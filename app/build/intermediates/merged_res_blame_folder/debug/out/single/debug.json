@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__reports_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_reports_icon.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/xml_data_extraction_rules.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__settings_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_settings_icon.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_category_icon_test.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/category_icon_test.png"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_russia_11699599.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_russia_11699599.png"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__add_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_add_icon.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_default_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_default_icon.png"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/xml_backup_rules.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_united_states.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_united_states.png"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__record_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_record_icon.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_ic_launcher_background.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__chart_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_chart_icon.xml"
+    }
+]

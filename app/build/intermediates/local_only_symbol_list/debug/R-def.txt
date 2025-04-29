@@ -1,0 +1,26 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable _add_icon
+drawable _chart_icon
+drawable _record_icon
+drawable _reports_icon
+drawable _settings_icon
+drawable category_icon_test
+drawable currency_default_icon
+drawable currency_russia_11699599
+drawable currency_united_states
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.MoneyPr
+xml backup_rules
+xml data_extraction_rules

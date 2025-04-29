@@ -1,0 +1,37 @@
+package ru.ohayo.moneypr.data.repository
+
+import android.database.sqlite.SQLiteConstraintException
+import kotlinx.coroutines.flow.Flow
+import ru.ohayo.moneypr.data.data_source.account.AccountDao
+import ru.ohayo.moneypr.domain.Account
+import ru.ohayo.moneypr.domain.AccountRepository
+import javax.inject.Inject
+
+class AccountRepositoryImpl @Inject constructor(
+    private val accountDao: AccountDao
+) : AccountRepository {
+
+    override suspend fun insertAccount(account: Account) {
+        try {
+            accountDao.insertAccount(account)
+        } catch (e: SQLiteConstraintException) {
+            throw IllegalArgumentException("Account with name '${account.name}' already exists.")
+        }
+    }
+
+    override fun getAllAccounts(): Flow<List<Account>> {
+        return accountDao.getAllAccounts()
+    }
+
+    override suspend fun deleteAccountById(id: Long) { // Используем Long
+        accountDao.deleteAccountById(id)
+    }
+
+    override suspend fun updateBalance(accountId: Long, amount: Double) {
+        accountDao.updateBalance(accountId, amount)
+    }
+
+    override suspend fun getAccountName(accountId: Long): String? {
+        return accountDao.getAccountNameById(accountId)
+    }
+}

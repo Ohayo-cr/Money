@@ -1,0 +1,34 @@
+package ru.ohayo.moneypr
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
+import ru.ohayo.moneypr.data.data_source.navigation.MainScreen
+import ru.ohayo.moneypr.data.data_source.navigation.NavHostScreen
+import ru.ohayo.moneypr.ui.theme.MoneyPrTheme
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MoneyPrTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    MainScreen(navController = navController)
+                }
+            }
+        }
+    }
+}
+
+
