@@ -9,6 +9,7 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -39,13 +40,17 @@ public final class CategoryDao_Impl implements CategoryDao {
 
   private final EntityDeletionOrUpdateAdapter<Category> __deletionAdapterOfCategory;
 
+  private final EntityDeletionOrUpdateAdapter<Category> __updateAdapterOfCategory;
+
+  private final SharedSQLiteStatement __preparedStmtOfUpdateOrder;
+
   public CategoryDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfCategory = new EntityInsertionAdapter<Category>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `Category` (`id`,`type`,`name`,`color`,`iconResId`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR REPLACE INTO `Category` (`id`,`type`,`name`,`color`,`iconResId`,`order`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
@@ -60,6 +65,7 @@ public final class CategoryDao_Impl implements CategoryDao {
         }
         statement.bindLong(4, entity.getColor());
         statement.bindLong(5, entity.getIconResId());
+        statement.bindLong(6, entity.getOrder());
       }
     };
     this.__deletionAdapterOfCategory = new EntityDeletionOrUpdateAdapter<Category>(__db) {
@@ -73,6 +79,37 @@ public final class CategoryDao_Impl implements CategoryDao {
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final Category entity) {
         statement.bindLong(1, entity.getId());
+      }
+    };
+    this.__updateAdapterOfCategory = new EntityDeletionOrUpdateAdapter<Category>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "UPDATE OR ABORT `Category` SET `id` = ?,`type` = ?,`name` = ?,`color` = ?,`iconResId` = ?,`order` = ? WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Category entity) {
+        statement.bindLong(1, entity.getId());
+        statement.bindString(2, __CategoryType_enumToString(entity.getType()));
+        if (entity.getName() == null) {
+          statement.bindNull(3);
+        } else {
+          statement.bindString(3, entity.getName());
+        }
+        statement.bindLong(4, entity.getColor());
+        statement.bindLong(5, entity.getIconResId());
+        statement.bindLong(6, entity.getOrder());
+        statement.bindLong(7, entity.getId());
+      }
+    };
+    this.__preparedStmtOfUpdateOrder = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE category SET `order` = ? WHERE id = ?";
+        return _query;
       }
     };
   }
@@ -135,10 +172,56 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
+  public Object update(final Category category, final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __updateAdapterOfCategory.handle(category);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object updateOrder(final long id, final int newOrder,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfUpdateOrder.acquire();
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, newOrder);
+        _argIndex = 2;
+        _stmt.bindLong(_argIndex, id);
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfUpdateOrder.release(_stmt);
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Flow<List<Category>> getAllCategories() {
-    final String _sql = "SELECT * FROM Category";
+    final String _sql = "SELECT * FROM category ORDER BY `order` ASC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"Category"}, new Callable<List<Category>>() {
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"category"}, new Callable<List<Category>>() {
       @Override
       @NonNull
       public List<Category> call() throws Exception {
@@ -149,6 +232,7 @@ public final class CategoryDao_Impl implements CategoryDao {
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
           final int _cursorIndexOfColor = CursorUtil.getColumnIndexOrThrow(_cursor, "color");
           final int _cursorIndexOfIconResId = CursorUtil.getColumnIndexOrThrow(_cursor, "iconResId");
+          final int _cursorIndexOfOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "order");
           final List<Category> _result = new ArrayList<Category>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Category _item;
@@ -166,7 +250,9 @@ public final class CategoryDao_Impl implements CategoryDao {
             _tmpColor = _cursor.getLong(_cursorIndexOfColor);
             final int _tmpIconResId;
             _tmpIconResId = _cursor.getInt(_cursorIndexOfIconResId);
-            _item = new Category(_tmpId,_tmpType,_tmpName,_tmpColor,_tmpIconResId);
+            final int _tmpOrder;
+            _tmpOrder = _cursor.getInt(_cursorIndexOfOrder);
+            _item = new Category(_tmpId,_tmpType,_tmpName,_tmpColor,_tmpIconResId,_tmpOrder);
             _result.add(_item);
           }
           return _result;
@@ -231,6 +317,7 @@ public final class CategoryDao_Impl implements CategoryDao {
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
           final int _cursorIndexOfColor = CursorUtil.getColumnIndexOrThrow(_cursor, "color");
           final int _cursorIndexOfIconResId = CursorUtil.getColumnIndexOrThrow(_cursor, "iconResId");
+          final int _cursorIndexOfOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "order");
           final Category _result;
           if (_cursor.moveToFirst()) {
             final long _tmpId;
@@ -247,7 +334,9 @@ public final class CategoryDao_Impl implements CategoryDao {
             _tmpColor = _cursor.getLong(_cursorIndexOfColor);
             final int _tmpIconResId;
             _tmpIconResId = _cursor.getInt(_cursorIndexOfIconResId);
-            _result = new Category(_tmpId,_tmpType,_tmpName,_tmpColor,_tmpIconResId);
+            final int _tmpOrder;
+            _tmpOrder = _cursor.getInt(_cursorIndexOfOrder);
+            _result = new Category(_tmpId,_tmpType,_tmpName,_tmpColor,_tmpIconResId,_tmpOrder);
           } else {
             _result = null;
           }

@@ -97,4 +97,7 @@ dependencies {
 
     // Calculate
     implementation ("net.objecthunter:exp4j:0.4.8")
+        //Drag
+    implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
+
 }

@@ -54,10 +54,10 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `Account` (`name` TEXT NOT NULL, `type` TEXT NOT NULL, `balance` REAL NOT NULL, `currency` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`currency`) REFERENCES `Currency`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )");
         db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_Account_name` ON `Account` (`name`)");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_Account_currency` ON `Account` (`currency`)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `Category` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `name` TEXT NOT NULL, `color` INTEGER NOT NULL, `iconResId` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `Category` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `name` TEXT NOT NULL, `color` INTEGER NOT NULL, `iconResId` INTEGER NOT NULL, `order` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `Currency` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `iconResId` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6e67675a92a6c7d7e8d2537cd44efb44')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '46c957fefd52613613e3334226d93016')");
       }
 
       @Override
@@ -155,12 +155,13 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoAccount + "\n"
                   + " Found:\n" + _existingAccount);
         }
-        final HashMap<String, TableInfo.Column> _columnsCategory = new HashMap<String, TableInfo.Column>(5);
+        final HashMap<String, TableInfo.Column> _columnsCategory = new HashMap<String, TableInfo.Column>(6);
         _columnsCategory.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCategory.put("type", new TableInfo.Column("type", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCategory.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCategory.put("color", new TableInfo.Column("color", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCategory.put("iconResId", new TableInfo.Column("iconResId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsCategory.put("order", new TableInfo.Column("order", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysCategory = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesCategory = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoCategory = new TableInfo("Category", _columnsCategory, _foreignKeysCategory, _indicesCategory);
@@ -185,7 +186,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "6e67675a92a6c7d7e8d2537cd44efb44", "b0b04fc7fd4852173828baf81a6608c3");
+    }, "46c957fefd52613613e3334226d93016", "191eedda3e85a6f80327a03eb3945349");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

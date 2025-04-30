@@ -1,5 +1,7 @@
 package ru.ohayo.moneypr.viewModel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,12 +22,15 @@ class CategoryViewModel @Inject constructor(
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
     val categories: StateFlow<List<Category>> = _categories
 
+    private var tempUpdatedList = listOf<Category>()
+
+
     init {
         viewModelScope.launch {
             try {
                 // Собираем данные из Flow в StateFlow
                 categoryRepository.getAllCategories().collect { categories ->
-                    _categories.value = categories
+                    _categories.value = categories.sortedBy { it.order } // Сортируем по полю order
                 }
             } catch (e: Exception) {
                 // Логируем ошибку или показываем сообщение пользователю
@@ -33,7 +38,24 @@ class CategoryViewModel @Inject constructor(
             }
         }
     }
+    fun moveCategory(fromIndex: Int, toIndex: Int) {
+        val currentList = _categories.value.toMutableList()
+        val item = currentList.removeAt(fromIndex)
+        currentList.add(toIndex, item)
 
+        val updatedList = currentList.mapIndexed { index, category ->
+            category.copy(order = index)
+        }
+
+        _categories.value = updatedList
+        tempUpdatedList = updatedList
+    }
+
+    fun saveOrderChanges() {
+        viewModelScope.launch {
+            categoryRepository.updateCategories(tempUpdatedList)
+        }
+    }
 
     // Метод для добавления категории
     fun insertCategory(category: Category) {
@@ -59,4 +81,10 @@ class CategoryViewModel @Inject constructor(
     fun filterCategoriesByType(type: CategoryType): List<Category> {
         return _categories.value.filter { it.type == type }
     }
+    fun updateOrder(updatedCategories: List<Category>) {
+        viewModelScope.launch {
+            categoryRepository.updateCategories(updatedCategories)
+        }
+    }
+
 }

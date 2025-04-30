@@ -24,7 +24,20 @@ object DefaultCategories {
             name = "Машина",
             color = 0xFF8A2BE2, // Фиолетово синий
             iconResId = R.drawable.category_icon_test // Пример иконки
-        )
+        ),
+        Category(
+            type = CategoryType.EXPENSE,
+            name = "VAPE",
+            color = 0xFF8A2BE2, // Фиолетово синий
+            iconResId = R.drawable.category_icon_test // Пример иконки
+        ),
+        Category(
+            type = CategoryType.EXPENSE,
+            name = "YOU",
+            color = 0xFF8A2BE2, // Фиолетово синий
+            iconResId = R.drawable.category_icon_test // Пример иконки
+        ),
+
 
     )
 }

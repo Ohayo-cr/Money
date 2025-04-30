@@ -9,7 +9,8 @@ data class Category(
     val type: CategoryType, // Тип категории: "EXPENSE" или "INCOME"
     val name: String, // Название категории
     val color: Long, // Цвет категории
-    val iconResId: Int // Идентификатор ресурса иконки (например, R.drawable.icon_name)
+    val iconResId: Int, // Идентификатор ресурса иконки (например, R.drawable.icon_name)
+    var order: Int = 0
 )
 
 enum class CategoryType {

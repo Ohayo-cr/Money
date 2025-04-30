@@ -9,5 +9,7 @@ interface CategoryRepository {
     suspend fun insertAll(categories: List<Category>)
     suspend fun insertCategory(category: Category)
     suspend fun isEmpty(): Boolean
+    suspend fun updateCategories(updatedCategories: List<Category>)
     fun getCategoryById(id: Long): Flow<Category?>
+
 }
