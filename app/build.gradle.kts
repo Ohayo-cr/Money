@@ -97,7 +97,7 @@ dependencies {
 
     // Calculate
     implementation ("net.objecthunter:exp4j:0.4.8")
-        //Drag
+    //DND
     implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
-
+    implementation("com.mohamedrejeb.dnd:compose-dnd:0.3.0")
 }

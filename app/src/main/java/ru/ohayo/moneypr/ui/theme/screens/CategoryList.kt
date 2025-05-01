@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
@@ -45,75 +48,80 @@ fun CategoryList(viewModel: CategoryViewModel) {
             viewModel.moveCategory(from.index, to.index)
         }
     )
+    Column(Modifier.fillMaxSize()) {
 
-    // Обрабатываем конец перетаскивания
-    LaunchedEffect(isDragging) {
-        if (!isDragging) {
-            viewModel.saveOrderChanges()
-        }
-    }
 
-    LazyColumn(
-        state = state.listState,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(5.dp)
-            .reorderable(state)
-            .detectReorderAfterLongPress(state)
-    ) {
-        items(
-            items = categories,
-            key = { it.id },
+        LazyColumn(
+            state = state.listState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .reorderable(state)
 
-            ) { category ->
-            ReorderableItem(
-                state, key = category.id,
-                modifier = Modifier.animateItemPlacement(),
-                defaultDraggingModifier = Modifier.animateItemPlacement()
-            ) { dragging ->
-                isDragging = dragging
-                val scale = animateFloatAsState(if (dragging) 1.1f else 1.0f)
-                val elevation = if (dragging) 4.dp else 0.dp
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp)
-                        .padding(vertical = 5.dp)
-                        .scale(scale.value)
-                        .shadow(elevation)
-                ) {
-                    Row(
+        ) {
+            items(
+                items = categories,
+                key = { it.id },
+
+                ) { category ->
+                ReorderableItem(
+                    state, key = category.id,
+
+
+                ) { dragging ->
+                    isDragging = dragging
+                    val elevation = animateDpAsState(if (dragging) 8.dp else 0.dp, label = "")
+                    Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = Color.LightGray),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .shadow(elevation.value)
+                            .detectReorderAfterLongPress(state)
                     ) {
-                        // Круглая иконка с фоном и обводкой
-                        Box(
+                        Row(
                             modifier = Modifier
-                                .size(35.dp)
-                                .background(
-                                    color = Color(category.color),
-                                    shape = CircleShape
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = Color.DarkGray,
-                                    shape = CircleShape
-                                )
-                                .padding(5.dp)
+                                .fillMaxSize()
+                                .background(color = Color.LightGray),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                painter = painterResource(id = category.iconResId),
-                                contentDescription = "Category icon",
-                                tint = Color.DarkGray
-                            )
+                            // Круглая иконка с фоном и обводкой
+                            Box(
+                                modifier = Modifier
+                                    .size(58.dp)
+                                    .background(
+                                        color = Color(category.color),
+                                        shape = CircleShape
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color.DarkGray,
+                                        shape = CircleShape
+                                    )
+                                    .padding(5.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = category.iconResId),
+                                    contentDescription = "Category icon",
+                                    tint = Color.DarkGray
+                                )
+                            }
+                            Text(text = category.name)
+                            Text(text = category.type.toString())
                         }
-                        Text(text = category.name)
-                        Text(text = category.type.toString())
                     }
+                    Divider()
                 }
             }
+        }
+        // Добавляем кнопку внизу
+        Button(
+            onClick = { viewModel.saveOrderChanges() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text("Сохранить порядок")
         }
     }
 }
