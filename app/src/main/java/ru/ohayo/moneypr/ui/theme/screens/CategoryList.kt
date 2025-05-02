@@ -1,8 +1,7 @@
 package ru.ohayo.moneypr.ui.theme.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -13,43 +12,87 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
+import androidx.navigation.NavHostController
 import org.burnoutcrew.reorderable.ReorderableItem
 import org.burnoutcrew.reorderable.detectReorderAfterLongPress
 import org.burnoutcrew.reorderable.rememberReorderableLazyListState
 import org.burnoutcrew.reorderable.reorderable
+import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun CategoryList(viewModel: CategoryViewModel) {
-    val categories = viewModel.categories.collectAsState(initial = emptyList()).value
 
-    var isDragging by remember { mutableStateOf(false) }
+@Composable
+fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController) {
+
+
+    val categories = viewModel.categories.collectAsState(initial = emptyList()).value
+    var selectedTab by remember { mutableStateOf(CategoryType.EXPENSE) }
+    val filteredCategories = categories.filter { it.type == selectedTab }
 
     val state = rememberReorderableLazyListState(
         onMove = { from, to ->
-            viewModel.moveCategory(from.index, to.index)
+            viewModel.moveCategory(from.index, to.index, selectedTab)
         }
     )
-    Column(Modifier.fillMaxSize()) {
 
+    Column(Modifier.fillMaxSize()) {
+        TabRow(
+            selectedTabIndex = selectedTab.ordinal,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            indicator = {}, // Убираем стандартный индикатор
+            divider = {},
+            containerColor = MaterialTheme.colorScheme.surface // Фон TabRow
+        ) {
+            CategoryType.values().forEach { tab ->
+                Tab(
+                    selected = selectedTab == tab,
+                    onClick = { selectedTab = tab },
+                    modifier = Modifier
+                        .padding(6.dp)
+                        .border(
+                            width = 1.dp,
+                            color = Color.Black,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .background(
+                            color = if (selectedTab == tab) Color.LightGray else Color.Transparent, // Фон таба
+                            shape = RoundedCornerShape(8.dp)
+                        )
+
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = tab.name,
+                            color = if (selectedTab == tab) MaterialTheme.colorScheme.surface else Color.Black,
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                    }
+                }
+            }
+        }
 
         LazyColumn(
             state = state.listState,
@@ -59,16 +102,14 @@ fun CategoryList(viewModel: CategoryViewModel) {
 
         ) {
             items(
-                items = categories,
-                key = { it.id },
+                items = filteredCategories,
+                key = { it.id }
 
                 ) { category ->
                 ReorderableItem(
                     state, key = category.id,
 
-
-                ) { dragging ->
-                    isDragging = dragging
+                    ) { dragging ->
                     val elevation = animateDpAsState(if (dragging) 8.dp else 0.dp, label = "")
                     Box(
                         modifier = Modifier
@@ -84,7 +125,6 @@ fun CategoryList(viewModel: CategoryViewModel) {
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Круглая иконка с фоном и обводкой
                             Box(
                                 modifier = Modifier
                                     .size(58.dp)
@@ -114,7 +154,6 @@ fun CategoryList(viewModel: CategoryViewModel) {
                 }
             }
         }
-        // Добавляем кнопку внизу
         Button(
             onClick = { viewModel.saveOrderChanges() },
             modifier = Modifier
@@ -123,5 +162,15 @@ fun CategoryList(viewModel: CategoryViewModel) {
         ) {
             Text("Сохранить порядок")
         }
+        BackHandler {
+            viewModel.saveOrderChanges()
+            navController.popBackStack()
+        }
+        DisposableEffect(Unit) {
+            onDispose {
+                viewModel.saveOrderChanges()
+            }
+        }
     }
 }
+

@@ -8,6 +8,7 @@ import androidx.room.CoroutinesRoom;
 import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
+import androidx.room.RoomDatabaseKt;
 import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
@@ -190,6 +191,12 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
+  public Object updateOrderByType(final List<Category> categories,
+      final Continuation<? super Unit> $completion) {
+    return RoomDatabaseKt.withTransaction(__db, (__cont) -> CategoryDao.DefaultImpls.updateOrderByType(CategoryDao_Impl.this, categories, __cont), $completion);
+  }
+
+  @Override
   public Object updateOrder(final long id, final int newOrder,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
@@ -351,6 +358,94 @@ public final class CategoryDao_Impl implements CategoryDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Flow<List<Category>> getCategoriesByType(final CategoryType type) {
+    final String _sql = "SELECT * FROM category WHERE type = ? ORDER BY `order` ASC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindString(_argIndex, __CategoryType_enumToString(type));
+    return CoroutinesRoom.createFlow(__db, false, new String[] {"category"}, new Callable<List<Category>>() {
+      @Override
+      @NonNull
+      public List<Category> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfType = CursorUtil.getColumnIndexOrThrow(_cursor, "type");
+          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfColor = CursorUtil.getColumnIndexOrThrow(_cursor, "color");
+          final int _cursorIndexOfIconResId = CursorUtil.getColumnIndexOrThrow(_cursor, "iconResId");
+          final int _cursorIndexOfOrder = CursorUtil.getColumnIndexOrThrow(_cursor, "order");
+          final List<Category> _result = new ArrayList<Category>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final Category _item;
+            final long _tmpId;
+            _tmpId = _cursor.getLong(_cursorIndexOfId);
+            final CategoryType _tmpType;
+            _tmpType = __CategoryType_stringToEnum(_cursor.getString(_cursorIndexOfType));
+            final String _tmpName;
+            if (_cursor.isNull(_cursorIndexOfName)) {
+              _tmpName = null;
+            } else {
+              _tmpName = _cursor.getString(_cursorIndexOfName);
+            }
+            final long _tmpColor;
+            _tmpColor = _cursor.getLong(_cursorIndexOfColor);
+            final int _tmpIconResId;
+            _tmpIconResId = _cursor.getInt(_cursorIndexOfIconResId);
+            final int _tmpOrder;
+            _tmpOrder = _cursor.getInt(_cursorIndexOfOrder);
+            _item = new Category(_tmpId,_tmpType,_tmpName,_tmpColor,_tmpIconResId,_tmpOrder);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Object getMaxOrder(final CategoryType type,
+      final Continuation<? super Integer> $completion) {
+    final String _sql = "SELECT COALESCE(MAX(`order`), 0) FROM category WHERE type = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindString(_argIndex, __CategoryType_enumToString(type));
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Integer>() {
+      @Override
+      @NonNull
+      public Integer call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Integer _result;
+          if (_cursor.moveToFirst()) {
+            final Integer _tmp;
+            if (_cursor.isNull(0)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getInt(0);
+            }
+            _result = _tmp;
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @NonNull

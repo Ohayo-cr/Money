@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 import ru.ohayo.moneypr.data.data_source.category.CategoryDao
 import ru.ohayo.moneypr.domain.category.Category
-
+import ru.ohayo.moneypr.domain.category.CategoryType
 
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -37,9 +37,23 @@ class CategoryRepositoryImpl @Inject constructor(
             }
     }
     override suspend fun updateCategories(updatedCategories: List<Category>) {
-        updatedCategories.forEach { category ->
-            categoryDao.updateOrder(category.id, category.order)
-        }
+        // Используем транзакцию для массового обновления
+        categoryDao.updateOrderByType(updatedCategories)
     }
+    override suspend fun deleteCategory(category: Category) =
+        categoryDao.deleteCategory(category)
+
+    override fun getCategoriesByType(type: CategoryType): Flow<List<Category>> =
+        categoryDao.getCategoriesByType(type)
+            .catch { e ->
+                Log.e("CategoryRepo", "Error fetching categories by type", e)
+                throw e
+            }
+
+    override suspend fun getMaxOrder(type: CategoryType): Int =
+        categoryDao.getMaxOrder(type)
+
+    override suspend fun updateCategory(category: Category) =
+        categoryDao.update(category)
 
 }

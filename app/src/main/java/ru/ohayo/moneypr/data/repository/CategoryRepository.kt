@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.domain.category.Category
+import ru.ohayo.moneypr.domain.category.CategoryType
 
 
 interface CategoryRepository {
@@ -11,5 +12,12 @@ interface CategoryRepository {
     suspend fun isEmpty(): Boolean
     suspend fun updateCategories(updatedCategories: List<Category>)
     fun getCategoryById(id: Long): Flow<Category?>
-
+    suspend fun deleteCategory(category: Category)
+    fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
+    suspend fun getMaxOrder(type: CategoryType): Int
+    suspend fun updateCategory(category: Category)
 }
+
+
+
+

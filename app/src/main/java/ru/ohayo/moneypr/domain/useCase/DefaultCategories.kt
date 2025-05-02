@@ -22,19 +22,25 @@ object DefaultCategories {
         Category(
             type = CategoryType.EXPENSE,
             name = "Машина",
-            color = 0xFF8A2BE2, // Фиолетово синий
+            color = 0xFF8FBC8F, // Фиолетово синий
             iconResId = R.drawable.category_icon_test // Пример иконки
         ),
         Category(
             type = CategoryType.EXPENSE,
             name = "VAPE",
-            color = 0xFF8A2BE2, // Фиолетово синий
+            color = 0xFFB0E0E6, // Фиолетово синий
             iconResId = R.drawable.category_icon_test // Пример иконки
         ),
         Category(
             type = CategoryType.EXPENSE,
             name = "YOU",
-            color = 0xFF8A2BE2, // Фиолетово синий
+            color = 0xFF2F4F4F, // Фиолетово синий
+            iconResId = R.drawable.category_icon_test // Пример иконки
+        ),
+        Category(
+            type = CategoryType.INCOME,
+            name = "Дивиденды",
+            color = 0xFFDDA0DD, // Фиолетово синий
             iconResId = R.drawable.category_icon_test // Пример иконки
         ),
 
