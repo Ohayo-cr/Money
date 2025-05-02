@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.data_source.navigation.Screen
 import ru.ohayo.moneypr.domain.category.Category
 import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.ui.theme.screens.components.ChooseCategory
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 @Composable
@@ -33,50 +34,39 @@ fun AddTransactionCategory(
     navController: NavController,
     viewModel: CategoryViewModel = hiltViewModel()
 ) {
-    var selectedTab by remember { mutableStateOf(CategoryType.INCOME) }
+    var selectedTab by remember { mutableStateOf(CategoryType.EXPENSE) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         // TabRow for INCOME and EXPENSE
         TabRow(
-            selectedTabIndex = if (selectedTab == CategoryType.INCOME) 0 else 1,
+            selectedTabIndex = selectedTab.ordinal,
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     color = MaterialTheme.colorScheme.onSecondary,
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[if (selectedTab == CategoryType.INCOME) 0 else 1])
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab.ordinal])
                 )
             }
         ) {
-            Tab(
-                selected = selectedTab == CategoryType.INCOME,
-                onClick = { selectedTab = CategoryType.INCOME },
-                text = {
-                    Text(
-                        text = "Income",
-                        color = if (selectedTab == CategoryType.INCOME)
-                            MaterialTheme.colorScheme.onSecondary
-                        else
-                            MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontWeight = if (selectedTab == CategoryType.INCOME) FontWeight.Bold else FontWeight.Normal
-                    )
-                }
-            )
-            Tab(
-                selected = selectedTab == CategoryType.EXPENSE,
-                onClick = { selectedTab = CategoryType.EXPENSE },
-                text = {
-                    Text(
-                        text = "Expense",
-                        color = if (selectedTab == CategoryType.EXPENSE)
-                            MaterialTheme.colorScheme.onSecondary
-                        else
-                            MaterialTheme.colorScheme.onSurfaceVariant,
-                        fontWeight = if (selectedTab == CategoryType.EXPENSE) FontWeight.Bold else FontWeight.Normal
-                    )
-                }
-            )
+            listOf(CategoryType.EXPENSE to "Expense",CategoryType.INCOME to "Income" ).forEach { (type, label) ->
+                Tab(
+                    selected = selectedTab == type,
+                    onClick = { selectedTab = type },
+                    text = {
+                        Text(
+                            text = label,
+                            color = if (selectedTab == type)
+                                MaterialTheme.colorScheme.onPrimary
+                            else
+                                MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontWeight = if (selectedTab == type) FontWeight.Bold else FontWeight.Normal
+                        )
+                    }
+                )
+            }
         }
+
 
         // Filtered categories grid
         val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
@@ -88,8 +78,10 @@ fun AddTransactionCategory(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(filteredCategories) { category ->
-                CategoryItem(
-                    category = category,
+                ChooseCategory(
+                    iconResId = category.iconResId,
+                    backgroundColor = Color(category.color),
+                    name = category.name,
                     onClick = {
                         navController.navigate(Screen.AddTransaction.routeWithCategoryId(category.id))
                     }
@@ -98,6 +90,7 @@ fun AddTransactionCategory(
         }
     }
 }
+
 // Расширение для удобного формирования маршрута с параметром
 fun Screen.routeWithCategoryId(categoryId: Long): String {
     return "${this.route}?categoryId=$categoryId"

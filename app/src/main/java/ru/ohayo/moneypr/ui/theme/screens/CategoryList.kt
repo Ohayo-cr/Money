@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -35,6 +36,7 @@ import org.burnoutcrew.reorderable.detectReorderAfterLongPress
 import org.burnoutcrew.reorderable.rememberReorderableLazyListState
 import org.burnoutcrew.reorderable.reorderable
 import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.ui.theme.screens.components.ButtonCategory
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 
@@ -57,10 +59,10 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
             selectedTabIndex = selectedTab.ordinal,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(80.dp),
             indicator = {}, // Убираем стандартный индикатор
             divider = {},
-            containerColor = MaterialTheme.colorScheme.surface // Фон TabRow
+            containerColor = colorScheme.surface // Фон TabRow
         ) {
             CategoryType.values().forEach { tab ->
                 Tab(
@@ -74,7 +76,7 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                             shape = RoundedCornerShape(8.dp)
                         )
                         .background(
-                            color = if (selectedTab == tab) Color.LightGray else Color.Transparent, // Фон таба
+                            color = if (selectedTab == tab) colorScheme.inversePrimary else Color.Transparent, // Фон таба
                             shape = RoundedCornerShape(8.dp)
                         )
 
@@ -86,7 +88,7 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                     ) {
                         Text(
                             text = tab.name,
-                            color = if (selectedTab == tab) MaterialTheme.colorScheme.surface else Color.Black,
+                            color = if (selectedTab == tab) colorScheme.onPrimary else colorScheme.onSurface,
                             style = MaterialTheme.typography.titleSmall
                         )
                     }
@@ -117,11 +119,12 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                             .height(60.dp)
                             .shadow(elevation.value)
                             .detectReorderAfterLongPress(state)
+
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(color = Color.LightGray),
+                                .background(color = colorScheme.primary),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -154,14 +157,7 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                 }
             }
         }
-        Button(
-            onClick = { viewModel.saveOrderChanges() },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text("Сохранить порядок")
-        }
+        ButtonCategory( onClick = { viewModel.saveOrderChanges() })
         BackHandler {
             viewModel.saveOrderChanges()
             navController.popBackStack()

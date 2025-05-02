@@ -86,7 +86,12 @@ int drawable _chart_icon 0x7f060002
 int drawable _record_icon 0x7f060003
 int drawable _reports_icon 0x7f060004
 int drawable _settings_icon 0x7f060005
-int drawable category_icon_test 0x7f060006
+int drawable cat__ic_acustik 0x7f06001f
+int drawable cat__ic_energy 0x7f060020
+int drawable cat__ic_fish 0x7f060021
+int drawable cat__ic_pc 0x7f060022
+int drawable cat__ic_power 0x7f060023
+int drawable cat__ic_vape 0x7f060024
 int drawable currency_default_icon 0x7f060007
 int drawable currency_russia_11699599 0x7f060008
 int drawable currency_united_states 0x7f060009

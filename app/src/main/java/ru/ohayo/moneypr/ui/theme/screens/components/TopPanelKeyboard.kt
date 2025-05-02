@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,7 +49,7 @@ fun TopPanelKeyboard(
                 Text(
                     text = currencyText,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
+                    color = colorScheme.onPrimary
                 )
             }
         }
@@ -61,7 +62,7 @@ fun TopPanelKeyboard(
                 NumberFormatterKeyboard.formatWithSpaces(viewModel.currentInput.ifEmpty { "0" }) // Форматируем текущий ввод
             },
             style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = colorScheme.onPrimary,
             modifier = Modifier // Не используем fillMaxWidth здесь
         )
     }

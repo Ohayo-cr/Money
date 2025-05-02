@@ -58,8 +58,7 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.Charts.route,
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }) {
-            val keyboardViewModel: KeyboardViewModel = hiltViewModel()
-            RecordsScreen(keyboardViewModel)
+            RecordsScreen()
         }
         composable(Screen.Records.route,
             enterTransition = { fadeIn() },
