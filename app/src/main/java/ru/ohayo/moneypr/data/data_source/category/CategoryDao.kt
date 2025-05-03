@@ -5,9 +5,11 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.domain.category.Category
+import ru.ohayo.moneypr.domain.category.CategoryType
 
 @Dao
 interface CategoryDao {
@@ -21,6 +23,7 @@ interface CategoryDao {
 
     @Query("SELECT * FROM category ORDER BY `order` ASC")
     fun getAllCategories(): Flow<List<Category>>
+
 
     @Delete
     suspend fun deleteCategory(category: Category)
@@ -36,7 +39,21 @@ interface CategoryDao {
     // Если нужно массовое обновление
     @Query("UPDATE category SET `order` = :newOrder WHERE id = :id")
     suspend fun updateOrder(id: Long, newOrder: Int)
+    // Получить категории по типу с сортировкой по order
+    @Query("SELECT * FROM category WHERE type = :type ORDER BY `order` ASC")
+    fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
 
+    // Получить максимальный order для указанного типа
+    @Query("SELECT COALESCE(MAX(`order`), 0) FROM category WHERE type = :type")
+    suspend fun getMaxOrder(type: CategoryType): Int
+
+    // Обновить order для списка категорий (для транзакции)
+    @Transaction
+    suspend fun updateOrderByType(categories: List<Category>) {
+        categories.forEachIndexed { index, category ->
+            updateOrder(category.id, index + 1)
+        }
+    }
 }
 
 

@@ -23,68 +23,56 @@ class CategoryViewModel @Inject constructor(
     val categories: StateFlow<List<Category>> = _categories
 
     private var tempUpdatedList = listOf<Category>()
-
+    private val changedTypes = mutableSetOf<CategoryType>()
 
     init {
         viewModelScope.launch {
             try {
-                // Собираем данные из Flow в StateFlow
                 categoryRepository.getAllCategories().collect { categories ->
-                    _categories.value = categories.sortedBy { it.order } // Сортируем по полю order
+                    _categories.value = categories
+                    tempUpdatedList = _categories.value
+
                 }
             } catch (e: Exception) {
-                // Логируем ошибку или показываем сообщение пользователю
                 e.printStackTrace()
             }
         }
     }
-    fun moveCategory(fromIndex: Int, toIndex: Int) {
-        val currentList = _categories.value.toMutableList()
-        val item = currentList.removeAt(fromIndex)
-        currentList.add(toIndex, item)
+    fun moveCategory(fromIndex: Int, toIndex: Int, type: CategoryType) {
+        val currentList = _categories.value
+        val (currentTypeCategories, otherCategories) = currentList.partition { it.type == type }
 
-        val updatedList = currentList.mapIndexed { index, category ->
+        val updatedCurrent = currentTypeCategories.toMutableList().apply {
+            val item = removeAt(fromIndex)
+            add(toIndex, item)
+        }.mapIndexed { index, category ->
             category.copy(order = index)
         }
 
-        _categories.value = updatedList
-        tempUpdatedList = updatedList
+        _categories.value = updatedCurrent + otherCategories
+        tempUpdatedList = _categories.value
+        changedTypes.add(type)
     }
 
     fun saveOrderChanges() {
         viewModelScope.launch {
-            categoryRepository.updateCategories(tempUpdatedList)
+            changedTypes.forEach { type ->
+                val categoriesToUpdate = tempUpdatedList.filter { it.type == type }
+                categoryRepository.updateCategories(categoriesToUpdate)
+            }
+            // Сброс после сохранения
+            changedTypes.clear()
+            tempUpdatedList = emptyList()
         }
+    }
+    // Получение категорий по типу с сортировкой
+    fun getCategoriesByType(type: CategoryType): List<Category> {
+        return _categories.value
+            .filter { it.type == type }
+            .sortedBy { it.order }
     }
 
-    // Метод для добавления категории
-    fun insertCategory(category: Category) {
-        viewModelScope.launch {
-            try {
-                categoryRepository.insertCategory(category)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    // Метод для добавления списка категорий
-    fun insertAll(categories: List<Category>) {
-        viewModelScope.launch {
-            try {
-                categoryRepository.insertAll(categories)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
     fun filterCategoriesByType(type: CategoryType): List<Category> {
         return _categories.value.filter { it.type == type }
     }
-    fun updateOrder(updatedCategories: List<Category>) {
-        viewModelScope.launch {
-            categoryRepository.updateCategories(updatedCategories)
-        }
-    }
-
 }

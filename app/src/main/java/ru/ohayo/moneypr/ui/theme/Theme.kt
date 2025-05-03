@@ -16,20 +16,33 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-// Цветовая палитра приложения
-val BrightTurquoise = Color(0xFF00C8B8) // Ярко-бирюзовый
-val DeepPurple = Color(0xFF8A2BE2)     // Темно-фиолетовый
-val SoftPink = Color(0xFFE073B9)       // Нежно-розовый
-val LightTurquoise = Color(0xFF64D8C9) // Светло-бирюзовый
-val WarmOrange = Color(0xFFFF933C)     // Теплый оранжевый
-val WhiteBackground = Color.White      // Белый фон
-val DarkBackground = Color(0xFF1C1B1F) // Темный фон (почти черный)
-val GraySurface = Color(0xFF2B2B2B)    // Серая поверхность (темная тема)
-val BlackText = Color(0xFF000000)           // Черный текст
-val WhiteText = Color.White            // Белый текст
-val ErrorRed = Color.Red               // Красный цвет для ошибок
-val SuccessGreen = Color.Green         // Зеленый цвет для успеха
-val MintColor = Color(0xFF3EB489)
+
+
+// Основные цвета
+val LightTurquoise = Color(0xFF64D8C9)
+val ErrorRed = Color.Red
+
+// Цвета текста
+val TextPrimaryWhite = Color.Black
+val TextPrimaryBlack = Color.White
+val TextSecondary = Color(0xFF383A3F)
+val TextDisabled = Color(0xFF898E98)
+val TextOnDark = Color.White
+
+// Темная тема
+val DarkPrimary = Color(0xFF2F3030)
+val DarkSecondary = Color(0xFF4A4B4B)
+val DarkBackground = Color(0xFF737274)
+val DarkSurface = DarkPrimary
+val DarkAccent = Color(0xFF008B8B)
+
+// Светлая тема
+val LightPrimary = Color(0xFFDDDFE2)
+val LightSecondary = LightTurquoise
+val LightBackground = Color.White
+val LightSurface = LightPrimary
+val LightAccent = Color(0xFF20B2AA)
+val LightTertiary = Color(0xFF3EB489)
 
 @Composable
 fun MoneyPrTheme(
@@ -38,38 +51,39 @@ fun MoneyPrTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        // Динамические цвета доступны только на Android 12+
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> darkColorScheme(
-            primary = DeepPurple,
-            onPrimary = BlackText,
-            secondary = SoftPink,
-            onSecondary = WhiteText,
+            primary = DarkPrimary,
+            onPrimary = TextPrimaryBlack,
+            secondary = DarkSecondary,
+            onSecondary = DarkPrimary,
             background = DarkBackground,
-            onBackground = WhiteText,
-            surface = GraySurface,
-            onSurface = WhiteText,
-            tertiary = DeepPurple,
-            onTertiary = BlackText,
+            onBackground = TextOnDark,
+            surface = DarkSurface,
+            onSurface = TextPrimaryBlack,
+            tertiary = DarkSecondary,
+            onTertiary = TextOnDark,
             error = ErrorRed,
-            onError = WhiteText
+            onError = TextOnDark,
+            inversePrimary = DarkAccent
         )
         else -> lightColorScheme(
-            primary = BrightTurquoise,
-            onPrimary = WhiteText,
-            secondary = LightTurquoise,
-            onSecondary = BlackText,
-            background = WhiteBackground,
-            onBackground = BlackText,
-            surface = BrightTurquoise,
-            onSurface = BlackText,
-            tertiary = MintColor,
-            onTertiary = WhiteText,
+            primary = LightPrimary,
+            onPrimary = TextPrimaryWhite,
+            secondary = LightSecondary,
+            onSecondary = LightPrimary,
+            background = LightBackground,
+            onBackground = TextPrimaryWhite,
+            surface = LightSurface,
+            onSurface = TextDisabled,
+            tertiary = LightTertiary,
+            onTertiary = TextOnDark,
             error = ErrorRed,
-            onError = WhiteText
+            onError = TextOnDark,
+            inversePrimary = LightAccent
         )
     }
 
@@ -96,7 +110,7 @@ private fun configureWindowColors(
     darkTheme: Boolean
 ) {
     val window = (view.context as Activity).window
-    window.statusBarColor = colorScheme.background.toArgb()
+    window.statusBarColor = colorScheme.surface.toArgb()
     WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
 
     window.navigationBarColor = colorScheme.surface.toArgb()

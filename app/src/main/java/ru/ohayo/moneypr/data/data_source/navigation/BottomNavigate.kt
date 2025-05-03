@@ -113,9 +113,9 @@ fun BottomNavigation(navController: NavController) {
                             }
                         },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color.Yellow,
+                            selectedIconColor = colorScheme.inversePrimary,
                             unselectedIconColor = Color.DarkGray,
-                            selectedTextColor = Color.Yellow,
+                            selectedTextColor = colorScheme.inversePrimary,
                             unselectedTextColor = Color.DarkGray,
                             indicatorColor = colorScheme.surface
                         ),
@@ -160,9 +160,9 @@ fun BottomNavigation(navController: NavController) {
                             }
                         },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color.Yellow,
+                            selectedIconColor = colorScheme.inversePrimary,
                             unselectedIconColor = Color.DarkGray,
-                            selectedTextColor = Color.Yellow,
+                            selectedTextColor = colorScheme.inversePrimary,
                             unselectedTextColor = Color.DarkGray,
                             indicatorColor = colorScheme.surface
                         ),
@@ -188,13 +188,13 @@ fun BottomNavigation(navController: NavController) {
                 .size(60.dp) // Размер кнопки
                 .padding(2.dp) // Поднимаем кнопку над NavigationBar
                 .clip(CircleShape), // Закругляем углы
-            containerColor = Color.Yellow,
+            containerColor = colorScheme.inversePrimary,
             contentColor = Color.Black
         ) {
             Icon(
                 painterResource(id = BottomItem.Screen3.iconId),
                 contentDescription = "Add",
-                tint = Color.Black,
+                tint = colorScheme.onSecondary,
                 modifier = Modifier.size(55.dp)
             )
         }

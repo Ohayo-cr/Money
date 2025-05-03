@@ -81,7 +81,7 @@ public final class AccountDao_Impl implements AccountDao {
   }
 
   @Override
-  public Object insertAccount(final Account account, final Continuation<? super Unit> $completion) {
+  public Object insertAccount(final Account account, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -95,11 +95,11 @@ public final class AccountDao_Impl implements AccountDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAccountById(final long id, final Continuation<? super Unit> $completion) {
+  public Object deleteAccountById(final long id, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -120,12 +120,12 @@ public final class AccountDao_Impl implements AccountDao {
           __preparedStmtOfDeleteAccountById.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object updateBalance(final long accountId, final double amount,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg2) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -148,7 +148,7 @@ public final class AccountDao_Impl implements AccountDao {
           __preparedStmtOfUpdateBalance.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg2);
   }
 
   @Override
@@ -200,8 +200,7 @@ public final class AccountDao_Impl implements AccountDao {
   }
 
   @Override
-  public Object getAccountNameById(final long accountId,
-      final Continuation<? super String> $completion) {
+  public Object getAccountNameById(final long accountId, final Continuation<? super String> arg1) {
     final String _sql = "SELECT name FROM account WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -229,7 +228,7 @@ public final class AccountDao_Impl implements AccountDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull

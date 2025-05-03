@@ -88,8 +88,7 @@ public final class CurrencyDao_Impl implements CurrencyDao {
   }
 
   @Override
-  public Object insertCurrency(final Currency currency,
-      final Continuation<? super Unit> $completion) {
+  public Object insertCurrency(final Currency currency, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -103,12 +102,12 @@ public final class CurrencyDao_Impl implements CurrencyDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object insertAllCurrency(final List<Currency> currency,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -122,7 +121,7 @@ public final class CurrencyDao_Impl implements CurrencyDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
@@ -172,7 +171,7 @@ public final class CurrencyDao_Impl implements CurrencyDao {
   }
 
   @Override
-  public Object isCurrencyEmpty(final Continuation<? super Boolean> $completion) {
+  public Object isCurrencyEmpty(final Continuation<? super Boolean> arg0) {
     final String _sql = "SELECT COUNT(*) == 0 FROM Currency";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -200,11 +199,11 @@ public final class CurrencyDao_Impl implements CurrencyDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
-  public Object getAllCurrencySync(final Continuation<? super List<Currency>> $completion) {
+  public Object getAllCurrencySync(final Continuation<? super List<Currency>> arg0) {
     final String _sql = "SELECT * FROM Currency";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -243,11 +242,11 @@ public final class CurrencyDao_Impl implements CurrencyDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
-  public Object getCurrencyById(final long id, final Continuation<? super Currency> $completion) {
+  public Object getCurrencyById(final long id, final Continuation<? super Currency> arg1) {
     final String _sql = "SELECT * FROM currency WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -288,7 +287,7 @@ public final class CurrencyDao_Impl implements CurrencyDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull

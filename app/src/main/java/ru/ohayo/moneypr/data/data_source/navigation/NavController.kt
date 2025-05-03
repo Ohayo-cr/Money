@@ -1,5 +1,6 @@
 package ru.ohayo.moneypr.data.data_source.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -41,7 +42,11 @@ fun NavHostScreen(navController: NavHostController) {
         }
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-            CategoryList(categoryViewModel)
+            BackHandler {
+                categoryViewModel.saveOrderChanges()
+                navController.popBackStack()
+            }
+            CategoryList(viewModel = categoryViewModel, navController = navController)
         }
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
@@ -53,8 +58,7 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.Charts.route,
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }) {
-            val keyboardViewModel: KeyboardViewModel = hiltViewModel()
-            RecordsScreen(keyboardViewModel)
+            RecordsScreen()
         }
         composable(Screen.Records.route,
             enterTransition = { fadeIn() },

@@ -26,10 +26,18 @@ class MoneyPrApp : Application() {
         // Инициализация базовых категорий
         MainScope().launch {
             if (categoryRepository.isEmpty()) {
-                categoryRepository.insertAll(DefaultCategories.DEFAULT_CATEGORIES)
+                // Группируем категории по типу и назначаем порядок для каждой группы
+                val initializedCategories = DefaultCategories.DEFAULT_CATEGORIES
+                    .groupBy { it.type }
+                    .flatMap { (type, categories) ->
+                        categories.mapIndexed { index, category ->
+                            category.copy(order = index + 1) // order начинается с 1
+                        }
+                    }
+
+                categoryRepository.insertAll(initializedCategories)
             }
         }
-
         // Инициализация базовых валют
         MainScope().launch {
             if (currencyRepository.isCurrencyEmpty()) {
