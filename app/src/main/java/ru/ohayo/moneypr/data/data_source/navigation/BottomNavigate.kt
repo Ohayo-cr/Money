@@ -23,8 +23,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,6 +52,19 @@ fun BottomNavigation(navController: NavController) {
         BottomItem.Screen4,
         BottomItem.Screen5 // Убираем Screen3 из списка
     )
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    // Храним выбранный элемент
+    var selectedItem by rememberSaveable { mutableStateOf(items.first().route) }
+
+    LaunchedEffect(currentRoute) {
+        val newSelectedItem = currentRoute ?: items.first().route
+        if (newSelectedItem != selectedItem) {
+            selectedItem = newSelectedItem
+        }
+    }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,7 +118,7 @@ fun BottomNavigation(navController: NavController) {
                                 )
                             }
                         },
-                        selected = currentRoute == item.route,
+                        selected = selectedItem == item.route,
                         onClick = {
                             navController.navigate(item.route) {
                                 launchSingleTop = true // Не создаем новый экземпляр экрана
@@ -148,7 +165,7 @@ fun BottomNavigation(navController: NavController) {
                                 )
                             }
                         },
-                        selected = currentRoute == item.route,
+                        selected = selectedItem == item.route,
                         onClick = {
                             navController.navigate(item.route) {
                                 launchSingleTop = true

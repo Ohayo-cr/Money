@@ -138,7 +138,7 @@ public final class TransactionDao_Impl implements TransactionDao {
 
   @Override
   public Object insertTransaction(final TransactionEntity transaction,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -152,12 +152,12 @@ public final class TransactionDao_Impl implements TransactionDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
   public Object updateTransaction(final TransactionEntity transaction,
-      final Continuation<? super Unit> arg1) {
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -171,11 +171,11 @@ public final class TransactionDao_Impl implements TransactionDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object deleteTransaction(final long id, final Continuation<? super Unit> arg1) {
+  public Object deleteTransaction(final long id, final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -196,7 +196,7 @@ public final class TransactionDao_Impl implements TransactionDao {
           __preparedStmtOfDeleteTransaction.release(_stmt);
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
@@ -274,7 +274,7 @@ public final class TransactionDao_Impl implements TransactionDao {
 
   @Override
   public Object getTransactionById(final long id,
-      final Continuation<? super TransactionEntity> arg1) {
+      final Continuation<? super TransactionEntity> $completion) {
     final String _sql = "SELECT * FROM transactions WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -342,7 +342,7 @@ public final class TransactionDao_Impl implements TransactionDao {
           _statement.release();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @NonNull
