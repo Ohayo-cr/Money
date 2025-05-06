@@ -137,7 +137,7 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                                     )
                                     .border(
                                         width = 1.dp,
-                                        color = Color.DarkGray,
+                                        color = Color.Black,
                                         shape = CircleShape
                                     )
                                     .padding(5.dp),
@@ -146,7 +146,7 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                                 Icon(
                                     painter = painterResource(id = category.iconResId),
                                     contentDescription = "Category icon",
-                                    tint = Color.DarkGray
+                                    tint = Color.Black
                                 )
                             }
                             Text(text = category.name)

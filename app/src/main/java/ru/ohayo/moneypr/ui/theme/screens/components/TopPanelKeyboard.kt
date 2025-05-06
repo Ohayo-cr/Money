@@ -1,6 +1,7 @@
 package ru.ohayo.moneypr.ui.theme.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.utils.NumberFormatterKeyboard
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
@@ -39,9 +41,14 @@ fun TopPanelKeyboard(
             // Кнопка "Выбрать счет"
             Button(
                 onClick = onAccountButtonClicked,
-                modifier = Modifier.padding(end = 8.dp) // Добавляем отступ между кнопкой и текстом
+                modifier = Modifier.padding(end = 8.dp),
+                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 2.dp) // Минимальный паддинг
             ) {
-                Text(selectedAccountName) // Отображаем название счета или "Выбрать счет"
+                Text(
+                    text = selectedAccountName.take(6), // Ограничиваем до 6 символов
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
 
             // Текст с валютой (если доступен)
@@ -63,7 +70,7 @@ fun TopPanelKeyboard(
             },
             style = MaterialTheme.typography.headlineMedium,
             color = colorScheme.onPrimary,
-            modifier = Modifier // Не используем fillMaxWidth здесь
+            modifier = Modifier
         )
     }
 }

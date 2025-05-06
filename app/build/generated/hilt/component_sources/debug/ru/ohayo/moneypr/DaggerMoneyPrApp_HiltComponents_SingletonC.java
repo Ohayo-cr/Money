@@ -417,25 +417,19 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
-
       static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
 
       static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
-
       static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
 
       static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
 
-      @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
 
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
 
       @KeepFieldType
       CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
@@ -444,13 +438,19 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
 
       @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
-
-      @KeepFieldType
       TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
 
       @KeepFieldType
+      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+
+      @KeepFieldType
       AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+
+      @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+
+      @KeepFieldType
+      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
     }
   }
 
@@ -513,37 +513,37 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
+      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
 
       static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+      static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
 
       static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
 
       @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
-
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
-
-      @KeepFieldType
-      FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
-
-      @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
 
       @KeepFieldType
       CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
 
       @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+      FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
+
+      @KeepFieldType
+      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
+
+      @KeepFieldType
+      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+
+      @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
 
       @KeepFieldType
       CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;

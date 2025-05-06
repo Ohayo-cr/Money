@@ -71,7 +71,7 @@ fun AddTransactionCategory(
         // Filtered categories grid
         val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
         LazyVerticalGrid(
-            columns = GridCells.Fixed(5),
+            columns = GridCells.Fixed(4),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),

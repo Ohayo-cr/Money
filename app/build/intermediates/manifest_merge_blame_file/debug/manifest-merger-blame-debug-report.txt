@@ -9,15 +9,15 @@
 9        android:targetSdkVersion="34" />
 10
 11    <permission
-11-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 12        android:name="ru.ohayo.moneypr.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="ru.ohayo.moneypr.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
 16
 17    <application
 17-->C:\Money\app\src\main\AndroidManifest.xml:5:5-27:19
@@ -26,7 +26,7 @@
 19        android:allowBackup="true"
 19-->C:\Money\app\src\main\AndroidManifest.xml:7:9-35
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\24f644d3a22a3c47cd57b10ce8c13ff0\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+20-->[androidx.core:core:1.10.1] C:\Users\Admin\.gradle\caches\transforms-3\5b928d41656616aa6e920c971ccfa596\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 21        android:dataExtractionRules="@xml/data_extraction_rules"
 21-->C:\Money\app\src\main\AndroidManifest.xml:8:9-65
 22        android:debuggable="true"
@@ -76,32 +76,32 @@
 46-->[androidx.room:room-runtime:2.6.1] C:\Users\Admin\.gradle\caches\transforms-3\da42f8ae58b655cec0985d39ccbcffc0\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
 47
 48        <activity
-48-->[androidx.compose.ui:ui-tooling-android:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\efd9e5753ce718c758d2840f1ca79e9e\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+48-->[androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\105d800e6159227748e35528a29451a8\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
 49            android:name="androidx.compose.ui.tooling.PreviewActivity"
-49-->[androidx.compose.ui:ui-tooling-android:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\efd9e5753ce718c758d2840f1ca79e9e\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+49-->[androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\105d800e6159227748e35528a29451a8\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
 50            android:exported="true" />
-50-->[androidx.compose.ui:ui-tooling-android:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\efd9e5753ce718c758d2840f1ca79e9e\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+50-->[androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\105d800e6159227748e35528a29451a8\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
 51        <activity
-51-->[androidx.compose.ui:ui-test-manifest:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\b0a6b45804e6754babb4f89c18055145\transformed\ui-test-manifest-1.6.7\AndroidManifest.xml:23:9-25:39
+51-->[androidx.compose.ui:ui-test-manifest:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\42c5159fe501655a3f4d87825685ba36\transformed\ui-test-manifest-1.5.0\AndroidManifest.xml:23:9-25:39
 52            android:name="androidx.activity.ComponentActivity"
-52-->[androidx.compose.ui:ui-test-manifest:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\b0a6b45804e6754babb4f89c18055145\transformed\ui-test-manifest-1.6.7\AndroidManifest.xml:24:13-63
+52-->[androidx.compose.ui:ui-test-manifest:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\42c5159fe501655a3f4d87825685ba36\transformed\ui-test-manifest-1.5.0\AndroidManifest.xml:24:13-63
 53            android:exported="true" />
-53-->[androidx.compose.ui:ui-test-manifest:1.6.7] C:\Users\Admin\.gradle\caches\transforms-3\b0a6b45804e6754babb4f89c18055145\transformed\ui-test-manifest-1.6.7\AndroidManifest.xml:25:13-36
+53-->[androidx.compose.ui:ui-test-manifest:1.5.0] C:\Users\Admin\.gradle\caches\transforms-3\42c5159fe501655a3f4d87825685ba36\transformed\ui-test-manifest-1.5.0\AndroidManifest.xml:25:13-36
 54
 55        <provider
-55-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+55-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
 56            android:name="androidx.startup.InitializationProvider"
-56-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+56-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
 57            android:authorities="ru.ohayo.moneypr.androidx-startup"
-57-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+57-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
 58            android:exported="false" >
-58-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+58-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
 59            <meta-data
-59-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+59-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
 60                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-60-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+60-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
 61                android:value="androidx.startup" />
-61-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Admin\.gradle\caches\transforms-3\2e341467a4cbb9a276f0d744c0d99897\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+61-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Admin\.gradle\caches\transforms-3\b87474eaa03aaec903523a5b832ecde9\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
 62            <meta-data
 62-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\Admin\.gradle\caches\transforms-3\c324b07e3f999f891dfd30a6521b782c\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
 63                android:name="androidx.lifecycle.ProcessLifecycleInitializer"

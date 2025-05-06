@@ -119,7 +119,7 @@ fun AddTransactionScreen(
                 currencyText = if (currency != null) {
                     "${currency.name}"
                 } else {
-                    "Currency: No currency available"
+                    "Non"
                 }
             )
             // Поле для заметки
