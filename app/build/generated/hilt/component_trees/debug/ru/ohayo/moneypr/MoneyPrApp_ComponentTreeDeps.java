@@ -41,6 +41,8 @@ import hilt_aggregated_deps._ru_ohayo_moneypr_MoneyPrApp_GeneratedInjector;
 import hilt_aggregated_deps._ru_ohayo_moneypr_di_AppModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_AccountViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_AccountViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_AddCategoryViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_AddCategoryViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_BindsModule;
@@ -98,6 +100,8 @@ import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_TransactionViewModel_Hil
         _ru_ohayo_moneypr_di_AppModule.class,
         _ru_ohayo_moneypr_viewModel_AccountViewModel_HiltModules_BindsModule.class,
         _ru_ohayo_moneypr_viewModel_AccountViewModel_HiltModules_KeyModule.class,
+        _ru_ohayo_moneypr_viewModel_AddCategoryViewModel_HiltModules_BindsModule.class,
+        _ru_ohayo_moneypr_viewModel_AddCategoryViewModel_HiltModules_KeyModule.class,
         _ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_BindsModule.class,
         _ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_KeyModule.class,
         _ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_BindsModule.class,

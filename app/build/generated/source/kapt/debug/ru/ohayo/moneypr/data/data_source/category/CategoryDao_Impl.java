@@ -361,6 +361,41 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
+  public Object getNextOrder(final CategoryType type,
+      final Continuation<? super Integer> $completion) {
+    final String _sql = "SELECT MAX(`order`) FROM Category WHERE type = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindString(_argIndex, __CategoryType_enumToString(type));
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Integer>() {
+      @Override
+      @Nullable
+      public Integer call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Integer _result;
+          if (_cursor.moveToFirst()) {
+            final Integer _tmp;
+            if (_cursor.isNull(0)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getInt(0);
+            }
+            _result = _tmp;
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Flow<List<Category>> getCategoriesByType(final CategoryType type) {
     final String _sql = "SELECT * FROM category WHERE type = ? ORDER BY `order` ASC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);

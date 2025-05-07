@@ -35,6 +35,7 @@ import org.burnoutcrew.reorderable.ReorderableItem
 import org.burnoutcrew.reorderable.detectReorderAfterLongPress
 import org.burnoutcrew.reorderable.rememberReorderableLazyListState
 import org.burnoutcrew.reorderable.reorderable
+import ru.ohayo.moneypr.data.data_source.navigation.Screen
 import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.ButtonCategory
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
@@ -157,7 +158,12 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                 }
             }
         }
-        ButtonCategory( onClick = { viewModel.saveOrderChanges() })
+        ButtonCategory(
+            text = "Создать категорию",
+            onClick = {
+                navController.navigate(Screen.AddCategory.route)
+            }
+        )
         BackHandler {
             viewModel.saveOrderChanges()
             navController.popBackStack()

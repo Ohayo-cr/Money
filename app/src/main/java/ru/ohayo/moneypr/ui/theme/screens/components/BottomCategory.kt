@@ -14,7 +14,10 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ButtonCategory(  onClick: () -> Unit ) {
+fun ButtonCategory(
+    text: String,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         modifier = Modifier
@@ -26,6 +29,6 @@ fun ButtonCategory(  onClick: () -> Unit ) {
             contentColor = MaterialTheme.colorScheme.onPrimary // Цвет текста
         )
     ) {
-        Text("Сохранить порядок")
+        Text(text)
     }
 }

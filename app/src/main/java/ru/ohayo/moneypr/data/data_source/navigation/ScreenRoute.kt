@@ -20,22 +20,6 @@ sealed class Screen(val route: String) {
     // Настройки
     object Categories : Screen("categories")               // Категории
     object Currency : Screen("currency")                   // Валюта
+    object AddCategory : Screen("add_category")
 
-    companion object {
-        // Поиск экрана по route
-        fun fromRoute(route: String?): Screen =
-            when (route) {
-                Splash.route -> Splash
-                Records.route -> Records
-                Charts.route -> Charts
-                Reports.route -> Reports
-                Settings.route -> Settings
-                AddTransaction.route -> AddTransaction
-                CategoryForTransact.route -> CategoryForTransact
-                AddAccount.route -> AddAccount
-                Categories.route -> Categories
-                Currency.route -> Currency
-                else -> Splash // или обработка неизвестного route
-            }
-    }
 }

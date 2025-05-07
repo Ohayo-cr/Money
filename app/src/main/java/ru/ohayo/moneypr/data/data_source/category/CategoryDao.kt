@@ -39,6 +39,8 @@ interface CategoryDao {
     // Если нужно массовое обновление
     @Query("UPDATE category SET `order` = :newOrder WHERE id = :id")
     suspend fun updateOrder(id: Long, newOrder: Int)
+    @Query("SELECT MAX(`order`) FROM Category WHERE type = :type")
+    suspend fun getNextOrder(type: CategoryType): Int?
     // Получить категории по типу с сортировкой по order
     @Query("SELECT * FROM category WHERE type = :type ORDER BY `order` ASC")
     fun getCategoriesByType(type: CategoryType): Flow<List<Category>>

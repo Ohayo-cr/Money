@@ -14,6 +14,7 @@ import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.navArgument
 import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
+import ru.ohayo.moneypr.ui.theme.screens.AddCategoryScreen
 import ru.ohayo.moneypr.ui.theme.screens.AddTransactionCategory
 import ru.ohayo.moneypr.ui.theme.screens.AddTransactionScreen
 import ru.ohayo.moneypr.ui.theme.screens.CurrencyScreen
@@ -22,6 +23,7 @@ import ru.ohayo.moneypr.ui.theme.screens.SettingsScreen
 import ru.ohayo.moneypr.ui.theme.screens.SplashScreen
 import ru.ohayo.moneypr.ui.theme.screens.TransactionsList
 import ru.ohayo.moneypr.viewModel.AccountViewModel
+import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
@@ -47,6 +49,10 @@ fun NavHostScreen(navController: NavHostController) {
                 navController.popBackStack()
             }
             CategoryList(viewModel = categoryViewModel, navController = navController)
+        }
+        composable(Screen.AddCategory.route) {
+            val addCategoryViewModel: AddCategoryViewModel = hiltViewModel()
+            AddCategoryScreen(navController =navController , viewModel = addCategoryViewModel)
         }
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()

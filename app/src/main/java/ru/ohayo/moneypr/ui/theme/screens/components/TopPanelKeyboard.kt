@@ -1,5 +1,6 @@
 package ru.ohayo.moneypr.ui.theme.screens.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ fun TopPanelKeyboard(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .background(Color.Red)
             .padding(end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween // Распределяем элементы по краям
@@ -45,7 +47,7 @@ fun TopPanelKeyboard(
                 contentPadding = PaddingValues(horizontal = 4.dp, vertical = 2.dp) // Минимальный паддинг
             ) {
                 Text(
-                    text = selectedAccountName.take(6), // Ограничиваем до 6 символов
+                    text = selectedAccountName.take(7),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -62,15 +64,26 @@ fun TopPanelKeyboard(
         }
 
         // Правая часть: текст с текущим вводом или результатом
+        val displayText = if (viewModel.result.isNotEmpty()) {
+            NumberFormatterKeyboard.formatWithSpaces(viewModel.result)
+        } else {
+            NumberFormatterKeyboard.formatWithSpaces(viewModel.currentInput.ifEmpty { "0" })
+        }
+
+        // Заменяем пробелы на неразрывные внутри чисел, а после + / - вставляем мягкую точку переноса
+        val formattedText = displayText
+            .replace(" ", "\u00A0")                     // 1. Все пробелы → неразрывные
+            .replace(Regex("([+\\-])")) { "${it.value}\u200B" }  // 2. После + / - → мягкий перенос + обычный пробел
+
         Text(
-            text = if (viewModel.result.isNotEmpty()) {
-                NumberFormatterKeyboard.formatWithSpaces(viewModel.result) // Форматируем результат
-            } else {
-                NumberFormatterKeyboard.formatWithSpaces(viewModel.currentInput.ifEmpty { "0" }) // Форматируем текущий ввод
-            },
+            text = formattedText,
             style = MaterialTheme.typography.headlineMedium,
             color = colorScheme.onPrimary,
             modifier = Modifier
+                .wrapContentWidth() // чтобы не обрезало по краям
+                .padding(end = 4.dp),
+            softWrap = true,         // Разрешаем перенос
+            overflow = TextOverflow.Clip // Отключаем обрезание, чтобы работал перенос
         )
     }
 }
