@@ -59,7 +59,7 @@ fun NavHostScreen(navController: NavHostController) {
             CurrencyScreen(currencyViewModel)
         }
         composable(Screen.Settings.route) {
-            SettingsScreen(navController)
+            SettingsScreen(navController = navController)
         }
         composable(Screen.Charts.route,
             enterTransition = { fadeIn() },
@@ -102,3 +102,4 @@ fun NavHostScreen(navController: NavHostController) {
         }
     }
 }
+
