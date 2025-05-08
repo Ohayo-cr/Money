@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.theme.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -96,74 +98,81 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
                 }
             }
         }
+Column(        modifier = Modifier
+    .fillMaxSize()) {
 
-        LazyColumn(
-            state = state.listState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .reorderable(state)
 
-        ) {
-            items(
-                items = filteredCategories,
-                key = { it.id }
+    LazyColumn(
+        state = state.listState,
+        modifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .reorderable(state)
 
-                ) { category ->
-                ReorderableItem(
-                    state, key = category.id,
+    ) {
+        items(
+            items = filteredCategories,
+            key = { it.id }
 
-                    ) { dragging ->
-                    val elevation = animateDpAsState(if (dragging) 8.dp else 0.dp, label = "")
-                    Box(
+        ) { category ->
+            ReorderableItem(
+                state, key = category.id,
+
+                ) { dragging ->
+                val scale = animateFloatAsState(if (dragging) 1.1f else 1.0f)
+                val elevation = animateDpAsState(if (dragging) 16.dp else 0.dp, label = "")
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .scale(scale.value)
+                        .height(60.dp)
+                        .shadow(elevation.value)
+                        .detectReorderAfterLongPress(state)
+
+                ) {
+                    Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .shadow(elevation.value)
-                            .detectReorderAfterLongPress(state)
-
+                            .fillMaxSize()
+                            .padding(horizontal = 17.dp)
+                            .background(color = colorScheme.background),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
+                        Box(
                             modifier = Modifier
-                                .fillMaxSize()
-                                .background(color = colorScheme.primary),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(58.dp)
-                                    .background(
-                                        color = Color(category.color),
-                                        shape = CircleShape
-                                    )
-                                    .border(
-                                        width = 1.dp,
-                                        color = Color.Black,
-                                        shape = CircleShape
-                                    )
-                                    .padding(5.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = category.iconResId),
-                                    contentDescription = "Category icon",
-                                    tint = Color.Black
+                                .size(58.dp)
+                                .background(
+                                    color = Color(category.color),
+                                    shape = CircleShape
                                 )
-                            }
-                            Text(text = category.name)
-                            Text(text = category.type.toString())
+                                .border(
+                                    width = 1.dp,
+                                    color = Color.Black,
+                                    shape = CircleShape
+                                )
+                                .padding(8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                painter = painterResource(id = category.iconResId),
+                                contentDescription = "Category icon",
+                                tint = Color.Black
+                            )
                         }
+                        Text(text = category.name)
+                        Text(text = category.type.toString())
                     }
-                    Divider()
                 }
             }
         }
-        ButtonCategory(
-            text = "Создать категорию",
-            onClick = {
-                navController.navigate(Screen.AddCategory.route)
-            }
-        )
+    }
+    ButtonCategory(
+        text = "Создать категорию",
+        onClick = {
+            navController.navigate(Screen.AddCategory.route)
+        }
+    )
+}
         BackHandler {
             viewModel.saveOrderChanges()
             navController.popBackStack()

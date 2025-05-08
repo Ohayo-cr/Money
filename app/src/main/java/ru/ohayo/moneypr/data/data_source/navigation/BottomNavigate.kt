@@ -202,7 +202,7 @@ fun BottomNavigation(navController: NavController) {
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter) // Выравниваем по центру
-                .size(60.dp) // Размер кнопки
+                .size(62.dp) // Размер кнопки
                 .padding(2.dp) // Поднимаем кнопку над NavigationBar
                 .clip(CircleShape), // Закругляем углы
             containerColor = colorScheme.inversePrimary,
@@ -212,7 +212,7 @@ fun BottomNavigation(navController: NavController) {
                 painterResource(id = BottomItem.Screen3.iconId),
                 contentDescription = "Add",
                 tint = colorScheme.onSecondary,
-                modifier = Modifier.size(55.dp)
+                modifier = Modifier.size(50.dp)
             )
         }
     }

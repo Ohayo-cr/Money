@@ -1,122 +1,162 @@
 [
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_acustik.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_acustik.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_currency_united_states.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\currency_united_states.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_bot_add_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/bot_add_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__reports_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_reports_icon.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_acustik.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_acustik.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/xml_data_extraction_rules.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_power.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_power.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_power.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_power.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_vape.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_vape.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable__add_icon.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\_add_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__settings_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_settings_icon.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_fish.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_fish.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_russia_11699599.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_russia_11699599.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__add_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_add_icon.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_currency_default_icon.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\currency_default_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_default_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_default_icon.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/xml_backup_rules.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable__reports_icon.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\_reports_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_currency_united_states.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/currency_united_states.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_pc.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_pc.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_fish.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_fish.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_bot_chart_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/bot_chart_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__record_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_record_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_bot_record_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/bot_record_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable__chart_icon.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\_chart_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_pc.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_pc.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_coffee.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_coffee.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_icon_transparent.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\icon_transparent.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_ic_launcher_background.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_coffee_2cup.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_coffee_2cup.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_bot_settings_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/bot_settings_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable__record_icon.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\_record_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_energy.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_energy.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable__chart_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/_chart_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_bot_reports_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-60:/drawable/bot_reports_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-58:/drawable_cat__ic_energy.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-60:/drawable/cat__ic_energy.png"
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_currency_russia_11699599.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\currency_russia_11699599.png"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_hookah.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_hookah.png"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_vape.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_vape.png"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable_cat__ic_tea.png.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\cat__ic_tea.png"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\drawable__settings_icon.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\drawable\\_settings_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-58:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\OHAYO\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-60:\\mipmap-xhdpi\\ic_launcher.webp"
     }
 ]

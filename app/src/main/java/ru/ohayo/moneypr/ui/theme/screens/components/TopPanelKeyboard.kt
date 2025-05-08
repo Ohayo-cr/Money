@@ -30,7 +30,6 @@ fun TopPanelKeyboard(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Red)
             .padding(end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween // Распределяем элементы по краям

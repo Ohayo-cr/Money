@@ -73,9 +73,9 @@ fun AddTransactionCategory(
         LazyVerticalGrid(
             columns = GridCells.Fixed(4),
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            contentPadding = PaddingValues(2.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             items(filteredCategories) { category ->
                 ChooseCategory(
@@ -91,44 +91,9 @@ fun AddTransactionCategory(
     }
 }
 
+
 // Расширение для удобного формирования маршрута с параметром
 fun Screen.routeWithCategoryId(categoryId: Long): String {
     return "${this.route}?categoryId=$categoryId"
 }
 
-@Composable
-fun CategoryItem(category: Category, onClick: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .width(64.dp)
-            .clickable(onClick = onClick)
-            .padding(4.dp),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
-    ) {
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .background(
-                    color = Color(category.color),
-                    shape = androidx.compose.foundation.shape.CircleShape
-                )
-                .border(
-                    width = 1.dp,
-                    color = Color.DarkGray,
-                    shape = androidx.compose.foundation.shape.CircleShape
-                )
-                .padding(8.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = category.iconResId.toInt()),
-                contentDescription = "Category icon",
-                tint = Color.DarkGray
-            )
-        }
-        Text(
-            text = category.name,
-            modifier = Modifier.padding(top = 4.dp),
-            maxLines = 1
-        )
-    }
-}
