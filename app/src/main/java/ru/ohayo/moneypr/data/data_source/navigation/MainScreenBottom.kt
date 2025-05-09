@@ -5,6 +5,7 @@ import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -24,69 +25,50 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import ru.ohayo.moneypr.data.data_source.navigation.NavigationRoutes.routesToShowBottomNav
+import ru.ohayo.moneypr.ui.theme.screens.components.UpdateSystemNavigationBar
+import ru.ohayo.moneypr.viewModel.BottomNavViewModel
 
 @Composable
-fun MainScreen(navController: NavHostController) {
-    // Список маршрутов, где BottomNavigation должен быть видимым
-    val routesToShowBottomNav = listOf(
-        Screen.Records.route,
-        Screen.Reports.route,
-        Screen.Charts.route,
-        Screen.AddAccount.route,
-        Screen.Settings.route
-    )
-
-    // Состояние для отслеживания текущего маршрута
+fun MainScreen(navController: NavHostController,viewModel: BottomNavViewModel = hiltViewModel()) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    // Определяем, нужно ли отображать BottomNavigation
-    val shouldShowBottomNavigation = currentRoute in routesToShowBottomNav
-    // Получаем контроллер системного интерфейса
-    val systemUiController = rememberSystemUiController()
-
-    // Определяем, использовать ли тёмные иконки
-    val useDarkIcons = !isSystemInDarkTheme()
-    // Цвет нижней панели системы
-    val navBarColor = if (shouldShowBottomNavigation) {
-        MaterialTheme.colorScheme.surface
-    } else {
-        MaterialTheme.colorScheme.background
+    LaunchedEffect(currentRoute) {
+        viewModel.updateNavigation(currentRoute)
     }
 
-    // Применяем цвет к системной панели навигации
-    SideEffect {
-        systemUiController.setNavigationBarColor(
-            color = navBarColor,
-            darkIcons = useDarkIcons
-        )
-    }
+    // Состояние для показа/скрытия bottom navigation
+    val showBottomNav by viewModel.shouldShowBottomNavigation.collectAsState()
 
-    Scaffold(
-        bottomBar = {
-            if (shouldShowBottomNavigation) {
-                Surface(
-                    color = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.navigationBarsPadding()
-                ) {
-                    BottomNavigation(navController = navController)
-                }
-            }
-        }
-    ) { paddingValues ->
-        val backgroundColor = if (shouldShowBottomNavigation) {
-            MaterialTheme.colorScheme.surface
-        } else {
-            MaterialTheme.colorScheme.background
-        }
+    // Общая высота bottom navigation bar (примерно 56.dp по умолчанию в M3)
+    val bottomBarHeight = 64.dp
 
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Основной контент
         Box(
             modifier = Modifier
-                .padding(paddingValues)
                 .fillMaxSize()
-                .background(backgroundColor)
+                .padding(bottom = if (showBottomNav) bottomBarHeight else 0.dp),
         ) {
             NavHostScreen(navController = navController)
+            UpdateSystemNavigationBar(navController)
+        }
+
+        // Bottom Navigation Bar — теперь правильно выровнена
+        if (showBottomNav) {
+            Box(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                contentAlignment = Alignment.Center
+            ) {
+                BottomNavigation(navController = navController, viewModel = viewModel)
+            }
         }
     }
+
+
 }

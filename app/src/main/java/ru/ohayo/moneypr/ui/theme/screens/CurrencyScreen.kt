@@ -85,6 +85,7 @@ fun CurrencyScreen(
                     CurrencyItem(currency = currency)
                 }
             }
+
         }
     }
 }

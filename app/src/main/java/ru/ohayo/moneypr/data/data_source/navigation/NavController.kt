@@ -4,6 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -12,7 +14,9 @@ import androidx.navigation.compose.composable
 import ru.ohayo.moneypr.ui.theme.screens.CategoryList
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
 import ru.ohayo.moneypr.ui.theme.screens.AddCategoryScreen
 import ru.ohayo.moneypr.ui.theme.screens.AddTransactionCategory
@@ -34,26 +38,37 @@ fun NavHostScreen(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = Screen.Records.route,
-        enterTransition = { fadeIn(animationSpec = tween(40)) },
-        exitTransition = { fadeOut(animationSpec = tween(40)) },
-        popEnterTransition = { fadeIn(animationSpec = tween(40)) },
-        popExitTransition = { fadeOut(animationSpec = tween(40)) }
+        enterTransition = { fadeIn(animationSpec = tween(0)) },
+        exitTransition = { fadeOut(animationSpec = tween(0)) },
+        popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+        popExitTransition = { fadeOut(animationSpec = tween(0)) }
     ) {
         composable(Screen.Splash.route) {
             SplashScreen(navController)
         }
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-            BackHandler {
-                categoryViewModel.saveOrderChanges()
-                navController.popBackStack()
-            }
+
             CategoryList(viewModel = categoryViewModel, navController = navController)
         }
-        composable(Screen.AddCategory.route) {
+        // Маршрут с аргументом для типа категории
+        composable(
+            route = "${Screen.AddCategory.route}/{categoryType}",
+            arguments = listOf(
+                navArgument("categoryType") {
+                    type = NavType.EnumType(CategoryType::class.java)
+                }
+            )
+        ) { backStackEntry ->
+            val categoryType = backStackEntry.arguments?.getSerializable("categoryType") as? CategoryType ?: CategoryType.EXPENSE
             val addCategoryViewModel: AddCategoryViewModel = hiltViewModel()
-            AddCategoryScreen(navController =navController , viewModel = addCategoryViewModel)
+            AddCategoryScreen(
+                navController = navController,
+                viewModel = addCategoryViewModel,
+                initialType = categoryType
+            )
         }
+
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
             CurrencyScreen(currencyViewModel)
@@ -80,7 +95,23 @@ fun NavHostScreen(navController: NavHostController) {
                 currencyViewModel = currencyViewModel
             )
         }
-        composable(Screen.CategoryForTransact.route) {
+        composable(
+            route = Screen.CategoryForTransact.route,
+            enterTransition = {
+                // Слайд сверху вниз → экран выезжает снизу
+                slideInVertically(
+                    initialOffsetY = { fullHeight -> fullHeight }, // начинает снизу
+                    animationSpec = tween(300)
+                ) + fadeIn(animationSpec = tween(300))
+            },
+            exitTransition = {
+                // Экран уезжает вниз
+                slideOutVertically(
+                    targetOffsetY = { fullHeight -> fullHeight }, // уезжает вниз
+                    animationSpec = tween(300)
+                ) + fadeOut(animationSpec = tween(300))
+            }
+        ) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransactionCategory(navController = navController, viewModel = categoryViewModel)
         }
@@ -102,4 +133,5 @@ fun NavHostScreen(navController: NavHostController) {
         }
     }
 }
+
 

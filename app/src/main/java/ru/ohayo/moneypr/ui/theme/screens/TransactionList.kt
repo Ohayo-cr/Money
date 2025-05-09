@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionsList(
     transactionlistViewModel: TransactionListViewModel = hiltViewModel(),
@@ -36,49 +35,56 @@ fun TransactionsList(
     val categories by categoryViewModel.categories.collectAsState()
     var selectedTransaction by remember { mutableStateOf<TransactionEntity?>(null) }
     val scrollState = transactionlistViewModel.scrollState
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Транзакции") },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
-            )
-        }
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            when {
-                transactions.isEmpty() -> EmptyTransactionsPlaceholder()
-                else -> LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    state = scrollState
-                ) {
-                    items(transactions) { transaction ->
-                        TransactionItem(
-                            transaction = transaction,
-                            categories = categories,
-                            onTransactionClick = { selectedTransaction = it }
-                        )
-                    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+
+        Text(
+            text = "Транзакции",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.TopStart)
+        )
+
+        // Основной контент
+        when {
+            transactions.isEmpty() -> EmptyTransactionsPlaceholder()
+            else -> LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 48.dp), // Пробел под заголовок
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                state = scrollState
+            ) {
+                items(transactions) { transaction ->
+                    TransactionItem(
+                        transaction = transaction,
+                        categories = categories,
+                        onTransactionClick = { selectedTransaction = it }
+                    )
                 }
             }
         }
-    }
 
-    selectedTransaction?.let { transaction ->
-        TransactionDetailsDialog(
-            transaction = transaction,
-            categories = categories,
-            onDismiss = { selectedTransaction = null },
-            transactionViewModel = transactionViewModel
-        )
+        // Диалог с деталями транзакции
+        selectedTransaction?.let { transaction ->
+            TransactionDetailsDialog(
+                transaction = transaction,
+                categories = categories,
+                onDismiss = { selectedTransaction = null },
+                transactionViewModel = transactionViewModel
+            )
+        }
     }
 }
 
 @Composable
 private fun EmptyTransactionsPlaceholder() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 64.dp), // Отступ для заголовка
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

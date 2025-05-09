@@ -45,6 +45,7 @@ import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.CategoryIcons
+import ru.ohayo.moneypr.ui.theme.screens.components.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.ChooseCategory
 import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.ColorNames
 import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.FullScreenCustomDialog
@@ -53,12 +54,13 @@ import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 @Composable
 fun AddCategoryScreen(
     navController: NavHostController,
-    viewModel: AddCategoryViewModel
+    viewModel: AddCategoryViewModel,
+    initialType: CategoryType = CategoryType.EXPENSE
 ) {
+    var selectedType by remember { mutableStateOf(initialType) }
     val colorScheme = MaterialTheme.colorScheme
 
     // Состояния экрана
-    var selectedType by remember { mutableStateOf(CategoryType.EXPENSE) }
     var categoryName by remember { mutableStateOf("") }
     var selectedIconResId by remember { mutableStateOf(R.drawable.cat__ic_power) } // Или ваша иконка по умолчанию
     var selectedColor by remember { mutableStateOf(Color(0xFFA9A9A9)) }
@@ -84,48 +86,12 @@ fun AddCategoryScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-// Переключатель доход/расход
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.surface
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                val colorScheme = MaterialTheme.colorScheme
+        // 🔄 Используем наш кастомный таб
+        CategoryTabRow(
+            selectedType = selectedType,
+            onTypeSelected = { selectedType = it }
+        )
 
-                CategoryType.entries.forEach { type ->
-                    Box(
-                        modifier = Modifier
-                            .weight(1f) // Равномерно распределить пространство между элементами
-                            .padding(4.dp)
-                            .border(
-                                width = 1.dp,
-                                color = Color.Black,
-                                shape = RoundedCornerShape(8.dp)
-                            )
-                            .background(
-                                color = if (selectedType == type) colorScheme.inversePrimary else Color.Transparent,
-                                shape = RoundedCornerShape(8.dp)
-                            )
-                            .clickable { selectedType = type }
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = type.name,
-                            color = if (selectedType == type) colorScheme.onPrimary else colorScheme.onSurface,
-                            style = MaterialTheme.typography.titleSmall,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-        }
         Divider()
 
         Spacer(modifier = Modifier.height(16.dp))

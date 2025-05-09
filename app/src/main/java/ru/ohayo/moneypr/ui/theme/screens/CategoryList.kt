@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import org.burnoutcrew.reorderable.ReorderableItem
 import org.burnoutcrew.reorderable.detectReorderAfterLongPress
@@ -40,6 +41,7 @@ import org.burnoutcrew.reorderable.reorderable
 import ru.ohayo.moneypr.data.data_source.navigation.Screen
 import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.ButtonCategory
+import ru.ohayo.moneypr.ui.theme.screens.components.CategoryTabRow
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 
@@ -57,52 +59,17 @@ fun CategoryList(viewModel: CategoryViewModel, navController: NavHostController)
         }
     )
 
-    Column(Modifier.fillMaxSize()) {
-        TabRow(
-            selectedTabIndex = selectedTab.ordinal,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp),
-            indicator = {}, // Убираем стандартный индикатор
-            divider = {},
-            containerColor = colorScheme.surface // Фон TabRow
-        ) {
-            CategoryType.values().forEach { tab ->
-                Tab(
-                    selected = selectedTab == tab,
-                    onClick = { selectedTab = tab },
-                    modifier = Modifier
-                        .padding(6.dp)
-                        .border(
-                            width = 1.dp,
-                            color = Color.Black,
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .background(
-                            color = if (selectedTab == tab) colorScheme.inversePrimary else Color.Transparent, // Фон таба
-                            shape = RoundedCornerShape(8.dp)
-                        )
+    Column(modifier = Modifier.fillMaxSize()) {
 
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = tab.name,
-                            color = if (selectedTab == tab) colorScheme.onPrimary else colorScheme.onSurface,
-                            style = MaterialTheme.typography.titleSmall
-                        )
-                    }
-                }
-            }
-        }
-Column(        modifier = Modifier
-    .fillMaxSize()) {
+        // 🔄 Используем наш кастомный таб
+        CategoryTabRow(
+            selectedType = selectedTab,
+            onTypeSelected = { selectedTab = it }
+        )
 
-
-    LazyColumn(
+        Divider()
+        Spacer(modifier = Modifier.height(16.dp))
+        LazyColumn(
         state = state.listState,
         modifier = Modifier
             .fillMaxWidth()
@@ -119,7 +86,7 @@ Column(        modifier = Modifier
                 state, key = category.id,
 
                 ) { dragging ->
-                val scale = animateFloatAsState(if (dragging) 1.1f else 1.0f)
+                val scale = animateFloatAsState(if (dragging) 1.1f else 1.0f, label = "")
                 val elevation = animateDpAsState(if (dragging) 16.dp else 0.dp, label = "")
                 Box(
                     modifier = Modifier
@@ -169,19 +136,20 @@ Column(        modifier = Modifier
     ButtonCategory(
         text = "Создать категорию",
         onClick = {
-            navController.navigate(Screen.AddCategory.route)
+            navController.navigate("${Screen.AddCategory.route}/${selectedTab}")
         }
     )
 }
-        BackHandler {
-            viewModel.saveOrderChanges()
-            navController.popBackStack()
-        }
+    BackHandler {
+        viewModel.saveOrderChanges()
+        navController.popBackStack()
+    }
+
         DisposableEffect(Unit) {
             onDispose {
                 viewModel.saveOrderChanges()
             }
         }
     }
-}
+
 
