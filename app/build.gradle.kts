@@ -101,4 +101,7 @@ dependencies {
     implementation("org.burnoutcrew.composereorderable:reorderable:0.9.6")
     // Date
     implementation ("com.github.commandiron:WheelPickerCompose:1.1.11")
+        //Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+
 }

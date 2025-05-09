@@ -38,31 +38,32 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.flow.emptyFlow
+import ru.ohayo.moneypr.viewModel.BottomNavViewModel
 
 
 @Composable
-fun BottomNavigation(navController: NavController) {
+fun BottomNavigation(navController: NavController,
+                     viewModel: BottomNavViewModel = hiltViewModel()) {
     val items = listOf(
         BottomItem.Screen1,
         BottomItem.Screen2,
         BottomItem.Screen4,
-        BottomItem.Screen5 // Убираем Screen3 из списка
+        BottomItem.Screen5
     )
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    // Храним выбранный элемент
-    var selectedItem by rememberSaveable { mutableStateOf(items.first().route) }
+    val selectedItem by viewModel.selectedItem
 
     LaunchedEffect(currentRoute) {
         val newSelectedItem = currentRoute ?: items.first().route
         if (newSelectedItem != selectedItem) {
-            selectedItem = newSelectedItem
+            viewModel.selectItem(newSelectedItem)
         }
     }
     Box(

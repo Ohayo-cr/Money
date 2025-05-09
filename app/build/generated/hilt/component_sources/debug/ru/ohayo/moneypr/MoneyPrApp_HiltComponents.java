@@ -48,6 +48,7 @@ import javax.inject.Singleton;
 import ru.ohayo.moneypr.di.AppModule;
 import ru.ohayo.moneypr.viewModel.AccountViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.viewModel.BottomNavViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.CategoryViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.FinanceViewModel_HiltModules;
@@ -153,6 +154,7 @@ public final class MoneyPrApp_HiltComponents {
       modules = {
           AccountViewModel_HiltModules.KeyModule.class,
           AddCategoryViewModel_HiltModules.KeyModule.class,
+          BottomNavViewModel_HiltModules.KeyModule.class,
           CategoryViewModel_HiltModules.KeyModule.class,
           CurrencyViewModel_HiltModules.KeyModule.class,
           FinanceViewModel_HiltModules.KeyModule.class,
@@ -200,6 +202,7 @@ public final class MoneyPrApp_HiltComponents {
       modules = {
           AccountViewModel_HiltModules.BindsModule.class,
           AddCategoryViewModel_HiltModules.BindsModule.class,
+          BottomNavViewModel_HiltModules.BindsModule.class,
           CategoryViewModel_HiltModules.BindsModule.class,
           CurrencyViewModel_HiltModules.BindsModule.class,
           FinanceViewModel_HiltModules.BindsModule.class,

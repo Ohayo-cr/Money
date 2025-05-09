@@ -5,6 +5,7 @@ INJECTED from C:\Users\OHAYO\AndroidStudioProjects\MoneyPr\app\src\main\AndroidM
 INJECTED from C:\Users\OHAYO\AndroidStudioProjects\MoneyPr\app\src\main\AndroidManifest.xml:2:1-29:12
 INJECTED from C:\Users\OHAYO\AndroidStudioProjects\MoneyPr\app\src\main\AndroidManifest.xml:2:1-29:12
 MERGED from [com.github.commandiron:WheelPickerCompose:1.1.11] C:\Users\OHAYO\.gradle\caches\transforms-3\a5710e901c2d529be8a8a7409ef730c4\transformed\WheelPickerCompose-1.1.11\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.32.0] C:\Users\OHAYO\.gradle\caches\transforms-3\b90afa39cc5f065d9a4cd1d0bd1eb5b8\transformed\accompanist-systemuicontroller-0.32.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.1.0] C:\Users\OHAYO\.gradle\caches\transforms-3\590abec182400a2d77e6ebeb81253545\transformed\hilt-navigation-compose-1.1.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.1.0] C:\Users\OHAYO\.gradle\caches\transforms-3\666b9dbeb829f465bf8c53b34a412043\transformed\hilt-navigation-1.1.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.dagger:hilt-android:2.51.1] C:\Users\OHAYO\.gradle\caches\transforms-3\a355c9d7fc94a2722ccfc7e76083b478\transformed\hilt-android-2.51.1\AndroidManifest.xml:16:1-19:12
@@ -153,6 +154,8 @@ INJECTED from C:\Users\OHAYO\AndroidStudioProjects\MoneyPr\app\src\main\AndroidM
 INJECTED from C:\Users\OHAYO\AndroidStudioProjects\MoneyPr\app\src\main\AndroidManifest.xml
 MERGED from [com.github.commandiron:WheelPickerCompose:1.1.11] C:\Users\OHAYO\.gradle\caches\transforms-3\a5710e901c2d529be8a8a7409ef730c4\transformed\WheelPickerCompose-1.1.11\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.commandiron:WheelPickerCompose:1.1.11] C:\Users\OHAYO\.gradle\caches\transforms-3\a5710e901c2d529be8a8a7409ef730c4\transformed\WheelPickerCompose-1.1.11\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.32.0] C:\Users\OHAYO\.gradle\caches\transforms-3\b90afa39cc5f065d9a4cd1d0bd1eb5b8\transformed\accompanist-systemuicontroller-0.32.0\AndroidManifest.xml:21:5-44
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.32.0] C:\Users\OHAYO\.gradle\caches\transforms-3\b90afa39cc5f065d9a4cd1d0bd1eb5b8\transformed\accompanist-systemuicontroller-0.32.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.hilt:hilt-navigation-compose:1.1.0] C:\Users\OHAYO\.gradle\caches\transforms-3\590abec182400a2d77e6ebeb81253545\transformed\hilt-navigation-compose-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.hilt:hilt-navigation-compose:1.1.0] C:\Users\OHAYO\.gradle\caches\transforms-3\590abec182400a2d77e6ebeb81253545\transformed\hilt-navigation-compose-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.hilt:hilt-navigation:1.1.0] C:\Users\OHAYO\.gradle\caches\transforms-3\666b9dbeb829f465bf8c53b34a412043\transformed\hilt-navigation-1.1.0\AndroidManifest.xml:5:5-44

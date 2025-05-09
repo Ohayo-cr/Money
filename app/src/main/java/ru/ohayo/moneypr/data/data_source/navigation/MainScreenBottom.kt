@@ -1,13 +1,19 @@
 package ru.ohayo.moneypr.data.data_source.navigation
 
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import android.app.Activity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
@@ -17,6 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import androidx.compose.runtime.SideEffect
 
 @Composable
 fun MainScreen(navController: NavHostController) {
@@ -35,40 +42,50 @@ fun MainScreen(navController: NavHostController) {
 
     // Определяем, нужно ли отображать BottomNavigation
     val shouldShowBottomNavigation = currentRoute in routesToShowBottomNav
+    // Получаем контроллер системного интерфейса
+    val systemUiController = rememberSystemUiController()
 
-    // Цвет фона для системной навигации
-    val colorScheme = MaterialTheme.colorScheme
-    val navigationBarColor = if (shouldShowBottomNavigation) {
-        colorScheme.surface // Цвет по умолчанию для системной навигации
+    // Определяем, использовать ли тёмные иконки
+    val useDarkIcons = !isSystemInDarkTheme()
+    // Цвет нижней панели системы
+    val navBarColor = if (shouldShowBottomNavigation) {
+        MaterialTheme.colorScheme.surface
     } else {
-        colorScheme.background // Цвет фона для экранов без BottomNavigation
+        MaterialTheme.colorScheme.background
     }
 
-    // Вычисляем, используем ли мы светлые иконки в системной навигации
-    val isDarkTheme = isSystemInDarkTheme() // Вызываем внутри @Composable контекста
-
-    // Доступ к текущему окну
-    val view = LocalView.current
-    val window = (view.context as Activity).window
-
-    // Динамическое изменение цвета системной навигации
-    // Используем LaunchedEffect, чтобы обновить системную панель только при изменении
-    LaunchedEffect(navigationBarColor, isDarkTheme) {
-        withContext(Dispatchers.Main) {
-            window.navigationBarColor = navigationBarColor.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars =
-                !isDarkTheme
-        }
+    // Применяем цвет к системной панели навигации
+    SideEffect {
+        systemUiController.setNavigationBarColor(
+            color = navBarColor,
+            darkIcons = useDarkIcons
+        )
     }
 
     Scaffold(
         bottomBar = {
             if (shouldShowBottomNavigation) {
-                BottomNavigation(navController = navController)
+                Surface(
+                    color = MaterialTheme.colorScheme.surface,
+                    modifier = Modifier.navigationBarsPadding()
+                ) {
+                    BottomNavigation(navController = navController)
+                }
             }
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+        val backgroundColor = if (shouldShowBottomNavigation) {
+            MaterialTheme.colorScheme.surface
+        } else {
+            MaterialTheme.colorScheme.background
+        }
+
+        Box(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+                .background(backgroundColor)
+        ) {
             NavHostScreen(navController = navController)
         }
     }

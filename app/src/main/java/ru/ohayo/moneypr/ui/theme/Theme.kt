@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import android.view.Window
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -48,6 +49,7 @@ val LightTertiary = Color(0xFF3EB489)
 fun MoneyPrTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
+    systemUiColor: Color? = null, // Опционально: свой цвет для системных баров
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -88,9 +90,19 @@ fun MoneyPrTheme(
     }
 
     val view = LocalView.current
+    val systemBarsColor = systemUiColor ?: colorScheme.surface
+
     if (!view.isInEditMode) {
         SideEffect {
-            configureWindowColors(view, colorScheme, darkTheme)
+            val context = view.context
+            if (context is Activity) {
+                val window = context.window
+                window.statusBarColor = systemBarsColor.toArgb()
+                window.navigationBarColor = Color.Transparent.toArgb() // Прозрачный цвет для нижней панели
+                val insetsController = WindowCompat.getInsetsController(window, view)
+                insetsController.isAppearanceLightStatusBars = !darkTheme
+                insetsController.isAppearanceLightNavigationBars = !darkTheme
+            }
         }
     }
 
@@ -100,19 +112,8 @@ fun MoneyPrTheme(
         content = content
     )
 }
-
-/**
- * Настройка цветов статус-бара и навигационной панели
- */
-private fun configureWindowColors(
-    view: android.view.View,
-    colorScheme: androidx.compose.material3.ColorScheme,
-    darkTheme: Boolean
-) {
-    val window = (view.context as Activity).window
-    window.statusBarColor = colorScheme.surface.toArgb()
-    WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-
-    window.navigationBarColor = colorScheme.surface.toArgb()
-    WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
+fun Window.setSystemBarsColor(color: Color) {
+    statusBarColor = color.toArgb()
+    navigationBarColor = color.toArgb()
 }
+
