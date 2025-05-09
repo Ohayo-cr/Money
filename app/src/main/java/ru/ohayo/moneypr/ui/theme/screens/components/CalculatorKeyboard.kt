@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -81,7 +82,8 @@ fun CalculatorKeyboard(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            KeyboardButton(".", Modifier.weight(1f), onClick = { viewModel.appendToInput(".") })
+            KeyboardButton(".", Modifier.weight(1f), onClick = { viewModel.appendToInput(".") },
+                shape = RoundedCornerShape(bottomStart = 8.dp))
             KeyboardButton("0", Modifier.weight(1f), onClick = { viewModel.appendToInput("0") })
             // Кнопка "стереть"
             DeleteButton(modifier = Modifier.weight(1f), onDeleteLast = { viewModel.deleteLast() })
@@ -106,7 +108,8 @@ fun CalculatorKeyboard(
                     }
                 },
                 enabled = buttonEnabled,
-                backgroundColor = buttonColor
+                backgroundColor = buttonColor,
+                shape = RoundedCornerShape(bottomEnd = 8.dp)
             )
         }
     }
@@ -128,7 +131,8 @@ fun KeyboardButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    backgroundColor: Color = MaterialTheme.colorScheme.tertiary
+    backgroundColor: Color = MaterialTheme.colorScheme.tertiary,
+    shape: Shape = RoundedCornerShape(2.dp)
 ) {
     Button(
         onClick = onClick,

@@ -76,14 +76,10 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.Settings.route) {
             SettingsScreen(navController = navController)
         }
-        composable(Screen.Charts.route,
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() }) {
+        composable(Screen.Charts.route) {
             RecordsScreen()
         }
-        composable(Screen.Records.route,
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() }) {
+        composable(Screen.Records.route) {
             TransactionsList()
         }
         composable(Screen.AddAccount.route) {
@@ -95,22 +91,8 @@ fun NavHostScreen(navController: NavHostController) {
                 currencyViewModel = currencyViewModel
             )
         }
-        composable(
-            route = Screen.CategoryForTransact.route,
-            enterTransition = {
-                // Слайд сверху вниз → экран выезжает снизу
-                slideInVertically(
-                    initialOffsetY = { fullHeight -> fullHeight }, // начинает снизу
-                    animationSpec = tween(300)
-                ) + fadeIn(animationSpec = tween(300))
-            },
-            exitTransition = {
-                // Экран уезжает вниз
-                slideOutVertically(
-                    targetOffsetY = { fullHeight -> fullHeight }, // уезжает вниз
-                    animationSpec = tween(300)
-                ) + fadeOut(animationSpec = tween(300))
-            }
+        composable(Screen.CategoryForTransact.route,
+
         ) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransactionCategory(navController = navController, viewModel = categoryViewModel)

@@ -64,7 +64,7 @@ fun BottomNavigation(navController: NavController,
 
         // Обновляем lastBottomNavRoute, если текущий маршрут входит в список
         if (NavigationRoutes.routesToShowBottomNav.contains(currentRoute)) {
-            BottomNavViewModel.LastBottomNav.lastBottomNavRoute = currentRoute
+           lastBottomNavRoute = currentRoute
         }
     }
     Box(
@@ -86,8 +86,7 @@ fun BottomNavigation(navController: NavController,
                 .height(55.dp) // Высота NavigationBar
 
         ) {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentRoute = navBackStackEntry?.destination?.route
+
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -194,9 +193,8 @@ fun BottomNavigation(navController: NavController,
         // Центральная кнопка (выступающая)
         FloatingActionButton(
             onClick = {
-                val newRoute = BottomItem.Screen3.route
-                viewModel.updateNavigation(newRoute) // <-- обновляем флаг до перехода
-                navController.navigate(newRoute) {
+
+                navController.navigate(Screen.CategoryForTransact.route) {
                     launchSingleTop = true
                     restoreState = true
                     popUpTo(lastBottomNavRoute.toString()) {

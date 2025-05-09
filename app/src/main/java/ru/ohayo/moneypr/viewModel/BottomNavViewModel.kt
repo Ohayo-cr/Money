@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.ohayo.moneypr.data.data_source.navigation.NavigationRoutes
+import ru.ohayo.moneypr.data.data_source.navigation.NavigationRoutes.routesToShowBottomNav
 import javax.inject.Inject
 
 @HiltViewModel

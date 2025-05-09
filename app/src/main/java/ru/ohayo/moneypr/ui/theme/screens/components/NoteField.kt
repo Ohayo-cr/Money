@@ -38,10 +38,12 @@ fun NoteField(
             }
     ) {
         TextField(
-            value = viewModel.note, // Берем значение заметки из ViewModel
+            value = viewModel.note,
             onValueChange = { newText ->
-                viewModel.updateNote(newText) // Обновляем значение в ViewModel
-                onTextChanged(newText) // Передаем новое значение через колбэк
+                if (newText.length <= 100) {
+                    viewModel.updateNote(newText)
+                    onTextChanged(newText)
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,14 +61,14 @@ fun NoteField(
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = MaterialTheme.colorScheme.primary
                 , // Цвет фона текстового поля
-                cursorColor = MaterialTheme.colorScheme.primary, // Цвет курсора
+                cursorColor = MaterialTheme.colorScheme.background, // Цвет курсора
                 focusedIndicatorColor = Color.Transparent,       // Убираем подчеркивание при фокусе
                 unfocusedIndicatorColor = Color.Transparent,     // Убираем подчеркивание без фокуса
                 disabledIndicatorColor = Color.Transparent,      // Убираем подчеркивание для отключенного состояния
                 focusedPlaceholderColor = Color.Red,             // Цвет плейсхолдера при фокусе
                 unfocusedPlaceholderColor = Color.Gray           // Цвет плейсхолдера без фокуса
             ),
-            shape = RoundedCornerShape(0.dp) // Убираем закругление углов
+            shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
         )
     }
 }

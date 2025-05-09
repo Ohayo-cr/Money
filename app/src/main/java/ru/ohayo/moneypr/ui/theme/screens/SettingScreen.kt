@@ -22,15 +22,12 @@ fun SettingsScreen(navController: NavHostController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Кнопка "Категории"
         Button(
             onClick = { navController.navigate(Screen.Categories.route) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Категории")
         }
-
-        // Кнопка "Валюта"
         Button(
             onClick = { navController.navigate(Screen.Currency.route) },
             modifier = Modifier.fillMaxWidth()
