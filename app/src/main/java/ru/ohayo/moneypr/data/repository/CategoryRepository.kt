@@ -14,7 +14,6 @@ interface CategoryRepository {
     fun getCategoryById(id: Long): Flow<Category?>
     suspend fun deleteCategory(category: Category)
     fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
-    suspend fun getMaxOrder(type: CategoryType): Int
     suspend fun updateCategory(category: Category)
 }
 

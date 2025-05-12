@@ -25,10 +25,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,27 +39,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.data.data_source.navigation.Screen
 import ru.ohayo.moneypr.ui.theme.screens.components.CategoryIcons
 import ru.ohayo.moneypr.ui.theme.screens.components.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.ChooseCategory
 import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.ColorNames
 import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.FullScreenCustomDialog
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
+import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 @Composable
 fun AddCategoryScreen(
     navController: NavHostController,
-    viewModel: AddCategoryViewModel,
-    initialType: CategoryType = CategoryType.EXPENSE
-) {
-    var selectedType by remember { mutableStateOf(initialType) }
-    val colorScheme = MaterialTheme.colorScheme
+    addCategoryVM: AddCategoryViewModel,
+    categoryVM: CategoryViewModel,
+    ) {
+    val selectedTab by categoryVM.selectedCategoryType.collectAsState()
 
     // Состояния экрана
     var categoryName by remember { mutableStateOf("") }
@@ -67,16 +67,13 @@ fun AddCategoryScreen(
     val showColorPickerDialog = remember { mutableStateOf(false) }
 
 
-    // --- ВСПЛЫВАЮЩИЙ ДИАЛОГ ---
     if (showColorPickerDialog.value) {
         FullScreenCustomDialog(
             onDismissRequest = { showColorPickerDialog.value = false },
             title = "Выберите цвет категории",
             message = "Нажмите на нужный цвет",
             confirmText = "Сохранить",
-            onConfirmClick = {
-                // Можно оставить пустым или выполнить логику после подтверждения
-            },
+            onConfirmClick = {},
             onColorSelected = { color ->
                 selectedColor = color
                 showColorPickerDialog.value = false
@@ -86,17 +83,15 @@ fun AddCategoryScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        // 🔄 Используем наш кастомный таб
         CategoryTabRow(
-            selectedType = selectedType,
-            onTypeSelected = { selectedType = it }
+            selectedType = selectedTab,
+            onTypeSelected = { newType ->
+                categoryVM.setSelectedCategoryType(newType) // Обновляем тип в ViewModel
+                CategoryViewModel.CategoryTypeHolder.currentType = newType
+            }
         )
-
         Divider()
-
         Spacer(modifier = Modifier.height(16.dp))
-
-        // Показ выбранной иконки + текстовое поле
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -204,21 +199,29 @@ fun AddCategoryScreen(
         Button(
             onClick = {
                 if (categoryName.isNotBlank()) {
-                    viewModel.addCategoryAndGenerateOrder(
-                        type = selectedType,
+                    addCategoryVM.addCategoryAndGenerateOrder(
+                        type = selectedTab,
                         name = categoryName,
                         iconResId = selectedIconResId,
                         selectedColor
                     )
-                    navController.popBackStack()
+                    navController.navigate(Screen.Categories.route) {
+                        popUpTo(Screen.Categories.route) {
+                            inclusive = true
+                        }
+                    }
                 }
             },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(Alignment.End).padding(bottom = 16.dp)
         ) {
             Text(text = "Сохранить")
         }
         BackHandler {
-            navController.popBackStack()
+            navController.navigate(Screen.Categories.route) {
+                popUpTo(Screen.Categories.route) {
+                    inclusive = true
+                }
+            }
         }
     }
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "ru.ohayo.moneypr.app-mergeDebugResources-2:/values-v16/values-v16.xml",
+            "outputFile": "ru.ohayo.moneypr.app-mergeDebugResources-57:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\5b928d41656616aa6e920c971ccfa596\\transformed\\core-1.10.1\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\OHAYO\\.gradle\\caches\\transforms-3\\5b928d41656616aa6e920c971ccfa596\\transformed\\core-1.10.1\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

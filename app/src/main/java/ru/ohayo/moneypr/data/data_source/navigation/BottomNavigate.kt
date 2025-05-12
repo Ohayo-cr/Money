@@ -39,7 +39,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.flow.emptyFlow
 import ru.ohayo.moneypr.viewModel.BottomNavViewModel
-import ru.ohayo.moneypr.viewModel.BottomNavViewModel.LastBottomNav.lastBottomNavRoute
+
 
 
 @Composable
@@ -60,11 +60,6 @@ fun BottomNavigation(navController: NavController,
         val newSelectedItem = currentRoute ?: items.first().route
         if (newSelectedItem != selectedItem) {
             viewModel.selectItem(newSelectedItem)
-        }
-
-        // Обновляем lastBottomNavRoute, если текущий маршрут входит в список
-        if (NavigationRoutes.routesToShowBottomNav.contains(currentRoute)) {
-           lastBottomNavRoute = currentRoute
         }
     }
     Box(
@@ -197,10 +192,7 @@ fun BottomNavigation(navController: NavController,
                 navController.navigate(Screen.CategoryForTransact.route) {
                     launchSingleTop = true
                     restoreState = true
-                    popUpTo(lastBottomNavRoute.toString()) {
-                        saveState = true
-                        inclusive = false
-                    }
+
                 }
             },
             modifier = Modifier

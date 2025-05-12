@@ -24,7 +24,6 @@ interface CategoryDao {
     @Query("SELECT * FROM category ORDER BY `order` ASC")
     fun getAllCategories(): Flow<List<Category>>
 
-
     @Delete
     suspend fun deleteCategory(category: Category)
 
@@ -45,9 +44,6 @@ interface CategoryDao {
     @Query("SELECT * FROM category WHERE type = :type ORDER BY `order` ASC")
     fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
 
-    // Получить максимальный order для указанного типа
-    @Query("SELECT COALESCE(MAX(`order`), 0) FROM category WHERE type = :type")
-    suspend fun getMaxOrder(type: CategoryType): Int
 
     // Обновить order для списка категорий (для транзакции)
     @Transaction

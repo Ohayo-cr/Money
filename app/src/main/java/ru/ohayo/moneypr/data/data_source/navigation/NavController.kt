@@ -1,11 +1,8 @@
 package ru.ohayo.moneypr.data.data_source.navigation
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -14,9 +11,7 @@ import androidx.navigation.compose.composable
 import ru.ohayo.moneypr.ui.theme.screens.CategoryList
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import ru.ohayo.moneypr.domain.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
 import ru.ohayo.moneypr.ui.theme.screens.AddCategoryScreen
 import ru.ohayo.moneypr.ui.theme.screens.AddTransactionCategory
@@ -29,7 +24,6 @@ import ru.ohayo.moneypr.ui.theme.screens.TransactionsList
 import ru.ohayo.moneypr.viewModel.AccountViewModel
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
-import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 
@@ -49,26 +43,20 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
 
-            CategoryList(viewModel = categoryViewModel, navController = navController)
+            CategoryList(categoryVM = categoryViewModel, navController = navController)
         }
         // Маршрут с аргументом для типа категории
         composable(
-            route = "${Screen.AddCategory.route}/{categoryType}",
-            arguments = listOf(
-                navArgument("categoryType") {
-                    type = NavType.EnumType(CategoryType::class.java)
-                }
-            )
-        ) { backStackEntry ->
-            val categoryType = backStackEntry.arguments?.getSerializable("categoryType") as? CategoryType ?: CategoryType.EXPENSE
+            route = Screen.AddCategory.route // Убран аргумент из маршрута
+        ) {
             val addCategoryViewModel: AddCategoryViewModel = hiltViewModel()
+            val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddCategoryScreen(
                 navController = navController,
-                viewModel = addCategoryViewModel,
-                initialType = categoryType
+                addCategoryVM = addCategoryViewModel,
+                categoryVM = categoryViewModel,
             )
         }
-
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
             CurrencyScreen(currencyViewModel)

@@ -1,7 +1,6 @@
 package ru.ohayo.moneypr.viewModel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,10 +20,14 @@ class CategoryViewModel @Inject constructor(
     // Используем StateFlow для управления состоянием
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
     val categories: StateFlow<List<Category>> = _categories
-
+    object CategoryTypeHolder {
+        var currentType: CategoryType = CategoryType.EXPENSE
+    }
     private var tempUpdatedList = listOf<Category>()
     private val changedTypes = mutableSetOf<CategoryType>()
-
+    // Храним выбранный тип
+    private val _selectedCategoryType = MutableStateFlow(CategoryTypeHolder.currentType)
+    val selectedCategoryType: StateFlow<CategoryType> = _selectedCategoryType
     init {
         viewModelScope.launch {
             try {
@@ -52,6 +55,9 @@ class CategoryViewModel @Inject constructor(
         _categories.value = updatedCurrent + otherCategories
         tempUpdatedList = _categories.value
         changedTypes.add(type)
+    }
+    fun setSelectedCategoryType(type: CategoryType) {
+        _selectedCategoryType.value = type
     }
 
     fun saveOrderChanges() {

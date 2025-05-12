@@ -1,158 +1,158 @@
 [
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/xml_backup_rules.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/xml/backup_rules.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable__add_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/_add_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_power.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_power.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_power.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_power.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_ic_launcher_background.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_bot_add_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/bot_add_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_coffee.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_coffee.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_currency_united_states.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/currency_united_states.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_tea.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_tea.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_hookah.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_hookah.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_pc.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_pc.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_energy.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_energy.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable__reports_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/_reports_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable__reports_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/_reports_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_icon_transparent.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/icon_transparent.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable__settings_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/_settings_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable__chart_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/_chart_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_acustik.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_acustik.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_bot_reports_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/bot_reports_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_energy.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_energy.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable__chart_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/_chart_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_bot_settings_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/bot_settings_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_vape.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_vape.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_bot_reports_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/bot_reports_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_pc.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_pc.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_coffee_2cup.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_coffee_2cup.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_icon_transparent.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/icon_transparent.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_currency_default_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/currency_default_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_currency_russia_11699599.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/currency_russia_11699599.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_acustik.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_acustik.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_hookah.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_hookah.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/ic_launcher_foreground.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable__record_icon.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/_record_icon.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_bot_chart_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/bot_chart_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_coffee_2cup.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_coffee_2cup.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_cat__ic_vape.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/cat__ic_vape.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_coffee.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_coffee.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable__record_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/_record_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_bot_settings_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/bot_settings_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable__settings_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/_settings_icon.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_ic_launcher_background.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/ic_launcher_background.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_bot_chart_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/bot_chart_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_bot_record_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/bot_record_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_currency_russia_11699599.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/currency_russia_11699599.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_currency_united_states.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/currency_united_states.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_bot_add_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/bot_add_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_currency_default_icon.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/currency_default_icon.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/xml_data_extraction_rules.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_cat__ic_tea.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/cat__ic_tea.png"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/xml_backup_rules.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/xml/backup_rules.xml"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable_bot_record_icon.png.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/bot_record_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/xml_data_extraction_rules.xml.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/xml/data_extraction_rules.xml"
+        "merged": "ru.ohayo.moneypr.app-merged_res-59:/drawable__add_icon.xml.flat",
+        "source": "ru.ohayo.moneypr.app-main-61:/drawable/_add_icon.xml"
     }
 ]

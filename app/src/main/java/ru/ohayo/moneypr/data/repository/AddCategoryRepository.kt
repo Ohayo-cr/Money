@@ -17,4 +17,5 @@ class AddCategoryRepository @Inject constructor(
     suspend fun getNextOrder(type: CategoryType): Int {
         return categoryDao.getNextOrder(type) ?: 1
     }
+
 }

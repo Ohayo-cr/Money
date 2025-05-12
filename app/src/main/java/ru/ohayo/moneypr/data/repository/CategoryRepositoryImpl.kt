@@ -50,8 +50,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 throw e
             }
 
-    override suspend fun getMaxOrder(type: CategoryType): Int =
-        categoryDao.getMaxOrder(type)
+
 
     override suspend fun updateCategory(category: Category) =
         categoryDao.update(category)

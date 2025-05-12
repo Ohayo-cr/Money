@@ -448,41 +448,6 @@ public final class CategoryDao_Impl implements CategoryDao {
     });
   }
 
-  @Override
-  public Object getMaxOrder(final CategoryType type,
-      final Continuation<? super Integer> $completion) {
-    final String _sql = "SELECT COALESCE(MAX(`order`), 0) FROM category WHERE type = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindString(_argIndex, __CategoryType_enumToString(type));
-    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Integer>() {
-      @Override
-      @NonNull
-      public Integer call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final Integer _result;
-          if (_cursor.moveToFirst()) {
-            final Integer _tmp;
-            if (_cursor.isNull(0)) {
-              _tmp = null;
-            } else {
-              _tmp = _cursor.getInt(0);
-            }
-            _result = _tmp;
-          } else {
-            _result = null;
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-          _statement.release();
-        }
-      }
-    }, $completion);
-  }
-
   @NonNull
   public static List<Class<?>> getRequiredConverters() {
     return Collections.emptyList();

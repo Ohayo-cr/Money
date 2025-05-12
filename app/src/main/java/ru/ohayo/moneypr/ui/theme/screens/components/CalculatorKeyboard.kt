@@ -83,7 +83,13 @@ fun CalculatorKeyboard(
             modifier = Modifier.fillMaxWidth()
         ) {
             KeyboardButton(".", Modifier.weight(1f), onClick = { viewModel.appendToInput(".") },
-                shape = RoundedCornerShape(bottomStart = 8.dp))
+                shape = RoundedCornerShape(
+                    topStart = 2.dp,
+                    topEnd = 2.dp,
+                    bottomEnd = 2.dp,
+                    bottomStart = 8.dp
+                )
+            )
             KeyboardButton("0", Modifier.weight(1f), onClick = { viewModel.appendToInput("0") })
             // Кнопка "стереть"
             DeleteButton(modifier = Modifier.weight(1f), onDeleteLast = { viewModel.deleteLast() })
@@ -109,7 +115,12 @@ fun CalculatorKeyboard(
                 },
                 enabled = buttonEnabled,
                 backgroundColor = buttonColor,
-                shape = RoundedCornerShape(bottomEnd = 8.dp)
+                shape = RoundedCornerShape(
+                    topStart = 2.dp,
+                    topEnd = 2.dp,
+                    bottomStart = 2.dp,
+                    bottomEnd = 8.dp
+                )
             )
         }
     }
@@ -172,25 +183,22 @@ fun DeleteButton(
                         // Ожидаем нажатие
                         val downEvent = awaitFirstDown(requireUnconsumed = false)
                         isPressed = true
-
                         // Вызываем одиночное удаление при первом нажатии
                         onDeleteLast()
-
                         // Запоминаем время начала нажатия
                         val pressTime = System.currentTimeMillis()
 
                         // Запускаем корутину для повторяющегося удаления
                         scope.launch {
                             // Ждем 500 мс перед началом повторяющегося удаления
-                            delay(300)
+                            delay(400)
 
                             // Пока кнопка удерживается, продолжаем удалять каждые 100 мс
                             while (isPressed) {
                                 onDeleteLast()
-                                delay(100)
+                                delay(200)
                             }
                         }
-
                         // Ожидаем отпускание кнопки
                         waitForUpOrCancellation()
                         isPressed = false // Сбрасываем состояние при отпускании

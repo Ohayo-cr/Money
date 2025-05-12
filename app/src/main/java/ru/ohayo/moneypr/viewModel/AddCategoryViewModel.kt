@@ -1,19 +1,13 @@
 package ru.ohayo.moneypr.viewModel
 
-import android.app.Application
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.data.data_source.transaction.AppDatabase
 import ru.ohayo.moneypr.data.repository.AddCategoryRepository
 import ru.ohayo.moneypr.domain.category.Category
 import ru.ohayo.moneypr.domain.category.CategoryType
@@ -23,6 +17,9 @@ import javax.inject.Inject
 class AddCategoryViewModel @Inject constructor(
     private val repository: AddCategoryRepository
 ) : ViewModel() {
+
+    private val _categoryNameError = MutableLiveData<String?>(null)
+    val categoryNameError: LiveData<String?> = _categoryNameError
 
     fun addCategoryAndGenerateOrder(
         type: CategoryType,
@@ -44,10 +41,4 @@ class AddCategoryViewModel @Inject constructor(
         }
     }
 
-
-    // Альтернатива через Flow (если хочешь использовать в Compose UI с collectAsState())
-    fun getNextOrderFlow(type: CategoryType): Flow<Int> = flow {
-        val order = repository.getNextOrder(type)
-        emit(order)
-    }.flowOn(Dispatchers.IO)
 }

@@ -19,7 +19,9 @@ class BottomNavViewModel @Inject constructor() : ViewModel() {
     val selectedItem: State<String> get() = _selectedItem
 
     fun selectItem(route: String) {
-        _selectedItem.value = route
+        if (route in NavigationRoutes.routesToShowBottomNav) {
+            _selectedItem.value = route
+        }
     }
 
     // Список маршрутов, где нужно отображать BottomNavigation
@@ -35,7 +37,5 @@ class BottomNavViewModel @Inject constructor() : ViewModel() {
         _currentRoute.value = route
         _shouldShowBottomNavigation.value = route != null && route in routesToShowBottomNav
     }
-    object LastBottomNav {
-        var lastBottomNavRoute: String? = null
-    }
+
 }
