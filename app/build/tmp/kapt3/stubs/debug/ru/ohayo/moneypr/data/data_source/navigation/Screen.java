@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.data.data_source.navigation;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000@\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u000e\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\b6\u0018\u00002\u00020\u0001:\u000b\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011B\u000f\b\u0004\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\u0002\u0010\u0004R\u0011\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0005\u0010\u0006\u0082\u0001\u000b\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u00a8\u0006\u001d"}, d2 = {"Lru/ohayo/moneypr/data/data_source/navigation/Screen;", "", "route", "", "(Ljava/lang/String;)V", "getRoute", "()Ljava/lang/String;", "AddAccount", "AddCategory", "AddTransaction", "Categories", "CategoryForTransact", "Charts", "Currency", "Records", "Reports", "Settings", "Splash", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddAccount;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddCategory;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddTransaction;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Categories;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$CategoryForTransact;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Charts;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Currency;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Records;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Reports;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Settings;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Splash;", "app_debug"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000<\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u000e\n\u0002\b\r\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\b6\u0018\u00002\u00020\u0001:\n\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010B\u000f\b\u0004\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\u0002\u0010\u0004R\u0011\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0005\u0010\u0006\u0082\u0001\n\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u00a8\u0006\u001b"}, d2 = {"Lru/ohayo/moneypr/data/data_source/navigation/Screen;", "", "route", "", "(Ljava/lang/String;)V", "getRoute", "()Ljava/lang/String;", "AddAccount", "AddCategory", "AddTransaction", "Categories", "Charts", "Currency", "Records", "Reports", "Settings", "Splash", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddAccount;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddCategory;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$AddTransaction;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Categories;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Charts;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Currency;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Records;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Reports;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Settings;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen$Splash;", "app_debug"})
 public abstract class Screen {
     @org.jetbrains.annotations.NotNull
     private final java.lang.String route = null;
@@ -47,15 +47,6 @@ public abstract class Screen {
         public static final ru.ohayo.moneypr.data.data_source.navigation.Screen.Categories INSTANCE = null;
         
         private Categories() {
-        }
-    }
-    
-    @kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000\f\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u00c6\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002\u00a8\u0006\u0003"}, d2 = {"Lru/ohayo/moneypr/data/data_source/navigation/Screen$CategoryForTransact;", "Lru/ohayo/moneypr/data/data_source/navigation/Screen;", "()V", "app_debug"})
-    public static final class CategoryForTransact extends ru.ohayo.moneypr.data.data_source.navigation.Screen {
-        @org.jetbrains.annotations.NotNull
-        public static final ru.ohayo.moneypr.data.data_source.navigation.Screen.CategoryForTransact INSTANCE = null;
-        
-        private CategoryForTransact() {
         }
     }
     

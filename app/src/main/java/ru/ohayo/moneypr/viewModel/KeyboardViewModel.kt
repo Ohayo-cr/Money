@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.ohayo.moneypr.data.repository.ExpressionRepository
 import ru.ohayo.moneypr.ui.theme.screens.components.CalculationResult
-import ru.ohayo.moneypr.ui.theme.screens.use_case.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase
 import javax.inject.Inject
 
 @HiltViewModel

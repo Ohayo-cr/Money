@@ -3,7 +3,6 @@ package ru.ohayo.moneypr.data.data_source.navigation
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,11 +10,9 @@ import androidx.navigation.compose.composable
 import ru.ohayo.moneypr.ui.theme.screens.CategoryList
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.navArgument
 import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
-import ru.ohayo.moneypr.ui.theme.screens.AddCategoryScreen
-import ru.ohayo.moneypr.ui.theme.screens.AddTransactionCategory
-import ru.ohayo.moneypr.ui.theme.screens.AddTransactionScreen
+import ru.ohayo.moneypr.ui.theme.screens.addCategory.AddCategoryScreen
+import ru.ohayo.moneypr.ui.theme.screens.AddTransaction
 import ru.ohayo.moneypr.ui.theme.screens.CurrencyScreen
 import ru.ohayo.moneypr.ui.theme.screens.RecordsScreen
 import ru.ohayo.moneypr.ui.theme.screens.SettingsScreen
@@ -24,7 +21,6 @@ import ru.ohayo.moneypr.ui.theme.screens.TransactionsList
 import ru.ohayo.moneypr.viewModel.AccountViewModel
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
-import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 
 @Composable
@@ -42,20 +38,17 @@ fun NavHostScreen(navController: NavHostController) {
         }
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-
             CategoryList(categoryVM = categoryViewModel, navController = navController)
         }
-        // Маршрут с аргументом для типа категории
         composable(
-            route = Screen.AddCategory.route // Убран аргумент из маршрута
+            route = Screen.AddCategory.route
         ) {
             val addCategoryViewModel: AddCategoryViewModel = hiltViewModel()
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddCategoryScreen(
                 navController = navController,
                 addCategoryVM = addCategoryViewModel,
-                categoryVM = categoryViewModel,
-            )
+                categoryVM = categoryViewModel,)
         }
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
@@ -73,33 +66,13 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.AddAccount.route) {
             val accountViewModel: AccountViewModel = hiltViewModel()
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
-
             AddAccountScreen(
                 accountViewModel = accountViewModel,
-                currencyViewModel = currencyViewModel
-            )
+                currencyViewModel = currencyViewModel)
         }
-        composable(Screen.CategoryForTransact.route,
-
-        ) {
+        composable(Screen.AddTransaction.route,) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-            AddTransactionCategory(navController = navController, viewModel = categoryViewModel)
-        }
-        composable(
-            route = "${Screen.AddTransaction.route}?categoryId={categoryId}",
-            arguments = listOf(navArgument("categoryId") { defaultValue = "-1" })
-        ) { backStackEntry ->
-            val categoryId = backStackEntry.arguments?.getString("categoryId")?.toIntOrNull() ?: -1
-            if (categoryId != -1) {
-                val transactionViewModel: TransactionViewModel = hiltViewModel()
-                AddTransactionScreen(
-                    categoryId = categoryId,
-                    viewModel = transactionViewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            } else {
-                Text("Invalid category ID")
-            }
+            AddTransaction(navController = navController, viewModel = categoryViewModel)
         }
     }
 }

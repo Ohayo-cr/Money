@@ -36,22 +36,22 @@ fun ColorTile(
             .clickable { onClick() }
             .padding(4.dp)
     ) {
-        // Определяем, является ли цвет прозрачным
+
         if (color == Color(0x00FFFFFF)) {
             Image(
                 painter = painterResource(id = R.drawable.icon_transparent),
                 contentDescription = "Transparent Icon",
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(70.dp)
                     .border(width = 2.dp, color = Color.Black, shape = MaterialTheme.shapes.medium)
-                    .clip(MaterialTheme.shapes.medium) // Обрезка по форме
-                    .fillMaxSize(), // Заполнение всего контейнера
-                contentScale = ContentScale.Crop // Растянуть и обрезать пропорционально
+                    .clip(MaterialTheme.shapes.medium)
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
         } else {
             Box(
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(70.dp)
                     .border(width = 2.dp, color = Color.Black, shape = MaterialTheme.shapes.medium)
                     .clip(MaterialTheme.shapes.medium)
                     .background(color)

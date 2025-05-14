@@ -7,7 +7,7 @@ import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.inject.Provider;
 import ru.ohayo.moneypr.data.repository.ExpressionRepository;
-import ru.ohayo.moneypr.ui.theme.screens.use_case.EvaluateExpressionUseCase;
+import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase;
 
 @ScopeMetadata
 @QualifierMetadata

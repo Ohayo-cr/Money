@@ -10,9 +10,7 @@ sealed class Screen(val route: String) {
     object Reports : Screen("reports")  // Отчеты
     object Settings : Screen("settings") // Настройки
 
-    // Управление транзакциями
-    object AddTransaction : Screen("add_transaction")       // Добавить транзакцию
-    object CategoryForTransact : Screen("category_list")          // Список категорий
+    object AddTransaction : Screen("add_transaction")
 
     // Управление аккаунтами
     object AddAccount : Screen("add_account")              // Добавить счет

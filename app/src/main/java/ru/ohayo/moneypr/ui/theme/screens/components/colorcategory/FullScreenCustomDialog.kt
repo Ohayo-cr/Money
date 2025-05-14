@@ -47,7 +47,7 @@ fun FullScreenCustomDialog(
                     .fillMaxSize()
                     .clip(RoundedCornerShape(topStart = 6.dp, topEnd = 6.dp))
                     .background(MaterialTheme.colorScheme.surface)
-                    .padding(24.dp),
+                    .padding(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -64,6 +64,7 @@ fun FullScreenCustomDialog(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
 
+                Spacer(modifier = Modifier.height(12.dp))
                 // Добавляем ColorPickerGrid
                 ColorPickerGrid(onColorSelected = onColorSelected)
 

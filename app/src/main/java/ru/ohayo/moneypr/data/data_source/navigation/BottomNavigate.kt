@@ -125,9 +125,9 @@ fun BottomNavigation(navController: NavController,
                         },
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = colorScheme.inversePrimary,
-                            unselectedIconColor = Color.DarkGray,
+                            unselectedIconColor = colorScheme.onSurface,
                             selectedTextColor = colorScheme.inversePrimary,
-                            unselectedTextColor = Color.DarkGray,
+                            unselectedTextColor =colorScheme.onSurface,
                             indicatorColor = colorScheme.surface
                         ),
                         interactionSource = remember { NoRippleInteractionSource }
@@ -174,9 +174,9 @@ fun BottomNavigation(navController: NavController,
                         },
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = colorScheme.inversePrimary,
-                            unselectedIconColor = Color.DarkGray,
+                            unselectedIconColor = colorScheme.onSurface,
                             selectedTextColor = colorScheme.inversePrimary,
-                            unselectedTextColor = Color.DarkGray,
+                            unselectedTextColor =colorScheme.onSurface,
                             indicatorColor = colorScheme.surface
                         ),
                         interactionSource = remember { NoRippleInteractionSource }
@@ -189,7 +189,7 @@ fun BottomNavigation(navController: NavController,
         FloatingActionButton(
             onClick = {
 
-                navController.navigate(Screen.CategoryForTransact.route) {
+                navController.navigate(Screen.AddTransaction.route) {
                     launchSingleTop = true
                     restoreState = true
 

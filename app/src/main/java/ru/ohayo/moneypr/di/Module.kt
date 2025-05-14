@@ -20,7 +20,7 @@ import ru.ohayo.moneypr.data.repository.CurrencyRepositoryImpl
 import ru.ohayo.moneypr.data.repository.ExpressionRepository
 import ru.ohayo.moneypr.data.repository.ExpressionRepositoryImpl
 import ru.ohayo.moneypr.domain.AccountRepository
-import ru.ohayo.moneypr.ui.theme.screens.use_case.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase
 import javax.inject.Singleton
 
 @Module

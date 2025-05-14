@@ -16,6 +16,7 @@ object CategoryColors {
         Color(0xFFFFF8DC), // Cornsilk
         Color(0xFFF8F8FF), // Ghost White
         Color(0xFFFFFACD), // Lemon Chiffon
+        Color(0xFF67676B), // Dark Gray
 
         // Тёплые / Пастельные
         Color(0xFFFFB6C1), // Light Pink

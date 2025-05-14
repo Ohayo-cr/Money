@@ -54,7 +54,6 @@ import ru.ohayo.moneypr.di.AppModule_ProvideEvaluateExpressionUseCaseFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideExpressionRepositoryFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideTransactionDaoFactory;
 import ru.ohayo.moneypr.domain.AccountRepository;
-import ru.ohayo.moneypr.ui.theme.screens.use_case.EvaluateExpressionUseCase;
 import ru.ohayo.moneypr.viewModel.AccountViewModel;
 import ru.ohayo.moneypr.viewModel.AccountViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel;
@@ -73,6 +72,7 @@ import ru.ohayo.moneypr.viewModel.TransactionListViewModel;
 import ru.ohayo.moneypr.viewModel.TransactionListViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.TransactionViewModel;
 import ru.ohayo.moneypr.viewModel.TransactionViewModel_HiltModules;
+import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase;
 
 @DaggerGenerated
 @SuppressWarnings({
@@ -422,29 +422,23 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
-
       static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
-
       static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
 
       static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
 
+      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
+
       static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
 
-      @KeepFieldType
-      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
+      static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
 
-      @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
 
       @KeepFieldType
       BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
@@ -453,19 +447,25 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
 
       @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
-
-      @KeepFieldType
-      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
-
-      @KeepFieldType
       CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
+
+      @KeepFieldType
+      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
 
       @KeepFieldType
       FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
 
       @KeepFieldType
+      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+
+      @KeepFieldType
       TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+
+      @KeepFieldType
+      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
+
+      @KeepFieldType
+      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
     }
   }
 
@@ -534,50 +534,50 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
 
       static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
 
+      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
+
       static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
+      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
 
       static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
 
+      static String ru_ohayo_moneypr_viewModel_FinanceViewModel = "ru.ohayo.moneypr.viewModel.FinanceViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
+
       static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
-
-      @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
-
-      @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
-
-      @KeepFieldType
-      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
-
-      @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
-
-      @KeepFieldType
-      FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
-
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
-
-      @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
 
       @KeepFieldType
       KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
 
       @KeepFieldType
+      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
+
+      @KeepFieldType
       CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+
+      @KeepFieldType
+      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
+
+      @KeepFieldType
+      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+
+      @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+
+      @KeepFieldType
+      FinanceViewModel ru_ohayo_moneypr_viewModel_FinanceViewModel2;
+
+      @KeepFieldType
+      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
+
+      @KeepFieldType
+      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -818,7 +818,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
           case 8: // ru.ohayo.moneypr.data.data_source.transaction.TransactionDao 
           return (T) AppModule_ProvideTransactionDaoFactory.provideTransactionDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 9: // ru.ohayo.moneypr.ui.theme.screens.use_case.EvaluateExpressionUseCase 
+          case 9: // ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase 
           return (T) AppModule_ProvideEvaluateExpressionUseCaseFactory.provideEvaluateExpressionUseCase();
 
           case 10: // ru.ohayo.moneypr.data.repository.ExpressionRepository 

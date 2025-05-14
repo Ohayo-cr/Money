@@ -15,6 +15,7 @@ val ColorNames = mapOf(
     Color(0xFFFFF8DC) to "Cornsilk",
     Color(0xFFF8F8FF) to "Ghost White",
     Color(0xFFFFFACD) to "Lemon Chiffon",
+    Color(0xFF67676B) to "Dark Gray",
 
     // Тёплые / Пастельные
     Color(0xFFFFB6C1) to "Light Pink",

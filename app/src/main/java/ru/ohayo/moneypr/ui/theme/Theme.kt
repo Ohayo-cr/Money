@@ -20,26 +20,26 @@ import androidx.core.view.WindowCompat
 
 
 // Основные цвета
-val LightTurquoise = Color(0xFF64D8C9)
 val ErrorRed = Color.Red
 
 // Цвета текста
-val TextPrimaryWhite = Color.Black
-val TextPrimaryBlack = Color.White
+val TextBlack = Color.Black
+val TextWhite = Color.White
 val TextSecondary = Color(0xFF383A3F)
 val TextDisabled = Color(0xFF898E98)
 val TextOnDark = Color.White
 
 // Темная тема
-val DarkPrimary = Color(0xFF2F3030)
-val DarkSecondary = Color(0xFF4A4B4B)
-val DarkBackground = Color(0xFF737274)
+val DarkPrimary = Color(0xFF252525)
+val DarkSecondary = Color(0xBF7E7E7E)
+val DarkBackground = Color(0xFF323234)
 val DarkSurface = DarkPrimary
 val DarkAccent = Color(0xFF008B8B)
+val DarkTertiary = Color(0xFF505050)
 
 // Светлая тема
 val LightPrimary = Color(0xFFDDDFE2)
-val LightSecondary = LightTurquoise
+val LightSecondary = Color(0xBF7E7E7E)
 val LightBackground = Color.White
 val LightSurface = LightPrimary
 val LightAccent = Color(0xFF20B2AA)
@@ -59,14 +59,14 @@ fun MoneyPrTheme(
         }
         darkTheme -> darkColorScheme(
             primary = DarkPrimary,
-            onPrimary = TextPrimaryBlack,
+            onPrimary = TextWhite,
             secondary = DarkSecondary,
             onSecondary = DarkPrimary,
             background = DarkBackground,
             onBackground = TextOnDark,
             surface = DarkSurface,
-            onSurface = TextPrimaryBlack,
-            tertiary = DarkSecondary,
+            onSurface = TextDisabled,
+            tertiary = DarkTertiary,
             onTertiary = TextOnDark,
             error = ErrorRed,
             onError = TextOnDark,
@@ -74,11 +74,11 @@ fun MoneyPrTheme(
         )
         else -> lightColorScheme(
             primary = LightPrimary,
-            onPrimary = TextPrimaryWhite,
+            onPrimary = TextBlack,
             secondary = LightSecondary,
             onSecondary = LightPrimary,
             background = LightBackground,
-            onBackground = TextPrimaryWhite,
+            onBackground = TextBlack,
             surface = LightSurface,
             onSurface = TextDisabled,
             tertiary = LightTertiary,
