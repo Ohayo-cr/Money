@@ -58,7 +58,7 @@ fun ChooseCategory(
             )
             .padding(2.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = if (name != null) Arrangement.SpaceEvenly else Arrangement.Center
+        verticalArrangement = if (name != null) Arrangement.Top else Arrangement.Center
     ) {
         CategoryIcon(
             iconResId = iconResId,
