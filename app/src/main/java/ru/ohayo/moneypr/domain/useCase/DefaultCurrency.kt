@@ -2,8 +2,7 @@ package ru.ohayo.moneypr.domain.useCase
 
 import ru.ohayo.moneypr.R
 
-import ru.ohayo.moneypr.domain.category.CategoryType
-import ru.ohayo.moneypr.domain.currency.Currency
+import ru.ohayo.moneypr.domain.allEntity.Currency
 
 object DefaultCurrency {
     val DEFAULT_CURRENCY = listOf(

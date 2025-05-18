@@ -2,8 +2,7 @@ package ru.ohayo.moneypr.data.repository
 
 
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.currency.Currency
+import ru.ohayo.moneypr.domain.allEntity.Currency
 
 interface CurrencyRepository {
     suspend fun insertCurrency(currency: Currency)

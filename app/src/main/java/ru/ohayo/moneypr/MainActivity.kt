@@ -9,8 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.ohayo.moneypr.data.data_source.navigation.MainScreen
-import ru.ohayo.moneypr.data.data_source.navigation.NavHostScreen
+import ru.ohayo.moneypr.ui.theme.screens.bottomNavigator.MainScreen
 import ru.ohayo.moneypr.ui.theme.MoneyPrTheme
 
 @AndroidEntryPoint

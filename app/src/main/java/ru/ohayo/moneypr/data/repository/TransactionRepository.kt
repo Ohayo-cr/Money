@@ -3,8 +3,8 @@ package ru.ohayo.moneypr.data.repository
 
 
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.data.data_source.transaction.TransactionDao
-import ru.ohayo.moneypr.domain.TransactionEntity
+import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao
+import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import javax.inject.Inject
 
 class TransactionRepository @Inject constructor(

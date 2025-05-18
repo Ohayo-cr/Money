@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase;
+import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata

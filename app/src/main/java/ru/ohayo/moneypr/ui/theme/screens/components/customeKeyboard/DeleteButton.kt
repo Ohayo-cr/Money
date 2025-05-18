@@ -1,5 +1,7 @@
 package ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Box
@@ -17,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
@@ -65,19 +68,18 @@ fun DeleteButton(
                     }
                 }
             }
-    ) {
-        Button(
-            onClick = { /* Обработка клика уже включена в pointerInput */ },
-            modifier = Modifier.fillMaxSize(),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
-            shape = RoundedCornerShape(2.dp)
-        ) {
-            Text(
-                text = "⌫",
-                color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp
+            .background(
+                color = MaterialTheme.colorScheme.tertiary,
+                shape = RoundedCornerShape(2.dp)
             )
-        }
+            .clickable {}
+    ) {
+        Text(
+            text = "⌫",
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }

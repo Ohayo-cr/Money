@@ -7,8 +7,8 @@ import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.inject.Provider;
-import ru.ohayo.moneypr.data.data_source.category.CategoryDao;
-import ru.ohayo.moneypr.data.data_source.transaction.AppDatabase;
+import ru.ohayo.moneypr.data.data_source.AppDatabase;
+import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata

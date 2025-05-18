@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.viewModel
 
-import ru.ohayo.moneypr.domain.TransactionEntity
+import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 
 sealed class TransactionState {
     object Loading : TransactionState() // Данные загружаются

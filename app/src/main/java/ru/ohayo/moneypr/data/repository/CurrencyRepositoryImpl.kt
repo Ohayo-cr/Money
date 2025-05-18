@@ -2,9 +2,8 @@ package ru.ohayo.moneypr.data.repository
 
 
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.data.data_source.currency.CurrencyDao
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.currency.Currency
+import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao
+import ru.ohayo.moneypr.domain.allEntity.Currency
 
 class CurrencyRepositoryImpl(
     private val currencyDao: CurrencyDao

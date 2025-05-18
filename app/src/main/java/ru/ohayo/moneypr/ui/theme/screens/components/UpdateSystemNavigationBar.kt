@@ -3,20 +3,12 @@ package ru.ohayo.moneypr.ui.theme.screens.components
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import kotlinx.coroutines.delay
-import ru.ohayo.moneypr.data.data_source.navigation.NavigationRoutes
-import ru.ohayo.moneypr.data.data_source.navigation.Screen
+import ru.ohayo.moneypr.ui.theme.screens.navController.NavigationRoutes
 
 @Composable
 fun UpdateSystemNavigationBar(navController: NavHostController) {

@@ -3,14 +3,11 @@ package ru.ohayo.moneypr.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import ru.ohayo.moneypr.data.repository.CurrencyRepository
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.currency.Currency
+import ru.ohayo.moneypr.domain.allEntity.Currency
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,20 +32,6 @@ class CurrencyViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _error.value = e.message
-            }
-        }
-    }
-
-    suspend fun isCurrencyEmpty(): Boolean {
-        return currencyRepository.isCurrencyEmpty()
-    }
-
-    fun addCurrency(currency: Currency) {
-        viewModelScope.launch {
-            try {
-                currencyRepository.insertCurrency(currency)
-            } catch (e: Exception) {
-                _error.value = "Failed to add currency: ${e.message}"
             }
         }
     }

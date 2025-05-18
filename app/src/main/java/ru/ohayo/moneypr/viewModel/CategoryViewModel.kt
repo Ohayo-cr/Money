@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.CategoryRepository
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,12 +71,7 @@ class CategoryViewModel @Inject constructor(
             tempUpdatedList = emptyList()
         }
     }
-    // Получение категорий по типу с сортировкой
-    fun getCategoriesByType(type: CategoryType): List<Category> {
-        return _categories.value
-            .filter { it.type == type }
-            .sortedBy { it.order }
-    }
+
 
     fun filterCategoriesByType(type: CategoryType): List<Category> {
         return _categories.value.filter { it.type == type }

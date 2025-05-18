@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.domain.Account
-import ru.ohayo.moneypr.domain.AccountRepository
-import ru.ohayo.moneypr.domain.AccountType
+import ru.ohayo.moneypr.domain.allEntity.Account
+import ru.ohayo.moneypr.data.repository.AccountRepository
+import ru.ohayo.moneypr.domain.allEntity.AccountType
 import javax.inject.Inject
 
 

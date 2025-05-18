@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.inject.Provider;
-import ru.ohayo.moneypr.data.data_source.category.CategoryDao;
+import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao;
 
 @ScopeMetadata
 @QualifierMetadata

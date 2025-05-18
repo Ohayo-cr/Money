@@ -7,7 +7,7 @@ import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.inject.Provider;
-import ru.ohayo.moneypr.data.data_source.currency.CurrencyDao;
+import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao;
 import ru.ohayo.moneypr.data.repository.CurrencyRepository;
 
 @ScopeMetadata("javax.inject.Singleton")

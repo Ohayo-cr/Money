@@ -25,11 +25,11 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.data.data_source.navigation.Screen
+import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.components.CategoryHeader
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.components.ColorPickerSection
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.components.IconGridSection
-import ru.ohayo.moneypr.ui.theme.screens.components.CategoryTabRow
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 

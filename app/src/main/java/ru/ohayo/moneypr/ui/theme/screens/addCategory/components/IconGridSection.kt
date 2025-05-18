@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.ui.theme.screens.components.CategoryIcons
-import ru.ohayo.moneypr.ui.theme.screens.components.ChooseCategory
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.AllCategoryIcons
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
 
 @Composable
 fun IconGridSection(
@@ -34,7 +34,7 @@ fun IconGridSection(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        itemsIndexed(CategoryIcons.icons) { _, iconResId ->
+        itemsIndexed(AllCategoryIcons.icons) { _, iconResId ->
             ChooseCategory(
                 iconResId = iconResId,
                 backgroundColor = Color(0xFF67676B),

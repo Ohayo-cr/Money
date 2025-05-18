@@ -2,8 +2,8 @@ package ru.ohayo.moneypr.domain.useCase
 
 
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryType
 
 object DefaultCategories {
     private const val INCOME_COLOR = 0xFF4CAF50 // Зелёный для доходов

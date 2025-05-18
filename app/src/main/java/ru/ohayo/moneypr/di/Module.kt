@@ -7,11 +7,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.ohayo.moneypr.data.data_source.account.AccountDao
-import ru.ohayo.moneypr.data.data_source.category.CategoryDao
-import ru.ohayo.moneypr.data.data_source.currency.CurrencyDao
-import ru.ohayo.moneypr.data.data_source.transaction.AppDatabase
-import ru.ohayo.moneypr.data.data_source.transaction.TransactionDao
+import ru.ohayo.moneypr.data.data_source.allDao.AccountDao
+import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
+import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao
+import ru.ohayo.moneypr.data.data_source.AppDatabase
+import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao
 import ru.ohayo.moneypr.data.repository.AccountRepositoryImpl
 import ru.ohayo.moneypr.data.repository.CategoryRepository
 import ru.ohayo.moneypr.data.repository.CategoryRepositoryImpl
@@ -19,8 +19,8 @@ import ru.ohayo.moneypr.data.repository.CurrencyRepository
 import ru.ohayo.moneypr.data.repository.CurrencyRepositoryImpl
 import ru.ohayo.moneypr.data.repository.ExpressionRepository
 import ru.ohayo.moneypr.data.repository.ExpressionRepositoryImpl
-import ru.ohayo.moneypr.domain.AccountRepository
-import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.data.repository.AccountRepository
+import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase
 import javax.inject.Singleton
 
 @Module

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.TransactionRepository
-import ru.ohayo.moneypr.domain.TransactionEntity
+import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import javax.inject.Inject
 
 @HiltViewModel

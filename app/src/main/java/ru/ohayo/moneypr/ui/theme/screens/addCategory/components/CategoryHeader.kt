@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.ui.theme.screens.components.CategoryIcon
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryIcon
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

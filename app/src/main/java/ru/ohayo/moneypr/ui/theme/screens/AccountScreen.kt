@@ -5,30 +5,20 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.domain.Account
-import ru.ohayo.moneypr.domain.AccountType
-import ru.ohayo.moneypr.domain.currency.Currency
+import ru.ohayo.moneypr.domain.allEntity.Account
+import ru.ohayo.moneypr.domain.allEntity.AccountType
 import ru.ohayo.moneypr.ui.theme.screens.components.DropdownSelector
 import ru.ohayo.moneypr.utils.NumberFormatter
 
 import ru.ohayo.moneypr.viewModel.AccountViewModel
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
-import java.text.NumberFormat
-import java.util.Locale
 
 @Composable
 fun AddAccountScreen(

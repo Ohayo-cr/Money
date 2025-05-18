@@ -7,7 +7,4 @@ class ExpressionRepositoryImpl : ExpressionRepository {
         history.add(Pair(expression, result))
     }
 
-    override fun getHistory(): List<Pair<String, String>> {
-        return history.toList()
-    }
 }

@@ -2,9 +2,8 @@ package ru.ohayo.moneypr.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.data.data_source.account.AccountDao
-import ru.ohayo.moneypr.domain.Account
-import ru.ohayo.moneypr.domain.AccountRepository
+import ru.ohayo.moneypr.data.data_source.allDao.AccountDao
+import ru.ohayo.moneypr.domain.allEntity.Account
 import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(

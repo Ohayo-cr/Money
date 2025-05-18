@@ -1,8 +1,8 @@
 package ru.ohayo.moneypr.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryType
 
 
 interface CategoryRepository {

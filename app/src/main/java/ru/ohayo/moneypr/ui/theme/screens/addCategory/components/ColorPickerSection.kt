@@ -22,8 +22,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.ColorNames
-import ru.ohayo.moneypr.ui.theme.screens.components.colorcategory.FullScreenCustomDialog
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ColorNames
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.FullScreenCustomDialog
 
 @Composable
 fun ColorPickerSection(

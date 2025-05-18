@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.AddCategoryRepository
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,8 +18,6 @@ class AddCategoryViewModel @Inject constructor(
     private val repository: AddCategoryRepository
 ) : ViewModel() {
 
-    private val _categoryNameError = MutableLiveData<String?>(null)
-    val categoryNameError: LiveData<String?> = _categoryNameError
 
     fun addCategoryAndGenerateOrder(
         type: CategoryType,

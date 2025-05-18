@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.ohayo.moneypr.data.repository.ExpressionRepository
-import ru.ohayo.moneypr.ui.theme.screens.components.CalculationResult
-import ru.ohayo.moneypr.viewModel.use_case.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculationResult
+import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,24 +18,18 @@ class KeyboardViewModel @Inject constructor(
 
     var currentInput by mutableStateOf("")
         private set
-
     var result by mutableStateOf("")
         private set
-
     var note by mutableStateOf("") // Новое состояние для примечания
         private set
-
     val isExpressionReadyForEvaluation: Boolean
         get() = currentInput.trim().isNotEmpty() && currentInput.any { it in "+-*/" }
-
     fun updateNote(newNote: String) {
         note = newNote // Обновление примечания
-    }
-    val isResultPositive: Boolean
+    }val isResultPositive: Boolean
         get() = result.toDoubleOrNull()?.let { it >= 0 } ?: true // Если результат пустой или не число, считаем его положительным
     // Флаг для отслеживания состояния зажатия кнопки "←"
     private var isDeletePressed = false
-
     fun appendToInput(value: String) {
         // Если результат равен "0", очищаем его перед началом нового ввода
         if (result == "0" && value.matches(Regex("[0-9.,]"))) {
@@ -162,6 +156,11 @@ class KeyboardViewModel @Inject constructor(
 
         // Разрешаем только цифры, запятую и операторы
         return newChar.matches(Regex("[0-9,+-/*]"))
+    }
+    fun reset() {
+        currentInput = ""
+        result = ""
+        note = ""
     }
 
     private fun getLastNumber(input: String): String {

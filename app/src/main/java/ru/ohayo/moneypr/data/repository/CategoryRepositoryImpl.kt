@@ -4,9 +4,9 @@ import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
-import ru.ohayo.moneypr.data.data_source.category.CategoryDao
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.domain.category.CategoryType
+import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryType
 
 
 class CategoryRepositoryImpl @Inject constructor(

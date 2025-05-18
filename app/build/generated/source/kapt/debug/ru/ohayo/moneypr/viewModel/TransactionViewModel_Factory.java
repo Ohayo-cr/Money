@@ -6,10 +6,10 @@ import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.inject.Provider;
+import ru.ohayo.moneypr.data.repository.AccountRepository;
 import ru.ohayo.moneypr.data.repository.CategoryRepository;
 import ru.ohayo.moneypr.data.repository.CurrencyRepository;
 import ru.ohayo.moneypr.data.repository.TransactionRepository;
-import ru.ohayo.moneypr.domain.AccountRepository;
 
 @ScopeMetadata
 @QualifierMetadata

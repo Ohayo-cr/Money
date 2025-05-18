@@ -62,12 +62,15 @@ fun CalculatorKeyboard(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            KeyboardButton(".", Modifier.weight(1f), onClick = { viewModel.appendToInput(".") },
+            KeyboardButton(
+                text = ".",
+                modifier = Modifier.weight(1f),
+                onClick = { viewModel.appendToInput(".") },
                 shape = RoundedCornerShape(
                     topStart = 2.dp,
                     topEnd = 2.dp,
                     bottomEnd = 2.dp,
-                    bottomStart = 8.dp
+                    bottomStart = 8.dp // нижний левый угол закруглён на 10.dp
                 )
             )
             KeyboardButton("0", Modifier.weight(1f), onClick = { viewModel.appendToInput("0") })

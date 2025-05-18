@@ -14,9 +14,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.domain.TransactionEntity
-import ru.ohayo.moneypr.domain.category.Category
-import ru.ohayo.moneypr.ui.theme.screens.getCategoryName
+import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
+import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.ui.theme.screens.transactionList.getCategoryName
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 @Composable
@@ -53,7 +53,11 @@ fun TransactionDetailsDialog(
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(text = "Сумма: ${transaction.amount}")
                 Text(text = "Категория: ${getCategoryName(categories, transaction.category)}")
-                Text(text = "Дата: ${ru.ohayo.moneypr.ui.theme.screens.formatTimestamp(transaction.timestamp)}")
+                Text(text = "Дата: ${
+                    ru.ohayo.moneypr.ui.theme.screens.transactionList.formatTimestamp(
+                        transaction.timestamp
+                    )
+                }")
                 transaction.content?.let {
                     Text(text = "Описание: $it")
                 }
