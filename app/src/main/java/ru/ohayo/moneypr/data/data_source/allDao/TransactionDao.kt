@@ -10,10 +10,8 @@ import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 
 @Dao
 interface TransactionDao {
-
-    @Query("SELECT * FROM transactions")
+    @Query("SELECT * FROM transactions ORDER BY timestamp DESC")
     fun getAllTransactions(): Flow<List<TransactionEntity>>
-
     @Query("SELECT * FROM transactions WHERE id = :id")
     suspend fun getTransactionById(id: Long): TransactionEntity? // Изменено на Long
 

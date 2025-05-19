@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.theme.screens.addCategory.components
+package ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,8 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.AllCategoryIcons
-import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
+
 
 @Composable
 fun IconGridSection(
@@ -28,20 +27,22 @@ fun IconGridSection(
     )
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(4),
+        columns = GridCells.Fixed(5),
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(8.dp),
+        contentPadding = PaddingValues(4.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        itemsIndexed(AllCategoryIcons.icons) { _, iconResId ->
+        itemsIndexed(AllCategoryIcons.allIcons) { _, item ->
+            val isPicture = item is PictureIcon
+            val iconResId = item.iconResId
             ChooseCategory(
-                iconResId = iconResId,
+                iconItem = iconResId,
                 backgroundColor = Color(0xFF67676B),
                 onClick = {
                     onIconSelected(iconResId)
                 },
-                isSelected = selectedIconResId == iconResId // ← Вот тут передаем состояние
+                isSelected = selectedIconResId == iconResId
             )
         }
     }

@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory
+package ru.ohayo.moneypr.ui.theme.screens.addCategory.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,7 +26,8 @@ fun FullScreenCustomDialog(
     message: String = "Это сообщение внутри полноэкранного диалога.",
     confirmText: String = "Подтвердить",
     onConfirmClick: () -> Unit,
-    onColorSelected: (Color) -> Unit // Новый параметр
+    onColorSelected: (Color) -> Unit,
+    selectedIconResId: Int?
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
@@ -65,7 +66,10 @@ fun FullScreenCustomDialog(
 
                 Spacer(modifier = Modifier.height(12.dp))
                 // Добавляем ColorPickerGrid
-                ColorPickerGrid(onColorSelected = onColorSelected)
+                ColorPickerGrid(
+                    onColorSelected = onColorSelected,
+                    selectedIconResId = selectedIconResId,
+                )
 
             }
         }

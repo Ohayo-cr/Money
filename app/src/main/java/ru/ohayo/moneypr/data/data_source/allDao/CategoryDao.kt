@@ -21,7 +21,7 @@ interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(categories: List<Category>)
 
-    @Query("SELECT * FROM category ORDER BY `order` ASC")
+    @Query("SELECT * FROM category ORDER BY `order` DESC")
     fun getAllCategories(): Flow<List<Category>>
 
     @Delete
@@ -38,6 +38,8 @@ interface CategoryDao {
     // Если нужно массовое обновление
     @Query("UPDATE category SET `order` = :newOrder WHERE id = :id")
     suspend fun updateOrder(id: Long, newOrder: Int)
+    @Query("SELECT MAX(`order`) FROM category WHERE type = :type")
+    suspend fun getMaxOrder(type: CategoryType): Int?
     @Query("SELECT MAX(`order`) FROM Category WHERE type = :type")
     suspend fun getNextOrder(type: CategoryType): Int?
     // Получить категории по типу с сортировкой по order

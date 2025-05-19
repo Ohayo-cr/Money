@@ -31,11 +31,11 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun ChooseCategory(
-    iconResId: Int,
+    iconItem: Int,
     backgroundColor: Color,
     name: String? = null,
     onClick: () -> Unit,
-    isSelected: Boolean
+    isSelected: Boolean = false
 ) {
     var isClickAnimating by remember { mutableStateOf(false) }
 
@@ -61,7 +61,7 @@ fun ChooseCategory(
         verticalArrangement = if (name != null) Arrangement.Top else Arrangement.Center
     ) {
         CategoryIcon(
-            iconResId = iconResId,
+            iconResId = iconItem,
             backgroundColor = backgroundColor,
             onClick = onClick,
             isSelected = isSelected,

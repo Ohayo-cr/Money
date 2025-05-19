@@ -22,15 +22,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ColorNames
-import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.FullScreenCustomDialog
 
 @Composable
 fun ColorPickerSection(
     selectedColor: Color,
     onColorClick: () -> Unit,
     showColorPickerDialog: MutableState<Boolean>,
-    onColorSelected: (Color) -> Unit
+    onColorSelected: (Color) -> Unit,
+    selectedIconResId: Int?
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -72,7 +71,8 @@ fun ColorPickerSection(
             onColorSelected = { color ->
                 onColorSelected(color)
                 showColorPickerDialog.value = false
-            }
+            },
+            selectedIconResId = selectedIconResId
         )
     }
 }

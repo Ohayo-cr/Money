@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory
+package ru.ohayo.moneypr.ui.theme.screens.addCategory.components
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "ru.ohayo.moneypr.app-mergeDebugResources-60:/values-da/values-da.xml",
+            "outputFile": "ru.ohayo.moneypr.app-mergeDebugResources-2:/values-da/values-da.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\OHAYO\\.gradle\\caches\\transforms-3\\23eb7003e747d617f36cdece5584a91f\\transformed\\core-1.13.1\\res\\values-da\\values-da.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,151,253,350,448,555,664,782",
-                        "endColumns": "95,101,96,97,106,108,117,100",
-                        "endOffsets": "146,248,345,443,550,659,777,878"
-                    },
-                    "to": {
-                        "startLines": "6,7,8,9,10,11,12,64",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "539,635,737,834,932,1039,1148,6368",
-                        "endColumns": "95,101,96,97,106,108,117,100",
-                        "endOffsets": "630,732,829,927,1034,1143,1261,6464"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\OHAYO\\.gradle\\caches\\transforms-3\\e533d17cb2e1f582c3ac7077b508e9da\\transformed\\ui-release\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\e533d17cb2e1f582c3ac7077b508e9da\\transformed\\ui-release\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\OHAYO\\.gradle\\caches\\transforms-3\\ac0d53a4052773c5cfe08a8d40750a30\\transformed\\material3-1.1.2\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\ac0d53a4052773c5cfe08a8d40750a30\\transformed\\material3-1.1.2\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\OHAYO\\.gradle\\caches\\transforms-3\\171a594ea373818e3c061b86eaa7fa95\\transformed\\foundation-release\\res\\values-da\\values-da.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\23eb7003e747d617f36cdece5584a91f\\transformed\\core-1.13.1\\res\\values-da\\values-da.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,350,448,555,664,782",
+                        "endColumns": "95,101,96,97,106,108,117,100",
+                        "endOffsets": "146,248,345,443,550,659,777,878"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12,64",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "539,635,737,834,932,1039,1148,6368",
+                        "endColumns": "95,101,96,97,106,108,117,100",
+                        "endOffsets": "630,732,829,927,1034,1143,1261,6464"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-3\\171a594ea373818e3c061b86eaa7fa95\\transformed\\foundation-release\\res\\values-da\\values-da.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

@@ -38,7 +38,7 @@ fun NavHostScreen(navController: NavHostController) {
         }
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-            CategoryList(categoryVM = categoryViewModel, navController = navController)
+            CategoryList(categoryVM = categoryViewModel, navController = navController,)
         }
         composable(
             route = Screen.AddCategory.route

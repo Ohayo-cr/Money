@@ -14,8 +14,10 @@ class AddCategoryRepository @Inject constructor(
         categoryDao.insertCategory(category)
     }
 
+    // Получить следующий порядковый номер
     suspend fun getNextOrder(type: CategoryType): Int {
-        return categoryDao.getNextOrder(type) ?: 1
+        val maxOrder = categoryDao.getMaxOrder(type)
+        return maxOrder?.plus(1) ?: 1
     }
 
 }

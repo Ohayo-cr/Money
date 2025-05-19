@@ -89,7 +89,7 @@ fun AddTransaction(
             ) {
                 items(filteredCategories) { category ->
                     ChooseCategory(
-                        iconResId = category.iconResId,
+                        iconItem = category.iconResId,
                         backgroundColor = Color(category.color),
                         name = category.name,
                         onClick = {
