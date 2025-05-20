@@ -46,14 +46,13 @@ interface CategoryDao {
     @Query("SELECT * FROM category WHERE type = :type ORDER BY `order` ASC")
     fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
 
-
-    // Обновить order для списка категорий (для транзакции)
     @Transaction
     suspend fun updateOrderByType(categories: List<Category>) {
         categories.forEachIndexed { index, category ->
             updateOrder(category.id, index + 1)
         }
     }
+
 }
 
 

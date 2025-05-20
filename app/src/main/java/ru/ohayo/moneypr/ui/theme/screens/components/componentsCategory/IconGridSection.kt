@@ -34,15 +34,13 @@ fun IconGridSection(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(AllCategoryIcons.allIcons) { _, item ->
-            val isPicture = item is PictureIcon
-            val iconResId = item.iconResId
             ChooseCategory(
-                iconItem = iconResId,
+                iconItem = item,
                 backgroundColor = Color(0xFF67676B),
                 onClick = {
-                    onIconSelected(iconResId)
+                    onIconSelected(item)
                 },
-                isSelected = selectedIconResId == iconResId
+                isSelected = selectedIconResId == item
             )
         }
     }

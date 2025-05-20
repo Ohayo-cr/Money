@@ -10,7 +10,7 @@ data class Category(
     val name: String,
     val color: Long,
     val iconResId: Int,
-    var order: Int = 1
+    var order: Int = 1,
 )
 
 enum class CategoryType {

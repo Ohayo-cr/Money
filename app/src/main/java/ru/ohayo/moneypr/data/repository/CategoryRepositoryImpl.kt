@@ -1,8 +1,11 @@
 package ru.ohayo.moneypr.data.repository
 
 import android.util.Log
+import androidx.room.Transaction
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
 import ru.ohayo.moneypr.domain.allEntity.Category
@@ -36,10 +39,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 throw e
             }
     }
-    override suspend fun updateCategories(updatedCategories: List<Category>) {
-        // Используем транзакцию для массового обновления
-        categoryDao.updateOrderByType(updatedCategories)
-    }
+
     override suspend fun deleteCategory(category: Category) =
         categoryDao.deleteCategory(category)
 
@@ -52,7 +52,18 @@ class CategoryRepositoryImpl @Inject constructor(
 
 
 
-    override suspend fun updateCategory(category: Category) =
-        categoryDao.update(category)
+
+
+    override suspend fun updateOrderByType(categories: List<Category>) {
+        withContext(Dispatchers.IO) {
+            // Инвертируем список
+            val reversedList = categories.reversed()
+
+            // Обновляем порядок для перевернутого списка
+            categoryDao.updateOrderByType(reversedList)
+        }
+    }
+
+
 
 }

@@ -4,33 +4,35 @@ import ru.ohayo.moneypr.R
 
 object AllCategoryIcons {
     val allIcons = listOf(
-        // Vector icons — можно окрасить тинтом
-        VectorIcon(R.drawable.cat__ic_acustik),
-        VectorIcon(R.drawable.cat__ic_energy),
-        VectorIcon(R.drawable.cat__ic_pc),
-        VectorIcon(R.drawable.cat__ic_power),
-        VectorIcon(R.drawable.cat__ic_vape),
-        VectorIcon(R.drawable.cat__ic_coffee),
-        VectorIcon(R.drawable.cat__ic_coffee_2cup),
-        VectorIcon(R.drawable.cat__ic_tea),
-        VectorIcon(R.drawable.cat__ic_hookah),
-        VectorIcon(R.drawable.cat__ic_delivery),
-        VectorIcon(R.drawable.cat__ic_diamond),
-        VectorIcon(R.drawable.cat__ic_diploma),
-        VectorIcon(R.drawable.cat__ic_donut),
-        VectorIcon(R.drawable.cat__ic_garbage),
-        VectorIcon(R.drawable.cat__ic_memory),
-        VectorIcon(R.drawable.cat__ic_pizza),
-        VectorIcon(R.drawable.cat__ic_premium),
-        VectorIcon(R.drawable.cat__ic_reuse_bot),
-        VectorIcon(R.drawable.cat__ic_rom),
-        VectorIcon(R.drawable.cat__ic_supermarket),
-        VectorIcon(R.drawable.cat__ic_binoculars),
-        VectorIcon(R.drawable.cat__ic_cristmas_tree),
-        VectorIcon(R.drawable.cat__ic_easel),
-        VectorIcon(R.drawable.cat__ic_puff),
 
-        // Picture icons — не красятся тинтом
-        PictureIcon(R.drawable.test_cat_ic_cats)
+        R.drawable.cat__ic_acustik,
+        R.drawable.cat__ic_energy,
+        R.drawable.cat__ic_pc,
+        R.drawable.cat__ic_power,
+        R.drawable.cat__ic_vape,
+        R.drawable.cat__ic_coffee,
+        R.drawable.cat__ic_coffee_2cup,
+        R.drawable.cat__ic_tea,
+        R.drawable.cat__ic_hookah,
+        R.drawable.cat__ic_delivery,
+        R.drawable.cat__ic_diamond,
+        R.drawable.cat__ic_diploma,
+        R.drawable.cat__ic_donut,
+        R.drawable.cat__ic_garbage,
+        R.drawable.cat__ic_memory,
+        R.drawable.cat__ic_pizza,
+        R.drawable.cat__ic_premium,
+        R.drawable.cat__ic_reuse_bot,
+        R.drawable.cat__ic_rom,
+        R.drawable.cat__ic_supermarket,
+        R.drawable.cat__ic_binoculars,
+        R.drawable.cat__ic_cristmas_tree,
+        R.drawable.cat__ic_easel,
+        R.drawable.cat__ic_puff,
+
+        //NO TINT
+        R.drawable.notint_cat_1,
+        R.drawable.notint_cat_2,
+        R.drawable.notint_cat_3,
     )
 }

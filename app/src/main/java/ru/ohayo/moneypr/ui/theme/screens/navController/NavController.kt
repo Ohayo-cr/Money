@@ -38,7 +38,10 @@ fun NavHostScreen(navController: NavHostController) {
         }
         composable(Screen.Categories.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
-            CategoryList(categoryVM = categoryViewModel, navController = navController,)
+            CategoryList(
+                categoryVM = categoryViewModel,
+                navController = navController,
+            )
         }
         composable(
             route = Screen.AddCategory.route
@@ -48,7 +51,8 @@ fun NavHostScreen(navController: NavHostController) {
             AddCategoryScreen(
                 navController = navController,
                 addCategoryVM = addCategoryViewModel,
-                categoryVM = categoryViewModel,)
+                categoryVM = categoryViewModel,
+            )
         }
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
@@ -68,9 +72,10 @@ fun NavHostScreen(navController: NavHostController) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
             AddAccountScreen(
                 accountViewModel = accountViewModel,
-                currencyViewModel = currencyViewModel)
+                currencyViewModel = currencyViewModel
+            )
         }
-        composable(Screen.AddTransaction.route,) {
+        composable(Screen.AddTransaction.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransaction(navController = navController, viewModel = categoryViewModel)
         }

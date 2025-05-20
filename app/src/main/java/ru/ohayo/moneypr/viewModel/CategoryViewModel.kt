@@ -4,8 +4,10 @@ package ru.ohayo.moneypr.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.CategoryRepository
 import ru.ohayo.moneypr.domain.allEntity.Category
@@ -28,6 +30,8 @@ class CategoryViewModel @Inject constructor(
     // Храним выбранный тип
     private val _selectedCategoryType = MutableStateFlow(CategoryTypeHolder.currentType)
     val selectedCategoryType: StateFlow<CategoryType> = _selectedCategoryType
+
+
     init {
         viewModelScope.launch {
             try {
@@ -64,7 +68,7 @@ class CategoryViewModel @Inject constructor(
         viewModelScope.launch {
             changedTypes.forEach { type ->
                 val categoriesToUpdate = tempUpdatedList.filter { it.type == type }
-                categoryRepository.updateCategories(categoriesToUpdate)
+                categoryRepository.updateOrderByType(categoriesToUpdate)
             }
             // Сброс после сохранения
             changedTypes.clear()
@@ -76,4 +80,8 @@ class CategoryViewModel @Inject constructor(
     fun filterCategoriesByType(type: CategoryType): List<Category> {
         return _categories.value.filter { it.type == type }
     }
+
+
+
+
 }

@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,26 +23,40 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.delay
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryIcon
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.FullWidthButton
+import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
 
 @Composable
-fun CategoryList(categoryVM: CategoryViewModel, navController: NavHostController) {
+fun CategoryList(categoryVM: CategoryViewModel,
+                 navController: NavHostController) {
 
     val categories = categoryVM.categories.collectAsState(initial = emptyList()).value
     val selectedTab by categoryVM.selectedCategoryType.collectAsState()
     val filteredCategories = categories.filter { it.type == selectedTab }
     val lazyListState = rememberLazyListState()
+
+
     val reorderableLazyListState = rememberReorderableLazyListState(lazyListState)
     { from, to ->
-            categoryVM.moveCategory(from.index, to.index, selectedTab)
+        categoryVM.moveCategory(from.index, to.index, selectedTab)
+    }
+
+
+    val categoryCount = filteredCategories.size
+
+    LaunchedEffect(categoryCount) {
+        if (categoryCount > 0) {
+            lazyListState.scrollToItem(0)
         }
+    }
 
 
     Column(modifier = Modifier.fillMaxSize()) {

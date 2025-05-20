@@ -1,5 +1,6 @@
 package ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -8,13 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -26,7 +28,9 @@ fun CategoryIcon(
     isSelected: Boolean = false,
     scale: Float = 1f
 ) {
-    val isBackgroundTransparent = backgroundColor.alpha <= 0.1f
+    val isPicture = IconTypeMapper.isNoTint(iconResId)
+    val iconTint = if (!isPicture) Color.White else Color.Unspecified
+
     Box(
         modifier = Modifier
             .size(60.dp)
@@ -40,17 +44,15 @@ fun CategoryIcon(
                 color = if (isSelected) MaterialTheme.colorScheme.inversePrimary else Color.Black,
                 shape = RoundedCornerShape(percent = 20)
             )
-            .padding(if (isBackgroundTransparent) 0.dp else 8.dp)
-
+            .padding(if (isPicture) 0.dp else 8.dp)
     ) {
-        val iconTint = if (!isBackgroundTransparent) Color.White else Color.Unspecified
-
-        Icon(
+        Image(
             painter = painterResource(id = iconResId),
             contentDescription = null,
-            tint = iconTint,
+            colorFilter = if (isPicture) null else ColorFilter.tint(iconTint),
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxSize()
+                .matchParentSize()
                 .clip(RoundedCornerShape(percent = 20))
         )
     }

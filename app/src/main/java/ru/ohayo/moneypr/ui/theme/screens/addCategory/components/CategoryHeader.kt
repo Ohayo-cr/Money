@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryIcon
 
-@OptIn(ExperimentalComposeUiApi::class)
+
 @Composable
 fun CategoryHeader(
     selectedIconResId: Int,
@@ -37,12 +37,12 @@ fun CategoryHeader(
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
-        // ❗ Используем CategoryIcon вместо Box + Icon
+
         CategoryIcon(
             iconResId = selectedIconResId,
             backgroundColor = selectedColor.takeIf { it != Color.Transparent }
                 ?: MaterialTheme.colorScheme.primary,
-            onClick = {} // Нет логики нажатия здесь
+            onClick = {}
         )
 
         Spacer(modifier = Modifier.width(16.dp))
