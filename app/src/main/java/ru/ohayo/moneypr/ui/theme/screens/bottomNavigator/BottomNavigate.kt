@@ -38,6 +38,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.flow.emptyFlow
+import ru.ohayo.moneypr.ui.theme.screens.components.NoRippleInteractionSource
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.viewModel.BottomNavViewModel
 
@@ -212,10 +213,4 @@ fun BottomNavigation(navController: NavController,
             )
         }
     }
-}
-// Пустой InteractionSource для отключения эффекта пульсации
-private object NoRippleInteractionSource : MutableInteractionSource {
-    override val interactions = emptyFlow<Interaction>()
-    override suspend fun emit(interaction: Interaction) {}
-    override fun tryEmit(interaction: Interaction) = true
 }

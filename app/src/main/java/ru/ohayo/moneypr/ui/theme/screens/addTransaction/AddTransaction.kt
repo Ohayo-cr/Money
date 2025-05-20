@@ -15,6 +15,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -22,10 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
+import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
+
 @Composable
 fun AddTransaction(
     navController: NavController,
@@ -39,43 +41,14 @@ fun AddTransaction(
 
     Column(modifier = Modifier.fillMaxSize()) {
         // TabRow for INCOME and EXPENSE
-        TabRow(
-            selectedTabIndex = selectedTab.ordinal,
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    color = MaterialTheme.colorScheme.onSecondary,
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab.ordinal])
-                )
-            }
-        ) {
-            listOf(
-                CategoryType.EXPENSE to "Expense",
-                CategoryType.INCOME to "Income"
-            ).forEach { (type, label) ->
-                Tab(
-                    selected = selectedTab == type,
-                    onClick = { selectedTab = type },
-                    text = {
-                        Text(
-                            text = label,
-                            color = if (selectedTab == type)
-                                MaterialTheme.colorScheme.onPrimary
-                            else
-                                MaterialTheme.colorScheme.onSurfaceVariant,
-                            fontWeight = if (selectedTab == type) FontWeight.Bold else FontWeight.Normal
-                        )
-                    }
-                )
-            }
-        }
+        CategoryTabRow(
+            selectedType = selectedTab,
+            onTypeSelected = { type -> selectedTab = type }
+        )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .weight(1f)
         ) {
             val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
@@ -83,9 +56,9 @@ fun AddTransaction(
             LazyVerticalGrid(
                 state = listState,
                 columns = GridCells.Fixed(4),
-                contentPadding = PaddingValues(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                contentPadding = PaddingValues(top = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 items(filteredCategories) { category ->
                     ChooseCategory(
@@ -101,15 +74,14 @@ fun AddTransaction(
                 }
             }
 
-
-            val density = LocalDensity.current // <-- Получаем плотность вне LaunchedEffect
+            val density = LocalDensity.current
 
             LaunchedEffect(showAddTransactionForm, selectedCategoryId) {
                 if (showAddTransactionForm != null) {
                     val index = filteredCategories.indexOfFirst { it.id == selectedCategoryId }
                     if (index != -1) {
                         val itemSizeDp = 100.dp
-                        val itemSizePx = with(density) { itemSizeDp.toPx().toInt() } // <-- используем её здесь
+                        val itemSizePx = with(density) { itemSizeDp.toPx().toInt() }
 
                         val visibleHeight = listState.layoutInfo.viewportSize.height
                         val offset = visibleHeight - itemSizePx
@@ -135,6 +107,7 @@ fun AddTransaction(
         }
     }
 }
+
 
 
 
