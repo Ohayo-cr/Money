@@ -18,11 +18,15 @@ object DefaultCategories {
         )
 
     val DEFAULT_CATEGORIES = listOf(
-        category("Продукты", R.drawable.cat__ic_energy),
-        category("Музыка", R.drawable.cat__ic_acustik),
-        category("Вейп", R.drawable.cat__ic_vape),
-        category("Компег", R.drawable.cat__ic_pc),
-        category("Зарплата", R.drawable.cat__ic_power, isIncome = true),
-        category("Кебшбек", R.drawable.cat__ic_energy, isIncome = true)
+        category("Drinks", R.drawable.cat__ic_energy),
+        category("Products", R.drawable.cat__ic_supermarket),
+        category("Music", R.drawable.cat__ic_acustik),
+        category("Delivery", R.drawable.cat__ic_delivery),
+        category("Computer", R.drawable.cat__ic_pc),
+        category("Diamond", R.drawable.cat__ic_diamond),
+        category("Smoking", R.drawable.cat__ic_puff),
+        category("Cats", R.drawable.notint_cat_3),
+        category("Salary", R.drawable.cat__ic_power, isIncome = true),
+        category("Cashback", R.drawable.cat__ic_premium, isIncome = true)
     )
 }
