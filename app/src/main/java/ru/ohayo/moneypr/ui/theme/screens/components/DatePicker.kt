@@ -57,23 +57,13 @@ fun DatePickerScroll() {
                 ),
                 onSnappedDateTime = { dateTime ->
                     selectedDateTime = dateTime
-                    println("Выбрано: $dateTime")
                 }
             )
 
-
-            // Кнопка под WheelDateTimePicker
             Button(
-                onClick = {
-                    if (selectedDateTime != null) {
-                        println("Дата выбрана: $selectedDateTime")
-                        // Здесь можно вызвать диалог или другое действие
-                    } else {
-                        println("Сначала выберите дату")
-                    }
-                },
+                onClick = {},
                 modifier = Modifier
-                    .fillMaxWidth(0.8f) // ширина 80% от родительского контейнера
+                    .fillMaxWidth(0.8f)
                     .padding(bottom = 20.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.inversePrimary,
@@ -83,7 +73,7 @@ fun DatePickerScroll() {
             ) {
                 Text(
                     text = "Выбрать дату",
-                    fontSize = 18.sp, // больший размер текста
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
             }

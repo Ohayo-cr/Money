@@ -40,7 +40,8 @@ fun FullScreenCustomDialog(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.6f))
-                .clickable { onDismissRequest() }
+                .clickable { onDismissRequest() },
+                contentAlignment = Alignment.BottomCenter
         ) {
             Column(
                 modifier = Modifier

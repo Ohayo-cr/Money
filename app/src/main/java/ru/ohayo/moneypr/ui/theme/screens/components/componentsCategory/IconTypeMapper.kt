@@ -4,7 +4,6 @@ import ru.ohayo.moneypr.R
 
 object IconTypeMapper {
     private val noTintIcons = mutableSetOf<Int>().apply {
-        add(R.drawable.notint_cat_1)
         add(R.drawable.notint_cat_2)
         add(R.drawable.notint_cat_3)
     }

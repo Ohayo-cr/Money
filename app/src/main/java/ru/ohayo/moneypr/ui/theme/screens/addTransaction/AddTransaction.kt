@@ -1,30 +1,23 @@
 package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 
-import android.annotation.SuppressLint
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
+import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 
@@ -36,11 +29,11 @@ fun AddTransaction(
     var selectedTab by remember { mutableStateOf(CategoryType.EXPENSE) }
     var showAddTransactionForm by remember { mutableStateOf(false) }
     var selectedCategoryId by remember { mutableStateOf<Long?>(null) }
-    // 1. Добавьте LazyListState для управления прокруткой
     val listState = rememberLazyGridState()
 
+
     Column(modifier = Modifier.fillMaxSize()) {
-        // TabRow for INCOME and EXPENSE
+
         CategoryTabRow(
             selectedType = selectedTab,
             onTypeSelected = { type -> selectedTab = type }
@@ -97,11 +90,13 @@ fun AddTransaction(
         if (showAddTransactionForm && selectedCategoryId != null) {
             AddTransactionForm(
                 categoryId = selectedCategoryId!!.toInt(),
+
                 onBack = {
                     showAddTransactionForm = false
                     selectedCategoryId = null
                 },
                 onTransactionAdded = {
+                    navController.navigate(Screen.Records.route)
                 }
             )
         }

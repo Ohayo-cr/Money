@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_notint_cat_3.png.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\notint_cat_3.png"
+    },
+    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_reuse_bot.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\cat__ic_reuse_bot.png"
     },
@@ -76,12 +80,12 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\_add_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_acustik.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\cat__ic_acustik.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_power.png.flat",
@@ -128,10 +132,6 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\bot_chart_icon.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_notint_cat_1.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/notint_cat_1.png"
-    },
-    {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_cristmas_tree.png.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\cat__ic_cristmas_tree.png"
     },
@@ -146,6 +146,10 @@
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_notint_cat_1.png.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\notint_cat_1.png"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_tea.png.flat",
@@ -180,8 +184,8 @@
         "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\currency_russia_11699599.png"
     },
     {
-        "merged": "ru.ohayo.moneypr.app-merged_res-4:/drawable_notint_cat_2.png.flat",
-        "source": "ru.ohayo.moneypr.app-main-6:/drawable/notint_cat_2.png"
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_notint_cat_2.png.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-main-6:\\drawable\\notint_cat_2.png"
     },
     {
         "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.2\\ru.ohayo.moneypr.app-merged_res-4:\\drawable_cat__ic_puff.png.flat",

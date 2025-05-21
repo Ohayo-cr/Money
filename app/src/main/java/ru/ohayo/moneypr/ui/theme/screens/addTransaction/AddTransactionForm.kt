@@ -26,9 +26,11 @@ import ru.ohayo.moneypr.domain.allEntity.AccountType
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.AccountSelectionDialog
+import ru.ohayo.moneypr.ui.theme.screens.components.DatePickerScrollDialog
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculatorKeyboard
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.NoteField
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.TopPanelKeyboard
+import ru.ohayo.moneypr.ui.theme.screens.components.localDateTimeToMillis
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
@@ -72,12 +74,15 @@ fun AddTransactionForm(
 
     val focusManager = LocalFocusManager.current
     var showAccountSelectionDialog by remember { mutableStateOf(false) }
+    var showDatePickerDialog by remember { mutableStateOf(false) }
+    var transactionDate by remember { mutableStateOf(System.currentTimeMillis()) }
+
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        // Добавляем Divider перед Box
+
         Divider(
             modifier = Modifier
                 .height(1.dp),
@@ -118,7 +123,9 @@ fun AddTransactionForm(
 
                 CalculatorKeyboard(
                     viewModel = keyboardViewModel,
-                    onDateButtonClicked = {},
+                    onDateButtonClicked = {
+                        showDatePickerDialog = true
+                    },
                     onHideKeyboardClicked = {},
                     onOkClicked = {
                         val parsedAmount = keyboardViewModel.result.toDoubleOrNull()
@@ -128,7 +135,7 @@ fun AddTransactionForm(
                             val transaction = TransactionEntity(
                                 amount = parsedAmount,
                                 content = if (content.isBlank()) null else content,
-                                timestamp = System.currentTimeMillis(),
+                                timestamp = transactionDate,
                                 category = categoryId.toLong(),
                                 fromAccount = selectedFromAccount?.id,
                                 toAccount = selectedToAccount?.id,
@@ -144,23 +151,37 @@ fun AddTransactionForm(
                         }
                     }
                 )
-            }
-        }
-
-        if (showAccountSelectionDialog) {
-            AccountSelectionDialog(
-                accounts = accounts,
-                selectedAccount = if (category?.type == CategoryType.EXPENSE) selectedFromAccount else selectedToAccount,
-                onDismiss = { showAccountSelectionDialog = false },
-                onAccountSelected = { account ->
-                    if (category?.type == CategoryType.EXPENSE) {
-                        selectedFromAccount = account
-                    } else {
-                        selectedToAccount = account
-                    }
-                    showAccountSelectionDialog = false
+                if (showDatePickerDialog) {
+                    DatePickerScrollDialog(
+                        onDismiss = { showDatePickerDialog = false },
+                        onDateSelected = { dateTime ->
+                            transactionDate = localDateTimeToMillis(dateTime)
+                        }
+                    )
                 }
-            )
+
+                if (showAccountSelectionDialog) {
+                    val selectedAccount = when (category?.type) {
+                        CategoryType.EXPENSE -> selectedFromAccount
+                        else -> selectedToAccount
+                    }
+
+                    AccountSelectionDialog(
+                        accounts = accounts,
+                        selectedAccount = selectedAccount,
+                        onDismiss = { showAccountSelectionDialog = false },
+                        onAccountSelected = { account ->
+                            if (category?.type == CategoryType.EXPENSE) {
+                                selectedFromAccount = account
+                            } else {
+                                selectedToAccount = account
+                            }
+                            showAccountSelectionDialog = false
+                        }
+                    )
+                }
+
+            }
         }
     }
 }

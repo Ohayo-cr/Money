@@ -47,7 +47,6 @@ drawable currency_united_states
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable icon_transparent
-drawable notint_cat_1
 drawable notint_cat_2
 drawable notint_cat_3
 mipmap ic_launcher

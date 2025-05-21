@@ -31,7 +31,6 @@ object AllCategoryIcons {
         R.drawable.cat__ic_puff,
 
         //NO TINT
-        R.drawable.notint_cat_1,
         R.drawable.notint_cat_2,
         R.drawable.notint_cat_3,
     )
