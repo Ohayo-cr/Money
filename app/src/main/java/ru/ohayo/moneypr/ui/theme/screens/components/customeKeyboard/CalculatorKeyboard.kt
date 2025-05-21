@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 
 @Composable
@@ -20,7 +23,8 @@ fun CalculatorKeyboard(
     viewModel: KeyboardViewModel,
     onDateButtonClicked: () -> Unit,
     onHideKeyboardClicked: () -> Unit,
-    onOkClicked: () -> Unit
+    onOkClicked: () -> Unit,
+    dateText: String
 ) {
     Column(
         modifier = Modifier
@@ -37,8 +41,13 @@ fun CalculatorKeyboard(
             KeyboardButton("7", Modifier.weight(1f), onClick = { viewModel.appendToInput("7") })
             KeyboardButton("8", Modifier.weight(1f), onClick = { viewModel.appendToInput("8") })
             KeyboardButton("9", Modifier.weight(1f), onClick = { viewModel.appendToInput("9") })
-            KeyboardButton("Дата", Modifier.weight(1f), onClick = { onDateButtonClicked() })
-        }
+            DateButton(
+                text = dateText,
+                onClick = onDateButtonClicked,
+                modifier = Modifier.weight(1f),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )}
 
         // Вторая строка
         Row(

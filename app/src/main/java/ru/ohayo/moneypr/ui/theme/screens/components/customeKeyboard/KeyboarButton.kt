@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,8 +45,8 @@ fun KeyboardButton(
             color = if (enabled) colorScheme.onTertiary else colorScheme.onSurface,
             textAlign = TextAlign.Center,
             fontSize = when (text) {
-                "OK", "Дата" -> 16.sp // Уменьшенный размер для "Дата"
-                else -> 26.sp // Стандартный размер для остальных
+                "OK" -> 16.sp
+                else -> 26.sp
             },
             fontWeight = FontWeight.Bold
         )

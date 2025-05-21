@@ -1,5 +1,8 @@
 package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,10 +33,14 @@ import ru.ohayo.moneypr.ui.theme.screens.components.DatePickerScrollDialog
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculatorKeyboard
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.NoteField
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.TopPanelKeyboard
+import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.formatLocalDateTime
+import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.millisToLocalDateTime
 import ru.ohayo.moneypr.ui.theme.screens.components.localDateTimeToMillis
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddTransactionForm(
     categoryId: Int,
@@ -71,11 +78,26 @@ fun AddTransactionForm(
         val account = selectedFromAccount ?: selectedToAccount
         currencies.find { it.id == account?.currency }
     }
-
+    val lastSelectedDate by viewModel.lastSelectedDate.collectAsState()
     val focusManager = LocalFocusManager.current
     var showAccountSelectionDialog by remember { mutableStateOf(false) }
     var showDatePickerDialog by remember { mutableStateOf(false) }
-    var transactionDate by remember { mutableStateOf(System.currentTimeMillis()) }
+    val currentDateTime by viewModel.currentDate.collectAsState()
+
+
+    var transactionDate by remember { mutableStateOf(currentDateTime) }
+    val initialDateTime = remember(lastSelectedDate) {
+        if (lastSelectedDate != null) {
+            millisToLocalDateTime(lastSelectedDate)
+        } else {
+            // Используем текущее время только если ещё не было выбора
+            millisToLocalDateTime(currentDateTime)
+        }
+    }
+    val formattedDate = remember(transactionDate) {
+        formatLocalDateTime(transactionDate)
+    }
+
 
 
     Column(
@@ -149,14 +171,20 @@ fun AddTransactionForm(
                         } else {
                             isError = true
                         }
-                    }
+                    },
+                    dateText = formattedDate
                 )
+
+
                 if (showDatePickerDialog) {
                     DatePickerScrollDialog(
                         onDismiss = { showDatePickerDialog = false },
                         onDateSelected = { dateTime ->
-                            transactionDate = localDateTimeToMillis(dateTime)
-                        }
+                            val millis = localDateTimeToMillis(dateTime)
+                            transactionDate = millis
+                            viewModel.setLastSelectedDate(millis)
+                        },
+                        initialDateTime = initialDateTime // ← новое свойство
                     )
                 }
 

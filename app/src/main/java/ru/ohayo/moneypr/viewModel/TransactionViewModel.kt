@@ -31,6 +31,22 @@ class TransactionViewModel @Inject constructor(
     val accounts = accountRepository.getAllAccounts()
     val currencies = currencyRepository.getAllCurrencies()
 
+    // Состояние текущей даты (в миллисекундах)
+    private val _currentDate = MutableStateFlow(System.currentTimeMillis())
+    val currentDate: StateFlow<Long> = _currentDate
+
+    // Последняя выбранная дата
+    private val _lastSelectedDate = MutableStateFlow(System.currentTimeMillis())
+    val lastSelectedDate: StateFlow<Long> = _lastSelectedDate
+
+    fun setCurrentDate(date: Long) {
+        _currentDate.value = date
+    }
+
+    fun setLastSelectedDate(date: Long) {
+        _lastSelectedDate.value = date
+    }
+
     fun addTransaction(transaction: TransactionEntity) {
         viewModelScope.launch {
             try {
@@ -47,6 +63,7 @@ class TransactionViewModel @Inject constructor(
                 }
 
                 _transactionResult.value = Result.success(Unit)
+              setCurrentDate(System.currentTimeMillis())
             } catch (e: Exception) {
                 e.printStackTrace()
                 _transactionResult.value = Result.failure(e)
@@ -54,16 +71,6 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-
-    fun updateTransaction(transaction: TransactionEntity) {
-        viewModelScope.launch {
-            try {
-                repository.updateTransaction(transaction)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 
     fun getCategoryById(categoryId: Long): Flow<Category?> {
         return categoryRepository.getCategoryById(categoryId.toLong())
