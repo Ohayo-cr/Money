@@ -23,6 +23,9 @@ interface TransactionDao {
 
     @Query("DELETE FROM transactions WHERE id = :id")
     suspend fun deleteTransaction(id: Long) // Изменено на Long
+
+    @Query("SELECT timestamp FROM transactions ORDER BY id DESC LIMIT 1")
+    fun getLastAddedTransactionTimestampFlow(): Flow<Long?>
 }
 
 

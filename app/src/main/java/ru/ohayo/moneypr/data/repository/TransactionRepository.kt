@@ -30,4 +30,6 @@ class TransactionRepository @Inject constructor(
     suspend fun deleteTransaction(id: Long) { // Изменено на Long
         transactionDao.deleteTransaction(id)
     }
+    fun getLastAddedTransactionTimestampFlow(): Flow<Long?> =
+        transactionDao.getLastAddedTransactionTimestampFlow()
 }

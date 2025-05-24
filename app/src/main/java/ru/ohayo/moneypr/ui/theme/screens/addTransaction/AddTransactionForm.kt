@@ -1,7 +1,7 @@
 package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
-import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.flow.onEach
 import ru.ohayo.moneypr.domain.allEntity.Account
 import ru.ohayo.moneypr.domain.allEntity.AccountType
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
@@ -38,6 +40,7 @@ import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.millisToLoca
 import ru.ohayo.moneypr.ui.theme.screens.components.localDateTimeToMillis
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
+
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -78,22 +81,14 @@ fun AddTransactionForm(
         val account = selectedFromAccount ?: selectedToAccount
         currencies.find { it.id == account?.currency }
     }
-    val lastSelectedDate by viewModel.lastSelectedDate.collectAsState()
+
     val focusManager = LocalFocusManager.current
     var showAccountSelectionDialog by remember { mutableStateOf(false) }
     var showDatePickerDialog by remember { mutableStateOf(false) }
-    val currentDateTime by viewModel.currentDate.collectAsState()
+    val selectedDate by viewModel.selectedDate.collectAsState()
 
+    var transactionDate by remember { mutableLongStateOf(selectedDate) }
 
-    var transactionDate by remember { mutableStateOf(currentDateTime) }
-    val initialDateTime = remember(lastSelectedDate) {
-        if (lastSelectedDate != null) {
-            millisToLocalDateTime(lastSelectedDate)
-        } else {
-            // Используем текущее время только если ещё не было выбора
-            millisToLocalDateTime(currentDateTime)
-        }
-    }
     val formattedDate = remember(transactionDate) {
         formatLocalDateTime(transactionDate)
     }
@@ -177,14 +172,18 @@ fun AddTransactionForm(
 
 
                 if (showDatePickerDialog) {
+                    val initialDateTime = millisToLocalDateTime(transactionDate)
+                    println("Initial date time: $initialDateTime") // <--- Лог здесь
+
                     DatePickerScrollDialog(
                         onDismiss = { showDatePickerDialog = false },
                         onDateSelected = { dateTime ->
-                            val millis = localDateTimeToMillis(dateTime)
-                            transactionDate = millis
-                            viewModel.setLastSelectedDate(millis)
+                            val newDate = localDateTimeToMillis(dateTime)
+                            transactionDate = newDate
+                            viewModel.setSelectedDate(newDate)
+                            showDatePickerDialog = false
                         },
-                        initialDateTime = initialDateTime // ← новое свойство
+                        initialDateTime = initialDateTime
                     )
                 }
 

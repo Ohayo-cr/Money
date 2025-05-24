@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.CategoryRepository
 import ru.ohayo.moneypr.data.repository.CurrencyRepository
@@ -35,35 +35,57 @@ class TransactionViewModel @Inject constructor(
     private val _currentDate = MutableStateFlow(System.currentTimeMillis())
     val currentDate: StateFlow<Long> = _currentDate
 
-    // Последняя выбранная дата
-    private val _lastSelectedDate = MutableStateFlow(System.currentTimeMillis())
-    val lastSelectedDate: StateFlow<Long> = _lastSelectedDate
+    // Последняя выбранная дата (из БД)
+    val lastSelectedDate: Flow<Long> = repository.getLastAddedTransactionTimestampFlow()
+        .map { it ?: System.currentTimeMillis() }
 
-    fun setCurrentDate(date: Long) {
-        _currentDate.value = date
+    // Выбранная пользователем дата (начальное значение — текущая дата)
+    private val _selectedDate = MutableStateFlow(_currentDate.value)
+    val selectedDate: StateFlow<Long> = _selectedDate
+
+    // Функция для установки пользовательской даты
+    fun setSelectedDate(date: Long) {
+        _selectedDate.value = date
+    }
+    init {
+        viewModelScope.launch {
+            selectedDate.collect { value ->
+                println("Selected Date Changed to: $value")
+            }
+        }
     }
 
-    fun setLastSelectedDate(date: Long) {
-        _lastSelectedDate.value = date
+    // Функция для сброса выбранной даты (например, после добавления транзакции)
+    fun resetSelectedDate() {
+        _selectedDate.value = _currentDate.value
     }
+
 
     fun addTransaction(transaction: TransactionEntity) {
         viewModelScope.launch {
             try {
-                repository.insertTransaction(transaction)
+                // Установка даты транзакции в выбранную
+                val updatedTransaction = transaction.copy(timestamp = selectedDate.value)
 
-                if (transaction.fromAccount != null) {
+                repository.insertTransaction(updatedTransaction)
+
+                if (updatedTransaction.fromAccount != null) {
                     accountRepository.updateBalance(
-                        transaction.fromAccount,
-                        -transaction.amount
+                        updatedTransaction.fromAccount,
+                        -updatedTransaction.amount
                     )
                 }
-                if (transaction.toAccount != null) {
-                    accountRepository.updateBalance(transaction.toAccount, transaction.amount)
+                if (updatedTransaction.toAccount != null) {
+                    accountRepository.updateBalance(
+                        updatedTransaction.toAccount,
+                        updatedTransaction.amount
+                    )
                 }
 
                 _transactionResult.value = Result.success(Unit)
-              setCurrentDate(System.currentTimeMillis())
+
+                // После успешного добавления — сбрасываем дату
+                resetSelectedDate()
             } catch (e: Exception) {
                 e.printStackTrace()
                 _transactionResult.value = Result.failure(e)
