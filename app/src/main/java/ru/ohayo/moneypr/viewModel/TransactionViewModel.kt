@@ -85,7 +85,7 @@ class TransactionViewModel @Inject constructor(
                 _transactionResult.value = Result.success(Unit)
 
                 // После успешного добавления — сбрасываем дату
-                resetSelectedDate()
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 _transactionResult.value = Result.failure(e)

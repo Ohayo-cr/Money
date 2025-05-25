@@ -60,26 +60,23 @@ fun AddTransactionForm(
     val currencies by viewModel.currencies.collectAsState(initial = emptyList())
     val category by viewModel.getCategoryById(categoryId.toLong()).collectAsState(initial = null)
 
-    val defaultFromAccount = if (category?.type == CategoryType.EXPENSE) {
-        accounts.firstOrNull { it.type == AccountType.Card || it.type == AccountType.Cash }
-    } else {
-        null
+    val defaultAccount = accounts.firstOrNull {
+        it.type == AccountType.Card || it.type == AccountType.Cash
     }
 
-    val defaultToAccount = if (category?.type == CategoryType.INCOME) {
-        accounts.firstOrNull { it.type == AccountType.Card || it.type == AccountType.Cash }
-    } else {
-        null
-    }
-
-    LaunchedEffect(defaultFromAccount, defaultToAccount) {
-        selectedFromAccount = defaultFromAccount
-        selectedToAccount = defaultToAccount
+    LaunchedEffect(category, defaultAccount) {
+        selectedFromAccount = when (category?.type) {
+            CategoryType.EXPENSE -> defaultAccount
+            else -> null
+        }
+        selectedToAccount = when (category?.type) {
+            CategoryType.INCOME -> defaultAccount
+            else -> null
+        }
     }
 
     val currency = remember(selectedFromAccount, selectedToAccount) {
-        val account = selectedFromAccount ?: selectedToAccount
-        currencies.find { it.id == account?.currency }
+        currencies.find { it.id == (selectedFromAccount ?: selectedToAccount)?.currency }
     }
 
     val focusManager = LocalFocusManager.current
@@ -88,12 +85,6 @@ fun AddTransactionForm(
     val selectedDate by viewModel.selectedDate.collectAsState()
 
     var transactionDate by remember { mutableLongStateOf(selectedDate) }
-
-    val formattedDate = remember(transactionDate) {
-        formatLocalDateTime(transactionDate)
-    }
-
-
 
     Column(
         modifier = Modifier
@@ -167,14 +158,12 @@ fun AddTransactionForm(
                             isError = true
                         }
                     },
-                    dateText = formattedDate
+                    dateText =  formatLocalDateTime(transactionDate)
                 )
 
 
                 if (showDatePickerDialog) {
                     val initialDateTime = millisToLocalDateTime(transactionDate)
-                    println("Initial date time: $initialDateTime") // <--- Лог здесь
-
                     DatePickerScrollDialog(
                         onDismiss = { showDatePickerDialog = false },
                         onDateSelected = { dateTime ->

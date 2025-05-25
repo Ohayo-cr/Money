@@ -60,9 +60,13 @@ fun DatePickerScrollDialog(
                 .background(colorScheme.surface)
         ) {
 
-            Column(modifier = Modifier.fillMaxWidth().padding(top=16.dp)) {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+
                 WheelDateTimePicker(
                     modifier = Modifier.fillMaxWidth(),
+                   startDateTime  = initialDateTime,
                     yearsRange = 1900..2130,
                     timeFormat = TimeFormat.HOUR_24,
                     size = DpSize(330.dp, 200.dp),
@@ -102,8 +106,8 @@ fun DatePickerScrollDialog(
                                 shape = RoundedCornerShape(8.dp)
                             )
                             .clickable {
-                                if (selectedDateTime != null) {
-                                    onDateSelected(selectedDateTime!!)
+                                selectedDateTime?.let { date ->
+                                    onDateSelected(date)
                                 }
                                 onDismiss()
                             }

@@ -34,89 +34,56 @@ fun AccountSelectionDialog(
     onDismiss: () -> Unit,
     onAccountSelected: (Account) -> Unit
 ) {
-    var expanded by remember { mutableStateOf(true) }
     var searchQuery by remember { mutableStateOf("") }
 
-    // Фильтрация счетов по поисковому запросу
     val filteredAccounts = remember(accounts, searchQuery) {
-        if (searchQuery.isBlank()) {
-            accounts
-        } else {
-            accounts.filter { account ->
-                account.name.contains(searchQuery, ignoreCase = true)
-            }
-        }
+        if (searchQuery.isBlank()) accounts
+        else accounts.filter { it.name.contains(searchQuery, ignoreCase = true) }
     }
 
-    if (expanded) {
-        AlertDialog(
-            onDismissRequest = {
-                expanded = false
-                onDismiss()
-            },
-            title = { Text("Выберите счет") },
-            text = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 300.dp) // Ограничиваем высоту диалога
-                ) {
-                    // Поле для поиска
-                    TextField(
-                        value = searchQuery,
-                        onValueChange = { searchQuery = it },
-                        placeholder = { Text("Поиск счета...") },
-                        modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    // Список счетов
-                    LazyColumn {
-                        items(filteredAccounts) { account ->
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        onAccountSelected(account)
-                                        expanded = false
-                                    }
-                                    .padding(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                RadioButton(
-                                    selected = selectedAccount?.id == account.id,
-                                    onClick = {
-                                        onAccountSelected(account)
-                                        expanded = false
-                                    }
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(text = account.name)
-                            }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Выберите счет") },
+        text = {
+            Column(modifier = Modifier.fillMaxWidth().heightIn(max = 300.dp)) {
+                TextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    placeholder = { Text("Поиск...") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                LazyColumn {
+                    items(filteredAccounts) { account ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onAccountSelected(account) }
+                                .padding(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedAccount?.id == account.id,
+                                onClick = { onAccountSelected(account) }
+                            )
+                            Text(text = account.name)
                         }
-
-                        // Если нет результатов поиска
-                        if (filteredAccounts.isEmpty()) {
-                            item {
-                                Text(
-                                    text = "Счета не найдены",
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(16.dp),
-                                    textAlign = TextAlign.Center
-                                )
-                            }
+                    }
+                    if (filteredAccounts.isEmpty()) {
+                        item {
+                            Text(
+                                text = "Счета не найдены",
+                                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
                         }
                     }
                 }
-            },
-            confirmButton = {
-                Button(onClick = { expanded = false }) {
-                    Text("Отмена")
-                }
             }
-        )
-    }
+        },
+        confirmButton = {
+            Button(onClick = onDismiss) { Text("Отмена") }
+        }
+    )
 }

@@ -2,6 +2,8 @@ package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -21,6 +23,7 @@ import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddTransaction(
     navController: NavController,
