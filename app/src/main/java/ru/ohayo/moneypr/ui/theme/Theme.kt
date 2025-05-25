@@ -20,7 +20,6 @@ import androidx.core.view.WindowCompat
 
 
 // Основные цвета
-val ErrorRed = Color.Red
 val AppleGreenColor = Color(0xFF50C878)
 
 
@@ -35,7 +34,7 @@ val TextOnDark = Color.White
 val DarkPrimary = Color(0xFF0F0F0F)
 val DarkSecondary = Color(0xBF7E7E7E)
 val DarkBackground = Color(0xFF222222)
-val DarkSurface = DarkPrimary
+
 val DarkAccent = Color(0xFF1C6F6F)
 val DarkTertiary = Color(0xFF505050)
 
@@ -43,7 +42,7 @@ val DarkTertiary = Color(0xFF505050)
 val LightPrimary = Color(0xFFDDDFE2)
 val LightSecondary = Color(0xBF7E7E7E)
 val LightBackground = Color.White
-val LightSurface = LightPrimary
+
 val LightAccent = Color(0xFF20B2AA)
 val LightTertiary = Color(0xFFE2E2E2)
 
@@ -60,34 +59,36 @@ fun MoneyPrTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> darkColorScheme(
-            primary = DarkPrimary,
-            onPrimary = TextWhite,
-            secondary = DarkSecondary,
-            onSecondary = DarkPrimary,
-            background = DarkBackground,
-            onBackground = TextOnDark,
-            surface = DarkSurface,
-            onSurface = TextDisabled,
-            tertiary = DarkTertiary,
-            onTertiary = TextOnDark,
-            error = ErrorRed,
-            onError = TextOnDark,
-            inversePrimary = DarkAccent
+            primary = Color(0xFF101624),
+            onPrimary = Color(0xFFF5F7FA),
+            secondary = Color(0xFF3D4966),
+            onSecondary = Color(0xFFF5F7FA),
+            background = Color(0xFF1A2035),
+            onBackground = Color(0xFFEDEFF4),
+            surface = Color(0xFF1C2338),
+            onSurface = Color(0xFFBEC5D4),
+            tertiary = Color(0xFF4A5772),
+            onTertiary = Color(0xFFF5F7FA),
+            error = Color(0xFFD63031),
+            onError = Color.White,
+            inversePrimary = Color(0xFF00A896),
+            surfaceVariant = Color(0xFF424242) // цвет карда по умолчанию
         )
         else -> lightColorScheme(
-            primary = LightPrimary,
-            onPrimary = TextBlack,
-            secondary = LightSecondary,
-            onSecondary = LightPrimary,
-            background = LightBackground,
-            onBackground = TextBlack,
-            surface = LightSurface,
-            onSurface = TextDisabled,
-            tertiary = LightTertiary,
-            onTertiary = TextOnDark,
-            error = ErrorRed,
-            onError = TextOnDark,
-            inversePrimary = LightAccent
+            primary = Color(0xFFF5F7FA),
+            onPrimary = Color(0xFF1F2937),
+            secondary = Color(0xFFCBD5E1),
+            onSecondary = Color(0xFF1F2937),
+            background = Color.White,
+            onBackground = Color(0xFF1F2937),
+            surface = Color(0xFFF1F5F9),
+            onSurface = Color(0xFF475569),
+            tertiary = Color(0xFFE2E8F0),
+            onTertiary = Color(0xFF475569),
+            error = Color(0xFFD63031),
+            onError = Color.White,
+            inversePrimary = Color(0xFF67E4D6),
+            surfaceVariant = Color(0xFFDBDBDB) // цвет карда по умолчанию
         )
     }
 

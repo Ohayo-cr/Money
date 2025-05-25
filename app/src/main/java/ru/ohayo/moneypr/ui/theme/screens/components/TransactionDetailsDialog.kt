@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.domain.allEntity.Category
-import ru.ohayo.moneypr.ui.theme.screens.transactionList.getCategoryName
+import ru.ohayo.moneypr.ui.theme.screens.transactionList.getCategory
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 @Composable
@@ -27,7 +27,7 @@ fun TransactionDetailsDialog(
     transactionViewModel: TransactionViewModel // Принимаем ViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
-
+    val category = getCategory(categories, transaction.category)
     // Состояния для хранения названий счетов
     var fromAccountName by remember { mutableStateOf<String?>(null) }
     var toAccountName by remember { mutableStateOf<String?>(null) }
@@ -52,7 +52,7 @@ fun TransactionDetailsDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(text = "Сумма: ${transaction.amount}")
-                Text(text = "Категория: ${getCategoryName(categories, transaction.category)}")
+                Text(text = "Категория:${category?.name ?: "Неизвестная категория"}")
                 Text(text = "Дата: ${
                     ru.ohayo.moneypr.ui.theme.screens.transactionList.formatTimestamp(
                         transaction.timestamp

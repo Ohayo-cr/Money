@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 fun CategoryIcon(
     iconResId: Int,
     backgroundColor: Color,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     isSelected: Boolean = false,
     scale: Float = 1f
 ) {
