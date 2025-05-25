@@ -6,7 +6,7 @@ import ru.ohayo.moneypr.domain.allEntity.Category
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
 
 object DefaultCategories {
-    private const val INCOME_COLOR = 0xFF4CAF50 // Зелёный для доходов
+    private const val INCOME_COLOR = 0xFF50C878 // Зелёный для доходов
     private const val EXPENSE_COLOR = 0xFF67676B // Серый для расходов
 
     fun category(name: String, iconResId: Int, isIncome: Boolean = false) =

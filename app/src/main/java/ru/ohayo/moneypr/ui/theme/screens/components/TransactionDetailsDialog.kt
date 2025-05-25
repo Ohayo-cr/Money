@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.domain.allEntity.Category
 import ru.ohayo.moneypr.ui.theme.screens.transactionList.getCategory
+import ru.ohayo.moneypr.utils.NumberFormatter
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 @Composable
@@ -51,7 +52,7 @@ fun TransactionDetailsDialog(
         title = { Text("Детали транзакции") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(text = "Сумма: ${transaction.amount}")
+                Text(text = "Сумма: ${NumberFormatter.format(transaction.amount)}")
                 Text(text = "Категория:${category?.name ?: "Неизвестная категория"}")
                 Text(text = "Дата: ${
                     ru.ohayo.moneypr.ui.theme.screens.transactionList.formatTimestamp(

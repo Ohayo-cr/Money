@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 fun CategoryIcon(
     iconResId: Int,
     backgroundColor: Color,
+    modifier: Modifier = Modifier.size(60.dp),
     onClick: (() -> Unit)? = null,
     isSelected: Boolean = false,
     scale: Float = 1f
@@ -32,8 +33,7 @@ fun CategoryIcon(
     val iconTint = if (!isPicture) Color.White else Color.Unspecified
 
     Box(
-        modifier = Modifier
-            .size(60.dp)
+        modifier = modifier
             .scale(scale)
             .background(
                 color = backgroundColor,

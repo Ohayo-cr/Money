@@ -19,8 +19,16 @@ class AccountViewModel @Inject constructor(
     private val accountRepository: AccountRepository
 ) : ViewModel() {
 
-    // Поток данных для получения всех счетов
-    val accounts = accountRepository.getAllAccounts()
+    private val _accounts = MutableStateFlow<List<Account>>(emptyList())
+    val accounts: StateFlow<List<Account>> = _accounts
+
+    init {
+        viewModelScope.launch {
+            accountRepository.getAllAccounts().collect { accountList ->
+                _accounts.value = accountList
+            }
+        }
+    }
 
     // Состояние для UI
     private val _state = MutableStateFlow<AccountState>(AccountState.Idle)

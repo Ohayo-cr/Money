@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.ui.theme.screens.components.TransactionDetailsDialog
+import ru.ohayo.moneypr.viewModel.AccountViewModel
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import ru.ohayo.moneypr.viewModel.TransactionListViewModel
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
@@ -25,11 +26,14 @@ fun TransactionsList(
     transactionlistViewModel: TransactionListViewModel = hiltViewModel(),
     categoryViewModel: CategoryViewModel = hiltViewModel(),
     transactionViewModel: TransactionViewModel = hiltViewModel(),
+    accountViewModel: AccountViewModel = hiltViewModel(),
+
 ) {
     val transactions by transactionlistViewModel.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
     var selectedTransaction by remember { mutableStateOf<TransactionEntity?>(null) }
     val scrollState = transactionlistViewModel.scrollState
+    val accounts by accountViewModel.accounts.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -56,6 +60,7 @@ fun TransactionsList(
                     TransactionItem(
                         transaction = transaction,
                         categories = categories,
+                        accounts = accounts,
                         onTransactionClick = { selectedTransaction = it }
                     )
                 }
@@ -73,6 +78,10 @@ fun TransactionsList(
         }
     }
 }
+
+
+
+
 
 @Composable
 private fun EmptyTransactionsPlaceholder() {
