@@ -147,7 +147,7 @@ fun AddTransactionForm(
                                 category = categoryId.toLong(),
                                 fromAccount = selectedFromAccount?.id,
                                 toAccount = selectedToAccount?.id,
-                                currency = currency?.id
+                                currency = currency.symbol
                             )
                             viewModel.addTransaction(transaction)
                             keyboardViewModel.reset()

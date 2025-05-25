@@ -113,7 +113,7 @@ private fun TransactionItem(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Сумма: ${NumberFormatter.format(transaction.amount)}",
+                text = "Сумма: ${NumberFormatter.format(transaction.amount)} ${transaction.currency}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )

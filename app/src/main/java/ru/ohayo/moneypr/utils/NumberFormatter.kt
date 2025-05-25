@@ -7,9 +7,7 @@ import java.util.Locale
 // Создаем объект для форматирования чисел
 object NumberFormatter {
     private val formatter = DecimalFormat("#,##0.00", DecimalFormatSymbols().apply {
-        // Явно задаем пробел как разделитель групп разрядов
         groupingSeparator = ' '
-        // Явно задаем точку как разделитель дробной части
         decimalSeparator = '.'
     })
 

@@ -22,12 +22,6 @@ import androidx.room.PrimaryKey
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = Currency::class,
-            parentColumns = ["id"],
-            childColumns = ["currency"],
-            onDelete = ForeignKey.SET_NULL
-        ),
-        ForeignKey(
             entity = Account::class,
             parentColumns = ["id"],
             childColumns = ["fromAccount"],
@@ -48,6 +42,6 @@ data class TransactionEntity(
     val category: Long, // ID категории
     val fromAccount: Long? = null, // Счет, с которого списываются средства
     val toAccount: Long? = null, // Счет, на который зачисляются средства
-    val currency: Long? = null, // ID валюты
+    val currency: String,
     @PrimaryKey(autoGenerate = true) val id: Long? = null
 )
