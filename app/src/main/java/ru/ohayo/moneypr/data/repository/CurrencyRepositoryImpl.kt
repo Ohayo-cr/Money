@@ -40,4 +40,6 @@ class CurrencyRepositoryImpl(
     override suspend fun getCurrencyById(id: Long): Currency? {
         return currencyDao.getCurrencyById(id)
     }
+    override suspend fun getCurrencySymbol(id: Long): String? =
+        currencyDao.getCurrencyById(id)?.symbol
 }

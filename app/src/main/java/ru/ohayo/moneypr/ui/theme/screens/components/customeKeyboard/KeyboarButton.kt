@@ -35,18 +35,18 @@ fun KeyboardButton(
             .clip(shape)
             .clickable(enabled = enabled, onClick = onClick)
             .background(
-                color = if (enabled) backgroundColor else colorScheme.onSurface.copy(alpha = 0.12f),
+                color = backgroundColor,
                 shape = shape
             ),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = if (enabled) colorScheme.onTertiary else colorScheme.onSurface,
+            color = if (enabled) colorScheme.onPrimary else colorScheme.onPrimary,
             textAlign = TextAlign.Center,
             fontSize = when (text) {
                 "OK" -> 16.sp
-                else -> 26.sp
+                else -> 30.sp
             },
             fontWeight = FontWeight.Bold
         )

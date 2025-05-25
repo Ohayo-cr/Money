@@ -93,7 +93,8 @@ fun CalculatorKeyboard(
             } else {
                 !isOnlyMinus && (viewModel.isExpressionReadyForEvaluation || isNumber(viewModel.currentInput))
             }
-            val buttonColor = if (buttonEnabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            val buttonColor = if (buttonEnabled) MaterialTheme.colorScheme.inversePrimary
+            else MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
 
             KeyboardButton(
                 text = buttonText,

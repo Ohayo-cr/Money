@@ -104,16 +104,25 @@ fun CurrencyItem(currency: Currency) {
             modifier = Modifier.size(40.dp),
             contentAlignment = Alignment.Center
         ) {
-            Icon(
-                painter = painterResource(id = currency.iconResId),
-                contentDescription = "Currency icon",
-                tint = Color.Unspecified
-            )
+            currency.iconResId?.let { painterResource(id = it) }?.let {
+                Icon(
+                    painter = it,
+                    contentDescription = "Currency icon",
+                    tint = Color.Unspecified
+                )
+            }
         }
 
         // Название валюты
         Text(
             text = currency.name,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.weight(1f),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = currency.symbol,
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.weight(1f),
             maxLines = 1,

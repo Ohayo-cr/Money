@@ -1,7 +1,10 @@
 package ru.ohayo.moneypr.ui.theme.screens.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,16 +38,26 @@ import androidx.compose.ui.window.Popup
 import com.commandiron.wheel_picker_compose.WheelDateTimePicker
 import com.commandiron.wheel_picker_compose.core.TimeFormat
 import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
+import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.millisToLocalDateTime
 import ru.ohayo.moneypr.viewModel.TransactionViewModel
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DatePickerScrollDialog(
     onDismiss: () -> Unit,
     onDateSelected: (LocalDateTime) -> Unit,
     initialDateTime: LocalDateTime,
+    lastSelectedDate: Long? = null
 ) {
     var selectedDateTime = initialDateTime
+    var lastDB = lastSelectedDate
+    val lastDBAsLocalDateTime = if (lastDB != null) {
+        millisToLocalDateTime(lastDB)
+    } else {
+        null
+    }
 
     Popup(
         onDismissRequest = onDismiss,
@@ -60,13 +73,25 @@ fun DatePickerScrollDialog(
                 .background(colorScheme.surface)
         ) {
 
+
             Column(modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)) {
+                .padding(top = 4.dp)) {
+
+                if (lastDBAsLocalDateTime != null) {
+                    val formattedDate = lastDBAsLocalDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+                    FullWidthButton(
+                        text = "Выбрать последнюю дату: $formattedDate",
+                        onClick = {
+                            onDateSelected(lastDBAsLocalDateTime)
+                            onDismiss()
+                        }
+                    )
+                }
 
                 WheelDateTimePicker(
                     modifier = Modifier.fillMaxWidth(),
-                   startDateTime  = initialDateTime,
+                    startDateTime  = initialDateTime,
                     yearsRange = 1900..2130,
                     timeFormat = TimeFormat.HOUR_24,
                     size = DpSize(330.dp, 200.dp),
@@ -82,45 +107,40 @@ fun DatePickerScrollDialog(
                     }
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 4.dp),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.Bottom
                 ) {
-                   Button(
+                    // Кнопка "Отмена"
+                    StyledButton(
+                        text = "Отмена",
                         onClick = onDismiss,
-                        modifier = Modifier.padding(end = 8.dp)
-                    ) {
-                        Text("Отмена")
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Box(
                         modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(bottom = 20.dp, end = 8.dp)
-                            .background(
-                                color = colorScheme.inversePrimary,
-                                shape = RoundedCornerShape(8.dp)
-                            )
-                            .clickable {
-                                selectedDateTime?.let { date ->
-                                    onDateSelected(date)
-                                }
-                                onDismiss()
+                            .padding(end = 8.dp, bottom = 4.dp)
+                            .weight(1f)
+                    )
+
+                    // Кнопка "OK"
+                    StyledButton(
+                        text = "OK",
+                        onClick = {
+                            selectedDateTime?.let { date ->
+                                onDateSelected(date)
                             }
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "OK",
-                            color = colorScheme.onPrimary
-                        )
-                    }
+                            onDismiss()
+                        },
+                        color = colorScheme.inversePrimary,
+                        contentColor = colorScheme.onPrimary,
+                        modifier = Modifier
+                            .padding(bottom = 4.dp)
+                            .weight(2f)
+                    )
+                }
                 }
             }
         }
     }
-}

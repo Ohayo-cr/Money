@@ -78,7 +78,7 @@ fun DeleteButton(
             text = "⌫",
             color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
-            fontSize = 20.sp,
+            fontSize = 30.sp,
             modifier = Modifier.align(Alignment.Center)
         )
     }

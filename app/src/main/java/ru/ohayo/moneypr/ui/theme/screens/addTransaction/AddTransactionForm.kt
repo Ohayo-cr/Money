@@ -1,7 +1,6 @@
 package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -82,6 +81,7 @@ fun AddTransactionForm(
     val focusManager = LocalFocusManager.current
     var showAccountSelectionDialog by remember { mutableStateOf(false) }
     var showDatePickerDialog by remember { mutableStateOf(false) }
+    val lastDateFromDB by viewModel.lastSelectedDate.collectAsState(initial = System.currentTimeMillis())
     val selectedDate by viewModel.selectedDate.collectAsState()
 
     var transactionDate by remember { mutableLongStateOf(selectedDate) }
@@ -172,7 +172,8 @@ fun AddTransactionForm(
                             viewModel.setSelectedDate(newDate)
                             showDatePickerDialog = false
                         },
-                        initialDateTime = initialDateTime
+                        initialDateTime = initialDateTime,
+                        lastSelectedDate = lastDateFromDB
                     )
                 }
 

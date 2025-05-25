@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Currency(
-    @PrimaryKey(autoGenerate = true) val id: Long? = null, // Уникальный идентификатор валюты
-    val name: String, // Название валюты
-    val iconResId: Int // Идентификатор ресурса иконки (например, R.drawable.icon_name)
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val name: String,
+    val iconResId: Int? = null,
+    val symbol: String
 )

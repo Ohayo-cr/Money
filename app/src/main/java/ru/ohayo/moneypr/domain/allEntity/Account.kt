@@ -23,19 +23,16 @@ import androidx.room.PrimaryKey
     ]
 )
 data class Account(
-    val name: String, // Название счета
-    val type: AccountType, // Тип счета (например, "cash", "bank", "card")
-    val balance: Double, // Текущий баланс счета
-    val currency: Long, // ID валюты (внешний ключ, используется Long для согласованности)
-    @PrimaryKey(autoGenerate = true) val id: Long = 0 // Уникальный идентификатор счета
+    val name: String,
+    val type: AccountType,
+    val balance: Double,
+    val currency: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )
 
-/**
- * Перечисление для типов счетов.
- */
 enum class AccountType {
-    Cash, // Наличные
-    Card, // Банковская карта
-    Contribution, // Вклад
-    Other // Другое
+    Cash,
+    Card,
+    Contribution,
+    Other
 }

@@ -30,11 +30,11 @@ val TextDisabled = Color(0xFF898E98)
 val TextOnDark = Color.White
 
 // Темная тема
-val DarkPrimary = Color(0xFF252525)
+val DarkPrimary = Color(0xFF0F0F0F)
 val DarkSecondary = Color(0xBF7E7E7E)
-val DarkBackground = Color(0xFF323234)
+val DarkBackground = Color(0xFF222222)
 val DarkSurface = DarkPrimary
-val DarkAccent = Color(0xFF008B8B)
+val DarkAccent = Color(0xFF1C6F6F)
 val DarkTertiary = Color(0xFF505050)
 
 // Светлая тема
@@ -43,7 +43,7 @@ val LightSecondary = Color(0xBF7E7E7E)
 val LightBackground = Color.White
 val LightSurface = LightPrimary
 val LightAccent = Color(0xFF20B2AA)
-val LightTertiary = Color(0xFF3EB489)
+val LightTertiary = Color(0xFFE2E2E2)
 
 @Composable
 fun MoneyPrTheme(

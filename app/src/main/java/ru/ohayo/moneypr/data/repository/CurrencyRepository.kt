@@ -10,4 +10,5 @@ interface CurrencyRepository {
     suspend fun isCurrencyEmpty(): Boolean
     suspend fun insertAllCurrency(currency: List<Currency>)
     suspend fun getCurrencyById(id: Long): Currency?
+    suspend fun getCurrencySymbol(id: Long): String?
 }

@@ -25,6 +25,8 @@ class TransactionViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) : ViewModel() {
 
+    // Другие стейты
+
     private val _transactionResult = MutableStateFlow<Result<Unit>?>(null)
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
 
@@ -46,13 +48,6 @@ class TransactionViewModel @Inject constructor(
     // Функция для установки пользовательской даты
     fun setSelectedDate(date: Long) {
         _selectedDate.value = date
-    }
-    init {
-        viewModelScope.launch {
-            selectedDate.collect { value ->
-                println("Selected Date Changed to: $value")
-            }
-        }
     }
 
     // Функция для сброса выбранной даты (например, после добавления транзакции)
@@ -100,6 +95,10 @@ class TransactionViewModel @Inject constructor(
 
     suspend fun getAccountName(accountId: Long): String? {
         return accountRepository.getAccountName(accountId)
+    }
+
+    suspend fun getCurrencySymbol(currencyId: Long): String? {
+        return currencyRepository.getCurrencyById(currencyId)?.symbol ?: ""
     }
 }
 

@@ -30,7 +30,7 @@ fun DateButton(
     shape: Shape = RoundedCornerShape(2.dp),
     fontSize: TextUnit = 16.sp,
     fontWeight: FontWeight = FontWeight.Bold,
-    color: Color = colorScheme.inversePrimary
+    color: Color = colorScheme.onPrimary
 ) {
     Box(
         modifier = modifier
@@ -49,7 +49,7 @@ fun DateButton(
             fontSize = fontSize,
             fontWeight = fontWeight,
             color = color,
-            textAlign = TextAlign.Center // <--- Это важно!
+            textAlign = TextAlign.Center
         )
     }
 }
