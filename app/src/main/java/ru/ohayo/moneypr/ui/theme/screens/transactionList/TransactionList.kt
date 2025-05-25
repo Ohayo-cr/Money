@@ -112,8 +112,9 @@ private fun TransactionItem(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+            val amountText = buildAmountText(transaction)
             Text(
-                text = "Сумма: ${NumberFormatter.format(transaction.amount)} ${transaction.currency}",
+                text = amountText,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
