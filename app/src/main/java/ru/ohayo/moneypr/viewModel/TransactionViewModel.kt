@@ -59,12 +59,12 @@ class TransactionViewModel @Inject constructor(
     }
 
 
+
     fun addTransaction(transaction: TransactionEntity) {
         viewModelScope.launch {
             try {
                 // Установка даты транзакции в выбранную
                 val updatedTransaction = transaction.copy(timestamp = selectedDate.value)
-
                 repository.insertTransaction(updatedTransaction)
 
                 if (updatedTransaction.fromAccount != null) {

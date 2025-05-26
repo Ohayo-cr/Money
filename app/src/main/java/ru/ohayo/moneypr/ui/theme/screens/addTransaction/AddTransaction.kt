@@ -95,15 +95,12 @@ fun AddTransaction(
                 categoryId = selectedCategoryId!!.toInt(),
 
                 onBack = {
-                    showAddTransactionForm = false
                     selectedCategoryId = null
                 },
                 onTransactionAdded = {
                     navController.navigate(Screen.Records.route) {
                         popUpTo(0)
                     }
-                    showAddTransactionForm = false
-                    selectedCategoryId = null
                 }
             )
         }

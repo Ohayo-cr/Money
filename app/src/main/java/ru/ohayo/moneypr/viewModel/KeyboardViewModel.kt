@@ -28,8 +28,11 @@ class KeyboardViewModel @Inject constructor(
         note = newNote // Обновление примечания
     }val isResultPositive: Boolean
         get() = result.toDoubleOrNull()?.let { it >= 0 } ?: true // Если результат пустой или не число, считаем его положительным
-    // Флаг для отслеживания состояния зажатия кнопки "←"
-    private var isDeletePressed = false
+    fun getParsedAmount(): Double? {
+        return result.toDoubleOrNull()
+            ?: currentInput.toDoubleOrNull()
+    }
+
     fun appendToInput(value: String) {
         // Если результат равен "0", очищаем его перед началом нового ввода
         if (result == "0" && value.matches(Regex("[0-9.,]"))) {

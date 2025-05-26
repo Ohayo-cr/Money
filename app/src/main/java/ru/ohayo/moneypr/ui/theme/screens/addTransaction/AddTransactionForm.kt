@@ -125,9 +125,7 @@ fun AddTransactionForm(
                     onHideKeyboardClicked = {},
                     dateText = formatLocalDateTime(transactionDate),
                     onOkClicked = {
-                        val parsedAmount = keyboardViewModel.result.toDoubleOrNull()
-                            ?: keyboardViewModel.currentInput.toDoubleOrNull()
-
+                        val parsedAmount = keyboardViewModel.getParsedAmount()
                         if (parsedAmount != null && currencyAcc != "Not") {
                             val transaction = TransactionEntity(
                                 amount = parsedAmount,
@@ -139,7 +137,6 @@ fun AddTransactionForm(
                                 currency = currencyAcc
                             )
                             viewModel.addTransaction(transaction)
-                            keyboardViewModel.reset()
                             onTransactionAdded()
 
                         } else {
