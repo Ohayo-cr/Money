@@ -11,22 +11,13 @@ import androidx.room.PrimaryKey
 @Entity(
     indices = [
         Index(value = ["name"], unique = true), // Уникальное имя счета
-        Index(value = ["currency"]) // Индекс для currencyId
-    ],
-    foreignKeys = [
-        ForeignKey(
-            entity = Currency::class,
-            parentColumns = ["id"],
-            childColumns = ["currency"],
-            onDelete = ForeignKey.SET_NULL // Установка NULL при удалении валюты
-        )
     ]
 )
 data class Account(
     val name: String,
     val type: AccountType,
     val balance: Double,
-    val currency: Long,
+    val currency: String,
     @PrimaryKey(autoGenerate = true) val id: Long = 0
 )
 

@@ -33,4 +33,16 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun getAccountName(accountId: Long): String? {
         return accountDao.getAccountNameById(accountId)
     }
+    override suspend fun getAccountById(accountId: Long): Account? {
+        return accountDao.getAccountById(accountId)
+    }
+    override suspend fun insertAllAccount(accounts: List<Account>) {
+        accountDao.insertAllAccount(accounts)
+    }
+
+    // Проверяем, есть ли уже аккаунты в БД
+    override suspend fun isAccountsEmpty(): Boolean {
+        return accountDao.getAccountsCount() == 0
+    }
+
 }

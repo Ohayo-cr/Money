@@ -420,45 +420,45 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
-
       static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
-
-      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
 
       static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
 
+      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+
+      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
+
       @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
 
       @KeepFieldType
       CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
 
       @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
-
-      @KeepFieldType
       TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
-
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
-
-      @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
 
       @KeepFieldType
       AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
 
       @KeepFieldType
       CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+
+      @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+
+      @KeepFieldType
+      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+
+      @KeepFieldType
+      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
     }
   }
 
@@ -526,25 +526,25 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
+      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
 
       static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
+      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
+      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
 
       static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
+      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
 
       @KeepFieldType
       AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
 
       @KeepFieldType
-      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
 
       @KeepFieldType
       KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
@@ -553,16 +553,16 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
 
       @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
+      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
 
       @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
 
       @KeepFieldType
       AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
 
       @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
+      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -696,13 +696,13 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     private Provider<CategoryRepository> provideCategoryRepositoryProvider;
 
-    private Provider<CurrencyDao> provideCurrencyDaoProvider;
-
-    private Provider<CurrencyRepository> provideCurrencyRepositoryProvider;
-
     private Provider<AccountDao> provideAccountDaoProvider;
 
     private Provider<AccountRepository> provideAccountRepositoryProvider;
+
+    private Provider<CurrencyDao> provideCurrencyDaoProvider;
+
+    private Provider<CurrencyRepository> provideCurrencyRepositoryProvider;
 
     private Provider<AddCategoryRepository> addCategoryRepositoryProvider;
 
@@ -723,10 +723,10 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       this.provideAppDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<AppDatabase>(singletonCImpl, 2));
       this.provideCategoryDaoProvider = DoubleCheck.provider(new SwitchingProvider<CategoryDao>(singletonCImpl, 1));
       this.provideCategoryRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<CategoryRepository>(singletonCImpl, 0));
-      this.provideCurrencyDaoProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyDao>(singletonCImpl, 4));
-      this.provideCurrencyRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyRepository>(singletonCImpl, 3));
-      this.provideAccountDaoProvider = DoubleCheck.provider(new SwitchingProvider<AccountDao>(singletonCImpl, 6));
-      this.provideAccountRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AccountRepository>(singletonCImpl, 5));
+      this.provideAccountDaoProvider = DoubleCheck.provider(new SwitchingProvider<AccountDao>(singletonCImpl, 4));
+      this.provideAccountRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AccountRepository>(singletonCImpl, 3));
+      this.provideCurrencyDaoProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyDao>(singletonCImpl, 6));
+      this.provideCurrencyRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyRepository>(singletonCImpl, 5));
       this.addCategoryRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AddCategoryRepository>(singletonCImpl, 7));
       this.provideEvaluateExpressionUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<EvaluateExpressionUseCase>(singletonCImpl, 8));
       this.provideExpressionRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ExpressionRepository>(singletonCImpl, 9));
@@ -755,6 +755,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     private MoneyPrApp injectMoneyPrApp2(MoneyPrApp instance) {
       MoneyPrApp_MembersInjector.injectCategoryRepository(instance, provideCategoryRepositoryProvider.get());
+      MoneyPrApp_MembersInjector.injectAccountRepository(instance, provideAccountRepositoryProvider.get());
       MoneyPrApp_MembersInjector.injectCurrencyRepository(instance, provideCurrencyRepositoryProvider.get());
       return instance;
     }
@@ -782,17 +783,17 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
           case 2: // ru.ohayo.moneypr.data.data_source.AppDatabase 
           return (T) AppModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 3: // ru.ohayo.moneypr.data.repository.CurrencyRepository 
-          return (T) AppModule_ProvideCurrencyRepositoryFactory.provideCurrencyRepository(singletonCImpl.provideCurrencyDaoProvider.get());
-
-          case 4: // ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao 
-          return (T) AppModule_ProvideCurrencyDaoFactory.provideCurrencyDao(singletonCImpl.provideAppDatabaseProvider.get());
-
-          case 5: // ru.ohayo.moneypr.data.repository.AccountRepository 
+          case 3: // ru.ohayo.moneypr.data.repository.AccountRepository 
           return (T) AppModule_ProvideAccountRepositoryFactory.provideAccountRepository(singletonCImpl.provideAccountDaoProvider.get());
 
-          case 6: // ru.ohayo.moneypr.data.data_source.allDao.AccountDao 
+          case 4: // ru.ohayo.moneypr.data.data_source.allDao.AccountDao 
           return (T) AppModule_ProvideAccountDaoFactory.provideAccountDao(singletonCImpl.provideAppDatabaseProvider.get());
+
+          case 5: // ru.ohayo.moneypr.data.repository.CurrencyRepository 
+          return (T) AppModule_ProvideCurrencyRepositoryFactory.provideCurrencyRepository(singletonCImpl.provideCurrencyDaoProvider.get());
+
+          case 6: // ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao 
+          return (T) AppModule_ProvideCurrencyDaoFactory.provideCurrencyDao(singletonCImpl.provideAppDatabaseProvider.get());
 
           case 7: // ru.ohayo.moneypr.data.repository.AddCategoryRepository 
           return (T) new AddCategoryRepository(singletonCImpl.provideCategoryDaoProvider.get());

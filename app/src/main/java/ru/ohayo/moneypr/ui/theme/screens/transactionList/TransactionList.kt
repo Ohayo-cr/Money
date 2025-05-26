@@ -9,7 +9,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
@@ -23,16 +22,16 @@ import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 @Composable
 fun TransactionsList(
-    transactionlistViewModel: TransactionListViewModel = hiltViewModel(),
+    transactionListVM: TransactionListViewModel = hiltViewModel(),
     categoryViewModel: CategoryViewModel = hiltViewModel(),
     transactionViewModel: TransactionViewModel = hiltViewModel(),
     accountViewModel: AccountViewModel = hiltViewModel(),
 
-) {
-    val transactions by transactionlistViewModel.transactions.collectAsState()
+    ) {
+    val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
     var selectedTransaction by remember { mutableStateOf<TransactionEntity?>(null) }
-    val scrollState = transactionlistViewModel.scrollState
+    val scrollState = transactionListVM.scrollState
     val accounts by accountViewModel.accounts.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {

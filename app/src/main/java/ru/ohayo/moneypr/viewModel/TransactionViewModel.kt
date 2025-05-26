@@ -1,5 +1,7 @@
 package ru.ohayo.moneypr.viewModel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +28,12 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Другие стейты
+    private val _note = mutableStateOf("")
+    val note: State<String> get() = _note
+
+    fun updateNote(newNote: String) {
+        _note.value = newNote
+    }
 
     private val _transactionResult = MutableStateFlow<Result<Unit>?>(null)
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
@@ -48,11 +56,6 @@ class TransactionViewModel @Inject constructor(
     // Функция для установки пользовательской даты
     fun setSelectedDate(date: Long) {
         _selectedDate.value = date
-    }
-
-    // Функция для сброса выбранной даты (например, после добавления транзакции)
-    fun resetSelectedDate() {
-        _selectedDate.value = _currentDate.value
     }
 
 
@@ -100,6 +103,7 @@ class TransactionViewModel @Inject constructor(
     suspend fun getCurrencySymbol(currencyId: Long): String? {
         return currencyRepository.getCurrencyById(currencyId)?.symbol ?: ""
     }
+
 }
 
 

@@ -6,6 +6,7 @@ import dagger.internal.DaggerGenerated;
 import dagger.internal.InjectedFieldSignature;
 import dagger.internal.QualifierMetadata;
 import javax.inject.Provider;
+import ru.ohayo.moneypr.data.repository.AccountRepository;
 import ru.ohayo.moneypr.data.repository.CategoryRepository;
 import ru.ohayo.moneypr.data.repository.CurrencyRepository;
 
@@ -21,23 +22,29 @@ import ru.ohayo.moneypr.data.repository.CurrencyRepository;
 public final class MoneyPrApp_MembersInjector implements MembersInjector<MoneyPrApp> {
   private final Provider<CategoryRepository> categoryRepositoryProvider;
 
+  private final Provider<AccountRepository> accountRepositoryProvider;
+
   private final Provider<CurrencyRepository> currencyRepositoryProvider;
 
   public MoneyPrApp_MembersInjector(Provider<CategoryRepository> categoryRepositoryProvider,
+      Provider<AccountRepository> accountRepositoryProvider,
       Provider<CurrencyRepository> currencyRepositoryProvider) {
     this.categoryRepositoryProvider = categoryRepositoryProvider;
+    this.accountRepositoryProvider = accountRepositoryProvider;
     this.currencyRepositoryProvider = currencyRepositoryProvider;
   }
 
   public static MembersInjector<MoneyPrApp> create(
       Provider<CategoryRepository> categoryRepositoryProvider,
+      Provider<AccountRepository> accountRepositoryProvider,
       Provider<CurrencyRepository> currencyRepositoryProvider) {
-    return new MoneyPrApp_MembersInjector(categoryRepositoryProvider, currencyRepositoryProvider);
+    return new MoneyPrApp_MembersInjector(categoryRepositoryProvider, accountRepositoryProvider, currencyRepositoryProvider);
   }
 
   @Override
   public void injectMembers(MoneyPrApp instance) {
     injectCategoryRepository(instance, categoryRepositoryProvider.get());
+    injectAccountRepository(instance, accountRepositoryProvider.get());
     injectCurrencyRepository(instance, currencyRepositoryProvider.get());
   }
 
@@ -45,6 +52,12 @@ public final class MoneyPrApp_MembersInjector implements MembersInjector<MoneyPr
   public static void injectCategoryRepository(MoneyPrApp instance,
       CategoryRepository categoryRepository) {
     instance.categoryRepository = categoryRepository;
+  }
+
+  @InjectedFieldSignature("ru.ohayo.moneypr.MoneyPrApp.accountRepository")
+  public static void injectAccountRepository(MoneyPrApp instance,
+      AccountRepository accountRepository) {
+    instance.accountRepository = accountRepository;
   }
 
   @InjectedFieldSignature("ru.ohayo.moneypr.MoneyPrApp.currencyRepository")

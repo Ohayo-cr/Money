@@ -1,5 +1,7 @@
 package ru.ohayo.moneypr.ui.theme.screens.navController
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -23,6 +25,7 @@ import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavHostScreen(navController: NavHostController) {
     NavHost(

@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.domain.allEntity.Account
 import ru.ohayo.moneypr.data.repository.AccountRepository
 import ru.ohayo.moneypr.domain.allEntity.AccountType
+import ru.ohayo.moneypr.ui.theme.screens.addTransaction.componens.SelectedAccountManager
 import javax.inject.Inject
 
 
@@ -21,21 +23,53 @@ class AccountViewModel @Inject constructor(
 
     private val _accounts = MutableStateFlow<List<Account>>(emptyList())
     val accounts: StateFlow<List<Account>> = _accounts
-
-    init {
-        viewModelScope.launch {
-            accountRepository.getAllAccounts().collect { accountList ->
-                _accounts.value = accountList
-            }
-        }
-    }
-
     // Состояние для UI
     private val _state = MutableStateFlow<AccountState>(AccountState.Idle)
     val state: StateFlow<AccountState> = _state
 
+    private val _selectedAccount = MutableStateFlow(SelectedAccountManager.selectedAccount.value)
+    val selectedAccount: StateFlow<Account?> = _selectedAccount
+
+    fun setSelectedAccount(account: Account?) {
+        _selectedAccount.value = account
+    }
+
+    init {
+        viewModelScope.launch {
+            accountRepository.getAllAccounts()
+                .distinctUntilChanged()
+                .collect { accountList ->
+                    _accounts.value = accountList
+
+                    if (SelectedAccountManager.selectedAccount.value == null && accountList.isNotEmpty()) {
+                        SelectedAccountManager.setSelectedAccount(accountList.first())
+                    }
+                }
+        }
+    }
+
+    // Метод получения аккаунта по ID
+    fun getAccountById(accountId: Long) {
+        viewModelScope.launch {
+            _state.value = AccountState.Loading
+            try {
+                val account = accountRepository.getAccountById(accountId)
+                if (account != null) {
+                    _selectedAccount.value = account
+                    _state.value = AccountState.Success
+                } else {
+                    _state.value = AccountState.Error("Аккаунт не найден")
+                }
+            } catch (e: Exception) {
+                _state.value = AccountState.Error(e.message ?: "Неизвестная ошибка")
+            }
+        }
+    }
+
+
+
     // Метод для добавления нового счета
-    fun addAccount(name: String, type: String, balance: Double, currencyId: Long) {
+    fun addAccount(name: String, type: String, balance: Double, currency: String) {
         viewModelScope.launch {
             _state.value = AccountState.Loading
             try {
@@ -52,15 +86,13 @@ class AccountViewModel @Inject constructor(
                 val accountType = enumValueOrNull<AccountType>(type)
                     ?: throw IllegalArgumentException("Неверный тип счета: $type")
 
-                // Создаем объект Account
                 val account = Account(
                     name = name,
                     type = accountType,
                     balance = balance,
-                    currency = currencyId
+                    currency = currency
                 )
 
-                // Вставляем счет в репозиторий
                 accountRepository.insertAccount(account)
                 _state.value = AccountState.Success
             } catch (e: Exception) {
@@ -69,7 +101,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    // Вспомогательная функция для безопасного преобразования строки в Enum
+
     private inline fun <reified T : Enum<T>> enumValueOrNull(value: String): T? {
         return try {
             enumValueOf<T>(value)
@@ -78,7 +110,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    // Состояния для UI
+
     sealed class AccountState {
         object Idle : AccountState()
         object Loading : AccountState()

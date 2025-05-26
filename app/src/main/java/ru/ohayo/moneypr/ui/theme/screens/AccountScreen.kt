@@ -30,8 +30,8 @@ fun AddAccountScreen(
     var name by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf(AccountType.Cash) }
     var balance by remember { mutableStateOf("") }
-    var selectedCurrencyId by remember { mutableStateOf(currencies.firstOrNull()?.id ?: 0) }
-    val selectedCurrency = currencies.find { it.id == selectedCurrencyId } // Находим выбранную валюту
+    var selectedCurrencySymbol by remember { mutableStateOf("") }
+    val selectedCurrency = currencies.find { it.symbol == selectedCurrencySymbol }
     val context = LocalContext.current
     val accounts by accountViewModel.accounts.collectAsState(initial = emptyList()) // Получаем список счетов
 
@@ -89,7 +89,7 @@ fun AddAccountScreen(
             DropdownSelector(
                 items = currencies,
                 selectedItem = selectedCurrency,
-                onItemSelected = { currency -> selectedCurrencyId = currency.id!! }, // Обновляем ID выбранной валюты
+                onItemSelected = { currency -> selectedCurrencySymbol = currency.symbol },
                 itemToString = { it.name },
                 itemIcon = { it.iconResId },
                 label = "Выберите валюту",
@@ -107,7 +107,7 @@ fun AddAccountScreen(
                     Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
                 } else if (balance.toDoubleOrNull() == null) {
                     Toast.makeText(context, "Введите корректный баланс", Toast.LENGTH_SHORT).show()
-                } else if (selectedCurrencyId.toInt() == 0) {
+                } else if (selectedCurrencySymbol.isEmpty()) {
                     Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
                 } else {
                     // Если все данные корректны, добавляем счет
@@ -115,7 +115,7 @@ fun AddAccountScreen(
                         name = name,
                         type = selectedType.name,
                         balance = balance.toDoubleOrNull() ?: 0.0,
-                        currencyId = selectedCurrencyId
+                        currency = selectedCurrencySymbol
                     )
                     Toast.makeText(context, "Счет добавлен", Toast.LENGTH_SHORT).show()
 
@@ -123,7 +123,7 @@ fun AddAccountScreen(
                     name = ""
                     selectedType = AccountType.Cash
                     balance = ""
-                    selectedCurrencyId = currencies.firstOrNull()?.id ?: 0
+                    selectedCurrencySymbol = ""
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -148,14 +148,13 @@ fun AddAccountScreen(
             items(accounts) { account ->
                 AccountItem(
                     account = account,
-                    currency = currencies.find { it.id == account.currency }?.name ?: "Неизвестная валюта"
                 )
             }
         }
     }
 }
 @Composable
-fun AccountItem(account: Account, currency: String) {
+fun AccountItem(account: Account) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -179,7 +178,7 @@ fun AccountItem(account: Account, currency: String) {
             Spacer(modifier = Modifier.height(4.dp))
             // Используем NumberFormatter напрямую в тексте
             Text(
-                text = "Баланс: ${NumberFormatter.format(account.balance)} $currency",
+                text = "Баланс: ${NumberFormatter.format(account.balance)} ${account.currency}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.domain.allEntity.Account
+import ru.ohayo.moneypr.domain.allEntity.Currency
 
 @Dao
 interface AccountDao {
@@ -24,5 +25,11 @@ interface AccountDao {
 
     @Query("SELECT name FROM account WHERE id = :accountId")
     suspend fun getAccountNameById(accountId: Long): String?
+    @Query("SELECT * FROM account WHERE id = :accountId")
+    suspend fun getAccountById(accountId: Long): Account?
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllAccount(account: List<Account>)
+    @Query("SELECT COUNT(*) FROM account")
+    suspend fun getAccountsCount(): Int
 }
 
