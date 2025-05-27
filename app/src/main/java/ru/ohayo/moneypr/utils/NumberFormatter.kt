@@ -13,6 +13,12 @@ object NumberFormatter {
 
     // Функция для форматирования числа
     fun format(number: Double): String {
-        return formatter.format(number)
+        val formatted = formatter.format(number)
+        // Если число отрицательное, добавляем пробел после минуса
+        return if (formatted.startsWith("-")) {
+            formatted.replaceFirst("-", "- ")
+        } else {
+            formatted
+        }
     }
 }

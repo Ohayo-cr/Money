@@ -65,12 +65,13 @@ class TransactionViewModel @Inject constructor(
             try {
                 // Установка даты транзакции в выбранную
                 val updatedTransaction = transaction.copy(timestamp = selectedDate.value)
+
                 repository.insertTransaction(updatedTransaction)
 
                 if (updatedTransaction.fromAccount != null) {
                     accountRepository.updateBalance(
                         updatedTransaction.fromAccount,
-                        -updatedTransaction.amount
+                        updatedTransaction.amount
                     )
                 }
                 if (updatedTransaction.toAccount != null) {
@@ -81,8 +82,6 @@ class TransactionViewModel @Inject constructor(
                 }
 
                 _transactionResult.value = Result.success(Unit)
-
-                // После успешного добавления — сбрасываем дату
 
             } catch (e: Exception) {
                 e.printStackTrace()

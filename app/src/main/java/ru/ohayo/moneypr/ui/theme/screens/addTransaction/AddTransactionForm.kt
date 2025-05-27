@@ -127,8 +127,13 @@ fun AddTransactionForm(
                     onOkClicked = {
                         val parsedAmount = keyboardViewModel.getParsedAmount()
                         if (parsedAmount != null && currencyAcc != "Not") {
+                            val amountWithSign = when (category?.type) {
+                                CategoryType.EXPENSE -> -parsedAmount // Расход — отрицательная сумма
+                                else -> parsedAmount // Доход — положительная сумма
+                            }
+
                             val transaction = TransactionEntity(
-                                amount = parsedAmount,
+                                amount = amountWithSign,
                                 content = if (note.isBlank()) null else note,
                                 timestamp = transactionDate,
                                 category = categoryId.toLong(),
