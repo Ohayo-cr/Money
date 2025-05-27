@@ -9,24 +9,12 @@ public final class NumberFormatterKeyboard {
         super();
     }
     
-    /**
-     * Форматирует числа в выражении с пробелами между тысячами и вокруг операторов.
-     *
-     * @param input Входная строка (может быть числом или выражением).
-     * @return Отформатированная строка с пробелами в числах и вокруг операторов.
-     */
     @org.jetbrains.annotations.NotNull
     public final java.lang.String formatWithSpaces(@org.jetbrains.annotations.NotNull
     java.lang.String input) {
         return null;
     }
     
-    /**
-     * Форматирует отдельное число с пробелами между тысячами.
-     *
-     * @param number Число в виде строки.
-     * @return Отформатированное число.
-     */
     private final java.lang.String formatSingleNumber(java.lang.String number) {
         return null;
     }

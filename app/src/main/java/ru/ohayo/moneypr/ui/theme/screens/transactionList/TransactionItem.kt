@@ -1,6 +1,8 @@
 package ru.ohayo.moneypr.ui.theme.screens.transactionList
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -45,14 +47,11 @@ fun TransactionItem(
     onTransactionClick: (TransactionEntity) -> Unit,
 ) {
     val category = getCategory(categories, transaction.category)
-    Card(
-        onClick = { onTransactionClick(transaction) },
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    Box(modifier = Modifier.fillMaxWidth()
+        .clickable { onTransactionClick(transaction) }
     ) {
         Row(
-            modifier = Modifier
-                .padding(2.dp),
+            modifier = Modifier,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             // Иконка категории слева
@@ -60,7 +59,8 @@ fun TransactionItem(
                 CategoryIcon(
                     iconResId = cat.iconResId,
                     backgroundColor = Color(cat.color),
-                    modifier = Modifier.size(54.dp)
+                    modifier = Modifier.size(54.dp),
+                    padding = 6.dp
                 )
             }
             Row(
@@ -87,12 +87,6 @@ fun TransactionItem(
                         color = MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.Bold,
                         maxLines = 2
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "${formatTimestamp(transaction.timestamp)}",
-                        fontSize = 12.sp,
-                        style = MaterialTheme.typography.bodyMedium
                     )
 
                 }

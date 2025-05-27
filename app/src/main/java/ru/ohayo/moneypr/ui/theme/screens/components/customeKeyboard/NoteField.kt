@@ -34,13 +34,13 @@ fun NoteField(
     onTextChanged: (String) -> Unit
 ) {
     var textFieldValue by remember(note) { mutableStateOf(note) }
-    val focusManager = LocalFocusManager.current // Получаем менеджер фокуса
+    val focusManager = LocalFocusManager.current
 
     Box(
         modifier = Modifier
             .fillMaxWidth().padding(start = 2.dp, end = 2.dp)
             .clickable {
-                focusManager.clearFocus() // Убираем фокус при клике вне TextField
+                focusManager.clearFocus()
             }
     ) {
 
@@ -55,24 +55,22 @@ fun NoteField(
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { focusState ->
-                    onFocusChanged(focusState.isFocused) // Уведомляем о состоянии фокуса
+                    onFocusChanged(focusState.isFocused)
                 },
             placeholder = {
                 Text(
-                    text = "Введите примечание",
+                    text = "Введите заметку",
                     style = MaterialTheme.typography.bodyMedium,
                     color = colorScheme.onPrimary,
                 )
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done // Здесь задаем действие
+                imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    // Логика при нажатии на OK/Enter
                     focusManager.clearFocus()
-                    // Вы можете вызвать здесь дополнительную логику
                 }
             ),
             colors = TextFieldDefaults.colors(

@@ -4,12 +4,6 @@ import java.util.Locale
 
 object NumberFormatterKeyboard {
 
-    /**
-     * Форматирует числа в выражении с пробелами между тысячами и вокруг операторов.
-     *
-     * @param input Входная строка (может быть числом или выражением).
-     * @return Отформатированная строка с пробелами в числах и вокруг операторов.
-     */
     fun formatWithSpaces(input: String): String {
         // Регулярное выражение для поиска чисел (целых, дробных, с точкой в начале)
         val numberPattern = Regex("""\d+(\.\d*)?|\.\d+""")
@@ -42,7 +36,7 @@ object NumberFormatterKeyboard {
         val result = tokens.mapIndexed { index, token ->
             when {
                 numberPattern.matches(token) -> formatSingleNumber(token)
-                operatorPattern.matches(token) -> " $token "
+                operatorPattern.matches(token) -> "\u00A0$token\u00A0"
                 else -> token
             }
         }.joinToString("")
@@ -54,12 +48,6 @@ object NumberFormatterKeyboard {
             .replace(Regex("(\\d)\\s+(\\.)"), "$1.") // Убираем пробелы между числом и точкой, если точка в конце
     }
 
-    /**
-     * Форматирует отдельное число с пробелами между тысячами.
-     *
-     * @param number Число в виде строки.
-     * @return Отформатированное число.
-     */
     private fun formatSingleNumber(number: String): String {
         return try {
             // Если число начинается с точки (например, ".1"), добавляем "0" перед точкой
@@ -69,9 +57,11 @@ object NumberFormatterKeyboard {
             // Преобразуем строку в число
             val numericValue = normalizedNumber.toDouble()
 
-            // Форматируем целую часть с пробелами
-            val integerPart = "%,d".format(Locale.getDefault(), numericValue.toLong())
-                .replace(',', ' ')
+            // 1. Форматируем с разделителями-запятыми
+            val withCommas = "%,d".format(Locale.getDefault(), numericValue.toLong())
+
+            // 2. Заменяем запятые на НЕРАЗРЫВНЫЕ пробелы
+            val integerPart = withCommas.replace(",", "\u00A0")
 
             // Форматируем дробную часть, если она есть
             val decimalPart = when {

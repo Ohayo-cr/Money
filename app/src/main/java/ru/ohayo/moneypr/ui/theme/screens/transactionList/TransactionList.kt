@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.theme.screens.transactionList
 
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
@@ -33,38 +35,50 @@ fun TransactionsList(
     var selectedTransaction by remember { mutableStateOf<TransactionEntity?>(null) }
     val scrollState = transactionListVM.scrollState
     val accounts by accountViewModel.accounts.collectAsState()
+    // Сгруппировать транзакции по дате
+    val groupedTransactions = remember(transactions) {
+        if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
-
-        Text(
-            text = "Транзакции",
-            style = MaterialTheme.typography.titleLarge,
+        Column(
             modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.TopCenter)
-        )
-
-        // Основной контент
-        when {
-            transactions.isEmpty() -> EmptyTransactionsPlaceholder()
-            else -> LazyColumn(
+                .fillMaxSize()
+                ,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Транзакции",
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 48.dp), // Пробел под заголовок
-                contentPadding = PaddingValues(horizontal = 4.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                state = scrollState
-            ) {
-                items(transactions) { transaction ->
-                    TransactionItem(
-                        transaction = transaction,
-                        categories = categories,
-                        accounts = accounts,
-                        onTransactionClick = { selectedTransaction = it }
-                    )
+                    .padding(16.dp)
+
+            )
+
+            when {
+                transactions.isEmpty() -> EmptyTransactionsPlaceholder()
+                else -> LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = 4.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    state = scrollState
+                ) {
+                    groupedTransactions.forEach { (date, dayTransactions) ->
+                        item {
+                            DayTransactionGroup(
+                                date = date,
+                                transactions = dayTransactions,
+                                categories = categories,
+                                accounts = accounts,
+                                onTransactionClick = { selectedTransaction = it }
+                            )
+                        }
+                    }
                 }
             }
         }
+    }
 
         // Диалог с деталями транзакции
         selectedTransaction?.let { transaction ->
@@ -76,10 +90,6 @@ fun TransactionsList(
             )
         }
     }
-}
-
-
-
 
 
 @Composable
