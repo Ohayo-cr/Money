@@ -17,12 +17,16 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
@@ -36,29 +40,32 @@ import sh.calvin.reorderable.rememberReorderableLazyListState
 
 
 @Composable
-fun CategoryList(categoryVM: CategoryViewModel,
+fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
                  navController: NavHostController) {
 
-    val categories = categoryVM.categories.collectAsState(initial = emptyList()).value
     val selectedTab by categoryVM.selectedCategoryType.collectAsState()
-    val filteredCategories = categories.filter { it.type == selectedTab }
-    val lazyListState = rememberLazyListState()
+    val filteredCategories by categoryVM.filteredCategories.collectAsState()
 
+    val savedScrollPosition by categoryVM.scrollPosition.collectAsState()
+    val lazyListState = rememberLazyListState(savedScrollPosition)
+
+    LaunchedEffect(lazyListState) {
+        snapshotFlow { lazyListState.firstVisibleItemIndex }
+            .collect { index -> categoryVM.saveScrollPosition(index) }
+    }
 
     val reorderableLazyListState = rememberReorderableLazyListState(lazyListState)
     { from, to ->
         categoryVM.moveCategory(from.index, to.index, selectedTab)
     }
+    val shouldScroll by categoryVM.shouldScrollToTop.collectAsState()
 
-
-    val categoryCount = filteredCategories.size
-
-    LaunchedEffect(categoryCount) {
-        if (categoryCount > 0) {
+    if (shouldScroll) {
+        LaunchedEffect(Unit) {
             lazyListState.scrollToItem(0)
+            categoryVM.setShouldScrollToTop(false) // Сбрасываем флаг
         }
     }
-
 
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -78,13 +85,10 @@ fun CategoryList(categoryVM: CategoryViewModel,
         modifier = Modifier
             .fillMaxWidth()
             .weight(1f)
-
-
     ) {
         items(
             items = filteredCategories,
             key = { it.id }
-
         ) { category ->
             ReorderableItem(
                 reorderableLazyListState, key = category.id,
@@ -117,7 +121,7 @@ fun CategoryList(categoryVM: CategoryViewModel,
                             )
                             Text(
                                 text = category.name,
-                                modifier = Modifier.padding(start = 8.dp) // Небольшой отступ от иконки
+                                modifier = Modifier.padding(start = 8.dp)
                             )
                         }
                         Text(

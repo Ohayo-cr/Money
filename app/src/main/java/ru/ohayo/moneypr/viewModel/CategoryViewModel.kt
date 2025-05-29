@@ -1,13 +1,19 @@
 package ru.ohayo.moneypr.viewModel
 
 
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.CategoryRepository
 import ru.ohayo.moneypr.domain.allEntity.Category
@@ -33,7 +39,25 @@ class CategoryViewModel @Inject constructor(
     // Храним выбранный тип
     private val _selectedCategoryType = MutableStateFlow(CategoryTypeHolder.currentType)
     val selectedCategoryType: StateFlow<CategoryType> = _selectedCategoryType
+    // Список категорий, отфильтрованный по выбранному типу
+    val filteredCategories: StateFlow<List<Category>> = selectedCategoryType
+        .combine(categories) { type, all ->
+            all.filter { it.type == type }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
+    private val _scrollPosition = MutableStateFlow(0)
+    val scrollPosition: StateFlow<Int> = _scrollPosition.asStateFlow()
+
+    fun saveScrollPosition(index: Int) {
+        _scrollPosition.value = index
+    }
+    private val _shouldScrollToTop = MutableStateFlow(false)
+    val shouldScrollToTop: StateFlow<Boolean> = _shouldScrollToTop
+
+    fun setShouldScrollToTop(value: Boolean) {
+        _shouldScrollToTop.value = value
+    }
 
     init {
         viewModelScope.launch {
@@ -63,6 +87,7 @@ class CategoryViewModel @Inject constructor(
         tempUpdatedList = _categories.value
         changedTypes.add(type)
     }
+
     fun setSelectedCategoryType(type: CategoryType) {
         _selectedCategoryType.value = type
     }

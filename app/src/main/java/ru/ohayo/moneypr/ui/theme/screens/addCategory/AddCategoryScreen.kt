@@ -138,31 +138,29 @@ fun AddCategoryScreen(
                             )
                             navController.popBackStack()
                         } else {
-                            // Создание новой категории
+
                             addCategoryVM.addCategoryAndGenerateOrder(
                                 type = selectedTab,
                                 name = categoryName,
                                 iconResId = selectedIconResId,
-                                selectedColor
+                                color = selectedColor,
+                                onComplete = {
+                                    categoryVM.setShouldScrollToTop(true)
+                                }
                             )
-                        }
-                        navController.navigate(Screen.Categories.route) {
-                            popUpTo(Screen.Categories.route) {
-                                inclusive = true
+                            navController.navigate(Screen.Categories.route) {
+                                popUpTo(Screen.Categories.route) {
+                                    inclusive = true
+                                }
                             }
                         }
                     }
                 }
             )
         }
+    }
 
-
-        BackHandler {
-            navController.navigate(Screen.Categories.route) {
-                popUpTo(Screen.Categories.route) {
-                    inclusive = true
-                }
-            }
-        }
+    BackHandler {
+        navController.popBackStack()
     }
 }

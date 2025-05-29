@@ -19,11 +19,13 @@ class AddCategoryViewModel @Inject constructor(
         return repository.getCategoryByIdUpdate(id)
     }
 
+
     fun addCategoryAndGenerateOrder(
         type: CategoryType,
         name: String,
         iconResId: Int,
-        color: Color
+        color: Color,
+        onComplete: () -> Unit
     ) {
         viewModelScope.launch {
             val order = repository.getNextOrder(type)
@@ -36,8 +38,10 @@ class AddCategoryViewModel @Inject constructor(
                 order = order
             )
             repository.addCategory(newCategory)
+            onComplete()
         }
     }
+
 
     fun updateCategory(
         id: Long,
