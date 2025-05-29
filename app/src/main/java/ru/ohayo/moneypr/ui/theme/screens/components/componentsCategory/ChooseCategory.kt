@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
@@ -35,6 +36,7 @@ fun ChooseCategory(
     backgroundColor: Color,
     name: String? = null,
     onClick: () -> Unit,
+    size: Dp = 100.dp,
     isSelected: Boolean = false
 ) {
     var isClickAnimating by remember { mutableStateOf(false) }
@@ -47,7 +49,7 @@ fun ChooseCategory(
 
     Column(
         modifier = Modifier
-            .size(100.dp)
+            .size(size)
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() },

@@ -6,12 +6,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.ohayo.moneypr.ui.theme.screens.categoryList.CategoryList
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.theme.screens.addTransaction.AddTransaction
@@ -55,8 +58,35 @@ fun NavHostScreen(navController: NavHostController) {
                 navController = navController,
                 addCategoryVM = addCategoryViewModel,
                 categoryVM = categoryViewModel,
+                isEditMode = false,
+                categoryId = null
             )
         }
+        composable(
+            route = "${Screen.AddCategoryWithId}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getLong("id")
+
+            if (categoryId != null) {
+                val addCategoryViewModel: AddCategoryViewModel = hiltViewModel()
+                val categoryViewModel: CategoryViewModel = hiltViewModel()
+
+                // Запрашиваем данные категории
+                LaunchedEffect(Unit) {
+                    categoryViewModel.loadCategory(categoryId)
+                }
+
+                AddCategoryScreen(
+                    navController = navController,
+                    addCategoryVM = addCategoryViewModel,
+                    categoryVM = categoryViewModel,
+                    isEditMode = true,
+                    categoryId = categoryId
+                )
+            }
+        }
+
         composable(Screen.Currency.route) {
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
             CurrencyScreen(currencyViewModel)

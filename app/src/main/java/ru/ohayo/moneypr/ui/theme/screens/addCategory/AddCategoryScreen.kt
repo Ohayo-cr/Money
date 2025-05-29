@@ -1,13 +1,17 @@
 package ru.ohayo.moneypr.ui.theme.screens.addCategory
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -17,16 +21,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
+import ru.ohayo.moneypr.ui.theme.ErorColor
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.components.CategoryHeader
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.components.ColorPickerSection
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.IconGridSection
 import ru.ohayo.moneypr.ui.theme.screens.components.FullWidthButton
+import ru.ohayo.moneypr.ui.theme.screens.components.TextSizeButton
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
 import ru.ohayo.moneypr.viewModel.CategoryViewModel
@@ -35,8 +43,10 @@ import ru.ohayo.moneypr.viewModel.CategoryViewModel
 fun AddCategoryScreen(
     navController: NavHostController,
     addCategoryVM: AddCategoryViewModel,
-    categoryVM: CategoryViewModel,
-    ) {
+    categoryVM: CategoryViewModel = hiltViewModel(),
+    isEditMode: Boolean = false,
+    categoryId: Long? = null
+) {
     val selectedTab by categoryVM.selectedCategoryType.collectAsState()
 
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -47,10 +57,23 @@ fun AddCategoryScreen(
     var selectedColor by remember { mutableStateOf(Color(0xFF67676B)) }
     val showColorPickerDialog = remember { mutableStateOf(false) }
 
+    if (isEditMode && categoryId != null) {
+        LaunchedEffect(categoryId) {
+            val category = addCategoryVM.getCategoryByIdUpdate(categoryId)
+            if (category != null) {
+                categoryName = category.name
+                selectedIconResId = category.iconResId
+                selectedColor = Color(category.color)
+            }
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier
-            .weight(1f)
-            .padding(bottom = 16.dp)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+
+        ) {
             CategoryTabRow(
                 selectedType = selectedTab,
                 onTypeSelected = { newType ->
@@ -80,7 +103,7 @@ fun AddCategoryScreen(
                 onColorSelected = { color -> selectedColor = color },
                 selectedIconResId = selectedIconResId,
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
 
             // Иконки
@@ -90,24 +113,48 @@ fun AddCategoryScreen(
             )
         }
 
-
-    FullWidthButton(text = "Сохранить",
-        onClick = {
-            if (categoryName.isNotBlank()) {
-                addCategoryVM.addCategoryAndGenerateOrder(
-                    type = selectedTab,
-                    name = categoryName,
-                    iconResId = selectedIconResId,
-                    selectedColor
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            if (isEditMode) {
+                TextSizeButton(
+                    text = "Удалить",
+                    onClick = {},
+                    containerColor = ErorColor,
                 )
-                navController.navigate(Screen.Categories.route) {
-                    popUpTo(Screen.Categories.route) {
-                        inclusive = true
+            }
+            FullWidthButton(text = "Сохранить",
+                onClick = {
+                    if (categoryName.isNotBlank()) {
+                        if (isEditMode && categoryId != null) {
+                            // Обновление категории
+                            addCategoryVM.updateCategory(
+                                id = categoryId,
+                                name = categoryName,
+                                iconResId = selectedIconResId,
+                                color = selectedColor.toArgb().toLong(),
+                                type = selectedTab,
+                            )
+                            navController.popBackStack()
+                        } else {
+                            // Создание новой категории
+                            addCategoryVM.addCategoryAndGenerateOrder(
+                                type = selectedTab,
+                                name = categoryName,
+                                iconResId = selectedIconResId,
+                                selectedColor
+                            )
+                        }
+                        navController.navigate(Screen.Categories.route) {
+                            popUpTo(Screen.Categories.route) {
+                                inclusive = true
+                            }
+                        }
                     }
                 }
-            }
+            )
         }
-    )
 
 
         BackHandler {

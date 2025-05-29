@@ -40,8 +40,7 @@ class CategoryRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun deleteCategory(category: Category) =
-        categoryDao.deleteCategory(category)
+
 
     override fun getCategoriesByType(type: CategoryType): Flow<List<Category>> =
         categoryDao.getCategoriesByType(type)
@@ -49,9 +48,6 @@ class CategoryRepositoryImpl @Inject constructor(
                 Log.e("CategoryRepo", "Error fetching categories by type", e)
                 throw e
             }
-
-
-
 
 
     override suspend fun updateOrderByType(categories: List<Category>) {
@@ -63,7 +59,4 @@ class CategoryRepositoryImpl @Inject constructor(
             categoryDao.updateOrderByType(reversedList)
         }
     }
-
-
-
 }

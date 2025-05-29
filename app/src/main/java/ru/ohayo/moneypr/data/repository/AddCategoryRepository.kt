@@ -1,5 +1,7 @@
 package ru.ohayo.moneypr.data.repository
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
 import ru.ohayo.moneypr.domain.allEntity.Category
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
@@ -19,5 +21,15 @@ class AddCategoryRepository @Inject constructor(
         val maxOrder = categoryDao.getMaxOrder(type)
         return maxOrder?.plus(1) ?: 1
     }
+ suspend fun getCategoryByIdUpdate(id: Long): Category? {
+        return categoryDao.getCategoryByIdUpdate(id)
+    }
+   suspend fun updateCategory(category: Category) {
+        withContext(Dispatchers.IO) {
+            categoryDao.updateCategory(category)
+        }
+    }
+    suspend fun deleteCategory(category: Category) =
+        categoryDao.deleteCategory(category)
 
 }

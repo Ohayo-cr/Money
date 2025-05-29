@@ -19,5 +19,7 @@ sealed class Screen(val route: String) {
     object Categories : Screen("categories")               // Категории
     object Currency : Screen("currency")                   // Валюта
     object AddCategory : Screen("add_category")
+    object AddCategoryWithId :  Screen("add_category/{id}")
+
 
 }

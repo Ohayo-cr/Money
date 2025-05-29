@@ -12,10 +12,11 @@ interface CategoryRepository {
     suspend fun isEmpty(): Boolean
 
     fun getCategoryById(id: Long): Flow<Category?>
-    suspend fun deleteCategory(category: Category)
+
     fun getCategoriesByType(type: CategoryType): Flow<List<Category>>
 
     suspend fun updateOrderByType(categories: List<Category>)
+
 }
 
 

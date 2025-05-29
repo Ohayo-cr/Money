@@ -23,14 +23,14 @@ fun IconGridSection(
     Text(
         text = "Выберите иконку",
         style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(start = 16.dp,top = 16.dp)
     )
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(5),
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(AllCategoryIcons.allIcons) { _, item ->
@@ -40,6 +40,7 @@ fun IconGridSection(
                 onClick = {
                     onIconSelected(item)
                 },
+                size = 80.dp,
                 isSelected = selectedIconResId == item
             )
         }

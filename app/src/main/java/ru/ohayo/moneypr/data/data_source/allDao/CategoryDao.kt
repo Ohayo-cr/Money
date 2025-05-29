@@ -52,6 +52,10 @@ interface CategoryDao {
             updateOrder(category.id, index + 1)
         }
     }
+    @Update
+    suspend fun updateCategory(category: Category)
+    @Query("SELECT * FROM category WHERE id = :id")
+    suspend fun getCategoryByIdUpdate(id: Long): Category?
 
 }
 

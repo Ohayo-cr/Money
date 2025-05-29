@@ -23,7 +23,8 @@ fun FullWidthButton(
     containerColor: Color = MaterialTheme.colorScheme.inversePrimary,
     contentColor: Color = MaterialTheme.colorScheme.onPrimary,
     borderColor: Color = Color.Black, // Новый параметр
-    borderWidth: Dp = 1.dp // Новый параметр
+    borderWidth: Dp = 1.dp ,
+
 ) {
     val buttonShape = RoundedCornerShape(percent = 20)
     Button(

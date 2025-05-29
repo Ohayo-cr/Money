@@ -4,10 +4,10 @@ package ru.ohayo.moneypr.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.repository.CategoryRepository
 import ru.ohayo.moneypr.domain.allEntity.Category
@@ -22,6 +22,9 @@ class CategoryViewModel @Inject constructor(
     // Используем StateFlow для управления состоянием
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
     val categories: StateFlow<List<Category>> = _categories
+    // Текущая категория при редактировании
+    private val _category = MutableStateFlow<Category?>(null)
+    val category: StateFlow<Category?> = _category
     object CategoryTypeHolder {
         var currentType: CategoryType = CategoryType.EXPENSE
     }
@@ -75,13 +78,16 @@ class CategoryViewModel @Inject constructor(
             tempUpdatedList = emptyList()
         }
     }
+    fun loadCategory(id: Long) {
+        viewModelScope.launch {
+            _category.value = categoryRepository.getCategoryById(id).first()
+        }
+    }
 
 
     fun filterCategoriesByType(type: CategoryType): List<Category> {
         return _categories.value.filter { it.type == type }
     }
-
-
 
 
 }
