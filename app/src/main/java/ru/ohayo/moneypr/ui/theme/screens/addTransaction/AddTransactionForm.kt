@@ -41,6 +41,7 @@ import ru.ohayo.moneypr.viewModel.TransactionViewModel
 
 
 
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddTransactionForm(
@@ -48,7 +49,6 @@ fun AddTransactionForm(
     viewModel: TransactionViewModel = hiltViewModel(),
     keyboardViewModel: KeyboardViewModel = hiltViewModel(),
     accountViewModel: AccountViewModel = hiltViewModel(),
-    onBack: () -> Unit,
     onTransactionAdded: () -> Unit
 ) {
     val selectedAccount by accountViewModel.selectedAccount.collectAsState()
@@ -134,7 +134,7 @@ fun AddTransactionForm(
 
                             val transaction = TransactionEntity(
                                 amount = amountWithSign,
-                                content = if (note.isBlank()) null else note,
+                                content = note.ifBlank { null },
                                 timestamp = transactionDate,
                                 category = categoryId.toLong(),
                                 fromAccount = selectedFromAccount?.id,
@@ -182,4 +182,5 @@ fun AddTransactionForm(
             }
         }
     }
+
 }
