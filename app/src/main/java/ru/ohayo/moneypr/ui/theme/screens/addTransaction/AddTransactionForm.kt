@@ -28,8 +28,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.Account
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
-import ru.ohayo.moneypr.ui.theme.screens.components.AccountSelectionBottomSheet
-import ru.ohayo.moneypr.ui.theme.screens.components.DatePickerScrollDialog
+import ru.ohayo.moneypr.ui.theme.screens.components.AccountSelectSheet
+import ru.ohayo.moneypr.ui.theme.screens.components.DatePickerSheet
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculatorKeyboard
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.NoteField
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.TopPanelKeyboard
@@ -156,7 +156,7 @@ fun AddTransactionForm(
 
                 if (showDatePickerDialog) {
                     val initialDateTime = millisToLocalDateTime(transactionDate)
-                    DatePickerScrollDialog(
+                    DatePickerSheet(
                         onDismiss = { showDatePickerDialog = false },
                         onDateSelected = { dateTime ->
                             val newDate = localDateTimeToMillis(dateTime)
@@ -170,7 +170,7 @@ fun AddTransactionForm(
                 }
 
                 if (showAccountSelection) {
-                    AccountSelectionBottomSheet(
+                    AccountSelectSheet(
                         accounts = accounts,
                         selectedAccount = selectedAccount,
                         onDismiss = { showAccountSelection = false },
