@@ -28,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.Account
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
-import ru.ohayo.moneypr.ui.theme.screens.components.AccountSelectionDialog
+import ru.ohayo.moneypr.ui.theme.screens.components.AccountSelectionBottomSheet
 import ru.ohayo.moneypr.ui.theme.screens.components.DatePickerScrollDialog
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculatorKeyboard
 import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.NoteField
@@ -75,7 +75,7 @@ fun AddTransactionForm(
     val currencyAcc = selectedAccount?.currency ?: "Not"
 
     val focusManager = LocalFocusManager.current
-    var showAccountSelectionDialog by remember { mutableStateOf(false) }
+    var showAccountSelection by remember { mutableStateOf(false) }
 
     var showDatePickerDialog by remember { mutableStateOf(false) }
     val lastDateFromDB by viewModel.lastSelectedDate.collectAsState(initial = System.currentTimeMillis())
@@ -108,7 +108,7 @@ fun AddTransactionForm(
                 TopPanelKeyboard(
                     viewModel = keyboardViewModel,
                     onAccountButtonClicked = {
-                        showAccountSelectionDialog = true
+                        showAccountSelection = true
                     },
                     selectedAccountName = selectedAccount?.name ?: "X account",
                     currencyText = currencyAcc
@@ -169,15 +169,14 @@ fun AddTransactionForm(
                     )
                 }
 
-                if (showAccountSelectionDialog) {
-
-                    AccountSelectionDialog(
+                if (showAccountSelection) {
+                    AccountSelectionBottomSheet(
                         accounts = accounts,
                         selectedAccount = selectedAccount,
-                        onDismiss = { showAccountSelectionDialog = false },
+                        onDismiss = { showAccountSelection = false },
                         onAccountSelected = { account: Account ->
                             accountViewModel.setSelectedAccount(account)
-                            showAccountSelectionDialog = false
+                            showAccountSelection = false
                         }
                     )
                 }
