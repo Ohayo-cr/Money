@@ -3,6 +3,7 @@ package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -20,7 +22,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
-import ru.ohayo.moneypr.ui.theme.RedOrange
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
@@ -41,8 +42,6 @@ fun AddTransaction(
     var isFirstSelection by rememberSaveable { mutableStateOf(true) }
     val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
 
-
-
     Column(modifier = Modifier.fillMaxSize()) {
 
         CategoryTabRow(
@@ -56,12 +55,19 @@ fun AddTransaction(
                 .weight(1f)
 
         ) {
-
-
+            val bottomPadding by remember(showAddTransactionForm) {
+                derivedStateOf {
+                    if (showAddTransactionForm) 500.dp // Высота формы или чуть больше
+                    else 0.dp
+                }
+            }
             LazyVerticalGrid(
                 state = listState,
                 columns = GridCells.Fixed(4),
-                contentPadding = PaddingValues(top = 20.dp),
+                contentPadding = PaddingValues(
+                    top = 20.dp,
+                    bottom = bottomPadding
+                ),
                 horizontalArrangement = Arrangement.spacedBy(2.dp),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
@@ -79,43 +85,57 @@ fun AddTransaction(
                 }
             }
 
-            if (showAddTransactionForm && selectedCategoryId != null) {
-                val density = LocalDensity.current
+            val density = LocalDensity.current
+            LaunchedEffect(key1 = selectedCategoryId) {
+                if (isFirstSelection && showAddTransactionForm) {
+                    val index = filteredCategories.indexOfFirst { it.id == selectedCategoryId }
+                    if (index != -1) {
 
-                LaunchedEffect(key1 = selectedCategoryId, key2 = isFirstSelection) {
-                    if (isFirstSelection) {
-                        delay(500)
-                        val index = filteredCategories.indexOfFirst { it.id == selectedCategoryId }
-                        if (index != -1) {
-                            // Переводим dp в px
-                            val itemSizePx = with(density) { 100.dp.toPx().toInt() }
+                        val bottomPaddingPx = density.run { bottomPadding.roundToPx() }
+
+                        listState.layoutInfo.visibleItemsInfo.getOrNull(0)?.let { firstItem ->
+                            val itemSizePx = firstItem.size.height
                             val visibleHeight = listState.layoutInfo.viewportSize.height
-                            val offset = visibleHeight - itemSizePx
 
-                            // Плавный скролл
+                            val scrollOffset = visibleHeight - bottomPaddingPx + itemSizePx - 20
+
                             listState.animateScrollToItem(
                                 index = index,
-                                scrollOffset = -offset
+                                scrollOffset = -scrollOffset
                             )
-
                             isFirstSelection = false
                         }
                     }
                 }
             }
-        }
-        if (showAddTransactionForm && selectedCategoryId != null) {
-            AddTransactionForm(
-                categoryId = selectedCategoryId!!.toInt(),
-                onTransactionAdded = {
-                    navController.navigate(Screen.Records.route) {
-                        popUpTo(0)
-                    }
+
+
+
+            if (showAddTransactionForm && selectedCategoryId != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                ) {
+                    AddTransactionForm(
+                        categoryId = selectedCategoryId!!.toInt(),
+                        onTransactionAdded = {
+                            navController.navigate(Screen.Records.route) {
+                                popUpTo(0)
+                            }
+                        },
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 16.dp)
+                            .wrapContentHeight() // Чтобы не занимала всё пространство
+                    )
                 }
-            )
+            }
         }
     }
 }
+
+
 
 
 

@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -49,7 +51,8 @@ fun AddTransactionForm(
     viewModel: TransactionViewModel = hiltViewModel(),
     keyboardViewModel: KeyboardViewModel = hiltViewModel(),
     accountViewModel: AccountViewModel = hiltViewModel(),
-    onTransactionAdded: () -> Unit
+    onTransactionAdded: () -> Unit,
+    modifier: Modifier
 ) {
     val selectedAccount by accountViewModel.selectedAccount.collectAsState()
     val note by viewModel.note
@@ -88,11 +91,12 @@ fun AddTransactionForm(
         Divider(
             modifier = Modifier
                 .height(1.dp),
-            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+            color = colorScheme.outlineVariant.copy(alpha = 0.4f)
         )
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(colorScheme.background)
                 .clickable { focusManager.clearFocus() },
             contentAlignment = Alignment.BottomCenter
         ) {
