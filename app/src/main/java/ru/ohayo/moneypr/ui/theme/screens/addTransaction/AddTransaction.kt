@@ -3,9 +3,7 @@ package ru.ohayo.moneypr.ui.theme.screens.addTransaction
 
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,7 +18,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kotlinx.coroutines.delay
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.ChooseCategory
@@ -126,7 +123,6 @@ fun AddTransaction(
                         },
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .padding(bottom = 16.dp)
                             .wrapContentHeight() // Чтобы не занимала всё пространство
                     )
                 }
