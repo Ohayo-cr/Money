@@ -14,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,6 +39,9 @@ fun AddTransaction(
     val listState = rememberLazyGridState()
     var isFirstSelection by rememberSaveable { mutableStateOf(true) }
     val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
+    val screenHeight = LocalConfiguration.current.screenHeightDp
+    val bottomPaddingPercentage = 0.5f
+    val bottomPadding = (screenHeight * bottomPaddingPercentage).dp
 
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -52,12 +56,7 @@ fun AddTransaction(
                 .weight(1f)
 
         ) {
-            val bottomPadding by remember(showAddTransactionForm) {
-                derivedStateOf {
-                    if (showAddTransactionForm) 500.dp // Высота формы или чуть больше
-                    else 0.dp
-                }
-            }
+
             LazyVerticalGrid(
                 state = listState,
                 columns = GridCells.Fixed(4),
@@ -91,10 +90,10 @@ fun AddTransaction(
                         val bottomPaddingPx = density.run { bottomPadding.roundToPx() }
 
                         listState.layoutInfo.visibleItemsInfo.getOrNull(0)?.let { firstItem ->
-                            val itemSizePx = firstItem.size.height
+                            val itemSizePx = firstItem.size.height / 2
                             val visibleHeight = listState.layoutInfo.viewportSize.height
 
-                            val scrollOffset = visibleHeight - bottomPaddingPx + itemSizePx - 20
+                            val scrollOffset = visibleHeight - bottomPaddingPx - itemSizePx
 
                             listState.animateScrollToItem(
                                 index = index,
