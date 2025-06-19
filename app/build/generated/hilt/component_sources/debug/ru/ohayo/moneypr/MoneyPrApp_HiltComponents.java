@@ -50,6 +50,7 @@ import ru.ohayo.moneypr.viewModel.AccountViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.BottomNavViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.CategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.viewModel.ChartsVM_HiltModules;
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.KeyboardViewModel_HiltModules;
 import ru.ohayo.moneypr.viewModel.TransactionListViewModel_HiltModules;
@@ -155,6 +156,7 @@ public final class MoneyPrApp_HiltComponents {
           AddCategoryViewModel_HiltModules.KeyModule.class,
           BottomNavViewModel_HiltModules.KeyModule.class,
           CategoryViewModel_HiltModules.KeyModule.class,
+          ChartsVM_HiltModules.KeyModule.class,
           CurrencyViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
@@ -202,6 +204,7 @@ public final class MoneyPrApp_HiltComponents {
           AddCategoryViewModel_HiltModules.BindsModule.class,
           BottomNavViewModel_HiltModules.BindsModule.class,
           CategoryViewModel_HiltModules.BindsModule.class,
+          ChartsVM_HiltModules.BindsModule.class,
           CurrencyViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
           KeyboardViewModel_HiltModules.BindsModule.class,

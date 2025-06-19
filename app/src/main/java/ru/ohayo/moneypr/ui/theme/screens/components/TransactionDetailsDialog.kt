@@ -53,7 +53,7 @@ fun TransactionDetailsDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(text = "Сумма: ${NumberFormatter.format(transaction.amount)}")
-                Text(text = "Категория:${category?.name ?: "Неизвестная категория"}")
+                Text(text = "Категория:${category?.categoryName ?: "Неизвестная категория"}")
                 Text(text = "Дата: ${
                     ru.ohayo.moneypr.ui.theme.screens.transactionList.formatTimestamp(
                         transaction.timestamp

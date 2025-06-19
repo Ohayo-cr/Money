@@ -47,6 +47,8 @@ import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_BottomNavViewModel_HiltM
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_BottomNavViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_ChartsVM_HiltModules_BindsModule;
+import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_ChartsVM_HiltModules_KeyModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_BindsModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_KeyboardViewModel_HiltModules_BindsModule;
@@ -106,6 +108,8 @@ import hilt_aggregated_deps._ru_ohayo_moneypr_viewModel_TransactionViewModel_Hil
         _ru_ohayo_moneypr_viewModel_BottomNavViewModel_HiltModules_KeyModule.class,
         _ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_BindsModule.class,
         _ru_ohayo_moneypr_viewModel_CategoryViewModel_HiltModules_KeyModule.class,
+        _ru_ohayo_moneypr_viewModel_ChartsVM_HiltModules_BindsModule.class,
+        _ru_ohayo_moneypr_viewModel_ChartsVM_HiltModules_KeyModule.class,
         _ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_BindsModule.class,
         _ru_ohayo_moneypr_viewModel_CurrencyViewModel_HiltModules_KeyModule.class,
         _ru_ohayo_moneypr_viewModel_KeyboardViewModel_HiltModules_BindsModule.class,

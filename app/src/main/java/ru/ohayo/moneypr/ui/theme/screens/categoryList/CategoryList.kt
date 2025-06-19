@@ -17,8 +17,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import kotlinx.coroutines.delay
 import ru.ohayo.moneypr.ui.theme.screens.navController.Screen
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryIcon
 import ru.ohayo.moneypr.ui.theme.screens.components.componentsCategory.CategoryTabRow
@@ -120,7 +117,7 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
                                 onClick = {}
                             )
                             Text(
-                                text = category.name,
+                                text = category.categoryName,
                                 modifier = Modifier.padding(start = 8.dp)
                             )
                         }

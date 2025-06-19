@@ -71,7 +71,7 @@ fun AddTransaction(
                     ChooseCategory(
                         iconItem = category.iconResId,
                         backgroundColor = Color(category.color),
-                        name = category.name,
+                        name = category.categoryName,
                         onClick = {
                             selectedCategoryId = category.id
                             showAddTransactionForm = true

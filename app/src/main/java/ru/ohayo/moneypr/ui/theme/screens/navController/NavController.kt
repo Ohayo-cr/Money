@@ -19,12 +19,13 @@ import ru.ohayo.moneypr.ui.theme.screens.AddAccountScreen
 import ru.ohayo.moneypr.ui.theme.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.theme.screens.addTransaction.AddTransaction
 import ru.ohayo.moneypr.ui.theme.screens.CurrencyScreen
-import ru.ohayo.moneypr.ui.theme.screens.RecordsScreen
+import ru.ohayo.moneypr.ui.theme.screens.charts.ChartsScreen
 import ru.ohayo.moneypr.ui.theme.screens.allSettings.SettingsScreen
 import ru.ohayo.moneypr.ui.theme.screens.SplashScreen
 import ru.ohayo.moneypr.ui.theme.screens.transactionList.TransactionsList
 import ru.ohayo.moneypr.viewModel.AccountViewModel
 import ru.ohayo.moneypr.viewModel.AddCategoryViewModel
+import ru.ohayo.moneypr.viewModel.ChartsVM
 import ru.ohayo.moneypr.viewModel.CurrencyViewModel
 
 
@@ -95,7 +96,7 @@ fun NavHostScreen(navController: NavHostController) {
             SettingsScreen(navController = navController)
         }
         composable(Screen.Charts.route) {
-            RecordsScreen()
+            ChartsScreen()
         }
         composable(Screen.Records.route) {
             TransactionsList()

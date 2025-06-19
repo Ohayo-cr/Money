@@ -32,7 +32,7 @@ class AddCategoryViewModel @Inject constructor(
             val newCategory = Category(
                 id = 0,
                 type = type,
-                name = name,
+                categoryName = name,
                 iconResId = iconResId,
                 color = color.toArgb().toLong(),
                 order = order
@@ -57,7 +57,7 @@ class AddCategoryViewModel @Inject constructor(
                 repository.updateCategory(
                     Category(
                         id = id,
-                        name = name,
+                        categoryName = name,
                         iconResId = iconResId,
                         color = color,
                         type = type,

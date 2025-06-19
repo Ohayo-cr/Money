@@ -59,7 +59,7 @@ fun AddCategoryScreen(
         LaunchedEffect(categoryId) {
             val category = addCategoryVM.getCategoryByIdUpdate(categoryId)
             if (category != null) {
-                categoryName = category.name
+                categoryName = category.categoryName
                 selectedIconResId = category.iconResId
                 selectedColor = Color(category.color)
             }

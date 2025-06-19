@@ -12,7 +12,7 @@ object DefaultCategories {
     fun category(name: String, iconResId: Int, isIncome: Boolean = false) =
         Category(
             type = if (isIncome) CategoryType.INCOME else CategoryType.EXPENSE,
-            name = name,
+            categoryName = name,
             color = if (isIncome) INCOME_COLOR else EXPENSE_COLOR,
             iconResId = iconResId
         )

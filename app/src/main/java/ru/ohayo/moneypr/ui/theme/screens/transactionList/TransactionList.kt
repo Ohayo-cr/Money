@@ -2,15 +2,12 @@ package ru.ohayo.moneypr.ui.theme.screens.transactionList
 
 
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
@@ -35,7 +32,6 @@ fun TransactionsList(
     var selectedTransaction by remember { mutableStateOf<TransactionEntity?>(null) }
     val scrollState = transactionListVM.scrollState
     val accounts by accountViewModel.accounts.collectAsState()
-    // Сгруппировать транзакции по дате
     val groupedTransactions = remember(transactions) {
         if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
     }
@@ -80,7 +76,7 @@ fun TransactionsList(
         }
     }
 
-        // Диалог с деталями транзакции
+
         selectedTransaction?.let { transaction ->
             TransactionDetailsDialog(
                 transaction = transaction,
