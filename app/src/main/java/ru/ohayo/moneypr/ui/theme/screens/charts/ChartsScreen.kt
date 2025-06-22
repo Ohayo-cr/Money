@@ -16,10 +16,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 
 import androidx.compose.runtime.getValue
@@ -44,15 +46,17 @@ import ru.ohayo.moneypr.viewModel.ChartsVM
 @Composable
 fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
-    val categorySummaries by viewModel.categorySummaries.collectAsState(emptyList())
+    val categorySummaries  by viewModel.categorySummaries.collectAsState()
+    LaunchedEffect(Unit) {
+        viewModel.refreshData()
+    }
 
     Column(modifier = Modifier.padding(16.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Период:", fontSize = 18.sp)
+            Text(text = "Период: this mount", fontSize = 18.sp)
             Spacer(modifier = Modifier.width(8.dp))
             // Здесь можно добавить выпадающий список выбора месяца
         }
-
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyColumn {
@@ -61,6 +65,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
             }
         }
     }
+
 }
 @Composable
 fun CategoryItem(category: CategorySummary) {
@@ -77,7 +82,7 @@ fun CategoryItem(category: CategorySummary) {
             modifier = Modifier.size(24.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = category.name, fontWeight = FontWeight.Bold)
+        Text(text = category.categoryName, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.weight(1f))
         Text(text = "${category.totalAmount}")
     }

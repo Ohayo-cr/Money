@@ -32,24 +32,25 @@ interface TransactionDao {
     @Query("SELECT timestamp FROM transactions ORDER BY id DESC LIMIT 1")
     fun getLastAddedTransactionTimestampFlow(): Flow<Long?>
 
-    @Query(
-        """
-    SELECT 
-        t.category AS categoryId,
-        c.categoryName AS name,
-        SUM(t.amount) AS totalAmount,
-        c.color AS color,              
-        c.iconResId AS iconResId      
-    FROM transactions t
-    JOIN categories c ON t.category = c.id
-    WHERE strftime('%Y-%m', datetime(t.timestamp, 'unixepoch')) = strftime('%Y-%m', 'now')
-      AND t.amount > 0
-    GROUP BY t.category
-    ORDER BY totalAmount DESC
-"""
-    )
-    fun getCategorySummariesByMonth(): Flow<List<CategorySummary>>
+    @Query("""
+        SELECT c.categoryName, 
+               SUM(t.amount) AS totalAmount, 
+               c.color, 
+               c.iconResId
+        FROM transactions t
+        INNER JOIN Category c ON t.category = c.id
+        WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
+        GROUP BY c.id
+        ORDER BY totalAmount 
+    """)
+    suspend fun getMonthlyCategorySummaries(
+        startTimestamp: Long,
+        endTimestamp: Long
+    ): List<CategorySummary>
 }
+
+
+
 
 
 

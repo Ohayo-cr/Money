@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
 import ru.ohayo.moneypr.ui.theme.screens.charts.components.CategorySummary
+import ru.ohayo.moneypr.ui.theme.screens.charts.components.getCurrentMonthRange
 
 import javax.inject.Inject
 
@@ -34,8 +35,9 @@ class TransactionRepository @Inject constructor(
     }
     fun getLastAddedTransactionTimestampFlow(): Flow<Long?> =
         transactionDao.getLastAddedTransactionTimestampFlow()
-    fun getCategorySummariesByMonth(): Flow<List<CategorySummary>> {
-        return transactionDao.getCategorySummariesByMonth()
+    suspend fun getTopCategoriesForCurrentMonth(): List<CategorySummary> {
+        val (start, end) = getCurrentMonthRange()
+        return transactionDao.getMonthlyCategorySummaries(start, end)
     }
 
 
