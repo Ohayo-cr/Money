@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -45,7 +46,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
     Column(modifier = Modifier
         .padding(start = 8.dp)
         .fillMaxSize(), verticalArrangement = Arrangement.Top ) {
-        Row() {
+        Row {
             Text(text = "Период: this mount", fontSize = 18.sp)
             Spacer(modifier = Modifier.width(4.dp))
             // Здесь можно добавить выпадающий список выбора месяца
@@ -68,7 +69,18 @@ fun CategoryItem(category: CategorySummaryFromDb) {
             .fillMaxWidth()
             .padding(vertical = 2.dp)
             .background(
-                color = Color(category.color).copy(alpha = 0.5f),
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        Color(category.color).copy(alpha = 0.01f),
+                        Color(category.color).copy(alpha = 0.1f),
+                        Color(category.color).copy(alpha = 0.4f),
+                        Color(category.color).copy(alpha = 0.5f),
+                        Color(category.color).copy(alpha = 0.5f),
+                        Color(category.color).copy(alpha = 0.3f),
+                        Color(category.color).copy(alpha = 0.1f)
+                    ),
+
+                ),
                 shape = RoundedCornerShape(
                     topStart = 10.dp,
                     bottomStart = 10.dp
@@ -78,11 +90,11 @@ fun CategoryItem(category: CategorySummaryFromDb) {
     ) {
         CategoryIcon(iconResId = category.iconResId,
             backgroundColor = Color(category.color),
-            modifier = Modifier.size(46.dp) )
+            modifier = Modifier.size(48.dp) )
         Spacer(modifier = Modifier.width(8.dp))
         Column(
             modifier = Modifier
-                .weight(1f)  // Занимает всё доступное место
+                .weight(1f)
                 .align(Alignment.CenterVertically)
         ) {
             Text(
@@ -93,15 +105,15 @@ fun CategoryItem(category: CategorySummaryFromDb) {
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = category.percentage?.let {
+                text = category.percentage.let {
                     "%.2f%%".format(it)
-                } ?: "N/A"
+                }
             )
         }
 
 
         Text(
-            text = "${NumberFormatter.format(category.totalAmount)}",
+            text = NumberFormatter.format(category.totalAmount),
             modifier = Modifier.padding(end = 8.dp))
 
     }

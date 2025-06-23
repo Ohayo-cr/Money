@@ -35,18 +35,25 @@ fun CategoryIcon(
 ) {
     val isPicture = IconTypeMapper.isNoTint(iconResId)
     val iconTint = if (!isPicture) Color.White else Color.Unspecified
+    val shape = RoundedCornerShape(percent = 20)
 
     Box(
         modifier = modifier
             .scale(scale)
             .background(
                 color = backgroundColor,
-                shape = RoundedCornerShape(percent = 20)
+                shape = shape
             )
-            .border(
-                width = if (isSelected) 2.dp else 1.dp,
-                color = if (isSelected) MaterialTheme.colorScheme.inversePrimary else Color.Black,
-                shape = RoundedCornerShape(percent = 20)
+            .then(
+                if (isSelected) {
+                    Modifier.border(
+                        width = 2.dp,
+                        color = MaterialTheme.colorScheme.inversePrimary,
+                        shape = shape
+                    )
+                } else {
+                    Modifier
+                }
             )
             .padding(if (isPicture) 0.dp else padding)
     ) {
@@ -57,7 +64,7 @@ fun CategoryIcon(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .matchParentSize()
-                .clip(RoundedCornerShape(percent = 20))
+                .clip(shape)
         )
     }
 }
