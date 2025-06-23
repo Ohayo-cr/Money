@@ -9,7 +9,7 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
-import ru.ohayo.moneypr.ui.theme.screens.charts.components.CategorySummary
+import ru.ohayo.moneypr.ui.theme.screens.charts.components.CategorySummaryFromDb
 
 
 @Dao
@@ -32,9 +32,12 @@ interface TransactionDao {
     @Query("SELECT timestamp FROM transactions ORDER BY id DESC LIMIT 1")
     fun getLastAddedTransactionTimestampFlow(): Flow<Long?>
 
-    @Query("""
+    @Query(
+        """
         SELECT c.categoryName, 
-               SUM(t.amount) AS totalAmount, 
+               SUM(t.amount) AS totalAmount,
+               (SUM(t.amount) * 100.0 / (SELECT SUM(amount) FROM transactions 
+WHERE timestamp BETWEEN :startTimestamp AND :endTimestamp)) AS percentage,
                c.color, 
                c.iconResId
         FROM transactions t
@@ -42,11 +45,12 @@ interface TransactionDao {
         WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
         GROUP BY c.id
         ORDER BY totalAmount 
-    """)
+    """
+    )
     suspend fun getMonthlyCategorySummaries(
         startTimestamp: Long,
         endTimestamp: Long
-    ): List<CategorySummary>
+    ): List<CategorySummaryFromDb>
 }
 
 
