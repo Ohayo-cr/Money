@@ -26,7 +26,7 @@ fun MainScreen(navController: NavHostController,viewModel: BottomNavViewModel = 
         viewModel.updateNavigation(currentRoute)
     }
 
-    // Состояние для показа/скрытия bottom navigation
+
     val showBottomNav by viewModel.shouldShowBottomNavigation.collectAsState()
 
     // Общая высота bottom navigation bar (примерно 56.dp по умолчанию в M3)
