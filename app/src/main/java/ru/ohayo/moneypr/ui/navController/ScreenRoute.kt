@@ -1,25 +1,20 @@
 package ru.ohayo.moneypr.ui.navController
 
 sealed class Screen(val route: String) {
-    // Стартовые экраны
-    object Splash : Screen("splash")
 
-    // Основные экраны (вкладки)
-    object Records : Screen("records")  // Записи
-    object Charts : Screen("charts")    // Графики
-    object Reports : Screen("reports")  // Отчеты
-    object Settings : Screen("settings") // Настройки
+    data object Splash : Screen("splash")
 
-    object AddTransaction : Screen("add_transaction")
+    data object Records : Screen("records")
+    data object Charts : Screen("charts")
+    data object Reports : Screen("reports")
+    data object Settings : Screen("settings")
+    data object AddTransaction : Screen("add_transaction")
 
-    // Управление аккаунтами
-    object AddAccount : Screen("add_account")              // Добавить счет
+    data object AddAccount : Screen("add_account")
 
-    // Настройки
-    object Categories : Screen("categories")               // Категории
-    object Currency : Screen("currency")                   // Валюта
-    object AddCategory : Screen("add_category")
-    object AddCategoryWithId :  Screen("add_category/{id}")
-
+    data object Categories : Screen("categories")
+    data  object Currency : Screen("currency")
+    data object AddCategory : Screen("add_category")
+    data object AddCategoryWithId :  Screen("add_category/{id}")
 
 }

@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.customeKeyboard
+package ru.ohayo.moneypr.models.formate
 
 import java.util.Locale
 

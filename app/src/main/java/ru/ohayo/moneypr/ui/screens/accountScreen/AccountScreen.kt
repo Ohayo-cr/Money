@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.others.DropdownSelector
-import ru.ohayo.moneypr.ui.component.others.NumberFormatter
+import ru.ohayo.moneypr.models.formate.NumberFormatter
 
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 

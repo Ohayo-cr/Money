@@ -32,7 +32,7 @@ class MoneyPrApp : Application() {
                 // Группируем категории по типу и назначаем порядок для каждой группы
                 val initializedCategories = InitialCategories.INITIAL_CATEGORIES
                     .groupBy { it.type }
-                    .flatMap { (type, categories) ->
+                    .flatMap { (_, categories) ->
                         categories.mapIndexed { index, category ->
                             category.copy(order = index + 1) // order начинается с 1
                         }
@@ -41,7 +41,7 @@ class MoneyPrApp : Application() {
                 categoryRepository.insertAll(initializedCategories)
             }
         }
-        // Инициализация базовых валют
+        // Инициализация базовых валют + account
         MainScope().launch {
             if (currencyRepository.isCurrencyEmpty()) {
                 currencyRepository.insertAllCurrency(InitialCurrency.INITIAL_CURRENCY)

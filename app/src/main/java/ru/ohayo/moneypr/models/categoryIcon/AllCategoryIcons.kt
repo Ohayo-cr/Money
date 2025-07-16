@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.categoryIcon
+package ru.ohayo.moneypr.models.categoryIcon
 
 import ru.ohayo.moneypr.R
 

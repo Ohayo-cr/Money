@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.ui.component.categoryIcon.AllCategoryIcons
+import ru.ohayo.moneypr.models.categoryIcon.AllCategoryIcons
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 
 

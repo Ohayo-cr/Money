@@ -68,7 +68,7 @@ fun TransactionsList(
                                 date = date,
                                 transactions = dayTransactions,
                                 categories = categories,
-                                accountDbos = accounts,
+                                account = accounts,
                                 onTransactionClick = { selectedTransaction = it }
                             )
                         }

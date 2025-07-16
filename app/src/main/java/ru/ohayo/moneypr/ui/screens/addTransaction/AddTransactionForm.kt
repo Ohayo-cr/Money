@@ -168,7 +168,7 @@ fun AddTransactionForm(
 
                 if (showAccountSelection) {
                     AccountSelectSheet(
-                        accountDbos = accounts,
+                        account = accounts,
                         selectedAccountDbo = selectedAccount,
                         onDismiss = { showAccountSelection = false },
                         onAccountSelected = { accountDbo: AccountDbo ->

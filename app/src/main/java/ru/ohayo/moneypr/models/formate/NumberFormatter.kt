@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.others
+package ru.ohayo.moneypr.models.formate
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

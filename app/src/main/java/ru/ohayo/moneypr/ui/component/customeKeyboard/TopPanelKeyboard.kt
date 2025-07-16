@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import ru.ohayo.moneypr.models.formate.NumberFormatterKeyboard
 import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel
 
 @Composable

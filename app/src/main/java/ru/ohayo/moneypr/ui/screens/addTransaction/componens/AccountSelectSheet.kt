@@ -27,12 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.account.AccountDbo
-import ru.ohayo.moneypr.ui.component.others.NumberFormatter
+import ru.ohayo.moneypr.models.formate.NumberFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountSelectSheet(
-    accountDbos: List<AccountDbo>,
+    account: List<AccountDbo>,
     selectedAccountDbo: AccountDbo?,
     onDismiss: () -> Unit,
     onAccountSelected: (AccountDbo) -> Unit
@@ -54,7 +54,7 @@ fun AccountSelectSheet(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 LazyColumn {
-                    items(accountDbos) { account ->
+                    items(account) { account ->
                         val isSelected = selectedAccountDbo?.id == account.id
 
                         FilterChip(
@@ -98,7 +98,7 @@ fun AccountSelectSheet(
                         )
 
                     }
-                    if (accountDbos.isEmpty()) {
+                    if (account.isEmpty()) {
                         item {
                             Text(
                                 text = "Счета не найдены",

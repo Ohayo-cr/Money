@@ -1,11 +1,8 @@
 package ru.ohayo.moneypr.ui.component.others
 
 import android.icu.util.Calendar
-import android.os.Build
-import androidx.annotation.RequiresApi
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun localDateTimeToMillis(dateTime: java.time.LocalDateTime): Long {
     val calendar = Calendar.getInstance()
     calendar.clear()

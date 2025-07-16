@@ -33,7 +33,7 @@ import java.util.Locale
 fun TransactionItem(
     transaction: TransactionDbo,
     categories: List<CategoryDbo>,
-    accountDbos: List<AccountDbo>,
+    account: List<AccountDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
 ) {
     val category = getCategory(categories, transaction.categoryDbo)
@@ -97,9 +97,9 @@ fun TransactionItem(
                     )
                     // Отображение названия счета
                     val accountTransaction = if (transaction.toAccount != null) {
-                        getAccount(accountDbos, transaction.toAccount)?.name ?: "Неизвестный"
+                        getAccount(account, transaction.toAccount)?.name ?: "Неизвестный"
                     } else {
-                        getAccount(accountDbos, transaction.fromAccount)?.name ?: "Неизвестный"
+                        getAccount(account, transaction.fromAccount)?.name ?: "Неизвестный"
                     }
                     Text(text = accountTransaction, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary)
 

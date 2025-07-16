@@ -7,9 +7,9 @@ import androidx.compose.runtime.remember
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 
 @Composable
-fun getAccount(accountDbos: List<AccountDbo>, accountId: Long?): AccountDbo? {
-    val result by remember(accountDbos, accountId) {
-        mutableStateOf(accountId?.let { accountDbos.find { acc -> acc.id == it } })
+fun getAccount(account: List<AccountDbo>, accountId: Long?): AccountDbo? {
+    val result by remember(account, accountId) {
+        mutableStateOf(accountId?.let { account.find { acc -> acc.id == it } })
     }
     return result
 }
