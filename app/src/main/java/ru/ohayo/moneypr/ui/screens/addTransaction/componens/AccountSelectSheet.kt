@@ -26,7 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
+import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.others.NumberFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)

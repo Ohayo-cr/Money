@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.ui.screens.transactionList.components
 
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

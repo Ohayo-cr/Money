@@ -6,9 +6,9 @@ import dagger.internal.DaggerGenerated;
 import dagger.internal.InjectedFieldSignature;
 import dagger.internal.QualifierMetadata;
 import javax.inject.Provider;
-import ru.ohayo.moneypr.data.repository.AccountRepository;
-import ru.ohayo.moneypr.data.repository.CategoryRepository;
-import ru.ohayo.moneypr.data.repository.CurrencyRepository;
+import ru.ohayo.moneypr.repository.AccountRepository;
+import ru.ohayo.moneypr.repository.CategoryRepository;
+import ru.ohayo.moneypr.repository.CurrencyRepository;
 
 @QualifierMetadata
 @DaggerGenerated

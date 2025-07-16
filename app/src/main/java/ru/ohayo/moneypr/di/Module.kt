@@ -7,20 +7,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.ohayo.moneypr.data.data_source.allDao.AccountDao
-import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
-import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao
-import ru.ohayo.moneypr.data.data_source.AppDatabase
-import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao
-import ru.ohayo.moneypr.data.repository.AccountRepositoryImpl
-import ru.ohayo.moneypr.data.repository.CategoryRepository
-import ru.ohayo.moneypr.data.repository.CategoryRepositoryImpl
-import ru.ohayo.moneypr.data.repository.CurrencyRepository
-import ru.ohayo.moneypr.data.repository.CurrencyRepositoryImpl
-import ru.ohayo.moneypr.data.repository.ExpressionRepository
-import ru.ohayo.moneypr.data.repository.ExpressionRepositoryImpl
-import ru.ohayo.moneypr.data.repository.AccountRepository
-import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.data.room.account.AccountDao
+import ru.ohayo.moneypr.data.room.category.CategoryDao
+import ru.ohayo.moneypr.data.room.currency.CurrencyDao
+import ru.ohayo.moneypr.data.room.AppDatabase
+import ru.ohayo.moneypr.data.room.transaction.TransactionDao
+import ru.ohayo.moneypr.repository.AccountRepositoryImpl
+import ru.ohayo.moneypr.repository.CategoryRepository
+import ru.ohayo.moneypr.repository.CategoryRepositoryImpl
+import ru.ohayo.moneypr.repository.CurrencyRepository
+import ru.ohayo.moneypr.repository.CurrencyRepositoryImpl
+import ru.ohayo.moneypr.repository.ExpressionRepository
+import ru.ohayo.moneypr.repository.ExpressionRepositoryImpl
+import ru.ohayo.moneypr.repository.AccountRepository
+import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator
 import javax.inject.Singleton
 
 @Module
@@ -77,8 +77,8 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideEvaluateExpressionUseCase(): EvaluateExpressionUseCase {
-        return EvaluateExpressionUseCase()
+    fun provideEvaluateExpressionUseCase(): ExpressionCalculator {
+        return ExpressionCalculator()
     }
 
     @Provides

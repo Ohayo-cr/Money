@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
-import ru.ohayo.moneypr.data.repository.AccountRepository
-import ru.ohayo.moneypr.domain.allEntity.AccountType
+import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.repository.AccountRepository
+import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.SelectedAccountManager
 import javax.inject.Inject
 

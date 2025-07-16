@@ -27,9 +27,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.ui.theme.ErorColor
-import ru.ohayo.moneypr.ui.component.categoryIcon.IconGridSection
-import ru.ohayo.moneypr.ui.component.others.FullWidthButton
-import ru.ohayo.moneypr.ui.component.others.TextSizeButton
+import ru.ohayo.moneypr.ui.screens.addCategory.components.IconGridSection
+import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.component.customeButton.TextSizeButton
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.addCategory.components.CategoryHeader

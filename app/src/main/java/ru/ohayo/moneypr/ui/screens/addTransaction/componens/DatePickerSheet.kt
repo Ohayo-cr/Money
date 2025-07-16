@@ -28,8 +28,8 @@ import com.commandiron.wheel_picker_compose.WheelDateTimePicker
 import com.commandiron.wheel_picker_compose.core.TimeFormat
 import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
 import ru.ohayo.moneypr.ui.component.customeKeyboard.millisToLocalDateTime
-import ru.ohayo.moneypr.ui.component.others.FullWidthButton
-import ru.ohayo.moneypr.ui.component.others.StyledButton
+import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.component.customeButton.StyledButton
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

@@ -40,6 +40,7 @@ fun TopPanelKeyboard(
                 text = selectedAccountName.take(10),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                color = colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(end = 8.dp)
                     .clickable { onAccountButtonClicked() }

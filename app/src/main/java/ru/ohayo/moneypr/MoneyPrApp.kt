@@ -4,12 +4,12 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.data.repository.AccountRepository
-import ru.ohayo.moneypr.data.repository.CategoryRepository
-import ru.ohayo.moneypr.data.repository.CurrencyRepository
-import ru.ohayo.moneypr.domain.useCase.DefaultAccounts
-import ru.ohayo.moneypr.domain.useCase.DefaultCategories
-import ru.ohayo.moneypr.domain.useCase.DefaultCurrency
+import ru.ohayo.moneypr.repository.AccountRepository
+import ru.ohayo.moneypr.repository.CategoryRepository
+import ru.ohayo.moneypr.repository.CurrencyRepository
+import ru.ohayo.moneypr.models.initialData.InitialAccounts
+import ru.ohayo.moneypr.models.initialData.InitialCategories
+import ru.ohayo.moneypr.models.initialData.InitialCurrency
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -30,7 +30,7 @@ class MoneyPrApp : Application() {
         MainScope().launch {
             if (categoryRepository.isEmpty()) {
                 // Группируем категории по типу и назначаем порядок для каждой группы
-                val initializedCategories = DefaultCategories.DEFAULT_CATEGORIES
+                val initializedCategories = InitialCategories.INITIAL_CATEGORIES
                     .groupBy { it.type }
                     .flatMap { (type, categories) ->
                         categories.mapIndexed { index, category ->
@@ -44,10 +44,10 @@ class MoneyPrApp : Application() {
         // Инициализация базовых валют
         MainScope().launch {
             if (currencyRepository.isCurrencyEmpty()) {
-                currencyRepository.insertAllCurrency(DefaultCurrency.DEFAULT_CURRENCY)
+                currencyRepository.insertAllCurrency(InitialCurrency.INITIAL_CURRENCY)
             }
                 if (accountRepository.isAccountsEmpty()) {
-                    accountRepository.insertAllAccount(DefaultAccounts.DEFAULT_ACCOUNTDbos)
+                    accountRepository.insertAllAccount(InitialAccounts.INITIAL_ACCOUNT)
                 }
             }
         }

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
+import ru.ohayo.moneypr.data.room.account.AccountDbo
 
 @Composable
 fun getAccount(accountDbos: List<AccountDbo>, accountId: Long?): AccountDbo? {

@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.domain.allEntity.CurrencyDbo
+import ru.ohayo.moneypr.data.room.currency.CurrencyDbo
 
 @Composable
 fun CurrencyScreen(

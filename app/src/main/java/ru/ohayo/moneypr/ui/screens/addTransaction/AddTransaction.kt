@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import ru.ohayo.moneypr.domain.allEntity.CategoryType
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 import ru.ohayo.moneypr.ui.navController.Screen

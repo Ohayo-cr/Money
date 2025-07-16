@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase;
+import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -18,9 +18,9 @@ import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase;
     "KotlinInternalInJava",
     "cast"
 })
-public final class AppModule_ProvideEvaluateExpressionUseCaseFactory implements Factory<EvaluateExpressionUseCase> {
+public final class AppModule_ProvideEvaluateExpressionUseCaseFactory implements Factory<ExpressionCalculator> {
   @Override
-  public EvaluateExpressionUseCase get() {
+  public ExpressionCalculator get() {
     return provideEvaluateExpressionUseCase();
   }
 
@@ -28,7 +28,7 @@ public final class AppModule_ProvideEvaluateExpressionUseCaseFactory implements 
     return InstanceHolder.INSTANCE;
   }
 
-  public static EvaluateExpressionUseCase provideEvaluateExpressionUseCase() {
+  public static ExpressionCalculator provideEvaluateExpressionUseCase() {
     return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideEvaluateExpressionUseCase());
   }
 

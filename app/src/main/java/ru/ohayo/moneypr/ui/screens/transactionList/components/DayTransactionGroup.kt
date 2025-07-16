@@ -18,9 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
-import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.others.NumberFormatter
 
 @Composable

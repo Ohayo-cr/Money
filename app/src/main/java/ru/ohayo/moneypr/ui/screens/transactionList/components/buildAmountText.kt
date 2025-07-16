@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.theme.AppleGreenColor
 import ru.ohayo.moneypr.ui.component.others.NumberFormatter
 

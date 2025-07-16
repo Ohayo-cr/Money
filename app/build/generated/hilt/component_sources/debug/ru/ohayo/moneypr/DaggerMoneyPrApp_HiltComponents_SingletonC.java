@@ -33,17 +33,11 @@ import dagger.internal.Provider;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import ru.ohayo.moneypr.data.data_source.AppDatabase;
-import ru.ohayo.moneypr.data.data_source.allDao.AccountDao;
-import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao;
-import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao;
-import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao;
-import ru.ohayo.moneypr.data.repository.AccountRepository;
-import ru.ohayo.moneypr.data.repository.AddCategoryRepository;
-import ru.ohayo.moneypr.data.repository.CategoryRepository;
-import ru.ohayo.moneypr.data.repository.CurrencyRepository;
-import ru.ohayo.moneypr.data.repository.ExpressionRepository;
-import ru.ohayo.moneypr.data.repository.TransactionRepository;
+import ru.ohayo.moneypr.data.room.AppDatabase;
+import ru.ohayo.moneypr.data.room.account.AccountDao;
+import ru.ohayo.moneypr.data.room.category.CategoryDao;
+import ru.ohayo.moneypr.data.room.currency.CurrencyDao;
+import ru.ohayo.moneypr.data.room.transaction.TransactionDao;
 import ru.ohayo.moneypr.di.AppModule_ProvideAccountDaoFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideAccountRepositoryFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideAppDatabaseFactory;
@@ -54,7 +48,13 @@ import ru.ohayo.moneypr.di.AppModule_ProvideCurrencyRepositoryFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideEvaluateExpressionUseCaseFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideExpressionRepositoryFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideTransactionDaoFactory;
-import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase;
+import ru.ohayo.moneypr.repository.AccountRepository;
+import ru.ohayo.moneypr.repository.AddCategoryRepository;
+import ru.ohayo.moneypr.repository.CategoryRepository;
+import ru.ohayo.moneypr.repository.CurrencyRepository;
+import ru.ohayo.moneypr.repository.ExpressionRepository;
+import ru.ohayo.moneypr.repository.TransactionRepository;
+import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator;
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel;
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel_HiltModules;
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel;
@@ -422,41 +422,32 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel = "ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel = "ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel";
-
       static String ru_ohayo_moneypr_ui_screens_charts_ChartsVM = "ru.ohayo.moneypr.ui.screens.charts.ChartsVM";
 
-      static String ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel = "ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel = "ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel";
+
+      static String ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel = "ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel = "ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel";
 
       static String ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel = "ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel";
 
+      static String ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel = "ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel";
+
       static String ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel";
 
-      @KeepFieldType
-      AddCategoryViewModel ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel2;
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
 
-      @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
-
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
-
-      @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel2;
+      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
 
       @KeepFieldType
       ChartsVM ru_ohayo_moneypr_ui_screens_charts_ChartsVM2;
 
       @KeepFieldType
-      CurrencyViewModel ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel2;
+      AddCategoryViewModel ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel2;
+
+      @KeepFieldType
+      BottomNavViewModel ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel2;
 
       @KeepFieldType
       AccountViewModel ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel2;
@@ -465,7 +456,16 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       TransactionListViewModel ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel2;
 
       @KeepFieldType
+      CurrencyViewModel ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel2;
+
+      @KeepFieldType
       KeyboardViewModel ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel2;
+
+      @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
+
+      @KeepFieldType
+      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
     }
   }
 
@@ -534,47 +534,47 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
+
+      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
+
       static String ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel = "ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel";
+
+      static String ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel = "ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel";
+
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel";
+
+      static String ru_ohayo_moneypr_ui_screens_charts_ChartsVM = "ru.ohayo.moneypr.ui.screens.charts.ChartsVM";
 
       static String ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel = "ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel";
 
       static String ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel = "ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel";
 
-      static String ru_ohayo_moneypr_ui_screens_charts_ChartsVM = "ru.ohayo.moneypr.ui.screens.charts.ChartsVM";
-
-      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel = "ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
-
-      static String ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel";
-
       static String ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel = "ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel";
 
       @KeepFieldType
+      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
+
+      @KeepFieldType
+      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
+
+      @KeepFieldType
       AddCategoryViewModel ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel2;
+
+      @KeepFieldType
+      AccountViewModel ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel2;
+
+      @KeepFieldType
+      KeyboardViewModel ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel2;
+
+      @KeepFieldType
+      ChartsVM ru_ohayo_moneypr_ui_screens_charts_ChartsVM2;
 
       @KeepFieldType
       BottomNavViewModel ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel2;
 
       @KeepFieldType
       CurrencyViewModel ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel2;
-
-      @KeepFieldType
-      ChartsVM ru_ohayo_moneypr_ui_screens_charts_ChartsVM2;
-
-      @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
-
-      @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel2;
-
-      @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
-
-      @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel2;
 
       @KeepFieldType
       TransactionListViewModel ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel2;
@@ -726,7 +726,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     private Provider<TransactionDao> provideTransactionDaoProvider;
 
-    private Provider<EvaluateExpressionUseCase> provideEvaluateExpressionUseCaseProvider;
+    private Provider<ExpressionCalculator> provideEvaluateExpressionUseCaseProvider;
 
     private Provider<ExpressionRepository> provideExpressionRepositoryProvider;
 
@@ -747,7 +747,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       this.provideCurrencyRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyRepository>(singletonCImpl, 5));
       this.addCategoryRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AddCategoryRepository>(singletonCImpl, 7));
       this.provideTransactionDaoProvider = DoubleCheck.provider(new SwitchingProvider<TransactionDao>(singletonCImpl, 8));
-      this.provideEvaluateExpressionUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<EvaluateExpressionUseCase>(singletonCImpl, 9));
+      this.provideEvaluateExpressionUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<ExpressionCalculator>(singletonCImpl, 9));
       this.provideExpressionRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ExpressionRepository>(singletonCImpl, 10));
     }
 
@@ -792,37 +792,37 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       @Override
       public T get() {
         switch (id) {
-          case 0: // ru.ohayo.moneypr.data.repository.CategoryRepository 
+          case 0: // ru.ohayo.moneypr.repository.CategoryRepository 
           return (T) AppModule_ProvideCategoryRepositoryFactory.provideCategoryRepository(singletonCImpl.provideCategoryDaoProvider.get());
 
-          case 1: // ru.ohayo.moneypr.data.data_source.allDao.CategoryDao 
+          case 1: // ru.ohayo.moneypr.data.room.category.CategoryDao 
           return (T) AppModule_ProvideCategoryDaoFactory.provideCategoryDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 2: // ru.ohayo.moneypr.data.data_source.AppDatabase 
+          case 2: // ru.ohayo.moneypr.data.room.AppDatabase 
           return (T) AppModule_ProvideAppDatabaseFactory.provideAppDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 3: // ru.ohayo.moneypr.data.repository.AccountRepository 
+          case 3: // ru.ohayo.moneypr.repository.AccountRepository 
           return (T) AppModule_ProvideAccountRepositoryFactory.provideAccountRepository(singletonCImpl.provideAccountDaoProvider.get());
 
-          case 4: // ru.ohayo.moneypr.data.data_source.allDao.AccountDao 
+          case 4: // ru.ohayo.moneypr.data.room.account.AccountDao 
           return (T) AppModule_ProvideAccountDaoFactory.provideAccountDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 5: // ru.ohayo.moneypr.data.repository.CurrencyRepository 
+          case 5: // ru.ohayo.moneypr.repository.CurrencyRepository 
           return (T) AppModule_ProvideCurrencyRepositoryFactory.provideCurrencyRepository(singletonCImpl.provideCurrencyDaoProvider.get());
 
-          case 6: // ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao 
+          case 6: // ru.ohayo.moneypr.data.room.currency.CurrencyDao 
           return (T) AppModule_ProvideCurrencyDaoFactory.provideCurrencyDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 7: // ru.ohayo.moneypr.data.repository.AddCategoryRepository 
+          case 7: // ru.ohayo.moneypr.repository.AddCategoryRepository 
           return (T) new AddCategoryRepository(singletonCImpl.provideCategoryDaoProvider.get());
 
-          case 8: // ru.ohayo.moneypr.data.data_source.allDao.TransactionDao 
+          case 8: // ru.ohayo.moneypr.data.room.transaction.TransactionDao 
           return (T) AppModule_ProvideTransactionDaoFactory.provideTransactionDao(singletonCImpl.provideAppDatabaseProvider.get());
 
-          case 9: // ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase 
+          case 9: // ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator 
           return (T) AppModule_ProvideEvaluateExpressionUseCaseFactory.provideEvaluateExpressionUseCase();
 
-          case 10: // ru.ohayo.moneypr.data.repository.ExpressionRepository 
+          case 10: // ru.ohayo.moneypr.repository.ExpressionRepository 
           return (T) AppModule_ProvideExpressionRepositoryFactory.provideExpressionRepository();
 
           default: throw new AssertionError(id);

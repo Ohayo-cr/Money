@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
-import ru.ohayo.moneypr.domain.allEntity.AccountType
+import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.others.DropdownSelector
 import ru.ohayo.moneypr.ui.component.others.NumberFormatter
 

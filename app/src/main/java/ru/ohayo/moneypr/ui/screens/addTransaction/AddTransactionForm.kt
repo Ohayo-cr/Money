@@ -25,9 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
-import ru.ohayo.moneypr.domain.allEntity.CategoryType
+import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectSheet
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.DatePickerSheet
 import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculatorKeyboard

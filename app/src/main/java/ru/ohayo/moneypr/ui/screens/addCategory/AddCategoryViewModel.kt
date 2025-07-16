@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.data.repository.AddCategoryRepository
-import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
-import ru.ohayo.moneypr.domain.allEntity.CategoryType
+import ru.ohayo.moneypr.repository.AddCategoryRepository
+import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import javax.inject.Inject
 
 @HiltViewModel

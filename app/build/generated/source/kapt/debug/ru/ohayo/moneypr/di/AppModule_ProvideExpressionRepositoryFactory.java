@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import ru.ohayo.moneypr.data.repository.ExpressionRepository;
+import ru.ohayo.moneypr.repository.ExpressionRepository;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata

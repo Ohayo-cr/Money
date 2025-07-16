@@ -5,14 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ru.ohayo.moneypr.data.repository.ExpressionRepository
+import ru.ohayo.moneypr.repository.ExpressionRepository
 import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculationResult
-import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase
+import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator
 import javax.inject.Inject
 
 @HiltViewModel
 class KeyboardViewModel @Inject constructor(
-    private val evaluateExpressionUseCase: EvaluateExpressionUseCase,
+    private val expressionCalculator: ExpressionCalculator,
     private val repository: ExpressionRepository
 ) : ViewModel() {
 
@@ -89,7 +89,7 @@ class KeyboardViewModel @Inject constructor(
         // Заменяем запятые на точки для корректного вычисления
         val expressionWithDots = sanitizedInput.replace(',', '.')
 
-        when (val calculationResult = evaluateExpressionUseCase(expressionWithDots)) {
+        when (val calculationResult = expressionCalculator(expressionWithDots)) {
             is CalculationResult.Success -> {
 
                 // Заменяем точку на запятую для отображения результата

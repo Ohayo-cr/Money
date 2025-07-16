@@ -44,6 +44,7 @@ drawable cat__ic_vape
 drawable currency_default_icon
 drawable currency_russia_11699599
 drawable currency_united_states
+drawable ic_color
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable icon_transparent

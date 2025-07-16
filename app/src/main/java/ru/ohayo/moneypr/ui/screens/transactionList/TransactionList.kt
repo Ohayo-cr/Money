@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
 import ru.ohayo.moneypr.ui.screens.transactionList.components.TransactionDetailsDialog
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate

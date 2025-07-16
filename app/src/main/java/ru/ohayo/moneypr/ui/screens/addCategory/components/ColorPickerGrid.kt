@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryColors
-import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
+import ru.ohayo.moneypr.models.colorCategory.CategoryColors
+import ru.ohayo.moneypr.models.colorCategory.ColorNames
 
 @Composable
 fun ColorPickerGrid(onColorSelected: (Color) -> Unit,
@@ -27,7 +27,7 @@ fun ColorPickerGrid(onColorSelected: (Color) -> Unit,
             val color = CategoryColors.colors[index]
             val name = ColorNames[color] ?: "Unknown"
 
-            ChooseCategory(
+            ChooseColorCategory(
                 iconItem = selectedIconResId ?: R.drawable.cat__ic_power,
                 backgroundColor = color,
                 name = name,

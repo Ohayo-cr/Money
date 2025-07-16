@@ -124,6 +124,7 @@ int drawable ic_call_answer_video 0x7f060028
 int drawable ic_call_answer_video_low 0x7f060029
 int drawable ic_call_decline 0x7f06002a
 int drawable ic_call_decline_low 0x7f06002b
+int drawable ic_color 0x7f06003e
 int drawable ic_launcher_background 0x7f06002c
 int drawable ic_launcher_foreground 0x7f06002d
 int drawable icon_transparent 0x7f06002e

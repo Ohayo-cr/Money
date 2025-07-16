@@ -14,7 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.ohayo.moneypr.ui.screens.bottomNavigator.components.BottomNavigation
+import ru.ohayo.moneypr.ui.screens.bottomNavigator.components.BottomNavigationBar
 import ru.ohayo.moneypr.ui.navController.NavHostScreen
 import ru.ohayo.moneypr.ui.screens.bottomNavigator.components.UpdateSystemNavigationBar
 
@@ -52,7 +52,7 @@ fun MainScreen(navController: NavHostController,viewModel: BottomNavViewModel = 
                 modifier = Modifier.align(Alignment.BottomCenter),
                 contentAlignment = Alignment.Center
             ) {
-                BottomNavigation(navController = navController, viewModel = viewModel)
+                BottomNavigationBar(navController = navController, viewModel = viewModel)
             }
         }
     }

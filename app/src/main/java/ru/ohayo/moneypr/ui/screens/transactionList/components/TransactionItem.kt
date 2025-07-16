@@ -21,9 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.ohayo.moneypr.domain.allEntity.AccountDbo
-import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import java.text.SimpleDateFormat
 import java.util.Date

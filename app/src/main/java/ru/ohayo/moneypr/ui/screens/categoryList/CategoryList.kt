@@ -29,7 +29,7 @@ import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
-import ru.ohayo.moneypr.ui.component.others.FullWidthButton
+import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 

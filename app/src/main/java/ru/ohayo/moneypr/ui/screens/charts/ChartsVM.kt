@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.data.repository.TransactionRepository
+import ru.ohayo.moneypr.repository.TransactionRepository
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 import javax.inject.Inject
 

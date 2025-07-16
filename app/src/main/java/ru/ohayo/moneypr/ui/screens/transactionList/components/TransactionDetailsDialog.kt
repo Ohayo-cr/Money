@@ -14,8 +14,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
-import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.ui.component.others.NumberFormatter
 import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel
 
