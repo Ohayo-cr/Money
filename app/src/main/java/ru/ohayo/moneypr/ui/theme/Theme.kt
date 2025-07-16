@@ -73,7 +73,7 @@ fun MoneyPrTheme(
             error = Color(0xFFD63031),
             onError = Color.White,
             inversePrimary = Color(0xFF00A896),
-            surfaceVariant = Color(0xFF424242) // цвет карда по умолчанию
+            surfaceVariant = Color(0xFF424242)
         )
         else -> lightColorScheme(
             primary = Color(0xFFF5F7FA),
@@ -89,7 +89,7 @@ fun MoneyPrTheme(
             error = Color(0xFFD63031),
             onError = Color.White,
             inversePrimary = Color(0xFF67E4D6),
-            surfaceVariant = Color(0xFFDBDBDB) // цвет карда по умолчанию
+            surfaceVariant = Color(0xFFDBDBDB)
         )
     }
 

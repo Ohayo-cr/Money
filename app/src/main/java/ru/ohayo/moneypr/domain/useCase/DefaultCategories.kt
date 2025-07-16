@@ -2,7 +2,7 @@ package ru.ohayo.moneypr.domain.useCase
 
 
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.domain.allEntity.Category
+import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
 import ru.ohayo.moneypr.domain.allEntity.CategoryType
 
 object DefaultCategories {
@@ -10,7 +10,7 @@ object DefaultCategories {
     private const val EXPENSE_COLOR = 0xFF67676B // Серый для расходов
 
     fun category(name: String, iconResId: Int, isIncome: Boolean = false) =
-        Category(
+        CategoryDbo(
             type = if (isIncome) CategoryType.INCOME else CategoryType.EXPENSE,
             categoryName = name,
             color = if (isIncome) INCOME_COLOR else EXPENSE_COLOR,

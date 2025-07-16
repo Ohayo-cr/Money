@@ -46,15 +46,15 @@ import dagger.hilt.internal.GeneratedComponent;
 import dagger.hilt.migration.DisableInstallInCheck;
 import javax.inject.Singleton;
 import ru.ohayo.moneypr.di.AppModule;
-import ru.ohayo.moneypr.viewModel.AccountViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.AddCategoryViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.BottomNavViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.CategoryViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.ChartsVM_HiltModules;
-import ru.ohayo.moneypr.viewModel.CurrencyViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.KeyboardViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.TransactionListViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.TransactionViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.charts.ChartsVM_HiltModules;
+import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel_HiltModules;
 
 public final class MoneyPrApp_HiltComponents {
   private MoneyPrApp_HiltComponents() {

@@ -5,31 +5,30 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.domain.allEntity.Account
-import ru.ohayo.moneypr.domain.allEntity.Currency
+import ru.ohayo.moneypr.domain.allEntity.AccountDbo
 
 @Dao
 interface AccountDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAccount(account: Account)
+    suspend fun insertAccount(accountDbo: AccountDbo)
 
-    @Query("SELECT * FROM account")
-    fun getAllAccounts(): Flow<List<Account>>
+    @Query("SELECT * FROM AccountDbo")
+    fun getAllAccounts(): Flow<List<AccountDbo>>
 
-    @Query("DELETE FROM account WHERE id = :id")
+    @Query("DELETE FROM AccountDbo WHERE id = :id")
     suspend fun deleteAccountById(id: Long) // Используем Long
 
-    @Query("UPDATE account SET balance = ROUND(balance + :amount, 2) WHERE id = :accountId")
+    @Query("UPDATE AccountDbo SET balance = ROUND(balance + :amount, 2) WHERE id = :accountId")
     suspend fun updateBalance(accountId: Long, amount: Double)
 
-    @Query("SELECT name FROM account WHERE id = :accountId")
+    @Query("SELECT name FROM AccountDbo WHERE id = :accountId")
     suspend fun getAccountNameById(accountId: Long): String?
-    @Query("SELECT * FROM account WHERE id = :accountId")
-    suspend fun getAccountById(accountId: Long): Account?
+    @Query("SELECT * FROM AccountDbo WHERE id = :accountId")
+    suspend fun getAccountById(accountId: Long): AccountDbo?
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAllAccount(account: List<Account>)
-    @Query("SELECT COUNT(*) FROM account")
+    suspend fun insertAllAccount(accountDbo: List<AccountDbo>)
+    @Query("SELECT COUNT(*) FROM AccountDbo")
     suspend fun getAccountsCount(): Int
 }
 

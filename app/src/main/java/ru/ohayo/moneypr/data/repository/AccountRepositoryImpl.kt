@@ -3,22 +3,22 @@ package ru.ohayo.moneypr.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.data.data_source.allDao.AccountDao
-import ru.ohayo.moneypr.domain.allEntity.Account
+import ru.ohayo.moneypr.domain.allEntity.AccountDbo
 import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
 ) : AccountRepository {
 
-    override suspend fun insertAccount(account: Account) {
+    override suspend fun insertAccount(accountDbo: AccountDbo) {
         try {
-            accountDao.insertAccount(account)
+            accountDao.insertAccount(accountDbo)
         } catch (e: SQLiteConstraintException) {
-            throw IllegalArgumentException("Account with name '${account.name}' already exists.")
+            throw IllegalArgumentException("AccountDbo with name '${accountDbo.name}' already exists.")
         }
     }
 
-    override fun getAllAccounts(): Flow<List<Account>> {
+    override fun getAllAccounts(): Flow<List<AccountDbo>> {
         return accountDao.getAllAccounts()
     }
 
@@ -33,11 +33,11 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun getAccountName(accountId: Long): String? {
         return accountDao.getAccountNameById(accountId)
     }
-    override suspend fun getAccountById(accountId: Long): Account? {
+    override suspend fun getAccountById(accountId: Long): AccountDbo? {
         return accountDao.getAccountById(accountId)
     }
-    override suspend fun insertAllAccount(accounts: List<Account>) {
-        accountDao.insertAllAccount(accounts)
+    override suspend fun insertAllAccount(accountDbo: List<AccountDbo>) {
+        accountDao.insertAllAccount(accountDbo)
     }
 
     // Проверяем, есть ли уже аккаунты в БД

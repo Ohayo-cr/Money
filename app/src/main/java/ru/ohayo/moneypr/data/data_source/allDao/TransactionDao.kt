@@ -4,27 +4,25 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
-import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
-import ru.ohayo.moneypr.ui.theme.screens.charts.components.CategorySummaryFromDb
+import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 
 
 @Dao
 interface TransactionDao {
     @Query("SELECT * FROM transactions ORDER BY timestamp DESC")
-    fun getAllTransactions(): Flow<List<TransactionEntity>>
+    fun getAllTransactions(): Flow<List<TransactionDbo>>
 
     @Query("SELECT * FROM transactions WHERE id = :id")
-    suspend fun getTransactionById(id: Long): TransactionEntity? // Изменено на Long
+    suspend fun getTransactionById(id: Long): TransactionDbo? // Изменено на Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTransaction(transaction: TransactionEntity)
+    suspend fun insertTransaction(transaction: TransactionDbo)
 
     @Update
-    suspend fun updateTransaction(transaction: TransactionEntity)
+    suspend fun updateTransaction(transaction: TransactionDbo)
 
     @Query("DELETE FROM transactions WHERE id = :id")
     suspend fun deleteTransaction(id: Long) // Изменено на Long
@@ -41,7 +39,7 @@ WHERE timestamp BETWEEN :startTimestamp AND :endTimestamp)) AS percentage,
                c.color, 
                c.iconResId
         FROM transactions t
-        INNER JOIN Category c ON t.category = c.id
+        INNER JOIN CategoryDbo c ON t.categoryDbo = c.id
         WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
         GROUP BY c.id
         ORDER BY totalAmount 

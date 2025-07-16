@@ -1,7 +1,7 @@
 package ru.ohayo.moneypr.domain.useCase
 
 import net.objecthunter.exp4j.ExpressionBuilder
-import ru.ohayo.moneypr.ui.theme.screens.components.customeKeyboard.CalculationResult
+import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculationResult
 
 class EvaluateExpressionUseCase {
     operator fun invoke(expression: String): CalculationResult {

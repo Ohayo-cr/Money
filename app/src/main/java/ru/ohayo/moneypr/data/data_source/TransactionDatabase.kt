@@ -6,14 +6,14 @@ import ru.ohayo.moneypr.data.data_source.allDao.AccountDao
 import ru.ohayo.moneypr.data.data_source.allDao.CategoryDao
 import ru.ohayo.moneypr.data.data_source.allDao.CurrencyDao
 import ru.ohayo.moneypr.data.data_source.allDao.TransactionDao
-import ru.ohayo.moneypr.domain.allEntity.Account
-import ru.ohayo.moneypr.domain.allEntity.TransactionEntity
-import ru.ohayo.moneypr.domain.allEntity.Category
-import ru.ohayo.moneypr.domain.allEntity.Currency
+import ru.ohayo.moneypr.domain.allEntity.AccountDbo
+import ru.ohayo.moneypr.domain.allEntity.TransactionDbo
+import ru.ohayo.moneypr.domain.allEntity.CategoryDbo
+import ru.ohayo.moneypr.domain.allEntity.CurrencyDbo
 
 
 @Database(
-    entities = [TransactionEntity::class, Account::class, Category::class, Currency::class],
+    entities = [TransactionDbo::class, AccountDbo::class, CategoryDbo::class, CurrencyDbo::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {

@@ -55,24 +55,24 @@ import ru.ohayo.moneypr.di.AppModule_ProvideEvaluateExpressionUseCaseFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideExpressionRepositoryFactory;
 import ru.ohayo.moneypr.di.AppModule_ProvideTransactionDaoFactory;
 import ru.ohayo.moneypr.domain.useCase.EvaluateExpressionUseCase;
-import ru.ohayo.moneypr.viewModel.AccountViewModel;
-import ru.ohayo.moneypr.viewModel.AccountViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.AddCategoryViewModel;
-import ru.ohayo.moneypr.viewModel.AddCategoryViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.BottomNavViewModel;
-import ru.ohayo.moneypr.viewModel.BottomNavViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.CategoryViewModel;
-import ru.ohayo.moneypr.viewModel.CategoryViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.ChartsVM;
-import ru.ohayo.moneypr.viewModel.ChartsVM_HiltModules;
-import ru.ohayo.moneypr.viewModel.CurrencyViewModel;
-import ru.ohayo.moneypr.viewModel.CurrencyViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.KeyboardViewModel;
-import ru.ohayo.moneypr.viewModel.KeyboardViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.TransactionListViewModel;
-import ru.ohayo.moneypr.viewModel.TransactionListViewModel_HiltModules;
-import ru.ohayo.moneypr.viewModel.TransactionViewModel;
-import ru.ohayo.moneypr.viewModel.TransactionViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel;
+import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel;
+import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel;
+import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel;
+import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel;
+import ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel;
+import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.charts.ChartsVM;
+import ru.ohayo.moneypr.ui.screens.charts.ChartsVM_HiltModules;
+import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel;
+import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel_HiltModules;
+import ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel;
+import ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel_HiltModules;
 
 @DaggerGenerated
 @SuppressWarnings({
@@ -398,7 +398,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(9).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_AccountViewModel, AccountViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_AddCategoryViewModel, AddCategoryViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_BottomNavViewModel, BottomNavViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_CategoryViewModel, CategoryViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_ChartsVM, ChartsVM_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_CurrencyViewModel, CurrencyViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_KeyboardViewModel, KeyboardViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_TransactionListViewModel, TransactionListViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_TransactionViewModel, TransactionViewModel_HiltModules.KeyModule.provide()).build());
+      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(9).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel, AccountViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel, AddCategoryViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel, BottomNavViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel, CategoryViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_charts_ChartsVM, ChartsVM_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel, CurrencyViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel, KeyboardViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel, TransactionListViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel, TransactionViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -422,50 +422,50 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel = "ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
+      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
+      static String ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel = "ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
+      static String ru_ohayo_moneypr_ui_screens_charts_ChartsVM = "ru.ohayo.moneypr.ui.screens.charts.ChartsVM";
 
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+      static String ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel = "ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_ChartsVM = "ru.ohayo.moneypr.viewModel.ChartsVM";
+      static String ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel = "ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
+      static String ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel = "ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
-
-      @KeepFieldType
-      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel";
 
       @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
+      AddCategoryViewModel ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel2;
 
       @KeepFieldType
-      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
 
       @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
 
       @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
+      BottomNavViewModel ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel2;
 
       @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+      ChartsVM ru_ohayo_moneypr_ui_screens_charts_ChartsVM2;
 
       @KeepFieldType
-      ChartsVM ru_ohayo_moneypr_viewModel_ChartsVM2;
+      CurrencyViewModel ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel2;
 
       @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
+      AccountViewModel ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel2;
 
       @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+      TransactionListViewModel ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel2;
+
+      @KeepFieldType
+      KeyboardViewModel ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel2;
     }
   }
 
@@ -524,7 +524,7 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(9).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_AccountViewModel, ((Provider) accountViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_AddCategoryViewModel, ((Provider) addCategoryViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_BottomNavViewModel, ((Provider) bottomNavViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_CategoryViewModel, ((Provider) categoryViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_ChartsVM, ((Provider) chartsVMProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_CurrencyViewModel, ((Provider) currencyViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_KeyboardViewModel, ((Provider) keyboardViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_TransactionListViewModel, ((Provider) transactionListViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_viewModel_TransactionViewModel, ((Provider) transactionViewModelProvider)).build());
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(9).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel, ((Provider) accountViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel, ((Provider) addCategoryViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel, ((Provider) bottomNavViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel, ((Provider) categoryViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_charts_ChartsVM, ((Provider) chartsVMProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel, ((Provider) currencyViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel, ((Provider) keyboardViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel, ((Provider) transactionListViewModelProvider)).put(LazyClassKeyProvider.ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel, ((Provider) transactionViewModelProvider)).build());
     }
 
     @Override
@@ -534,50 +534,50 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ru_ohayo_moneypr_viewModel_BottomNavViewModel = "ru.ohayo.moneypr.viewModel.BottomNavViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel = "ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CurrencyViewModel = "ru.ohayo.moneypr.viewModel.CurrencyViewModel";
+      static String ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel = "ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_AddCategoryViewModel = "ru.ohayo.moneypr.viewModel.AddCategoryViewModel";
+      static String ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel = "ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_AccountViewModel = "ru.ohayo.moneypr.viewModel.AccountViewModel";
+      static String ru_ohayo_moneypr_ui_screens_charts_ChartsVM = "ru.ohayo.moneypr.ui.screens.charts.ChartsVM";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionListViewModel = "ru.ohayo.moneypr.viewModel.TransactionListViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_ChartsVM = "ru.ohayo.moneypr.viewModel.ChartsVM";
+      static String ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel = "ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_CategoryViewModel = "ru.ohayo.moneypr.viewModel.CategoryViewModel";
+      static String ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel = "ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_KeyboardViewModel = "ru.ohayo.moneypr.viewModel.KeyboardViewModel";
+      static String ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel = "ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel";
 
-      static String ru_ohayo_moneypr_viewModel_TransactionViewModel = "ru.ohayo.moneypr.viewModel.TransactionViewModel";
-
-      @KeepFieldType
-      BottomNavViewModel ru_ohayo_moneypr_viewModel_BottomNavViewModel2;
+      static String ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel = "ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel";
 
       @KeepFieldType
-      CurrencyViewModel ru_ohayo_moneypr_viewModel_CurrencyViewModel2;
+      AddCategoryViewModel ru_ohayo_moneypr_ui_screens_addCategory_AddCategoryViewModel2;
 
       @KeepFieldType
-      AddCategoryViewModel ru_ohayo_moneypr_viewModel_AddCategoryViewModel2;
+      BottomNavViewModel ru_ohayo_moneypr_ui_screens_bottomNavigator_BottomNavViewModel2;
 
       @KeepFieldType
-      AccountViewModel ru_ohayo_moneypr_viewModel_AccountViewModel2;
+      CurrencyViewModel ru_ohayo_moneypr_ui_screens_currencyScreen_CurrencyViewModel2;
 
       @KeepFieldType
-      TransactionListViewModel ru_ohayo_moneypr_viewModel_TransactionListViewModel2;
+      ChartsVM ru_ohayo_moneypr_ui_screens_charts_ChartsVM2;
 
       @KeepFieldType
-      ChartsVM ru_ohayo_moneypr_viewModel_ChartsVM2;
+      TransactionViewModel ru_ohayo_moneypr_ui_screens_addTransaction_TransactionViewModel2;
 
       @KeepFieldType
-      CategoryViewModel ru_ohayo_moneypr_viewModel_CategoryViewModel2;
+      AccountViewModel ru_ohayo_moneypr_ui_screens_accountScreen_AccountViewModel2;
 
       @KeepFieldType
-      KeyboardViewModel ru_ohayo_moneypr_viewModel_KeyboardViewModel2;
+      CategoryViewModel ru_ohayo_moneypr_ui_screens_categoryList_CategoryViewModel2;
 
       @KeepFieldType
-      TransactionViewModel ru_ohayo_moneypr_viewModel_TransactionViewModel2;
+      KeyboardViewModel ru_ohayo_moneypr_ui_screens_addTransaction_KeyboardViewModel2;
+
+      @KeepFieldType
+      TransactionListViewModel ru_ohayo_moneypr_ui_screens_transactionList_TransactionListViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -601,31 +601,31 @@ public final class DaggerMoneyPrApp_HiltComponents_SingletonC {
       @Override
       public T get() {
         switch (id) {
-          case 0: // ru.ohayo.moneypr.viewModel.AccountViewModel 
+          case 0: // ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel 
           return (T) new AccountViewModel(singletonCImpl.provideAccountRepositoryProvider.get());
 
-          case 1: // ru.ohayo.moneypr.viewModel.AddCategoryViewModel 
+          case 1: // ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel 
           return (T) new AddCategoryViewModel(singletonCImpl.addCategoryRepositoryProvider.get());
 
-          case 2: // ru.ohayo.moneypr.viewModel.BottomNavViewModel 
+          case 2: // ru.ohayo.moneypr.ui.screens.bottomNavigator.BottomNavViewModel 
           return (T) new BottomNavViewModel();
 
-          case 3: // ru.ohayo.moneypr.viewModel.CategoryViewModel 
+          case 3: // ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel 
           return (T) new CategoryViewModel(singletonCImpl.provideCategoryRepositoryProvider.get());
 
-          case 4: // ru.ohayo.moneypr.viewModel.ChartsVM 
+          case 4: // ru.ohayo.moneypr.ui.screens.charts.ChartsVM 
           return (T) new ChartsVM(viewModelCImpl.transactionRepository());
 
-          case 5: // ru.ohayo.moneypr.viewModel.CurrencyViewModel 
+          case 5: // ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel 
           return (T) new CurrencyViewModel(singletonCImpl.provideCurrencyRepositoryProvider.get());
 
-          case 6: // ru.ohayo.moneypr.viewModel.KeyboardViewModel 
+          case 6: // ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel 
           return (T) new KeyboardViewModel(singletonCImpl.provideEvaluateExpressionUseCaseProvider.get(), singletonCImpl.provideExpressionRepositoryProvider.get());
 
-          case 7: // ru.ohayo.moneypr.viewModel.TransactionListViewModel 
+          case 7: // ru.ohayo.moneypr.ui.screens.transactionList.TransactionListViewModel 
           return (T) new TransactionListViewModel(viewModelCImpl.transactionRepository());
 
-          case 8: // ru.ohayo.moneypr.viewModel.TransactionViewModel 
+          case 8: // ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel 
           return (T) new TransactionViewModel(viewModelCImpl.transactionRepository(), singletonCImpl.provideAccountRepositoryProvider.get(), singletonCImpl.provideCurrencyRepositoryProvider.get(), singletonCImpl.provideCategoryRepositoryProvider.get());
 
           default: throw new AssertionError(id);
