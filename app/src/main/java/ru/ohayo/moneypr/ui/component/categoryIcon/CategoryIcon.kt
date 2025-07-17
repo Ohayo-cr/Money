@@ -38,7 +38,7 @@ fun CategoryIcon(
         modifier = modifier
             .scale(scale)
             .background(
-                color = backgroundColor,
+                color = if (isPicture) Color.Transparent else backgroundColor,
                 shape = shape
             )
             .then(
