@@ -1,6 +1,7 @@
-package ru.ohayo.moneypr.ui.component.customeKeyboard
+package ru.ohayo.moneypr.domain.calculator
 
 import net.objecthunter.exp4j.ExpressionBuilder
+import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculationResult
 
 class ExpressionCalculator {
     operator fun invoke(expression: String): CalculationResult {

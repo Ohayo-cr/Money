@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.customeKeyboard
+package ru.ohayo.moneypr.utils.formate
 
 
 import java.time.Instant

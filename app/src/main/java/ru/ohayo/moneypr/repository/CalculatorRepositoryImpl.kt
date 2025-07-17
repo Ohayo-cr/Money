@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.repository
 
-class ExpressionRepositoryImpl : ExpressionRepository {
+class CalculatorRepositoryImpl : CalculatorRepository {
     private val history = mutableListOf<Pair<String, String>>()
 
     override fun saveExpression(expression: String, result: String) {

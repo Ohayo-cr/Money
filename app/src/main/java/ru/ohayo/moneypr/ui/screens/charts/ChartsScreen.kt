@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
-import ru.ohayo.moneypr.models.formate.NumberFormatter
+import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 
 @Composable

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.commandiron.wheel_picker_compose.WheelDateTimePicker
 import com.commandiron.wheel_picker_compose.core.TimeFormat
 import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
-import ru.ohayo.moneypr.ui.component.customeKeyboard.millisToLocalDateTime
+import ru.ohayo.moneypr.utils.formate.millisToLocalDateTime
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import ru.ohayo.moneypr.ui.component.customeButton.StyledButton
 import java.time.LocalDateTime

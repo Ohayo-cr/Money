@@ -33,9 +33,9 @@ import ru.ohayo.moneypr.ui.screens.addTransaction.componens.DatePickerSheet
 import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculatorKeyboard
 import ru.ohayo.moneypr.ui.component.customeKeyboard.NoteField
 import ru.ohayo.moneypr.ui.component.customeKeyboard.TopPanelKeyboard
-import ru.ohayo.moneypr.ui.component.customeKeyboard.formatLocalDateTime
-import ru.ohayo.moneypr.ui.component.customeKeyboard.millisToLocalDateTime
-import ru.ohayo.moneypr.ui.component.others.localDateTimeToMillis
+import ru.ohayo.moneypr.utils.formate.formatLocalDateTime
+import ru.ohayo.moneypr.utils.formate.millisToLocalDateTime
+import ru.ohayo.moneypr.utils.formate.localDateTimeToMillis
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
 
 

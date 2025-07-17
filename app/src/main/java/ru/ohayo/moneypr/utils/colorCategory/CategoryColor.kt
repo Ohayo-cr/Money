@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.models.colorCategory
+package ru.ohayo.moneypr.utils.colorCategory
 
 import androidx.compose.ui.graphics.Color
 

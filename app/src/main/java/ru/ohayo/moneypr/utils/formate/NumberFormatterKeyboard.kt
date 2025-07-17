@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.models.formate
+package ru.ohayo.moneypr.utils.formate
 
 import java.util.Locale
 

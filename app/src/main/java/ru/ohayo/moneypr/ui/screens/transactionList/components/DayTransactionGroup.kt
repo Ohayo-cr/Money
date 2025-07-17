@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
-import ru.ohayo.moneypr.models.formate.NumberFormatter
+import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
 fun DayTransactionGroup(

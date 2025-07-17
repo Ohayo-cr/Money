@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import ru.ohayo.moneypr.repository.ExpressionRepository;
+import ru.ohayo.moneypr.repository.CalculatorRepository;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -18,9 +18,9 @@ import ru.ohayo.moneypr.repository.ExpressionRepository;
     "KotlinInternalInJava",
     "cast"
 })
-public final class AppModule_ProvideExpressionRepositoryFactory implements Factory<ExpressionRepository> {
+public final class AppModule_ProvideExpressionRepositoryFactory implements Factory<CalculatorRepository> {
   @Override
-  public ExpressionRepository get() {
+  public CalculatorRepository get() {
     return provideExpressionRepository();
   }
 
@@ -28,7 +28,7 @@ public final class AppModule_ProvideExpressionRepositoryFactory implements Facto
     return InstanceHolder.INSTANCE;
   }
 
-  public static ExpressionRepository provideExpressionRepository() {
+  public static CalculatorRepository provideExpressionRepository() {
     return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideExpressionRepository());
   }
 

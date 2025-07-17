@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.others
+package ru.ohayo.moneypr.utils.formate
 
 import android.icu.util.Calendar
 

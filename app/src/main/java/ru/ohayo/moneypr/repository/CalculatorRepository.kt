@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.repository
 
-interface ExpressionRepository {
+interface CalculatorRepository {
     fun saveExpression(expression: String, result: String)
 
 }

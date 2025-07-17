@@ -7,9 +7,9 @@ import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.repository.CategoryRepository
 import ru.ohayo.moneypr.repository.CurrencyRepository
-import ru.ohayo.moneypr.models.initialData.InitialAccounts
-import ru.ohayo.moneypr.models.initialData.InitialCategories
-import ru.ohayo.moneypr.models.initialData.InitialCurrency
+import ru.ohayo.moneypr.data.initialData.InitialAccounts
+import ru.ohayo.moneypr.data.initialData.InitialCategories
+import ru.ohayo.moneypr.data.initialData.InitialCurrency
 import javax.inject.Inject
 
 @HiltAndroidApp

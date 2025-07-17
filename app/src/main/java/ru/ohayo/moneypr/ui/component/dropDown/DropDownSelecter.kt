@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.others
+package ru.ohayo.moneypr.ui.component.dropDown
 
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Row

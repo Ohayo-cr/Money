@@ -5,15 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ru.ohayo.moneypr.repository.ExpressionRepository
+import ru.ohayo.moneypr.repository.CalculatorRepository
 import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculationResult
-import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator
+import ru.ohayo.moneypr.domain.calculator.ExpressionCalculator
 import javax.inject.Inject
 
 @HiltViewModel
 class KeyboardViewModel @Inject constructor(
     private val expressionCalculator: ExpressionCalculator,
-    private val repository: ExpressionRepository
+    private val repository: CalculatorRepository
 ) : ViewModel() {
 
     var currentInput by mutableStateOf("")

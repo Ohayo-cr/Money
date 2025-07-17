@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
-import ru.ohayo.moneypr.models.categoryIcon.IconTypeMapper
+import ru.ohayo.moneypr.utils.categoryIcon.IconTypeMapper
 
 @Composable
 fun ChooseColorCategory(

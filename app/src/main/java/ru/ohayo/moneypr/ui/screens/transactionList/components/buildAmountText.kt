@@ -8,7 +8,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.theme.AppleGreenColor
-import ru.ohayo.moneypr.models.formate.NumberFormatter
+import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
 fun buildAmountText(transaction: TransactionDbo): AnnotatedString {

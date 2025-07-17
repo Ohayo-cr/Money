@@ -6,7 +6,7 @@ import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator;
+import ru.ohayo.moneypr.domain.calculator.ExpressionCalculator;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata

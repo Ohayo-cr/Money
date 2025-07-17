@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.models.colorCategory.CategoryColors
-import ru.ohayo.moneypr.models.colorCategory.ColorNames
+import ru.ohayo.moneypr.utils.colorCategory.CategoryColors
+import ru.ohayo.moneypr.utils.colorCategory.ColorNames
 
 @Composable
 fun ColorPickerGrid(onColorSelected: (Color) -> Unit,

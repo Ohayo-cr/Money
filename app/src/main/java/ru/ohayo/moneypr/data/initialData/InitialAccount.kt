@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.models.initialData
+package ru.ohayo.moneypr.data.initialData
 
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.account.AccountType

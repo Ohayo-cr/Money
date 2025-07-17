@@ -17,10 +17,10 @@ import ru.ohayo.moneypr.repository.CategoryRepository
 import ru.ohayo.moneypr.repository.CategoryRepositoryImpl
 import ru.ohayo.moneypr.repository.CurrencyRepository
 import ru.ohayo.moneypr.repository.CurrencyRepositoryImpl
-import ru.ohayo.moneypr.repository.ExpressionRepository
-import ru.ohayo.moneypr.repository.ExpressionRepositoryImpl
+import ru.ohayo.moneypr.repository.CalculatorRepository
+import ru.ohayo.moneypr.repository.CalculatorRepositoryImpl
 import ru.ohayo.moneypr.repository.AccountRepository
-import ru.ohayo.moneypr.ui.component.customeKeyboard.ExpressionCalculator
+import ru.ohayo.moneypr.domain.calculator.ExpressionCalculator
 import javax.inject.Singleton
 
 @Module
@@ -83,8 +83,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideExpressionRepository(): ExpressionRepository {
-        return ExpressionRepositoryImpl()
+    fun provideExpressionRepository(): CalculatorRepository {
+        return CalculatorRepositoryImpl()
     }
 
 }
