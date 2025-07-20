@@ -68,47 +68,10 @@ class AccountViewModel @Inject constructor(
 
 
 
-    // Метод для добавления нового счета
-    fun addAccount(name: String, type: String, balance: Double, currency: String) {
-        viewModelScope.launch {
-            _state.value = AccountState.Loading
-            try {
-                // Проверяем уникальность имени счета
-                val existingAccount = accountRepository.getAllAccounts()
-                    .first() // Получаем список счетов из потока
-                    .firstOrNull { it.name == name }
-
-                if (existingAccount != null) {
-                    throw IllegalArgumentException("Счет с именем '$name' уже существует.")
-                }
-
-                // Безопасное преобразование строки в AccountType
-                val accountType = enumValueOrNull<AccountType>(type)
-                    ?: throw IllegalArgumentException("Неверный тип счета: $type")
-
-                val accountDbo = AccountDbo(
-                    name = name,
-                    type = accountType,
-                    balance = balance,
-                    currency = currency
-                )
-
-                accountRepository.insertAccount(accountDbo)
-                _state.value = AccountState.Success
-            } catch (e: Exception) {
-                _state.value = AccountState.Error(e.message ?: "Неизвестная ошибка")
-            }
-        }
-    }
 
 
-    private inline fun <reified T : Enum<T>> enumValueOrNull(value: String): T? {
-        return try {
-            enumValueOf<T>(value)
-        } catch (e: IllegalArgumentException) {
-            null
-        }
-    }
+
+
 
 
     sealed class AccountState {

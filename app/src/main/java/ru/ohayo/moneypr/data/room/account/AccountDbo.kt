@@ -4,9 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-/**
- * Сущность для представления счета пользователя.
- */
+
 @Entity(
     indices = [
         Index(value = ["name"], unique = true), // Уникальное имя счета

@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.account.AccountType
@@ -18,6 +19,48 @@ class AddAccountViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = MutableStateFlow<AccountState>(AccountState.Idle)
     val state: StateFlow<AccountState> = _state
+    private val _dialogStates = MutableStateFlow(mapOf<String, Boolean>())
+    val dialogStates: StateFlow<Map<String, Boolean>> get() = _dialogStates
+
+    private val _fieldValues = MutableStateFlow(mapOf<String, String>())
+    val fieldValues: StateFlow<Map<String, String>> get() = _fieldValues
+
+    private val _tempFieldValues = MutableStateFlow(mapOf<String, String>())
+    val tempFieldValues: StateFlow<Map<String, String>> get() = _tempFieldValues
+
+    init {
+        // Инициализация начальных значений
+        viewModelScope.launch {
+            _fieldValues.emit(mapOf("name" to "Enter name", "note" to "Enter note"))
+            _tempFieldValues.emit(mapOf("name" to "", "note" to ""))
+        }
+    }
+
+    fun setShowDialog(dialogKey: String, show: Boolean) {
+        viewModelScope.launch {
+            _dialogStates.update { it + (dialogKey to show) }
+        }
+    }
+
+    private fun setFieldValue(fieldKey: String, value: String) {
+        viewModelScope.launch {
+            _fieldValues.update { it + (fieldKey to value) }
+        }
+    }
+
+    fun setTempFieldValue(fieldKey: String, value: String) {
+        viewModelScope.launch {
+            _tempFieldValues.update { it + (fieldKey to value) }
+        }
+    }
+
+    fun confirmField(fieldKey: String) {
+        viewModelScope.launch {
+            val tempValue = _tempFieldValues.value[fieldKey] ?: ""
+            setFieldValue(fieldKey, tempValue)
+            setShowDialog(fieldKey, false)
+        }
+    }
     fun addAccount(name: String, type: String, balance: Double, currency: String) {
         viewModelScope.launch {
             _state.value = AccountState.Loading

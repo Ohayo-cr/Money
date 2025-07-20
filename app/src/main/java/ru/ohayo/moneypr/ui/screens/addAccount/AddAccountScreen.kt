@@ -29,8 +29,9 @@ import ru.ohayo.moneypr.ui.component.dropDown.DropdownSelector
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 
 @Composable
-fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(), currencyVM: CurrencyViewModel = hiltViewModel()) {
-    // Собираем состояние валют из ViewModel
+fun AddAccountScreenA(accountVM: AddAccountViewModel = hiltViewModel(),
+                     currencyVM: CurrencyViewModel = hiltViewModel()) {
+
     val currencies by currencyVM.currencies.collectAsState(initial = emptyList())
     var name by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf(AccountType.Cash) }
@@ -104,7 +105,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(), currencyV
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Кнопка сохранения
+
         Button(
             onClick = {
                 // Проверяем, что все поля заполнены корректно

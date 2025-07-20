@@ -106,15 +106,13 @@ fun NavHostScreen(navController: NavHostController) {
         }
         composable(Screen.AccountList.route) {
             val accountViewModel: AccountViewModel = hiltViewModel()
-            val currencyViewModel: CurrencyViewModel = hiltViewModel()
             AccountScreen(
                 accountViewModel = accountViewModel,
-                currencyViewModel = currencyViewModel,
                 navController = navController
             )
         }
         composable(Screen.AddAccount.route) {
-            AddAccountScreen()
+            AddAccountScreen(navController = navController)
         }
         composable(Screen.AddTransaction.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
