@@ -10,11 +10,12 @@ sealed class Screen(val route: String) {
     data object Settings : Screen("settings")
     data object AddTransaction : Screen("add_transaction")
 
-    data object AddAccount : Screen("add_account")
+    data object AccountList : Screen("account_list")
 
     data object Categories : Screen("categories")
     data  object Currency : Screen("currency")
     data object AddCategory : Screen("add_category")
+    data object AddAccount : Screen("add_account")
     data object AddCategoryWithId :  Screen("add_category/{id}")
 
 }

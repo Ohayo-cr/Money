@@ -20,13 +20,14 @@ import ru.ohayo.moneypr.ui.screens.allSettings.SettingsScreen
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryList
 import ru.ohayo.moneypr.ui.screens.charts.ChartsScreen
 import ru.ohayo.moneypr.ui.screens.transactionList.TransactionsList
-import ru.ohayo.moneypr.ui.screens.accountScreen.AddAccountScreen
+import ru.ohayo.moneypr.ui.screens.accountScreen.AccountScreen
 
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyScreen
 
 import ru.ohayo.moneypr.ui.screens.splashScreen.SplashScreen
 
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
+import ru.ohayo.moneypr.ui.screens.addAccount.AddAccountScreen
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 
@@ -103,13 +104,17 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.Records.route) {
             TransactionsList()
         }
-        composable(Screen.AddAccount.route) {
+        composable(Screen.AccountList.route) {
             val accountViewModel: AccountViewModel = hiltViewModel()
             val currencyViewModel: CurrencyViewModel = hiltViewModel()
-            AddAccountScreen(
+            AccountScreen(
                 accountViewModel = accountViewModel,
-                currencyViewModel = currencyViewModel
+                currencyViewModel = currencyViewModel,
+                navController = navController
             )
+        }
+        composable(Screen.AddAccount.route) {
+            AddAccountScreen()
         }
         composable(Screen.AddTransaction.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
