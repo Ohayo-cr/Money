@@ -43,6 +43,7 @@ import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.component.dropDown.DropdownSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
+import ru.ohayo.moneypr.ui.screens.addAccount.components.KeyboardSheet
 import ru.ohayo.moneypr.ui.screens.addAccount.components.accountTypeList
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
@@ -91,7 +92,9 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account balance", "0") { println("Clicked on Name") }
+                Triple("Account balance",  fieldValues["balance"] ?: "") {
+                    accountVM.setShowDialog("balance", true)
+                }
             )
         )
         AccountInfoCard(
@@ -160,6 +163,11 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                 accountVM.setCurrency(selectedItem)
                 accountVM.setShowDialog("currency", false)
             }
+        )
+    }
+    if (dialogStates["balance"] == true) {
+        KeyboardSheet(
+            onDismiss = { accountVM.setShowDialog("balance", false) },
         )
     }
 

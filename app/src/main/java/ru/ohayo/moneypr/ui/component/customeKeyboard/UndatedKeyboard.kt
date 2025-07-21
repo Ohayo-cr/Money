@@ -17,9 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel
 
-
 @Composable
-fun CalculatorKeyboard(
+fun UndatedKeyboard(
     viewModel: KeyboardViewModel,
     onDateButtonClicked: () -> Unit,
     onHideKeyboardClicked: () -> Unit,
@@ -30,7 +29,7 @@ fun CalculatorKeyboard(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Max) // Занимает всю доступную высоту
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.primary)
             .padding(top = 4.dp), // Добавляем небольшой отступ сверху
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -119,16 +118,11 @@ fun CalculatorKeyboard(
         }
     }
 }
-fun isNumber(input: String): Boolean {
+private fun isNumber(input: String): Boolean {
     return when {
-        input == "0" -> false // Одиночный 0 не является числом
+
         input == "." || input == "," -> false // Одиночная точка или запятая не являются числами
-        input == "0." || input == "0," -> false // Незавершенные числа вида "0." или "0," не являются числами
-        input == "0.0" || input == "0.00" -> false // Числа 0.0 и 0.00 считаются некорректными
         input.toDoubleOrNull() != null -> true // Корректное число
         else -> false
     }
 }
-
-
-

@@ -30,7 +30,7 @@ import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectSheet
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.DatePickerSheet
-import ru.ohayo.moneypr.ui.component.customeKeyboard.CalculatorKeyboard
+import ru.ohayo.moneypr.ui.component.customeKeyboard.TransactionKeyboard
 import ru.ohayo.moneypr.ui.component.customeKeyboard.NoteField
 import ru.ohayo.moneypr.ui.component.customeKeyboard.TopPanelKeyboard
 import ru.ohayo.moneypr.utils.formate.formatLocalDateTime
@@ -117,7 +117,7 @@ fun AddTransactionForm(
                     onFocusChanged = {}
                 )
 
-                CalculatorKeyboard(
+                TransactionKeyboard(
                     viewModel = keyboardViewModel,
                     onDateButtonClicked = {
                         showDatePickerDialog = true

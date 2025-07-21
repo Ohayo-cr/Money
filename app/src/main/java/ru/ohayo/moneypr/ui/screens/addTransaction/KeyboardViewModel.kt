@@ -16,7 +16,7 @@ class KeyboardViewModel @Inject constructor(
     private val repository: CalculatorRepository
 ) : ViewModel() {
 
-    var currentInput by mutableStateOf("")
+    var currentInput by mutableStateOf("0")
         private set
     var result by mutableStateOf("")
         private set
