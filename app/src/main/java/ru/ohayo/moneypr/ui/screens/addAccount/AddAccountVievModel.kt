@@ -11,12 +11,21 @@ import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.repository.AccountRepository
+import ru.ohayo.moneypr.repository.CurrencyRepository
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountItem
 
 import javax.inject.Inject
 @HiltViewModel
 class AddAccountViewModel @Inject constructor(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
+    private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
+
+
+    private val _currencyList = mutableListOf<AccountItem>()
+    val currencyList: List<AccountItem> get() = _currencyList
+
+
     private val _state = MutableStateFlow<AccountState>(AccountState.Idle)
     val state: StateFlow<AccountState> = _state
     private val _dialogStates = MutableStateFlow(mapOf<String, Boolean>())
@@ -33,6 +42,15 @@ class AddAccountViewModel @Inject constructor(
         viewModelScope.launch {
             _fieldValues.emit(mapOf("name" to "Enter name", "note" to "Enter note"))
             _tempFieldValues.emit(mapOf("name" to "", "note" to ""))
+
+            loadCurrencyList()
+        }
+    }
+    private fun loadCurrencyList() {
+        viewModelScope.launch {
+            val currencies = currencyRepository.getAllAccountItems()
+            _currencyList.clear()
+            _currencyList.addAll(currencies)
         }
     }
 
@@ -61,6 +79,21 @@ class AddAccountViewModel @Inject constructor(
             setShowDialog(fieldKey, false)
         }
     }
+
+
+    fun setAccountType(selectedType: AccountType) {
+        viewModelScope.launch {
+            _fieldValues.update { it + ("type" to selectedType.name) }
+        }
+    }
+
+    fun setCurrency(selectedCurrency: AccountItem) {
+        viewModelScope.launch {
+            _fieldValues.update { it + ("currency" to selectedCurrency.mainText) }
+        }
+    }
+
+
     fun addAccount(name: String, type: String, balance: Double, currency: String) {
         viewModelScope.launch {
             _state.value = AccountState.Loading

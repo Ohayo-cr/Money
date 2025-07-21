@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.utils.accountIconMapper
+package ru.ohayo.moneypr.ui.screens.addAccount.components
 
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountType

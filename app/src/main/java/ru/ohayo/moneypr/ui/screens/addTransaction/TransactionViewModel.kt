@@ -39,7 +39,7 @@ class TransactionViewModel @Inject constructor(
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
 
     val accounts = accountRepository.getAllAccounts()
-    val currencies = currencyRepository.getAllCurrencies()
+    val currencies = currencyRepository.getAllCurrenciesFlow()
 
     // Состояние текущей даты (в миллисекундах)
     private val _currentDate = MutableStateFlow(System.currentTimeMillis())

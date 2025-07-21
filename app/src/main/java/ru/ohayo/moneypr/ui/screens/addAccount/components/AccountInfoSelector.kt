@@ -4,29 +4,30 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import ru.ohayo.moneypr.data.models.AccountItem
-import ru.ohayo.moneypr.data.room.account.AccountType
-import ru.ohayo.moneypr.utils.accountIconMapper.AccountIconMapper
+import ru.ohayo.moneypr.ui.theme.TextDisabled
 
 @Composable
 fun AccountInfoSelector(
+    text: String,
     onDismissRequest: () -> Unit,
     items: List<AccountItem>, // Список элементов для отображения
     selectedItem: AccountItem? = null, // Текущий выбранный элемент (опционально)
@@ -36,17 +37,18 @@ fun AccountInfoSelector(
         Card(
             shape = MaterialTheme.shapes.medium,
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.fillMaxWidth()
+                .padding(16.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = "Выбор элемента",
+                    text = text,
                     style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
 
                 LazyColumn {
-                    items(items) { item ->
+                    itemsIndexed(items) { index, item ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
@@ -59,8 +61,9 @@ fun AccountInfoSelector(
                                 painter = painterResource(id = item.iconResId),
                                 contentDescription = item.mainText,
                                 modifier = Modifier
-                                    .size(24.dp)
-                                    .padding(end = 16.dp)
+                                    .size(44.dp)
+                                    .padding(end = 16.dp),
+                                colorFilter = if (item.shouldTintIcon) ColorFilter.tint(MaterialTheme.colorScheme.onPrimary) else null
                             )
 
                             // Два текста друг над другом
@@ -70,16 +73,18 @@ fun AccountInfoSelector(
                                 Text(
                                     text = item.mainText,
                                     style = MaterialTheme.typography.bodyLarge,
-                                    color = if (item == selectedItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                    color = MaterialTheme.colorScheme.onPrimary
                                 )
-                                if (item.secondaryText != null) {
-                                    Text(
-                                        text = item.secondaryText,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = if (item == selectedItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
+                                Text(
+                                    text = item.secondaryText,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = TextDisabled
+                                )
                             }
+
+                        }
+                        if (index < items.size - 1) {
+                            Divider(modifier = Modifier.padding(horizontal = 8.dp))
                         }
                     }
                 }

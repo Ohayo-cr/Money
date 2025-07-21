@@ -96,7 +96,7 @@ fun AddAccountScreenA(accountVM: AddAccountViewModel = hiltViewModel(),
                 items = currencies,
                 selectedItem = selectedCurrency,
                 onItemSelected = { currency -> selectedCurrencySymbol = currency.symbol },
-                itemToString = { it.name },
+                itemToString = { it.fullName },
                 itemIcon = { it.iconResId },
                 label = "Выберите валюту",
                 modifier = Modifier.fillMaxWidth()

@@ -112,7 +112,7 @@ fun CurrencyItem(currency: CurrencyDbo) {
 
         // Название валюты
         Text(
-            text = currency.name,
+            text = currency.fullName,
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.weight(1f),
             maxLines = 1,

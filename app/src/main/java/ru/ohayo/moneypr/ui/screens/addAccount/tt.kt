@@ -31,15 +31,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.component.dropDown.DropdownSelector
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
+import ru.ohayo.moneypr.ui.screens.addAccount.components.accountTypeList
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 
@@ -48,16 +52,17 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                      currencyVM: CurrencyViewModel = hiltViewModel(),
                      navController: NavController) {
 
-    val currencies by currencyVM.currencies.collectAsState(initial = emptyList())
 
+
+
+    val currencies = accountVM.currencyList
     var selectedType by remember { mutableStateOf(AccountType.Cash) }
     var balance by remember { mutableStateOf("") }
-    var selectedCurrencySymbol by remember { mutableStateOf("") }
-    val selectedCurrency = currencies.find { it.symbol == selectedCurrencySymbol }
     val context = LocalContext.current
     val dialogStates by accountVM.dialogStates.collectAsState()
     val fieldValues by accountVM.fieldValues.collectAsState()
     val tempFieldValues by accountVM.tempFieldValues.collectAsState()
+
 
 
 
@@ -76,7 +81,9 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         }
         AccountInfoCard(
             items = listOf(
-                Triple("Account type", selectedType.toString()) { println("Clicked on Name") },
+                Triple("Account type", fieldValues["type"] ?: AccountType.Cash.name) {
+                    accountVM.setShowDialog("accountType", true)
+                },
                 Triple("Account name", fieldValues["name"] ?: "") {
                     accountVM.setShowDialog("name", true)
                 }
@@ -90,7 +97,9 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         AccountInfoCard(
             items = listOf(
                 Triple("Account icon", "name") { println("Clicked on Name") },
-                Triple("Account currency", "viewModel.email") { println("Clicked on Email") },
+                Triple("Account currency", fieldValues["currency"] ?: "") {
+                    accountVM.setShowDialog("currency", true)
+                },
                 Triple("Account note", fieldValues["note"] ?: "") {
                     accountVM.setShowDialog("note", true)
                 }
@@ -113,6 +122,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         )
     }
 
+
     if (dialogStates["note"] == true) {
         AccountNameDialog(
             onDismissRequest = {
@@ -127,6 +137,33 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             label = "Note"
         )
     }
+
+    if (dialogStates["accountType"] == true) {
+        AccountInfoSelector(
+            text = "Enter account type",
+            onDismissRequest = {  accountVM.confirmField("accountType") },
+            items = accountTypeList,
+            selectedItem = accountTypeList.find { it.mainText == fieldValues["type"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setAccountType(AccountType.entries.first { it.name == selectedItem.mainText })
+                accountVM.confirmField("accountType")
+            }
+        )
+    }
+    if (dialogStates["currency"] == true) {
+        AccountInfoSelector(
+            text = "Enter Currency",
+            onDismissRequest = {     accountVM.setShowDialog("currency", false) },
+            items = currencies,
+            selectedItem = currencies.find { it.mainText == fieldValues["currency"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setCurrency(selectedItem)
+                accountVM.setShowDialog("currency", false)
+            }
+        )
+    }
+
+
 }
 
 

@@ -15,6 +15,7 @@ data class AccountDbo(
     val type: AccountType,
     val balance: Double,
     val currency: String,
+    val note: String? = "",
     @PrimaryKey(autoGenerate = true) val id: Long = 0
 )
 
@@ -22,5 +23,5 @@ enum class AccountType {
     Cash,
     Card,
     Contribution,
-    Other
+    Other,
 }

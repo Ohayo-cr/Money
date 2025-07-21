@@ -27,7 +27,7 @@ class CurrencyViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 // Сбор данных из репозитория
-                currencyRepository.getAllCurrencies().collect { currencies ->
+                currencyRepository.getAllCurrenciesFlow().collect { currencies ->
                     _currencies.value = currencies
                 }
             } catch (e: Exception) {
