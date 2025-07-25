@@ -22,8 +22,31 @@ class NoDateKeyboardViewModel @Inject constructor(
         private set
 
     val isExpressionReadyForEvaluation: Boolean
-        get() = currentInput.trim().isNotEmpty() && currentInput.any { it in "+-*/" }
+        get() {
+            if (currentInput.trim().isEmpty()) return false
 
+            // Проверяем, что есть хотя бы один оператор, который не является унарным минусом в начале
+            var hasBinaryOperator = false
+            var i = 0
+            while (i < currentInput.length) {
+                when (currentInput[i]) {
+                    '+', '*', '/' -> {
+                        hasBinaryOperator = true
+                        break
+                    }
+                    '-' -> {
+                        // Это бинарный минус, если он не в начале и не после другого оператора
+                        if (i > 0 && currentInput[i-1] !in "+-*/") {
+                            hasBinaryOperator = true
+                            break
+                        }
+                    }
+                }
+                i++
+            }
+
+            return hasBinaryOperator
+        }
 
 
     fun appendToInput(value: String) {

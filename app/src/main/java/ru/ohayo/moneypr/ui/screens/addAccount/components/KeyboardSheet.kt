@@ -34,7 +34,7 @@ fun KeyboardSheet(
     val displayText = if (keyboardViewModel.result.isNotEmpty()) {
         NumberFormatterKeyboard.formatWithSpaces(keyboardViewModel.result)
     } else {
-        NumberFormatterKeyboard.formatWithSpaces(keyboardViewModel.currentInput.ifEmpty { "0" })
+        NumberFormatterKeyboard.formatWithSpaces(keyboardViewModel.currentInput.ifEmpty { "" })
     }
     ModalBottomSheet(
         onDismissRequest = onDismiss,
