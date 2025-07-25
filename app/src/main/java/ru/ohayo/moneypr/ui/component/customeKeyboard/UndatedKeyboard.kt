@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import ru.ohayo.moneypr.ui.screens.addAccount.NoDateKeyboardViewModel
 
 @Composable
 fun UndatedKeyboard(
-    viewModel: KeyboardViewModel,
+    viewModel: NoDateKeyboardViewModel = hiltViewModel(),
     onDateButtonClicked: () -> Unit,
     onHideKeyboardClicked: () -> Unit,
     onOkClicked: () -> Unit,
@@ -37,15 +38,27 @@ fun UndatedKeyboard(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            KeyboardButton("7", Modifier.weight(1f), onClick = { viewModel.appendToInput("7") })
+            KeyboardButton("7", Modifier.weight(1f), onClick = { viewModel.appendToInput("7") },
+                shape = RoundedCornerShape(
+                    topStart = 8.dp,
+                    topEnd = 2.dp,
+                    bottomEnd = 2.dp,
+                    bottomStart = 2.dp
+                ))
             KeyboardButton("8", Modifier.weight(1f), onClick = { viewModel.appendToInput("8") })
-            KeyboardButton("9", Modifier.weight(1f), onClick = { viewModel.appendToInput("9") })
+            KeyboardButton("9", Modifier.weight(1f), onClick = { viewModel.appendToInput("9") },)
             DateButton(
                 text = dateText,
                 onClick = onDateButtonClicked,
                 modifier = Modifier.weight(1f),
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                shape = RoundedCornerShape(
+                    topStart = 2.dp,
+                    topEnd = 8.dp,
+                    bottomEnd = 2.dp,
+                    bottomStart = 2.dp
+                )
             )
         }
 
@@ -89,7 +102,7 @@ fun UndatedKeyboard(
             val buttonText = if (viewModel.isExpressionReadyForEvaluation) "=" else "OK"
             val isOnlyMinus = viewModel.currentInput == "-"
             val buttonEnabled = if (viewModel.result.isNotEmpty()) {
-                viewModel.isResultPositive && viewModel.result.toDoubleOrNull() != 0.0
+                 viewModel.result.toDoubleOrNull() != 0.0
             } else {
                 !isOnlyMinus && (viewModel.isExpressionReadyForEvaluation || isNumber(viewModel.currentInput))
             }

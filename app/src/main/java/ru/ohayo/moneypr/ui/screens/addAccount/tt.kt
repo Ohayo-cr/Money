@@ -45,8 +45,10 @@ import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
 import ru.ohayo.moneypr.ui.screens.addAccount.components.KeyboardSheet
 import ru.ohayo.moneypr.ui.screens.addAccount.components.accountTypeList
+import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
+import ru.ohayo.moneypr.utils.formate.NumberFormatterKeyboard
 
 @Composable
 fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
@@ -58,7 +60,6 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
 
     val currencies = accountVM.currencyList
     var selectedType by remember { mutableStateOf(AccountType.Cash) }
-    var balance by remember { mutableStateOf("") }
     val context = LocalContext.current
     val dialogStates by accountVM.dialogStates.collectAsState()
     val fieldValues by accountVM.fieldValues.collectAsState()
@@ -92,7 +93,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account balance",  fieldValues["balance"] ?: "") {
+                Triple("Account balance",fieldValues["balance"] ?: "0") {
                     accountVM.setShowDialog("balance", true)
                 }
             )
@@ -168,6 +169,11 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
     if (dialogStates["balance"] == true) {
         KeyboardSheet(
             onDismiss = { accountVM.setShowDialog("balance", false) },
+            onOkClicked = { result ->
+                accountVM.setFieldValue("balance", result)
+                accountVM.setShowDialog("balance", false)
+
+            }
         )
     }
 

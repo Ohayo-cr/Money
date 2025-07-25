@@ -60,7 +60,7 @@ class AddAccountViewModel @Inject constructor(
         }
     }
 
-    private fun setFieldValue(fieldKey: String, value: String) {
+     fun setFieldValue(fieldKey: String, value: String) {
         viewModelScope.launch {
             _fieldValues.update { it + (fieldKey to value) }
         }
