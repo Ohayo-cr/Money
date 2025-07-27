@@ -40,7 +40,10 @@ class AddAccountViewModel @Inject constructor(
     init {
         // Инициализация начальных значений
         viewModelScope.launch {
-            _fieldValues.emit(mapOf("name" to "Enter name", "note" to "Enter note"))
+            _fieldValues.emit(mapOf(
+                "name" to "",
+                "note" to "",
+                "type" to AccountType.Cash.toString()))
             _tempFieldValues.emit(mapOf("name" to "", "note" to ""))
 
             loadCurrencyList()
@@ -94,7 +97,7 @@ class AddAccountViewModel @Inject constructor(
     }
 
 
-    fun addAccount(name: String, type: String, balance: Double, currency: String) {
+    fun addAccount(name: String, type: String, balance: Double, currency: String, note: String) {
         viewModelScope.launch {
             _state.value = AccountState.Loading
             try {
@@ -115,13 +118,14 @@ class AddAccountViewModel @Inject constructor(
                     name = name,
                     type = accountType,
                     balance = balance,
-                    currency = currency
-                )
+                    currency = currency,
+                    note = note
+                    )
 
                 accountRepository.insertAccount(accountDbo)
                 _state.value = AccountState.Success
             } catch (e: Exception) {
-                _state.value = AccountState.Error(e.message ?: "Неизвестная ошибка")
+                _state.value = AccountState.Error(e.message ?: "Ошибка")
             }
         }
     }
@@ -133,9 +137,9 @@ class AddAccountViewModel @Inject constructor(
         }
     }
     sealed class AccountState {
-        object Idle : AccountState()
-        object Loading : AccountState()
-        object Success : AccountState()
+        data object Idle : AccountState()
+        data object Loading : AccountState()
+        data object Success : AccountState()
         data class Error(val message: String) : AccountState()
     }
 }

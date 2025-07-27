@@ -1,70 +1,50 @@
 package ru.ohayo.moneypr.ui.screens.addAccount
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
-import ru.ohayo.moneypr.ui.component.dropDown.DropdownSelector
+import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
 import ru.ohayo.moneypr.ui.screens.addAccount.components.KeyboardSheet
 import ru.ohayo.moneypr.ui.screens.addAccount.components.accountTypeList
-import ru.ohayo.moneypr.ui.screens.addTransaction.KeyboardViewModel
-import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
-import ru.ohayo.moneypr.utils.formate.NumberFormatterKeyboard
+
 
 @Composable
 fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
-                     currencyVM: CurrencyViewModel = hiltViewModel(),
                      navController: NavController) {
 
 
-
-
     val currencies = accountVM.currencyList
-    var selectedType by remember { mutableStateOf(AccountType.Cash) }
-    val context = LocalContext.current
     val dialogStates by accountVM.dialogStates.collectAsState()
     val fieldValues by accountVM.fieldValues.collectAsState()
     val tempFieldValues by accountVM.tempFieldValues.collectAsState()
-
+    val context = LocalContext.current
 
 
 
@@ -83,10 +63,10 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         }
         AccountInfoCard(
             items = listOf(
-                Triple("Account type", fieldValues["type"] ?: AccountType.Cash.name) {
+                Triple("Account type", fieldValues["type"] ?: "") {
                     accountVM.setShowDialog("accountType", true)
                 },
-                Triple("Account name", fieldValues["name"] ?: "") {
+                Triple("Account name",if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"] ?: "") {
                     accountVM.setShowDialog("name", true)
                 }
             )
@@ -100,16 +80,40 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account icon", "name") { println("Clicked on Name") },
+                Triple("Account icon", "--") { println("Clicked on --") },
                 Triple("Account currency", fieldValues["currency"] ?: "") {
                     accountVM.setShowDialog("currency", true)
                 },
-                Triple("Account note", fieldValues["note"] ?: "") {
+                Triple("Account note",if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"] ?: "") {
                     accountVM.setShowDialog("note", true)
                 }
             )
         )
+        FullWidthButton(
+            text = "Save account",
+            onClick = {
+
+                    val name = fieldValues["name"] ?: ""
+                    val type = fieldValues["type"] ?: ""
+                    val balanceString = fieldValues["balance"] ?: "0"
+                    val currency = fieldValues["currency"] ?: ""
+                    val note = fieldValues["note"] ?: ""
+                    val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
+                if (name.isEmpty()) {
+                    Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
+
+                } else if (currency.isEmpty()) {
+                    Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
+                } else {
+                    accountVM.addAccount(name, type, balance, currency, note)
+                }
+            }
+        )
     }
+
+
+
+
 
     if (dialogStates["name"] == true) {
         AccountNameDialog(

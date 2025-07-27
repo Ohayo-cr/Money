@@ -121,7 +121,8 @@ fun AddAccountScreenA(accountVM: AddAccountViewModel = hiltViewModel(),
                         name = name,
                         type = selectedType.name,
                         balance = balance.toDoubleOrNull() ?: 0.0,
-                        currency = selectedCurrencySymbol
+                        currency = selectedCurrencySymbol,
+                        note = "null"
                     )
                     Toast.makeText(context, "Счет добавлен", Toast.LENGTH_SHORT).show()
 
