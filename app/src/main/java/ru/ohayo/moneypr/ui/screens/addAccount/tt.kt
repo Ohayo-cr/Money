@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,13 +25,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountIconMapper
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoItem
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
 import ru.ohayo.moneypr.ui.screens.addAccount.components.KeyboardSheet
@@ -64,40 +70,49 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         }
         AccountInfoCard(
             items = listOf(
-                Triple("Account type", fieldValues["type"] ?: "") {
-                    accountVM.setShowDialog("accountType", true)
-                },
-                Triple(
-                    "Account name",
-                    if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
-                        ?: ""
-                ) {
-                    accountVM.setShowDialog("name", true)
-                }
+                AccountInfoItem(
+                    key = "Account type",
+                    valueText = fieldValues["type"] ?: "",
+                    onClick = { accountVM.setShowDialog("accountType", true) }
+                ),
+                AccountInfoItem(
+                    key = "Account name",
+                    valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"] ?: "",
+                    onClick = { accountVM.setShowDialog("name", true) }
+                )
             )
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account balance", fieldValues["balance"] ?: "0") {
-                    accountVM.setShowDialog("balance", true)
-                }
+                AccountInfoItem(
+                    key = "Account balance",
+                    valueText = fieldValues["balance"] ?: "0",
+                    onClick = { accountVM.setShowDialog("balance", true) }
+                )
             )
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account icon", "--") { println("Clicked on --") },
-                Triple("Account currency", fieldValues["currency"] ?: "") {
-                    accountVM.setShowDialog("currency", true)
-                },
-                Triple(
-                    "Account note",
-                    if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
-                        ?: ""
-                ) {
-                    accountVM.setShowDialog("note", true)
-                }
+                AccountInfoItem(
+                    key = "Account icon",
+                    valueIcon = AccountIconMapper.getIconResId(
+                        AccountType.entries.firstOrNull { it.name == fieldValues["type"] } ?: AccountType.Other
+                    ),
+                    onClick = {  }
+                ),
+                AccountInfoItem(
+                    key = "Account currency",
+                    valueText = fieldValues["currency"] ?: "",
+                    onClick = { accountVM.setShowDialog("currency", true) }
+                ),
+                AccountInfoItem(
+                    key = "Account note",
+                    valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"] ?: "",
+                    onClick = { accountVM.setShowDialog("note", true) }
+                )
             )
         )
+
         FullWidthButton(
             text = "Save account",
             onClick = {
@@ -138,13 +153,10 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             }
 
             AddAccountViewModel.AccountState.Loading -> {
-                // Показ индикатора загрузки
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
 
-            AddAccountViewModel.AccountState.Idle -> {
-                // Ничего не делаем
-            }
+            AddAccountViewModel.AccountState.Idle -> {}
         }
     }
 
@@ -222,27 +234,37 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
 
 
 
+
 @Composable
-fun AccountInfoCard(items: List<Triple<String, String, () -> Unit>>) {
+fun AccountInfoCard(items: List<AccountInfoItem>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(colorScheme.surface)
     ) {
         Column {
-            items.forEachIndexed { index, (key, value, onClick) ->
+            items.forEachIndexed { index, item ->
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onClick() }
+                        .clickable { item.onClick() }
                         .padding(16.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = key, color = colorScheme.onPrimary)
-                        Text(text = value, color = TextDisabled)
+                        Text(text = item.key, color = colorScheme.onPrimary)
+                        if (item.valueText != null) {
+                            Text(text = item.valueText, color = TextDisabled)
+                        } else if (item.valueIcon != null) {
+                            Icon(
+                                painter = painterResource(id = item.valueIcon),
+                                modifier = Modifier.size(26.dp),
+                                contentDescription = null,
+                                tint = TextDisabled
+                            )
+                        }
                     }
                 }
                 if (index < items.size - 1) {
