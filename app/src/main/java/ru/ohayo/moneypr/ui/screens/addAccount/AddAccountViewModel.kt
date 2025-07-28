@@ -37,6 +37,11 @@ class AddAccountViewModel @Inject constructor(
     private val _tempFieldValues = MutableStateFlow(mapOf<String, String>())
     val tempFieldValues: StateFlow<Map<String, String>> get() = _tempFieldValues
 
+    fun resetState() {
+        viewModelScope.launch {
+            _state.value = AccountState.Idle
+        }
+    }
     init {
         // Инициализация начальных значений
         viewModelScope.launch {
@@ -107,7 +112,7 @@ class AddAccountViewModel @Inject constructor(
                     .firstOrNull { it.name == name }
 
                 if (existingAccount != null) {
-                    throw IllegalArgumentException("Счет с именем '$name' уже существует.")
+                    throw IllegalArgumentException("Счет с именем $name уже существует.")
                 }
 
                 // Безопасное преобразование строки в AccountType

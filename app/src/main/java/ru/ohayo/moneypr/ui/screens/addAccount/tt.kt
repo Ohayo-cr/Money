@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -45,8 +47,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
     val fieldValues by accountVM.fieldValues.collectAsState()
     val tempFieldValues by accountVM.tempFieldValues.collectAsState()
     val context = LocalContext.current
-
-
+    val accountState by accountVM.state.collectAsState()
 
     Column(
         modifier = Modifier
@@ -66,14 +67,18 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                 Triple("Account type", fieldValues["type"] ?: "") {
                     accountVM.setShowDialog("accountType", true)
                 },
-                Triple("Account name",if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"] ?: "") {
+                Triple(
+                    "Account name",
+                    if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
+                        ?: ""
+                ) {
                     accountVM.setShowDialog("name", true)
                 }
             )
         )
         AccountInfoCard(
             items = listOf(
-                Triple("Account balance",fieldValues["balance"] ?: "0") {
+                Triple("Account balance", fieldValues["balance"] ?: "0") {
                     accountVM.setShowDialog("balance", true)
                 }
             )
@@ -84,7 +89,11 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                 Triple("Account currency", fieldValues["currency"] ?: "") {
                     accountVM.setShowDialog("currency", true)
                 },
-                Triple("Account note",if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"] ?: "") {
+                Triple(
+                    "Account note",
+                    if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
+                        ?: ""
+                ) {
                     accountVM.setShowDialog("note", true)
                 }
             )
@@ -93,12 +102,12 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             text = "Save account",
             onClick = {
 
-                    val name = fieldValues["name"] ?: ""
-                    val type = fieldValues["type"] ?: ""
-                    val balanceString = fieldValues["balance"] ?: "0"
-                    val currency = fieldValues["currency"] ?: ""
-                    val note = fieldValues["note"] ?: ""
-                    val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
+                val name = fieldValues["name"] ?: ""
+                val type = fieldValues["type"] ?: ""
+                val balanceString = fieldValues["balance"] ?: "0"
+                val currency = fieldValues["currency"] ?: ""
+                val note = fieldValues["note"] ?: ""
+                val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
                 if (name.isEmpty()) {
                     Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
 
@@ -109,8 +118,35 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                 }
             }
         )
-    }
+        when (val currentState = accountState) {
+            is AddAccountViewModel.AccountState.Success -> {
+                val name = fieldValues["name"] ?: ""
+                LaunchedEffect(currentState) {
+                    Toast.makeText(context, "Счет $name успешно добавлен", Toast.LENGTH_SHORT)
+                        .show()
+                    navController.popBackStack()
+                    accountVM.resetState()
+                }
+            }
 
+            is AddAccountViewModel.AccountState.Error -> {
+                val errorMessage = (currentState as AddAccountViewModel.AccountState.Error).message
+                LaunchedEffect(currentState) {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                    accountVM.resetState()
+                }
+            }
+
+            AddAccountViewModel.AccountState.Loading -> {
+                // Показ индикатора загрузки
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            }
+
+            AddAccountViewModel.AccountState.Idle -> {
+                // Ничего не делаем
+            }
+        }
+    }
 
 
 
