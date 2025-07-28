@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,10 +42,17 @@ fun AccountSelectSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
+        windowInsets = WindowInsets(0),
         content = {
             Column(modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp,horizontal = 8.dp )) {
+                .padding(
+                    top = 16.dp,
+                    start = 8.dp,
+                    end = 8.dp,
+                    bottom = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding() + 16.dp
+                )
+            ) {
                 Text(
                     text = "Выберите счет",
                     style = typography.titleMedium,
@@ -111,8 +121,10 @@ fun AccountSelectSheet(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(156.dp))
+
             }
+
         }
+
     )
 }

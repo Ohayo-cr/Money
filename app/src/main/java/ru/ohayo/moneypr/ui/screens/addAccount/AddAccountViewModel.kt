@@ -58,9 +58,9 @@ class AddAccountViewModel @Inject constructor(
         viewModelScope.launch {
             _fieldValues.emit(mapOf(
                 "name" to "",
-                "note" to "",
-                "type" to AccountType.Cash.toString()))
+                "note" to ""))
             _tempFieldValues.emit(mapOf("name" to "", "note" to ""))
+            setShowDialog ("accountType", true)
 
             loadCurrencyList()
         }
