@@ -1,6 +1,6 @@
 package ru.ohayo.moneypr.ui.screens.addAccount
 
-import android.annotation.SuppressLint
+
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
@@ -59,59 +58,68 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                BackButton(navController)
-                Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    BackButton(navController)
+                    Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
+                }
 
-        }
-        AccountInfoCard(
-            items = listOf(
-                AccountInfoItem(
-                    key = "Account type",
-                    valueText = fieldValues["type"] ?: "",
-                    onClick = { accountVM.setShowDialog("accountType", true) }
-                ),
-                AccountInfoItem(
-                    key = "Account name",
-                    valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"] ?: "",
-                    onClick = { accountVM.setShowDialog("name", true) }
-                )
-            )
-        )
-        AccountInfoCard(
-            items = listOf(
-                AccountInfoItem(
-                    key = "Account balance",
-                    valueText = fieldValues["balance"] ?: "0",
-                    onClick = { accountVM.setShowDialog("balance", true) }
-                )
-            )
-        )
-        AccountInfoCard(
-            items = listOf(
-                AccountInfoItem(
-                    key = "Account icon",
-                    valueIcon = AccountIconMapper.getIconResId(
-                        AccountType.entries.firstOrNull { it.name == fieldValues["type"] } ?: AccountType.Other
+            }
+            AccountInfoCard(
+                items = listOf(
+                    AccountInfoItem(
+                        key = "Account type",
+                        valueText = fieldValues["type"] ?: "",
+                        onClick = { accountVM.setShowDialog("accountType", true) }
                     ),
-                    onClick = {  }
-                ),
-                AccountInfoItem(
-                    key = "Account currency",
-                    valueText = fieldValues["currency"] ?: "",
-                    onClick = { accountVM.setShowDialog("currency", true) }
-                ),
-                AccountInfoItem(
-                    key = "Account note",
-                    valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"] ?: "",
-                    onClick = { accountVM.setShowDialog("note", true) }
+                    AccountInfoItem(
+                        key = "Account name",
+                        valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("name", true) }
+                    )
                 )
             )
-        )
+            AccountInfoCard(
+                items = listOf(
+                    AccountInfoItem(
+                        key = "Account balance",
+                        valueText = fieldValues["balance"] ?: "0",
+                        onClick = { accountVM.setShowDialog("balance", true) }
+                    )
+                )
+            )
+            AccountInfoCard(
+                items = listOf(
+                    AccountInfoItem(
+                        key = "Account icon",
+                        valueIcon = AccountIconMapper.getIconResId(
+                            AccountType.entries.firstOrNull { it.name == fieldValues["type"] }
+                                ?: AccountType.Other
+                        ),
+                        isClickable = false
+                    ),
+                    AccountInfoItem(
+                        key = "Account currency",
+                        valueText = fieldValues["currency"] ?: "",
+                        onClick = { accountVM.setShowDialog("currency", true) }
+                    ),
+                    AccountInfoItem(
+                        key = "Account note",
+                        valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("note", true) }
+                    )
+                )
+            )
+        }
 
         FullWidthButton(
             text = "Save account",
@@ -145,7 +153,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             }
 
             is AddAccountViewModel.AccountState.Error -> {
-                val errorMessage = (currentState as AddAccountViewModel.AccountState.Error).message
+                val errorMessage = (currentState).message
                 LaunchedEffect(currentState) {
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                     accountVM.resetState()
@@ -159,9 +167,6 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             AddAccountViewModel.AccountState.Idle -> {}
         }
     }
-
-
-
 
     if (dialogStates["name"] == true) {
         AccountNameDialog(
@@ -177,7 +182,6 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
             label = "Account Name"
         )
     }
-
 
     if (dialogStates["note"] == true) {
         AccountNameDialog(
@@ -247,7 +251,10 @@ fun AccountInfoCard(items: List<AccountInfoItem>) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { item.onClick() }
+                        .clickable(
+                            enabled = item.isClickable,
+                            onClick = item.onClick
+                        )
                         .padding(16.dp)
                 ) {
                     Row(

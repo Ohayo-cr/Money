@@ -4,5 +4,6 @@ data class AccountInfoItem(
     val key: String,
     val valueText: String? = null,
     val valueIcon: Int? = null,
-    val onClick: () -> Unit
+    val onClick: () -> Unit = {},
+    val isClickable: Boolean = true
 )
