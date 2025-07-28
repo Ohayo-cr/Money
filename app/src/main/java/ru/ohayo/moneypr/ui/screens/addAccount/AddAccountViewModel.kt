@@ -12,6 +12,7 @@ import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.repository.CurrencyRepository
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountIconMapper
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountItem
 
 import javax.inject.Inject
@@ -42,6 +43,16 @@ class AddAccountViewModel @Inject constructor(
             _state.value = AccountState.Idle
         }
     }
+    private val _selectedIcon = MutableStateFlow<Int?>(null)
+    val selectedIcon: StateFlow<Int?> get() = _selectedIcon
+
+    fun setSelectedIcon(iconResId: Int?) {
+        viewModelScope.launch {
+            _selectedIcon.value = iconResId
+        }
+    }
+
+
     init {
         // Инициализация начальных значений
         viewModelScope.launch {
@@ -92,8 +103,10 @@ class AddAccountViewModel @Inject constructor(
     fun setAccountType(selectedType: AccountType) {
         viewModelScope.launch {
             _fieldValues.update { it + ("type" to selectedType.name) }
+            setSelectedIcon(AccountIconMapper.getIconResId(selectedType))
         }
     }
+
 
     fun setCurrency(selectedCurrency: AccountItem) {
         viewModelScope.launch {
@@ -124,6 +137,7 @@ class AddAccountViewModel @Inject constructor(
                     type = accountType,
                     balance = balance,
                     currency = currency,
+                    icon = _selectedIcon.value,
                     note = note
                     )
 

@@ -15,6 +15,7 @@ data class AccountDbo(
     val type: AccountType,
     val balance: Double,
     val currency: String,
+    val icon: Int? = null,
     val note: String? = "",
     @PrimaryKey(autoGenerate = true) val id: Long = 0
 )

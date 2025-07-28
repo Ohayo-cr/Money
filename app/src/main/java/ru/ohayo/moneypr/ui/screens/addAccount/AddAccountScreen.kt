@@ -1,141 +1,281 @@
 package ru.ohayo.moneypr.ui.screens.addAccount
 
+
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.account.AccountType
-import ru.ohayo.moneypr.ui.component.dropDown.DropdownSelector
-import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
+import ru.ohayo.moneypr.ui.component.customeButton.BackButton
+import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountCardItem
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountNameDialog
+import ru.ohayo.moneypr.ui.screens.addAccount.components.KeyboardSheet
+import ru.ohayo.moneypr.ui.screens.addAccount.components.accountTypeList
+import ru.ohayo.moneypr.ui.theme.TextDisabled
+
 
 @Composable
-fun AddAccountScreenA(accountVM: AddAccountViewModel = hiltViewModel(),
-                     currencyVM: CurrencyViewModel = hiltViewModel()) {
+fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
+                     navController: NavController) {
 
-    val currencies by currencyVM.currencies.collectAsState(initial = emptyList())
-    var name by remember { mutableStateOf("") }
-    var selectedType by remember { mutableStateOf(AccountType.Cash) }
-    var balance by remember { mutableStateOf("") }
-    var selectedCurrencySymbol by remember { mutableStateOf("") }
-    val selectedCurrency = currencies.find { it.symbol == selectedCurrencySymbol }
+
+    val currencies = accountVM.currencyList
+    val dialogStates by accountVM.dialogStates.collectAsState()
+    val fieldValues by accountVM.fieldValues.collectAsState()
+    val tempFieldValues by accountVM.tempFieldValues.collectAsState()
     val context = LocalContext.current
-
-
+    val accountState by accountVM.state.collectAsState()
+    val selectedIcon by accountVM.selectedIcon.collectAsState(initial = null)
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(8.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Добавить счет", style = MaterialTheme.typography.headlineMedium)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    BackButton(navController)
+                    Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
+                }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Поле для ввода названия счета
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Название счета") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Выбор типа счета
-        DropdownSelector(
-            items = AccountType.entries,
-            selectedItem = selectedType,
-            onItemSelected = { type -> selectedType = type }, // Обновляем выбранный тип
-            itemToString = { it.name },
-            label = "Тип счета",
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Поле для ввода баланса
-        OutlinedTextField(
-            value = balance,
-            onValueChange = { balance = it },
-            label = { Text("Баланс") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Выбор валюты
-        if (currencies.isEmpty()) {
-            Text(
-                text = "Нет доступных валют",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.error
+            }
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account type",
+                        valueText = fieldValues["type"] ?: "",
+                        onClick = { accountVM.setShowDialog("accountType", true) }
+                    ),
+                    AccountCardItem(
+                        key = "Account name",
+                        valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("name", true) }
+                    )
+                )
             )
-        } else {
-            DropdownSelector(
-                items = currencies,
-                selectedItem = selectedCurrency,
-                onItemSelected = { currency -> selectedCurrencySymbol = currency.symbol },
-                itemToString = { it.fullName },
-                itemIcon = { it.iconResId },
-                label = "Выберите валюту",
-                modifier = Modifier.fillMaxWidth()
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account balance",
+                        valueText = fieldValues["balance"] ?: "0",
+                        onClick = { accountVM.setShowDialog("balance", true) }
+                    )
+                )
+            )
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account icon",
+                        valueIcon = selectedIcon,
+                        isClickable = false
+                    ),
+                    AccountCardItem(
+                        key = "Account currency",
+                        valueText = fieldValues["currency"] ?: "",
+                        onClick = { accountVM.setShowDialog("currency", true) }
+                    ),
+                    AccountCardItem(
+                        key = "Account note",
+                        valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("note", true) }
+                    )
+                )
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-
-        Button(
+        FullWidthButton(
+            text = "Save account",
             onClick = {
-                // Проверяем, что все поля заполнены корректно
-                if (name.isBlank()) {
+
+                val name = fieldValues["name"] ?: ""
+                val type = fieldValues["type"] ?: ""
+                val balanceString = fieldValues["balance"] ?: "0"
+                val currency = fieldValues["currency"] ?: ""
+                val note = fieldValues["note"] ?: ""
+                val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
+                if (name.isEmpty()) {
                     Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
-                } else if (balance.toDoubleOrNull() == null) {
-                    Toast.makeText(context, "Введите корректный баланс", Toast.LENGTH_SHORT).show()
-                } else if (selectedCurrencySymbol.isEmpty()) {
+
+                } else if (currency.isEmpty()) {
                     Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Если все данные корректны, добавляем счет
-                    accountVM.addAccount(
-                        name = name,
-                        type = selectedType.name,
-                        balance = balance.toDoubleOrNull() ?: 0.0,
-                        currency = selectedCurrencySymbol,
-                        note = "null"
-                    )
-                    Toast.makeText(context, "Счет добавлен", Toast.LENGTH_SHORT).show()
-
-                    // Очищаем поля после успешного добавления
-                    name = ""
-                    selectedType = AccountType.Cash
-                    balance = ""
-                    selectedCurrencySymbol = ""
+                    accountVM.addAccount(name, type, balance, currency, note)
                 }
+            }
+        )
+        when (val currentState = accountState) {
+            is AddAccountViewModel.AccountState.Success -> {
+                val name = fieldValues["name"] ?: ""
+                LaunchedEffect(currentState) {
+                    Toast.makeText(context, "Счет $name успешно добавлен", Toast.LENGTH_SHORT)
+                        .show()
+                    navController.popBackStack()
+                    accountVM.resetState()
+                }
+            }
+
+            is AddAccountViewModel.AccountState.Error -> {
+                val errorMessage = (currentState).message
+                LaunchedEffect(currentState) {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                    accountVM.resetState()
+                }
+            }
+
+            AddAccountViewModel.AccountState.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            }
+
+            AddAccountViewModel.AccountState.Idle -> {}
+        }
+    }
+
+    if (dialogStates["name"] == true) {
+        AccountNameDialog(
+            onDismissRequest = {
+                accountVM.confirmField("name")
             },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Сохранить")
+            tempName = tempFieldValues["name"] ?: "",
+            onTempNameChange = { accountVM.setTempFieldValue("name", it) },
+            onConfirm = {
+                accountVM.confirmField("name")
+            },
+            title = "Enter Account Name",
+            label = "Account Name"
+        )
+    }
+
+    if (dialogStates["note"] == true) {
+        AccountNameDialog(
+            onDismissRequest = {
+                accountVM.confirmField("note")
+            },
+            tempName = tempFieldValues["note"] ?: "",
+            onTempNameChange = { accountVM.setTempFieldValue("note", it) },
+            onConfirm = {
+                accountVM.confirmField("note")
+            },
+            title = "Enter Note",
+            label = "Note"
+        )
+    }
+
+    if (dialogStates["accountType"] == true) {
+        AccountInfoSelector(
+            text = "Enter account type",
+            onDismissRequest = {  accountVM.confirmField("accountType") },
+            items = accountTypeList,
+            selectedItem = accountTypeList.find { it.mainText == fieldValues["type"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setAccountType(AccountType.entries.first { it.name == selectedItem.mainText })
+                accountVM.confirmField("accountType")
+            }
+        )
+    }
+    if (dialogStates["currency"] == true) {
+        AccountInfoSelector(
+            text = "Enter Currency",
+            onDismissRequest = {     accountVM.setShowDialog("currency", false) },
+            items = currencies,
+            selectedItem = currencies.find { it.mainText == fieldValues["currency"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setCurrency(selectedItem)
+                accountVM.setShowDialog("currency", false)
+            }
+        )
+    }
+    if (dialogStates["balance"] == true) {
+        KeyboardSheet(
+            onDismiss = { accountVM.setShowDialog("balance", false) },
+            onOkClicked = { result ->
+                accountVM.setFieldValue("balance", result)
+                accountVM.setShowDialog("balance", false)
+
+            }
+        )
+    }
+
+
+}
+
+
+
+
+
+
+@Composable
+fun AccountInfoCard(items: List<AccountCardItem>) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(colorScheme.surface)
+    ) {
+        Column {
+            items.forEachIndexed { index, item ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(
+                            enabled = item.isClickable,
+                            onClick = item.onClick
+                        )
+                        .padding(16.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(text = item.key, color = colorScheme.onPrimary)
+                        if (item.valueText != null) {
+                            Text(text = item.valueText, color = TextDisabled)
+                        } else if (item.valueIcon != null) {
+                            Icon(
+                                painter = painterResource(id = item.valueIcon),
+                                modifier = Modifier.size(26.dp),
+                                contentDescription = null,
+                                tint = TextDisabled
+                            )
+                        }
+                    }
+                }
+                if (index < items.size - 1) {
+                    Divider(modifier = Modifier.padding(horizontal = 8.dp))
+                }
+            }
         }
     }
 }

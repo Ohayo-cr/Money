@@ -7,9 +7,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
@@ -25,7 +27,7 @@ fun AccountScreen(navController: NavController,
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -66,27 +68,34 @@ fun AccountItem(accountDbo: AccountDbo) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 2.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(vertical = 8.dp, horizontal = 4.dp),
+            horizontalArrangement = Arrangement.Absolute.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            Row {
+            accountDbo.icon?.let {
+                CategoryIcon(
+                    iconResId = it,
+                    backgroundColor = Color.Gray,
+                    Modifier.size(40.dp)
+                )
+            }
+                Spacer(modifier = Modifier.size(10.dp))
             Text(
                 text = accountDbo.name,
                 style = MaterialTheme.typography.titleMedium
             )
-            Spacer(modifier = Modifier.height(4.dp))
+        }
+
+
             Text(
-                text = "Тип: ${accountDbo.type}",
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            // Используем NumberFormatter напрямую в тексте
-            Text(
-                text = "Баланс: ${NumberFormatter.format(accountDbo.balance)} ${accountDbo.currency}",
+                text = "${NumberFormatter.format(accountDbo.balance)} ${accountDbo.currency}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
