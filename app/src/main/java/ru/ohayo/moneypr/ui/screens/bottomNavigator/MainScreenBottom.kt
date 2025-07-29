@@ -1,6 +1,7 @@
 package ru.ohayo.moneypr.ui.screens.bottomNavigator
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.ui.screens.bottomNavigator.components.BottomNavigationBar
@@ -49,7 +51,7 @@ fun MainScreen(navController: NavHostController,viewModel: BottomNavViewModel = 
         // Bottom Navigation Bar — теперь правильно выровнена
         if (showBottomNav) {
             Box(
-                modifier = Modifier.align(Alignment.BottomCenter),
+                modifier = Modifier.align(Alignment.BottomCenter).background(Color.Transparent),
                 contentAlignment = Alignment.Center
             ) {
                 BottomNavigationBar(navController = navController, viewModel = viewModel)

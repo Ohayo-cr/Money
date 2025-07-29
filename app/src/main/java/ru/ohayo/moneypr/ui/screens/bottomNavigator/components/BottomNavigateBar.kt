@@ -72,7 +72,7 @@ fun BottomNavigationBar(navController: NavController,
     ) {
         // Нижняя навигация
         NavigationBar(
-            contentColor = Color.Transparent,
+            contentColor = colorScheme.surface,
             containerColor = colorScheme.surface,
             modifier = Modifier
                 .fillMaxWidth()
@@ -82,7 +82,7 @@ fun BottomNavigationBar(navController: NavController,
 
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().background(colorScheme.surface),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -204,7 +204,7 @@ fun BottomNavigationBar(navController: NavController,
             Icon(
                 painterResource(id = BottomItem.Screen3.iconId),
                 contentDescription = "Add",
-                tint = colorScheme.onSecondary,
+                tint = colorScheme.surface,
                 modifier = Modifier.size(50.dp)
             )
         }
