@@ -59,7 +59,7 @@ fun NoteField(
                 },
             placeholder = {
                 Text(
-                    text = "Введите заметку",
+                    text = "Enter a note",
                     style = MaterialTheme.typography.bodyMedium,
                     color = colorScheme.onPrimary,
                 )

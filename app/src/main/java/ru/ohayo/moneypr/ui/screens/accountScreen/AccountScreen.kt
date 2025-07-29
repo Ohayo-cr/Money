@@ -88,7 +88,7 @@ fun AccountItem(accountDbo: AccountDbo) {
             horizontalArrangement = Arrangement.Absolute.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row {
+            Row( modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
             accountDbo.icon?.let {
                 CategoryIcon(
                     iconResId = it,
