@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey
 data class AccountDbo(
     val name: String,
     val type: AccountType,
+    val initialBalance : Double = 0.0,
     val balance: Double,
     val currency: String,
     val icon: Int? = null,

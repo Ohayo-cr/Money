@@ -104,7 +104,7 @@ fun AddAccountScreen(accountVM: AddAccountViewModel = hiltViewModel(),
                     ),
                     AccountCardItem(
                         key = "Account currency",
-                        valueText = fieldValues["currency"] ?: "",
+                        valueText = fieldValues["currency_display"] ?: "",
                         onClick = { accountVM.setShowDialog("currency", true) }
                     ),
                     AccountCardItem(

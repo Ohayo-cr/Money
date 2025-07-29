@@ -110,7 +110,10 @@ class AddAccountViewModel @Inject constructor(
 
     fun setCurrency(selectedCurrency: AccountItem) {
         viewModelScope.launch {
-            _fieldValues.update { it + ("currency" to selectedCurrency.mainText) }
+            // Store the symbol in fieldValues for database
+            _fieldValues.update { it + ("currency" to selectedCurrency.symbol) }
+            // Store the display name separately for UI
+            _fieldValues.update { it + ("currency_display" to selectedCurrency.mainText) }
         }
     }
 
@@ -135,6 +138,7 @@ class AddAccountViewModel @Inject constructor(
                 val accountDbo = AccountDbo(
                     name = name,
                     type = accountType,
+                    initialBalance = balance,
                     balance = balance,
                     currency = currency,
                     icon = _selectedIcon.value,

@@ -64,7 +64,8 @@ class CurrencyRepositoryImpl(
                 iconResId = currencyDbo.iconResId
                     ?: R.drawable.ic_default_none,
                 mainText = currencyDbo.code,
-                secondaryText = currencyDbo.fullName
+                secondaryText = currencyDbo.fullName,
+                symbol = currencyDbo.symbol
             )
         }
     }
