@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.repository.CurrencyRepository
 import ru.ohayo.moneypr.data.room.currency.CurrencyDbo
+import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountItem
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,24 +16,20 @@ class CurrencyViewModel @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
 
-    // StateFlow для управления состоянием списка валют
-    private val _currencies = MutableStateFlow<List<CurrencyDbo>>(emptyList())
-    val currencies: StateFlow<List<CurrencyDbo>> = _currencies
+    private val _currencyList = mutableListOf<AccountItem>()
+    val currencyList: List<AccountItem> get() = _currencyList
 
-    // StateFlow для отображения ошибок
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error
 
     init {
         viewModelScope.launch {
-            try {
-                // Сбор данных из репозитория
-                currencyRepository.getAllCurrenciesFlow().collect { currencies ->
-                    _currencies.value = currencies
-                }
-            } catch (e: Exception) {
-                _error.value = e.message
-            }
+            loadCurrencyList()
+        }
+    }
+    private fun loadCurrencyList() {
+        viewModelScope.launch {
+            val currencies = currencyRepository.getAllAccountItems()
+            _currencyList.clear()
+            _currencyList.addAll(currencies)
         }
     }
 }

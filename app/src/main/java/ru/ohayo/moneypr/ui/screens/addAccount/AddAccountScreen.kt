@@ -1,6 +1,7 @@
 package ru.ohayo.moneypr.ui.screens.addAccount
 
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,7 @@ import ru.ohayo.moneypr.ui.theme.TextDisabled
 
 
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun AddAccountScreen(
     accountVM: AddAccountViewModel = hiltViewModel(),
