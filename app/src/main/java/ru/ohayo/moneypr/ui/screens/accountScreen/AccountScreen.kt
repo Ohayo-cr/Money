@@ -60,6 +60,13 @@ fun AccountScreen(navController: NavController,
                     accountDbo = account,
                 )
             }
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .height(200.dp)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }

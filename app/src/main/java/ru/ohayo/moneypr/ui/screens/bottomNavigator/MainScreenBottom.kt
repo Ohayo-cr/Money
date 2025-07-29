@@ -42,7 +42,7 @@ fun MainScreen(navController: NavHostController,viewModel: BottomNavViewModel = 
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = if (showBottomNav) bottomBarHeight else 0.dp),
+               
         ) {
             NavHostScreen(navController = navController)
             UpdateSystemNavigationBar(navController)

@@ -39,16 +39,13 @@ fun TransactionsList(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                ,
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "Транзакции",
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier
-                    .padding(16.dp),
+                modifier = Modifier.padding(16.dp),
                 color = MaterialTheme.colorScheme.onPrimary
 
             )
@@ -71,7 +68,16 @@ fun TransactionsList(
                                 account = accounts,
                                 onTransactionClick = { selectedTransaction = it }
                             )
+
                         }
+
+                    }
+                    item {
+                        Spacer(
+                            modifier = Modifier
+                                .height(200.dp)
+                                .fillMaxWidth()
+                        )
                     }
                 }
             }
