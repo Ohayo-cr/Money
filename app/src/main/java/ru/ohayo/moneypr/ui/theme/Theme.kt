@@ -94,7 +94,7 @@ fun MoneyPrTheme(
     }
 
     val view = LocalView.current
-    val systemBarsColor = systemUiColor ?: colorScheme.surface
+    val systemBarsColor = systemUiColor ?: colorScheme.background
 
     if (!view.isInEditMode) {
         SideEffect {
