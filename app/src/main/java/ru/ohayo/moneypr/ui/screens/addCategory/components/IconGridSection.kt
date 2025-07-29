@@ -23,7 +23,7 @@ fun IconGridSection(
     onIconSelected: (Int) -> Unit
 ) {
     Text(
-        text = "Выберите иконку",
+        text = "Select icon",
         color =  MaterialTheme.colorScheme.onPrimary,
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(start = 16.dp,top = 16.dp)

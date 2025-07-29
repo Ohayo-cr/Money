@@ -30,24 +30,23 @@ fun AccountScreen(navController: NavController,
             .padding(top = 8.dp, start = 4.dp, end = 4.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 
 
-        Text(text = "Добавить счет", style = MaterialTheme.typography.headlineMedium)
+
             TextButton(onClick = { navController.navigate(Screen.AddAccount.route)}) {
-                Text(text = "Add", color = MaterialTheme.colorScheme.onPrimary)
+                Text(text = "Add new account", color = MaterialTheme.colorScheme.onPrimary)
 
             }
     }
 
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         // Отображение списка счетов
         Text(
-            text = "Список счетов",
+            text = "Yours accounts",
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(vertical = 8.dp),
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         LazyColumn(
@@ -77,7 +76,10 @@ fun AccountItem(accountDbo: AccountDbo) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 2.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        )
     ) {
         Row(
             modifier = Modifier

@@ -47,7 +47,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
         .padding(start = 8.dp)
         .fillMaxSize(), verticalArrangement = Arrangement.Top ) {
         Row {
-            Text(text = "Период: this mount", fontSize = 18.sp,  color = MaterialTheme.colorScheme.onPrimary)
+            Text(text = "The period of this month", fontSize = 18.sp,  color = MaterialTheme.colorScheme.onPrimary)
             Spacer(modifier = Modifier.width(4.dp))
             // Здесь можно добавить выпадающий список выбора месяца
         }

@@ -117,12 +117,12 @@ fun AddCategoryScreen(
         ) {
             if (isEditMode) {
                 TextSizeButton(
-                    text = "Удалить",
+                    text = "Delete",
                     onClick = {},
                     containerColor = ErorColor,
                 )
             }
-            FullWidthButton(text = "Сохранить",
+            FullWidthButton(text = "Save",
                 onClick = {
                     if (categoryName.isNotBlank()) {
                         if (isEditMode && categoryId != null) {

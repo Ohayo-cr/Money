@@ -49,7 +49,7 @@ fun CategoryHeader(
         OutlinedTextField(
             value = categoryName,
             onValueChange = onNameChange,
-            label = { Text("Название") },
+            label = { Text("Name category") },
             modifier = Modifier.weight(1f),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done

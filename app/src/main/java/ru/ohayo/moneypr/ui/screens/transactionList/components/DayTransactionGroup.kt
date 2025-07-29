@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
@@ -44,7 +45,10 @@ fun DayTransactionGroup(
             .padding(2.dp)
     ) {
         Column(modifier = Modifier.padding(vertical = 4.dp,horizontal = 4.dp)) {
-           Row(modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+           Row(modifier = Modifier
+               .fillMaxWidth()
+               .padding(bottom = 2.dp)
+               .wrapContentHeight(),
                Arrangement.SpaceBetween) {
 
             Text(
@@ -62,6 +66,7 @@ fun DayTransactionGroup(
                    overflow = TextOverflow.Ellipsis
                )
            }
+            Divider()
             Spacer(modifier = Modifier.height(4.dp))
             Column(
                 modifier = Modifier.padding(horizontal = 2.dp),
@@ -74,6 +79,7 @@ fun DayTransactionGroup(
                         account = account,
                         onTransactionClick = onTransactionClick
                     )
+
                 }
             }
         }

@@ -121,7 +121,7 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
                             )
                         }
                         Text(
-                            text = "Редактировать",
+                            text = "Edit",
                             color = color,
                             modifier = Modifier
                                 .padding(end = 4.dp)
@@ -136,7 +136,7 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
         }
     }
         FullWidthButton(
-        text = "Создать категорию",
+        text = "Create a new category",
         onClick = {
             navController.navigate(Screen.AddCategory.route)
         }

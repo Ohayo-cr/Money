@@ -26,13 +26,13 @@ fun SettingsScreen(navController: NavHostController) {
             onClick = { navController.navigate(Screen.Categories.route) },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Категории")
+            Text(text = "Category")
         }
         Button(
             onClick = { navController.navigate(Screen.Currency.route) },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Валюта")
+            Text(text = "Currency")
         }
     }
 }

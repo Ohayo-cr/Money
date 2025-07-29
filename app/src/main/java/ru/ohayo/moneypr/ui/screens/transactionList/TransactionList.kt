@@ -43,7 +43,7 @@ fun TransactionsList(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Транзакции",
+                text = "List of transactions",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(16.dp),
                 color = MaterialTheme.colorScheme.onPrimary

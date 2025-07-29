@@ -39,10 +39,10 @@ fun ColorPickerSection(
             .padding(horizontal = 16.dp)
     ) {
         Column {
-            Text(text = "Текущий цвет:", style = MaterialTheme.typography.bodyLarge,
+            Text(text = "Current color:", style = MaterialTheme.typography.bodyLarge,
                 color =  MaterialTheme.colorScheme.onPrimary)
             Text(
-                text = ColorNames[selectedColor] ?: "Неизвестный",
+                text = ColorNames[selectedColor] ?: "Unknown",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 8.dp)
@@ -59,16 +59,16 @@ fun ColorPickerSection(
                 .weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "Нажми чтобы изменить", fontSize = 16.sp)
+            Text(text = "Click to change color", fontSize = 16.sp)
         }
     }
 
     if (showColorPickerDialog.value) {
         FullScreenCustomDialog(
             onDismissRequest = { showColorPickerDialog.value = false },
-            title = "Выберите цвет категории",
-            message = "Нажмите на нужный цвет",
-            confirmText = "Сохранить",
+            title = "Choose a category color",
+            message = "Click on the desired color",
+            confirmText = "Save",
             onConfirmClick = {},
             onColorSelected = { color ->
                 onColorSelected(color)
