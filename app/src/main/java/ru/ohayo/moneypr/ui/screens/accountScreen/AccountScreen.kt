@@ -63,6 +63,7 @@ fun AccountScreen(navController: NavController,
         }
     }
 }
+
 @Composable
 fun AccountItem(accountDbo: AccountDbo) {
     Card(
