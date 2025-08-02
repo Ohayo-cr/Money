@@ -11,7 +11,7 @@ object InitialCategories {
 
     fun category(name: String, iconResId: Int, isIncome: Boolean = false) =
         CategoryDbo(
-            type = if (isIncome) CategoryType.INCOME else CategoryType.EXPENSE,
+            type = if (isIncome) CategoryType.Income else CategoryType.Expense,
             categoryName = name,
             color = if (isIncome) INCOME_COLOR else EXPENSE_COLOR,
             iconResId = iconResId
@@ -28,24 +28,7 @@ object InitialCategories {
         category("Cats", R.drawable.notint_cat_3),
         category("Salary", R.drawable.cat__ic_power, isIncome = true),
         category("Cashback", R.drawable.cat__ic_premium, isIncome = true),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
-        category("Cats", R.drawable.notint_cat_3),
+
+
     )
 }

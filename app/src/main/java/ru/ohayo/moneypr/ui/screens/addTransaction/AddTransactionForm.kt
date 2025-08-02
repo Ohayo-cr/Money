@@ -60,11 +60,11 @@ fun AddTransactionForm(
 
     LaunchedEffect(category, selectedAccount) {
         selectedFromAccount = when (category?.type) {
-            CategoryType.EXPENSE -> selectedAccount
+            CategoryType.Expense -> selectedAccount
             else -> null
         }
         selectedToAccount = when (category?.type) {
-            CategoryType.INCOME -> selectedAccount
+            CategoryType.Income -> selectedAccount
             else -> null
         }
     }
@@ -128,17 +128,17 @@ fun AddTransactionForm(
                         val parsedAmount = keyboardViewModel.getParsedAmount()
                         if (parsedAmount != null && currencyAcc != "Not") {
                             val amountWithSign = when (category?.type) {
-                                CategoryType.EXPENSE -> -parsedAmount // Расход — отрицательная сумма
+                                CategoryType.Expense -> -parsedAmount // Расход — отрицательная сумма
                                 else -> parsedAmount // Доход — положительная сумма
                             }
 
                             val transaction = TransactionDbo(
                                 amount = amountWithSign,
-                                content = note.ifBlank { null },
+                                note = note.ifBlank { null },
                                 timestamp = transactionDate,
-                                categoryDbo = categoryId.toLong(),
-                                fromAccount = selectedFromAccount?.id,
-                                toAccount = selectedToAccount?.id,
+                                category = viewModel.categoryName.value,
+                                paymentAccount = selectedFromAccount?.name,
+                                recipientAccount = selectedToAccount?.name,
                                 currency = currencyAcc
                             )
                             viewModel.addTransaction(transaction)

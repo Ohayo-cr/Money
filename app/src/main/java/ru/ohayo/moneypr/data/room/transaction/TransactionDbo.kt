@@ -11,39 +11,42 @@ import ru.ohayo.moneypr.data.room.category.CategoryDbo
     tableName = "transactions",
     indices = [
         Index(value = ["timestamp"]),
-        Index(value = ["categoryDbo"]),
+        Index(value = ["category"]),
         Index(value = ["currency"]),
-        Index(value = ["fromAccount"]),
-        Index(value = ["toAccount"])
+        Index(value = ["paymentAccount"]),
+        Index(value = ["recipientAccount"])
     ],
     foreignKeys = [
         ForeignKey(
             entity = CategoryDbo::class,
-            parentColumns = ["id"],
-            childColumns = ["categoryDbo"],
+            parentColumns = ["categoryName"],
+            childColumns = ["category"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = AccountDbo::class,
-            parentColumns = ["id"],
-            childColumns = ["fromAccount"],
-            onDelete = ForeignKey.SET_NULL
+            parentColumns = ["name"],
+            childColumns = ["paymentAccount"],
+            onDelete = ForeignKey.NO_ACTION
         ),
         ForeignKey(
             entity = AccountDbo::class,
-            parentColumns = ["id"],
-            childColumns = ["toAccount"],
-            onDelete = ForeignKey.SET_NULL
+            parentColumns = ["name"],
+            childColumns = ["recipientAccount"],
+            onDelete = ForeignKey.NO_ACTION
         )
     ]
 )
 data class TransactionDbo(
     val amount: Double,
-    val content: String? = null,
-    val timestamp: Long,
-    val categoryDbo: Long, // ID категории
-    val fromAccount: Long? = null, // Счет, с которого списываются средства
-    val toAccount: Long? = null, // Счет, на который зачисляются средства
     val currency: String,
+    val account: String? = null,
+    val category: String,
+    val parentCategory: Long? = null,
+    val paymentAccount: String? = null,
+    val recipientAccount: String? = null,
+    val note: String? = null,
+    val tag: String? = null,
+    val timestamp: Long,
     @PrimaryKey(autoGenerate = true) val id: Long? = null
 )

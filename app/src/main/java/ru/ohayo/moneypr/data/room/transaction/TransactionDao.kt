@@ -39,7 +39,7 @@ WHERE timestamp BETWEEN :startTimestamp AND :endTimestamp)) AS percentage,
                c.color, 
                c.iconResId
         FROM transactions t
-        INNER JOIN CategoryDbo c ON t.categoryDbo = c.id
+        INNER JOIN CategoryDbo c ON t.category = c.categoryName
         WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
         GROUP BY c.id
         ORDER BY totalAmount 

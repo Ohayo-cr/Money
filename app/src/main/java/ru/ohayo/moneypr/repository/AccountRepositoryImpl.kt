@@ -26,8 +26,8 @@ class AccountRepositoryImpl @Inject constructor(
         accountDao.deleteAccountById(id)
     }
 
-    override suspend fun updateBalance(accountId: Long, amount: Double) {
-        accountDao.updateBalance(accountId, amount)
+    override suspend fun updateBalance(accountName: String, amount: Double) {
+        accountDao.updateBalance(accountName, amount)
     }
 
     override suspend fun getAccountName(accountId: Long): String? {

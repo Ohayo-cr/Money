@@ -30,7 +30,7 @@ import ru.ohayo.moneypr.ui.theme.ErorColor
 import ru.ohayo.moneypr.ui.screens.addCategory.components.IconGridSection
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import ru.ohayo.moneypr.ui.component.customeButton.TextSizeButton
-import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
+import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.addCategory.components.CategoryHeader
 import ru.ohayo.moneypr.ui.screens.addCategory.components.ColorPickerSection

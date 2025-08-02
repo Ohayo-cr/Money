@@ -14,7 +14,6 @@ import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
 import ru.ohayo.moneypr.ui.screens.transactionList.components.TransactionDetailsDialog
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
-import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel
 
@@ -24,15 +23,13 @@ import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel
 fun TransactionsList(
     transactionListVM: TransactionListViewModel = hiltViewModel(),
     categoryViewModel: CategoryViewModel = hiltViewModel(),
-    transactionViewModel: TransactionViewModel = hiltViewModel(),
-    accountViewModel: AccountViewModel = hiltViewModel(),
+    transactionViewModel: TransactionViewModel = hiltViewModel()
 
     ) {
     val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
     var selectedTransaction by remember { mutableStateOf<TransactionDbo?>(null) }
     val scrollState = transactionListVM.scrollState
-    val accounts by accountViewModel.accounts.collectAsState()
     val groupedTransactions = remember(transactions) {
         if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
     }
@@ -65,7 +62,6 @@ fun TransactionsList(
                                 date = date,
                                 transactions = dayTransactions,
                                 categories = categories,
-                                account = accounts,
                                 onTransactionClick = { selectedTransaction = it }
                             )
 
@@ -89,8 +85,7 @@ fun TransactionsList(
             TransactionDetailsDialog(
                 transaction = transaction,
                 categories = categories,
-                onDismiss = { selectedTransaction = null },
-                transactionViewModel = transactionViewModel
+                onDismiss = { selectedTransaction = null }
             )
         }
     }

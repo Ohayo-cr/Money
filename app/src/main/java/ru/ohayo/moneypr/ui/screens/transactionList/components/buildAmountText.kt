@@ -14,16 +14,16 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatter
 fun buildAmountText(transaction: TransactionDbo): AnnotatedString {
     val formattedAmount = NumberFormatter.format(Math.abs(transaction.amount))
     val currency = transaction.currency
-    val prefix = if (transaction.toAccount == null) "- "
-    else if (transaction.fromAccount == null) "+ "
+    val prefix = if (transaction.recipientAccount == null) "- "
+    else if (transaction.paymentAccount == null) "+ "
     else ""
 
     return buildAnnotatedString {
         pushStyle(
             SpanStyle(
                 color = when {
-                    transaction.toAccount == null -> colorScheme.onPrimary
-                    transaction.fromAccount == null -> AppleGreenColor
+                    transaction.recipientAccount == null -> colorScheme.onPrimary
+                    transaction.paymentAccount == null -> AppleGreenColor
                     else -> Color.Blue
                 }
             )

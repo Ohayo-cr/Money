@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.category.CategoryType
-import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
+import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
@@ -28,10 +28,11 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 @Composable
 fun AddTransaction(
     navController: NavController,
-    viewModel: CategoryViewModel = hiltViewModel()
+    viewModel: CategoryViewModel = hiltViewModel(),
+    transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
 
-    var selectedTab by rememberSaveable { mutableStateOf(CategoryType.EXPENSE) }
+    var selectedTab by rememberSaveable { mutableStateOf(CategoryType.Expense) }
     var showAddTransactionForm by rememberSaveable { mutableStateOf(false) }
     var selectedCategoryId by rememberSaveable { mutableStateOf<Long?>(null) }
     val listState = rememberLazyGridState()
@@ -73,6 +74,7 @@ fun AddTransaction(
                         onClick = {
                             selectedCategoryId = category.id
                             showAddTransactionForm = true
+                            transactionViewModel.selectCategoryName(category.categoryName)
                         },
                         isSelected = selectedCategoryId == category.id
                     )

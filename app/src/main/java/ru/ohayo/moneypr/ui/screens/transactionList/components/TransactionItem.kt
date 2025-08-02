@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
@@ -33,10 +32,14 @@ import java.util.Locale
 fun TransactionItem(
     transaction: TransactionDbo,
     categories: List<CategoryDbo>,
-    account: List<AccountDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
 ) {
-    val category = getCategory(categories, transaction.categoryDbo)
+    val accountName = when {
+        transaction.paymentAccount != null -> transaction.paymentAccount
+        transaction.recipientAccount != null -> transaction.recipientAccount
+        else -> "non account"
+    }
+    val category = getCategoryByName(categories, transaction.category)
     Box(modifier = Modifier.fillMaxWidth()
         .clickable { onTransactionClick(transaction) }
     ) {
@@ -65,7 +68,7 @@ fun TransactionItem(
                         .padding(2.dp),
                     horizontalAlignment = Alignment.Start
                 ) {
-                    val categoryName = category?.categoryName ?: "Неизвестная категория"
+                    val categoryName = transaction.category
                     val formattedCategory = if (categoryName.length > 16) {
                         categoryName.substring(0, 16) + "-\n" + categoryName.substring(16)
                     } else {
@@ -73,7 +76,7 @@ fun TransactionItem(
                     }
 
                     Text(
-                        text = formattedCategory,
+                        text = transaction.category,
                         color = MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.Bold,
                         maxLines = 2
@@ -95,13 +98,9 @@ fun TransactionItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    // Отображение названия счета
-                    val accountTransaction = if (transaction.toAccount != null) {
-                        getAccount(account, transaction.toAccount)?.name ?: "Неизвестный"
-                    } else {
-                        getAccount(account, transaction.fromAccount)?.name ?: "Неизвестный"
-                    }
-                    Text(text = accountTransaction, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary)
+
+                    Text(text = accountName, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary)
+
 
                 }
             }
@@ -110,9 +109,9 @@ fun TransactionItem(
 }
 
 @Composable
-fun getCategory(categories: List<CategoryDbo>, categoryId: Long): CategoryDbo? {
-    val result by remember(categories, categoryId) {
-        mutableStateOf(categories.find { it.id == categoryId })
+fun getCategoryByName(categories: List<CategoryDbo>, categoryName: String): CategoryDbo? {
+    val result by remember(categories, categoryName) {
+        mutableStateOf(categories.find { it.categoryName == categoryName })
     }
     return result
 }

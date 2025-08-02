@@ -19,8 +19,8 @@ interface AccountDao {
     @Query("DELETE FROM AccountDbo WHERE id = :id")
     suspend fun deleteAccountById(id: Long) // Используем Long
 
-    @Query("UPDATE AccountDbo SET balance = ROUND(balance + :amount, 2) WHERE id = :accountId")
-    suspend fun updateBalance(accountId: Long, amount: Double)
+    @Query("UPDATE AccountDbo SET balance = ROUND(balance + :amount, 2) WHERE name = :accountName")
+    suspend fun updateBalance(accountName: String, amount: Double)
 
     @Query("SELECT name FROM AccountDbo WHERE id = :accountId")
     suspend fun getAccountNameById(accountId: Long): String?

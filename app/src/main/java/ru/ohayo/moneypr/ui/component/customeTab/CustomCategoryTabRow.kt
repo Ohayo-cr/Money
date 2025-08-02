@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.component.categoryIcon
+package ru.ohayo.moneypr.ui.component.customeTab
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

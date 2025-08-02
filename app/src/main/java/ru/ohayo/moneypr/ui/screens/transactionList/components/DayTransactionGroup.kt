@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
@@ -29,7 +28,6 @@ fun DayTransactionGroup(
     date: String,
     transactions: List<TransactionDbo>,
     categories: List<CategoryDbo>,
-    account: List<AccountDbo>,
     onTransactionClick: (TransactionDbo) -> Unit
 ) {
     val income = transactions.filter { it.amount > 0 }.sumOf { it.amount }
@@ -76,7 +74,6 @@ fun DayTransactionGroup(
                     TransactionItem(
                         transaction = transaction,
                         categories = categories,
-                        account = account,
                         onTransactionClick = onTransactionClick
                     )
 

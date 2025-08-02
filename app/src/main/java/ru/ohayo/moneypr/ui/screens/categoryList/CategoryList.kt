@@ -28,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
-import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryTabRow
+import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState

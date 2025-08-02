@@ -29,7 +29,7 @@ class CategoryViewModel @Inject constructor(
     private val _categoryDbo = MutableStateFlow<CategoryDbo?>(null)
     val categoryDbo: StateFlow<CategoryDbo?> = _categoryDbo
     object CategoryTypeHolder {
-        var currentType: CategoryType = CategoryType.EXPENSE
+        var currentType: CategoryType = CategoryType.Expense
     }
     private var tempUpdatedList = listOf<CategoryDbo>()
     private val changedTypes = mutableSetOf<CategoryType>()

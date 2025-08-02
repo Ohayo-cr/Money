@@ -34,6 +34,12 @@ class TransactionViewModel @Inject constructor(
     fun updateNote(newNote: String) {
         _note.value = newNote
     }
+    private val _categoryName = mutableStateOf("")
+    val categoryName: State<String> get() = _categoryName
+
+    fun selectCategoryName(newCategoryName: String) {
+        _categoryName.value = newCategoryName
+    }
 
     private val _transactionResult = MutableStateFlow<Result<Unit>?>(null)
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
@@ -68,15 +74,15 @@ class TransactionViewModel @Inject constructor(
 
                 repository.insertTransaction(updatedTransaction)
 
-                if (updatedTransaction.fromAccount != null) {
+                if (updatedTransaction.paymentAccount != null) {
                     accountRepository.updateBalance(
-                        updatedTransaction.fromAccount,
+                        updatedTransaction.paymentAccount,
                         updatedTransaction.amount
                     )
                 }
-                if (updatedTransaction.toAccount != null) {
+                if (updatedTransaction.recipientAccount != null) {
                     accountRepository.updateBalance(
-                        updatedTransaction.toAccount,
+                        updatedTransaction.recipientAccount,
                         updatedTransaction.amount
                     )
                 }
