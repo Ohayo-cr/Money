@@ -3,6 +3,7 @@ package ru.ohayo.moneypr.ui.screens.transactionList.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,7 +34,8 @@ fun TransactionDetailsDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(text = "Сумма: ${NumberFormatter.format(transaction.amount)}")
-                Text(text = "Категория:${category?.categoryName ?: "Неизвестная категория"}")
+                Text(text = "Счёт: ${transaction.account}")
+                Text(text = "Категория: ${category?.categoryName ?: "Неизвестная категория"}")
                 Text(text = "Дата: ${
                     formatTimestamp(
                         transaction.timestamp
@@ -47,7 +49,7 @@ fun TransactionDetailsDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Закрыть")
+                Text("Закрыть", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     )

@@ -74,20 +74,13 @@ class TransactionViewModel @Inject constructor(
     fun addTransaction(transaction: TransactionDbo) {
         viewModelScope.launch {
             try {
-                // Установка даты транзакции в выбранную
+
                 val updatedTransaction = transaction.copy(timestamp = selectedDate.value)
 
                 repository.insertTransaction(updatedTransaction)
-
-                if (updatedTransaction.paymentAccount != null) {
+                if (updatedTransaction.account != null) {
                     accountRepository.updateBalance(
-                        updatedTransaction.paymentAccount,
-                        updatedTransaction.amount
-                    )
-                }
-                if (updatedTransaction.recipientAccount != null) {
-                    accountRepository.updateBalance(
-                        updatedTransaction.recipientAccount,
+                        updatedTransaction.account,
                         updatedTransaction.amount
                     )
                 }
@@ -99,19 +92,6 @@ class TransactionViewModel @Inject constructor(
                 _transactionResult.value = Result.failure(e)
             }
         }
-    }
-
-
-    fun getCategoryById(categoryId: Long): Flow<CategoryDbo?> {
-        return categoryRepository.getCategoryById(categoryId)
-    }
-
-    suspend fun getAccountName(accountId: Long): String? {
-        return accountRepository.getAccountName(accountId)
-    }
-
-    suspend fun getCurrencySymbol(currencyId: Long): String? {
-        return currencyRepository.getCurrencyById(currencyId)?.symbol ?: ""
     }
 
 }

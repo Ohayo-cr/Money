@@ -34,11 +34,7 @@ fun TransactionItem(
     categories: List<CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
 ) {
-    val accountName = when {
-        transaction.paymentAccount != null -> transaction.paymentAccount
-        transaction.recipientAccount != null -> transaction.recipientAccount
-        else -> "non account"
-    }
+
     val category = getCategoryByName(categories, transaction.category)
     Box(modifier = Modifier.fillMaxWidth()
         .clickable { onTransactionClick(transaction) }
@@ -99,7 +95,7 @@ fun TransactionItem(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    Text(text = accountName, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary)
+                    transaction.account?.let { Text(text = it, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary) }
 
 
                 }

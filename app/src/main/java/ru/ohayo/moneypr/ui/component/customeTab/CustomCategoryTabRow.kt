@@ -68,7 +68,7 @@ fun CategoryTabRow(
                         interactionSource = remember { NoRippleInteractionSource }
                     ) {
                         Text(
-                            text = type.name,
+                            text = CategoryTypeDisplayNameMap[type] ?: type.name,
                             color = if (selectedType == type) colorScheme.onPrimary else colorScheme.onSurface,
                             style = MaterialTheme.typography.titleSmall,
                             textAlign = TextAlign.Center,
