@@ -12,7 +12,10 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -34,10 +37,12 @@ fun AccountTextDialog(
 ) {
     val focusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val textFieldValue = remember(tempName) {
-        TextFieldValue(
-            text = tempName,
-            selection = TextRange(tempName.length)
+    var textFieldValue by remember(tempName) {
+        mutableStateOf(
+            TextFieldValue(
+                text = tempName,
+                selection = TextRange(tempName.length)
+            )
         )
     }
 
@@ -52,6 +57,7 @@ fun AccountTextDialog(
             TextField(
                 value = textFieldValue,
                 onValueChange = { newValue ->
+                    textFieldValue = newValue
                     onTempNameChange(newValue.text)
                 },
                 modifier = Modifier
