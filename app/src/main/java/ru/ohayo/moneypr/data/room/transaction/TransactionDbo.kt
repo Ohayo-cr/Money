@@ -6,6 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
 
 @Entity(
     tableName = "transactions",
@@ -14,7 +15,8 @@ import ru.ohayo.moneypr.data.room.category.CategoryDbo
         Index(value = ["category"]),
         Index(value = ["currency"]),
         Index(value = ["paymentAccount"]),
-        Index(value = ["recipientAccount"])
+        Index(value = ["recipientAccount"]),
+        Index(value = ["categoryType"])
     ],
     foreignKeys = [
         ForeignKey(
@@ -34,12 +36,20 @@ import ru.ohayo.moneypr.data.room.category.CategoryDbo
             parentColumns = ["name"],
             childColumns = ["recipientAccount"],
             onDelete = ForeignKey.NO_ACTION
+        ),
+        ForeignKey(
+            entity = AccountDbo::class,
+            parentColumns = ["name"],
+            childColumns = ["account"],
+            onDelete = ForeignKey.NO_ACTION
         )
     ]
 )
 data class TransactionDbo(
-    val amount: Double,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    val categoryType: CategoryType,
     val currency: String,
+    val amount: Double,
     val account: String? = null,
     val category: String,
     val parentCategory: Long? = null,
@@ -48,5 +58,5 @@ data class TransactionDbo(
     val note: String? = null,
     val tag: String? = null,
     val timestamp: Long,
-    @PrimaryKey(autoGenerate = true) val id: Long? = null
+
 )

@@ -27,19 +27,24 @@ class TransactionViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) : ViewModel() {
 
-    // Другие стейты
     private val _note = mutableStateOf("")
     val note: State<String> get() = _note
 
     fun updateNote(newNote: String) {
         _note.value = newNote
     }
-    private val _categoryName = mutableStateOf("")
-    val categoryName: State<String> get() = _categoryName
+
+
+    private val _selectedCategory = mutableStateOf<CategoryDbo?>(null)
+    val selectedCategory: State<CategoryDbo?> get() = _selectedCategory
 
     fun selectCategoryName(newCategoryName: String) {
-        _categoryName.value = newCategoryName
+        viewModelScope.launch {
+            val category = categoryRepository.getCategoryByName(newCategoryName)
+            _selectedCategory.value = category
+        }
     }
+    fun getSelectedCategory(): CategoryDbo? = _selectedCategory.value
 
     private val _transactionResult = MutableStateFlow<Result<Unit>?>(null)
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
@@ -98,7 +103,7 @@ class TransactionViewModel @Inject constructor(
 
 
     fun getCategoryById(categoryId: Long): Flow<CategoryDbo?> {
-        return categoryRepository.getCategoryById(categoryId.toLong())
+        return categoryRepository.getCategoryById(categoryId)
     }
 
     suspend fun getAccountName(accountId: Long): String? {

@@ -14,7 +14,9 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
 class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
-
+    override suspend fun getCategoryByName(name: String): CategoryDbo? {
+        return categoryDao.getCategoryByName(name)
+    }
     override fun getAllCategories(): Flow<List<CategoryDbo>> {
         return categoryDao.getAllCategories()
             .catch { e -> throw e }

@@ -42,6 +42,7 @@ fun AddTransaction(
     val bottomPaddingPercentage = 0.5f
     val bottomPadding = (screenHeight * bottomPaddingPercentage).dp
 
+
     Column(modifier = Modifier.fillMaxSize()) {
 
         CategoryTabRow(

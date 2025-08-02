@@ -57,6 +57,7 @@ fun AddTransactionForm(
     var selectedToAccount by remember { mutableStateOf(selectedAccount) }
     val accounts by viewModel.accounts.collectAsState(initial = emptyList())
     val category by viewModel.getCategoryById(categoryId.toLong()).collectAsState(initial = null)
+    val selectedCategory = viewModel.getSelectedCategory()
 
     LaunchedEffect(category, selectedAccount) {
         selectedFromAccount = when (category?.type) {
@@ -126,7 +127,7 @@ fun AddTransactionForm(
                     dateText = formatLocalDateTime(transactionDate),
                     onOkClicked = {
                         val parsedAmount = keyboardViewModel.getParsedAmount()
-                        if (parsedAmount != null && currencyAcc != "Not") {
+                        if (parsedAmount != null && currencyAcc != "Not" && selectedCategory != null) {
                             val amountWithSign = when (category?.type) {
                                 CategoryType.Expense -> -parsedAmount // Расход — отрицательная сумма
                                 else -> parsedAmount // Доход — положительная сумма
@@ -135,10 +136,10 @@ fun AddTransactionForm(
                             val transaction = TransactionDbo(
                                 amount = amountWithSign,
                                 note = note.ifBlank { null },
+                                categoryType = selectedCategory.type,
                                 timestamp = transactionDate,
-                                category = viewModel.categoryName.value,
-                                paymentAccount = selectedFromAccount?.name,
-                                recipientAccount = selectedToAccount?.name,
+                                category = selectedCategory.categoryName,
+                                account = selectedAccount?.name,
                                 currency = currencyAcc
                             )
                             viewModel.addTransaction(transaction)

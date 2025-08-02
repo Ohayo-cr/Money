@@ -30,6 +30,8 @@ interface CategoryDao {
 
     @Query("SELECT * FROM CategoryDbo WHERE id = :id")
     fun getCategoryById(id: Long): Flow<CategoryDbo?>
+    @Query("SELECT * FROM categoryDbo WHERE categoryName = :name LIMIT 1")
+    suspend fun getCategoryByName(name: String): CategoryDbo?
     @Update
     suspend fun update(categoryDbo: CategoryDbo)
 
