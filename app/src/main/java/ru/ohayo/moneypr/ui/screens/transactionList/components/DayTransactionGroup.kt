@@ -37,7 +37,7 @@ fun DayTransactionGroup(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = colorScheme.onSurface.copy(alpha = 0.05f),
+                color = colorScheme.secondary,
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(2.dp)

@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.component.customeKeyboard
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +39,7 @@ fun NoteField(
 
     Box(
         modifier = Modifier
-            .fillMaxWidth().padding(start = 2.dp, end = 2.dp)
+            .fillMaxWidth().padding(horizontal = 2.dp)
             .clickable {
                 focusManager.clearFocus()
             }
@@ -57,6 +58,7 @@ fun NoteField(
                 .onFocusChanged { focusState ->
                     onFocusChanged(focusState.isFocused)
                 },
+
             placeholder = {
                 Text(
                     text = "Enter a note",
@@ -90,6 +92,7 @@ fun NoteField(
                 unfocusedPlaceholderColor = colorScheme.onPrimary,          // Цвет плейсхолдера без фокуса
             ),
             shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+
         )
     }
 }

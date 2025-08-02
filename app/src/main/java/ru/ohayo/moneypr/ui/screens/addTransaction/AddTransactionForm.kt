@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
@@ -122,7 +121,7 @@ fun AddTransactionForm(
                             val transaction = TransactionDbo(
                                 amount = amountWithSign,
                                 note = note.ifBlank { null },
-                                categoryType = selectedCategory.type,
+                                type = selectedCategory.type,
                                 timestamp = transactionDate,
                                 category = selectedCategory.categoryName,
                                 account = selectedAccount?.name,

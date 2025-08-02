@@ -16,7 +16,7 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
         Index(value = ["currency"]),
         Index(value = ["paymentAccount"]),
         Index(value = ["recipientAccount"]),
-        Index(value = ["categoryType"])
+        Index(value = ["type"])
     ],
     foreignKeys = [
         ForeignKey(
@@ -47,7 +47,7 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
 )
 data class TransactionDbo(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
-    val categoryType: CategoryType,
+    val type: CategoryType,
     val currency: String,
     val amount: Double,
     val account: String? = null,
@@ -59,4 +59,4 @@ data class TransactionDbo(
     val tag: String? = null,
     val timestamp: Long,
 
-)
+    )

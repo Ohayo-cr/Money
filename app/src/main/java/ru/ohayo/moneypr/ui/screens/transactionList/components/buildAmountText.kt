@@ -2,7 +2,6 @@ package ru.ohayo.moneypr.ui.screens.transactionList.components
 
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -16,7 +15,7 @@ import kotlin.math.abs
 fun buildAmountText(transaction: TransactionDbo): AnnotatedString {
     val formattedAmount = NumberFormatter.format(abs(transaction.amount))
     val currency = transaction.currency
-    val prefix = when (transaction.categoryType) {
+    val prefix = when (transaction.type) {
         CategoryType.Expense -> "- "
         CategoryType.Income -> "+ "
         else -> ""
@@ -25,7 +24,7 @@ fun buildAmountText(transaction: TransactionDbo): AnnotatedString {
     return buildAnnotatedString {
         pushStyle(
             SpanStyle(
-                color = when (transaction.categoryType) {
+                color = when (transaction.type) {
                     CategoryType.Expense ->  colorScheme.onPrimary
                     CategoryType.Income -> AppleGreenColor
                     else -> colorScheme.onPrimary
