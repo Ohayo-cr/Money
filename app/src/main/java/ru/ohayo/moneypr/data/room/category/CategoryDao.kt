@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import ru.ohayo.moneypr.ui.screens.categoryList.components.CategoryTransactionStats
 
 @Dao
 interface CategoryDao {
@@ -56,6 +57,8 @@ interface CategoryDao {
     suspend fun updateCategory(categoryDbo: CategoryDbo)
     @Query("SELECT * FROM categoryDbo WHERE id = :id")
     suspend fun getCategoryByIdUpdate(id: Long): CategoryDbo?
+    @Query("SELECT category, COUNT(*) as transactionCount, SUM(amount) as totalAmount FROM transactions GROUP BY category")
+    suspend fun getCategoryTransactionStats(): List<CategoryTransactionStats>
 
 }
 

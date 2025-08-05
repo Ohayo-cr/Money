@@ -9,6 +9,7 @@ import javax.inject.Inject
 import ru.ohayo.moneypr.data.room.category.CategoryDao
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.category.CategoryType
+import ru.ohayo.moneypr.ui.screens.categoryList.components.CategoryTransactionStats
 
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -59,5 +60,9 @@ class CategoryRepositoryImpl @Inject constructor(
             // Обновляем порядок для перевернутого списка
             categoryDao.updateOrderByType(reversedList)
         }
+    }
+
+    override suspend fun getCategoryTransactionStats(): List<CategoryTransactionStats> {
+        return categoryDao.getCategoryTransactionStats()
     }
 }

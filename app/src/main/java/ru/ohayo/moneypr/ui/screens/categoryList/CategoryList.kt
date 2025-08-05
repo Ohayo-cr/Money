@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,8 @@ import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.theme.TextDisabled
+import ru.ohayo.moneypr.utils.formate.NumberFormatter
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
@@ -40,6 +43,7 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
     val color =  colorScheme.onPrimary
     val selectedTab by categoryVM.selectedCategoryType.collectAsState()
     val filteredCategories by categoryVM.filteredCategories.collectAsState()
+    val categoryStatsMap by categoryVM.categoryStatsMap.collectAsState() // Добавляем статистику
 
     val savedScrollPosition by categoryVM.scrollPosition.collectAsState()
     val lazyListState = rememberLazyListState(savedScrollPosition)
@@ -85,6 +89,9 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
             items = filteredCategories,
             key = { it.id }
         ) { category ->
+            val stats = categoryStatsMap[category.categoryName]
+            val transactionCount = stats?.transactionCount ?: 0
+            val totalAmount = stats?.totalAmount ?: 0.0
             ReorderableItem(
                 reorderableLazyListState, key = category.id,
                 ) { dragging ->
@@ -114,11 +121,22 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
                                 backgroundColor = Color(category.color),
                                 onClick = {}
                             )
-                            Text(
-                                text = category.categoryName,
-                                modifier = Modifier.padding(start = 8.dp),
-                                color = color
-                            )
+                            Column {
+                                Text(
+                                    text = category.categoryName,
+                                    modifier = Modifier.padding(start = 8.dp),
+                                    color = color
+                                )
+                                // Добавляем информацию о транзакциях
+                                if (transactionCount > 0) {
+                                    Text(
+                                        text = "$transactionCount transactions, sum ${NumberFormatter.format(totalAmount)}",
+                                        modifier = Modifier.padding(start = 8.dp),
+                                        color = TextDisabled,
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
+                            }
                         }
                         Text(
                             text = "Edit",

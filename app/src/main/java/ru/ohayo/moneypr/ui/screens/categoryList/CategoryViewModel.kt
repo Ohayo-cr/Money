@@ -55,20 +55,32 @@ class CategoryViewModel @Inject constructor(
     fun setShouldScrollToTop(value: Boolean) {
         _shouldScrollToTop.value = value
     }
+    private val _categoryStatsMap = MutableStateFlow<Map<String, CategoryStats>>(emptyMap())
+    val categoryStatsMap: StateFlow<Map<String, CategoryStats>> = _categoryStatsMap
 
     init {
         viewModelScope.launch {
-            try {
+
                 categoryRepository.getAllCategories().collect { categories ->
                     _categories.value = categories
                     tempUpdatedList = _categories.value
 
                 }
+            }
+        // Загружаем статистику
+        viewModelScope.launch {
+            try {
+                val stats = categoryRepository.getCategoryTransactionStats()
+                val statsMap = stats.associate { it.category to CategoryStats(it.transactionCount, it.totalAmount) }
+                _categoryStatsMap.value = statsMap
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
+
+
     fun moveCategory(fromIndex: Int, toIndex: Int, type: CategoryType) {
         val currentList = _categories.value
         val (currentTypeCategories, otherCategories) = currentList.partition { it.type == type }
@@ -111,5 +123,8 @@ class CategoryViewModel @Inject constructor(
         return _categories.value.filter { it.type == type }
     }
 
-
+    data class CategoryStats(
+        val transactionCount: Int,
+        val totalAmount: Double
+    )
 }

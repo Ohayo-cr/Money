@@ -1,9 +1,9 @@
 package ru.ohayo.moneypr.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.category.CategoryType
+import ru.ohayo.moneypr.ui.screens.categoryList.components.CategoryTransactionStats
 
 
 interface CategoryRepository {
@@ -19,6 +19,7 @@ interface CategoryRepository {
     fun getCategoriesByType(type: CategoryType): Flow<List<CategoryDbo>>
 
     suspend fun updateOrderByType(categories: List<CategoryDbo>)
+    suspend fun getCategoryTransactionStats(): List<CategoryTransactionStats>
 
 }
 
