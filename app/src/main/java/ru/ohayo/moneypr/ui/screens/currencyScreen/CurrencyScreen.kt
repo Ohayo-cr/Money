@@ -51,35 +51,7 @@ fun CurrencyScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Заголовок экрана
-        Text(
-            text = "All currency",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp),
-            color = MaterialTheme.colorScheme.onPrimary
-        )
 
-        if (currencies.isEmpty()) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "There are no available currencies",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Gray
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Button(onClick = onAddCurrencyClick) {
-                        Text("Add currency")
-                    }
-                }
-            }
-        } else {
-            // Отображаем список валют
             LazyColumn {
                 itemsIndexed(currencies) { index, item ->
                     Row(
@@ -129,6 +101,6 @@ fun CurrencyScreen(
             }
         }
     }
-}
+
 
 
