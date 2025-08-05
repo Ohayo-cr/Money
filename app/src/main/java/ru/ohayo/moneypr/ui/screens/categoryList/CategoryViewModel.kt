@@ -67,7 +67,7 @@ class CategoryViewModel @Inject constructor(
 
                 }
             }
-        // Загружаем статистику
+
         viewModelScope.launch {
             try {
                 val stats = categoryRepository.getCategoryTransactionStats()

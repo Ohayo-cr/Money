@@ -64,7 +64,7 @@ fun DayTransactionGroup(
                    overflow = TextOverflow.Ellipsis
                )
            }
-            Divider()
+            Divider(modifier = Modifier, color = colorScheme.onPrimary)
             Spacer(modifier = Modifier.height(4.dp))
             Column(
                 modifier = Modifier.padding(horizontal = 2.dp),
