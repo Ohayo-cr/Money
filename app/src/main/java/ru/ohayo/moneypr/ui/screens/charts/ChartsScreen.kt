@@ -15,10 +15,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -26,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,28 +43,45 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatter
 @Composable
 fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
-    val categorySummaries  by viewModel.categorySummaries.collectAsState()
-    LaunchedEffect(Unit) {
-        viewModel.refreshData()
-    }
+    val categorySummaries by viewModel.categorySummaries.collectAsState()
+    val monthLabel by viewModel.monthLabel.collectAsState()
 
-    Column(modifier = Modifier
-        .padding(start = 8.dp)
-        .fillMaxSize(), verticalArrangement = Arrangement.Top ) {
-        Row {
-            Text(text = "The period of this month", fontSize = 18.sp,  color = MaterialTheme.colorScheme.onPrimary)
-            Spacer(modifier = Modifier.width(4.dp))
-            // Здесь можно добавить выпадающий список выбора месяца
+
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        // Заголовок с навигацией
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = { viewModel.prevMonth() }) {
+                Icon(Icons.Default.ArrowBack, contentDescription = "Previous month", tint = MaterialTheme.colorScheme.onPrimary)
+            }
+
+            Text(
+                text = monthLabel,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center
+            )
+
+            IconButton(onClick = { viewModel.nextMonth() }) {
+                Icon(Icons.Default.ArrowForward, contentDescription = "Next month", tint = MaterialTheme.colorScheme.onPrimary)
+            }
         }
-        Spacer(modifier = Modifier.height(16.dp))
 
-        LazyColumn {
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Список категорий
+        LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
             items(categorySummaries) { category ->
                 CategoryItem(category = category)
             }
         }
     }
-
 }
 @Composable
 fun CategoryItem(category: CategorySummaryFromDb) {

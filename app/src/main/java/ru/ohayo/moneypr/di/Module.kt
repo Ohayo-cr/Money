@@ -21,6 +21,8 @@ import ru.ohayo.moneypr.repository.CalculatorRepository
 import ru.ohayo.moneypr.repository.CalculatorRepositoryImpl
 import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.domain.calculator.ExpressionCalculator
+import ru.ohayo.moneypr.repository.ChartsRepository
+import ru.ohayo.moneypr.repository.ChartsRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -86,7 +88,11 @@ object AppModule {
     fun provideExpressionRepository(): CalculatorRepository {
         return CalculatorRepositoryImpl()
     }
-
+    @Provides
+    @Singleton
+    fun provideChartsRepository(transactionDao: TransactionDao): ChartsRepository {
+        return ChartsRepositoryImpl(transactionDao)
+    }
 
 }
 

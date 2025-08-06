@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 
 
@@ -32,17 +31,22 @@ interface TransactionDao {
 
     @Query(
         """
-        SELECT c.categoryName, 
-               SUM(t.amount) AS totalAmount,
-               (SUM(t.amount) * 100.0 / (SELECT SUM(amount) FROM transactions 
-WHERE timestamp BETWEEN :startTimestamp AND :endTimestamp)) AS percentage,
-               c.color, 
-               c.iconResId
-        FROM transactions t
-        INNER JOIN CategoryDbo c ON t.category = c.categoryName
-        WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
-        GROUP BY c.id
-        ORDER BY totalAmount 
+    SELECT c.categoryName, 
+           SUM(t.amount) AS totalAmount,
+           (SUM(t.amount) * 100.0 / (
+               SELECT SUM(amount) 
+               FROM transactions 
+               WHERE timestamp BETWEEN :startTimestamp AND :endTimestamp 
+                 AND type = 'Expense'
+           )) AS percentage,
+           c.color, 
+           c.iconResId
+    FROM transactions t
+    INNER JOIN CategoryDbo c ON t.category = c.categoryName
+    WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
+      AND t.type = 'Expense'
+    GROUP BY c.id
+    ORDER BY totalAmount DESC
     """
     )
     suspend fun getMonthlyCategorySummaries(
