@@ -49,22 +49,32 @@ class AddCategoryViewModel @Inject constructor(
         name: String,
         iconResId: Int,
         color: Long,
-        type: CategoryType
+        type: CategoryType,
+        onComplete: (Boolean) -> Unit
     ) {
         viewModelScope.launch {
             val existingCategory = getCategoryByIdUpdate(id)
-            if (existingCategory != null) {
-                repository.updateCategory(
-                    CategoryDbo(
-                        id = id,
-                        categoryName = name,
-                        iconResId = iconResId,
-                        color = color,
-                        type = type,
-                        order = existingCategory.order // сохраняем старое значение order
+            val isUpdated = if (existingCategory != null) {
+                try {
+                    repository.updateCategory(
+                        CategoryDbo(
+                            id = id,
+                            categoryName = name,
+                            iconResId = iconResId,
+                            color = color,
+                            type = type,
+                            order = existingCategory.order
+                        )
                     )
-                )
+                    true
+                } catch (e: Exception) {
+                    false
+                }
+            } else {
+                false
             }
+            onComplete(isUpdated)
         }
     }
 }
+

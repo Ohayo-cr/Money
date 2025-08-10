@@ -23,7 +23,9 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
             entity = CategoryDbo::class,
             parentColumns = ["categoryName"],
             childColumns = ["category"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+
         ),
         ForeignKey(
             entity = AccountDbo::class,

@@ -59,15 +59,19 @@ class CategoryViewModel @Inject constructor(
     val categoryStatsMap: StateFlow<Map<String, CategoryStats>> = _categoryStatsMap
 
     init {
+        loadAllCategories()
+        loadCategoryStats()
+
+    }
+    private fun loadAllCategories() {
         viewModelScope.launch {
-
-                categoryRepository.getAllCategories().collect { categories ->
-                    _categories.value = categories
-                    tempUpdatedList = _categories.value
-
-                }
+            categoryRepository.getAllCategories().collect { categories ->
+                _categories.value = categories
+                tempUpdatedList = _categories.value
             }
-
+        }
+    }
+    private fun loadCategoryStats() {
         viewModelScope.launch {
             try {
                 val stats = categoryRepository.getCategoryTransactionStats()
@@ -78,7 +82,10 @@ class CategoryViewModel @Inject constructor(
             }
         }
     }
-
+    fun refreshCategoriesAndStats() {
+        loadAllCategories()
+        loadCategoryStats()
+    }
 
 
     fun moveCategory(fromIndex: Int, toIndex: Int, type: CategoryType) {

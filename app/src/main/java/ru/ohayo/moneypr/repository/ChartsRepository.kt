@@ -1,8 +1,11 @@
 package ru.ohayo.moneypr.repository
 
-import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 
 interface ChartsRepository {
-    suspend fun getCategoriesForPeriod(startTimestamp: Long, endTimestamp: Long): List<CategorySummaryFromDb>
+    fun getCategoriesForPeriod(startTimestamp: Long, endTimestamp: Long): Flow<List<CategorySummaryFromDb>>
+
+
+
 }

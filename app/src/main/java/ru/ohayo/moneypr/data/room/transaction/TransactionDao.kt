@@ -49,10 +49,10 @@ interface TransactionDao {
     ORDER BY totalAmount ASC
     """
     )
-    suspend fun getMonthlyCategorySummaries(
+     fun getMonthlyCategorySummaries(
         startTimestamp: Long,
         endTimestamp: Long
-    ): List<CategorySummaryFromDb>
+    ): Flow<List<CategorySummaryFromDb>>
 }
 
 

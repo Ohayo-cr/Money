@@ -133,8 +133,17 @@ fun AddCategoryScreen(
                                 iconResId = selectedIconResId,
                                 color = selectedColor.toArgb().toLong(),
                                 type = selectedTab,
-                            )
-                            navController.popBackStack()
+                            ) { isUpdated ->
+                                if (isUpdated) {
+                                    categoryVM.refreshCategoriesAndStats()
+                                    navController.navigate(Screen.Categories.route) {
+                                        popUpTo(Screen.Categories.route) {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+
+                            }
                         } else {
 
                             addCategoryVM.addCategoryAndGenerateOrder(

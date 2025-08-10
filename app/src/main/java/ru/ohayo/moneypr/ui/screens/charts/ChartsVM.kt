@@ -1,15 +1,20 @@
 package ru.ohayo.moneypr.ui.screens.charts
 
 
+import android.util.Log
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.repository.ChartsRepository
 
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
+import ru.ohayo.moneypr.utils.all_charts.donutChart.model.PieChartData
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -36,40 +41,71 @@ class ChartsVM @Inject constructor(
     private val _categorySummaries = MutableStateFlow<List<CategorySummaryFromDb>>(emptyList())
     val categorySummaries: StateFlow<List<CategorySummaryFromDb>> = _categorySummaries
 
+    private val _pieChartData = MutableStateFlow<List<PieChartData>>(emptyList())
+    val pieChartData: StateFlow<List<PieChartData>> = _pieChartData
+
     init {
         updateMonthLabel()
-        loadTopCategories()
-    }
 
-    private fun loadTopCategories() {
+        // Собираем Flow из репозитория
         viewModelScope.launch {
-            try {
-                val cal = _currentMonth.value
-                val (start, end) = getMonthRange(cal)
-                val result = repository.getCategoriesForPeriod(start, end)
-                _categorySummaries.value = result
-            } catch (e: Exception) {
-                // Можно логировать
+            _currentMonth.collectLatest { cal ->
+                loadCategoryData(cal)
+            }
+        }
+
+        // Обновляем pie chart когда приходят новые данные
+        viewModelScope.launch {
+            _categorySummaries.collect { summaries ->
+                updatePieChartData(summaries)
             }
         }
     }
 
 
-    fun nextMonth() {
+
+    private fun loadCategoryData(calendar: Calendar) {
         viewModelScope.launch {
-            _currentMonth.value.apply { add(Calendar.MONTH, 1) }
-            updateMonthLabel()
-            loadTopCategories()
+            try {
+                val (start, end) = getMonthRange(calendar)
+                // Собираем Flow из репозитория
+                repository.getCategoriesForPeriod(start, end)
+                    .catch { e ->
+                        // Обработка ошибок
+                        Log.e("ChartsVM", "Error loading categories", e)
+                    }
+                    .collectLatest { categories ->
+                        _categorySummaries.value = categories
+                    }
+            } catch (e: Exception) {
+                Log.e("ChartsVM", "Error loading categories", e)
+            }
         }
+    }
+    private fun updatePieChartData(summaries: List<CategorySummaryFromDb>) {
+        val chartData = summaries.map { summary ->
+            PieChartData(
+                data = toPositive(summary.totalAmount),
+                color = Color(summary.color),
+                partName = summary.categoryName
+            )
+        }
+        _pieChartData.value = chartData
+    }
+    fun nextMonth() {
+        _currentMonth.value = _currentMonth.value.apply { add(Calendar.MONTH, 1) }.clone() as Calendar
+        updateMonthLabel()
+        // loadTopCategories() - теперь не нужен, так как collectLatest в init сам обновит данные
     }
 
     fun prevMonth() {
-        viewModelScope.launch {
-            _currentMonth.value.apply { add(Calendar.MONTH, -1) }
-            updateMonthLabel()
-            loadTopCategories()
-        }
+        _currentMonth.value = _currentMonth.value.apply { add(Calendar.MONTH, -1) }.clone() as Calendar
+        updateMonthLabel()
+        // loadTopCategories() - теперь не нужен, так как collectLatest в init сам обновит данные
     }
+
+
+
 
     private fun updateMonthLabel() {
         val cal = _currentMonth.value
@@ -105,4 +141,5 @@ class ChartsVM @Inject constructor(
 
         return Pair(start, end)
     }
+    private fun toPositive(value: Double) = kotlin.math.abs(value)
 }

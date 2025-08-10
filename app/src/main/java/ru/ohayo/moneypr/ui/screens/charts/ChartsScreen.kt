@@ -46,7 +46,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
     val categorySummaries by viewModel.categorySummaries.collectAsState()
     val monthLabel by viewModel.monthLabel.collectAsState()
-
+    val pieChartData by viewModel.pieChartData.collectAsState()
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -76,7 +76,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        DonutChartSample()
+        DonutChartSample(pieChartData = pieChartData)
         Spacer(modifier = Modifier.height(8.dp))
 
         // Список категорий
