@@ -1,4 +1,4 @@
-package com.aay.compose.donutChart
+package ru.ohayo.moneypr.utils.all_charts.donutChart
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
@@ -28,7 +28,7 @@ import ru.ohayo.moneypr.utils.all_charts.utils.checkIfDataIsNegative
 import kotlin.math.min
 import androidx.compose.animation.core.*
 import androidx.compose.ui.text.*
-import com.aay.compose.baseComponents.model.LegendPosition
+import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.LegendPosition
 import com.aay.compose.utils.ChartDefaultValues
 /**
  * Composable function to render a pie chart with an optional legend.
@@ -169,8 +169,6 @@ private fun drawPieChart(
                     pieChartData = pieChartData,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
-                    textMeasure = textMeasure,
-                    textRatioStyle = textRatioStyle,
                     ratioLineColor = ratioLineColor,
                     arcWidth = arcWidth,
                     minValue = minValue,

@@ -1,4 +1,4 @@
-package com.aay.compose.lineChart
+package ru.ohayo.moneypr.utils.all_charts.lineChart
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,9 +13,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.utils.all_charts.baseComponents.ChartDescription
 import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.GridOrientation
-import com.aay.compose.baseComponents.model.LegendPosition
+import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.LegendPosition
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.utils.ChartDefaultValues
+
 /**
  * Composable function to render a line chart with optional legends.
  *

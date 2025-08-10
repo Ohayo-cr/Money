@@ -24,8 +24,6 @@ internal fun DrawScope.drawPedigreeChart(
     pieChartData: List<PieChartData>,
     totalSum: Float,
     transitionProgress: Animatable<Float, AnimationVector1D>,
-    textMeasure: TextMeasurer,
-    textRatioStyle: TextStyle,
     ratioLineColor: Color,
     arcWidth: Float,
     minValue: Float,
@@ -75,14 +73,9 @@ internal fun DrawScope.drawPedigreeChart(
             }
 
 
-            val textOffset = getTextOffsetByRegion(regionSign, lineEnd.x, secondLineEnd.y, arcWidth)
 
-            ratioText(
-                textMeasure,
-                getPartRatio(pieValueWithRatio, index),
-                textRatioStyle,
-                Offset(textOffset.x, textOffset.y - 40.toDp().toPx())
-            )
+
+
             startArc += arcWithAnimation
             startArcWithoutAnimation += arcWithoutAnimation
 
@@ -118,13 +111,8 @@ internal fun DrawScope.drawPedigreeChart(
                 topLeft = arcOffset
             )
 
-            val textOffset = getTextOffsetByRegion(regionSign, lineEnd.x, secondLineEnd.y, arcWidth)
-            ratioText(
-                textMeasure,
-                getPartRatio(pieValueWithRatio, index),
-                textRatioStyle,
-                Offset(textOffset.x, textOffset.y - 40.toDp().toPx())
-            )
+
+
             startArc += arcWithAnimation
             startArcWithoutAnimation += arcWithoutAnimation
         }
@@ -139,17 +127,8 @@ private fun calculateAngle(dataLength: Float, totalLength: Float, progress: Floa
 
 private fun calculateAngle(dataLength: Float, totalLength: Float): Float = -360F * dataLength / totalLength
 
-private fun getPartRatio(pieValueWithRatio: List<Float>, index: Int): Int {
-    return (pieValueWithRatio[index].toDouble() / 360.0 * 100).roundToInt()
-}
 
-private fun getTextOffsetByRegion(regionSign: Int, x: Float, y: Float, arcWidth: Float): Offset {
-    return if (regionSign == 1) {
-        Offset(x + arcWidth / 4, y)
-    } else {
-        Offset(x - arcWidth, y)
-    }
-}
+
 
 
 

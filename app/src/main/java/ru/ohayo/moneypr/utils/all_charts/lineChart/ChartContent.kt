@@ -1,4 +1,4 @@
-package com.aay.compose.lineChart
+package ru.ohayo.moneypr.utils.all_charts.lineChart
 
 
 import androidx.compose.animation.core.Animatable
@@ -26,7 +26,7 @@ import com.aay.compose.lineChart.components.drawQuarticLineWithShadow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalTextApi::class)
+
 @Composable
 internal fun ChartContent(
     modifier: Modifier,

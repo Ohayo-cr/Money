@@ -1,4 +1,4 @@
-package com.aay.compose.donutChart
+package ru.ohayo.moneypr.utils.all_charts.donutChart
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,7 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aay.compose.baseComponents.model.LegendPosition
+import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.LegendPosition
 import ru.ohayo.moneypr.utils.all_charts.donutChart.component.PieChartDescriptionComposable
 import ru.ohayo.moneypr.utils.all_charts.donutChart.component.draPieCircle
 import ru.ohayo.moneypr.utils.all_charts.donutChart.component.drawCenterText
@@ -46,9 +46,8 @@ fun DonutChart(
     pieChartData: List<PieChartData>,
     centerTitle: String = "",
     centerTitleStyle: TextStyle = TextStyle.Default,
-    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 3000),
+    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 2000),
     descriptionStyle: TextStyle = TextStyle.Default,
-    textRatioStyle: TextStyle = TextStyle.Default.copy(fontSize = 12.sp),
     outerCircularColor: Color = Color.Gray,
     innerCircularColor: Color = Color.Gray,
     ratioLineColor: Color = Color.Gray,
@@ -95,7 +94,6 @@ fun DonutChart(
                     pieChartData = pieChartData,
                     centerTitle = centerTitle,
                     centerTitleStyle = centerTitleStyle,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
                     innerCircularColor = innerCircularColor,
                     ratioLineColor = ratioLineColor,
@@ -113,7 +111,6 @@ fun DonutChart(
                     pieChartData = pieChartData,
                     centerTitle = centerTitle,
                     centerTitleStyle = centerTitleStyle,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
                     innerCircularColor = innerCircularColor,
                     ratioLineColor = ratioLineColor,
@@ -136,7 +133,6 @@ fun DonutChart(
                     pieChartData = pieChartData,
                     centerTitle = centerTitle,
                     centerTitleStyle = centerTitleStyle,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
                     innerCircularColor = innerCircularColor,
                     ratioLineColor = ratioLineColor,
@@ -161,7 +157,6 @@ private fun drawDonutChart(
     pieChartData: List<PieChartData>,
     centerTitle: String = "",
     centerTitleStyle: TextStyle = TextStyle.Default,
-    textRatioStyle: TextStyle = TextStyle.Default.copy(fontSize = 12.sp),
     outerCircularColor: Color = Color.Gray,
     innerCircularColor: Color = Color.Gray,
     ratioLineColor: Color = Color.Gray,
@@ -194,8 +189,6 @@ private fun drawDonutChart(
                     pieChartData = pieChartData,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
-                    textMeasure = textMeasure,
-                    textRatioStyle = textRatioStyle,
                     ratioLineColor = ratioLineColor,
                     arcWidth = arcWidth,
                     minValue = minValue,

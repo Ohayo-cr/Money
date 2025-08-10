@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.aay.compose.barChart.components.BarChartContent
 import com.aay.compose.barChart.model.BarParameters
 import ru.ohayo.moneypr.utils.all_charts.baseComponents.ChartDescription
-import com.aay.compose.baseComponents.model.LegendPosition
+import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.LegendPosition
 import com.aay.compose.utils.ChartDefaultValues
 
 /**

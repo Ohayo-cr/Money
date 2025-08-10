@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aay.compose.barChart.model.BarParameters
 import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.GridOrientation
-import com.aay.compose.baseComponents.model.LegendPosition
+import ru.ohayo.moneypr.utils.all_charts.baseComponents.model.LegendPosition
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.lineChart.model.LineType
 
