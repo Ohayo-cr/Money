@@ -75,6 +75,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
+
         // Список категорий
         LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
             items(categorySummaries) { category ->

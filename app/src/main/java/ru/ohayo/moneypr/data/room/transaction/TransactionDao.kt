@@ -46,7 +46,7 @@ interface TransactionDao {
     WHERE t.timestamp BETWEEN :startTimestamp AND :endTimestamp
       AND t.type = 'Expense'
     GROUP BY c.id
-    ORDER BY totalAmount DESC
+    ORDER BY totalAmount ASC
     """
     )
     suspend fun getMonthlyCategorySummaries(
