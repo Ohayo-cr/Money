@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -18,17 +19,25 @@ internal fun ChartDescription(
     chartName: String,
     descriptionStyle: TextStyle,
 ) {
+    val truncatedName = if (chartName.length > 12) {
+        chartName.take(12) + "..."
+    } else {
+        chartName
+    }
+
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(
             modifier = Modifier
                 .clip(CircleShape)
                 .background(color = chartColor)
-                .size(8.dp)
+                .size(10.dp)
         )
         Text(
-            text = chartName,
+            text = truncatedName,
             modifier = Modifier.padding(start = 10.dp),
-            style = descriptionStyle
+            style = descriptionStyle,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }

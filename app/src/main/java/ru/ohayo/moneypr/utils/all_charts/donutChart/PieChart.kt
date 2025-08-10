@@ -52,9 +52,7 @@ fun PieChart(
     modifier: Modifier = Modifier,
     pieChartData: List<PieChartData>,
     animation: AnimationSpec<Float> = TweenSpec(durationMillis = 3000),
-    textRatioStyle: TextStyle = TextStyle.Default.copy(fontSize = 12.sp),
     outerCircularColor: Color = Color.Gray,
-    ratioLineColor: Color = Color.Gray,
     descriptionStyle: TextStyle = TextStyle.Default,
     legendPosition: LegendPosition = ChartDefaultValues.legendPosition,
 ) {
@@ -92,9 +90,7 @@ fun PieChart(
                 drawPieChart(
                     modifier = Modifier.weight(1.5f),
                     pieChartData = pieChartData,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
-                    ratioLineColor = ratioLineColor,
                     pieValueWithRatio = pieValueWithRatio,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
@@ -106,9 +102,7 @@ fun PieChart(
                 drawPieChart(
                     modifier = Modifier.weight(1.5f),
                     pieChartData = pieChartData,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
-                    ratioLineColor = ratioLineColor,
                     pieValueWithRatio = pieValueWithRatio,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
@@ -126,9 +120,7 @@ fun PieChart(
                 drawPieChart(
                     modifier = Modifier.weight(1.5f),
                     pieChartData = pieChartData,
-                    textRatioStyle = textRatioStyle,
                     outerCircularColor = outerCircularColor,
-                    ratioLineColor = ratioLineColor,
                     pieValueWithRatio = pieValueWithRatio,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
@@ -145,9 +137,7 @@ fun PieChart(
 private fun drawPieChart(
     modifier: Modifier = Modifier,
     pieChartData: List<PieChartData>,
-    textRatioStyle: TextStyle,
     outerCircularColor: Color,
-    ratioLineColor: Color,
     pieValueWithRatio: MutableList<Float>,
     totalSum: Float,
     transitionProgress: Animatable<Float, AnimationVector1D>,
@@ -169,7 +159,6 @@ private fun drawPieChart(
                     pieChartData = pieChartData,
                     totalSum = totalSum,
                     transitionProgress = transitionProgress,
-                    ratioLineColor = ratioLineColor,
                     arcWidth = arcWidth,
                     minValue = minValue,
                     pieChart = ChartTypes.PIE_CHART

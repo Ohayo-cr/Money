@@ -1,6 +1,9 @@
 package ru.ohayo.moneypr.ui.screens.charts.components
 
-import androidx.compose.foundation.layout.fillMaxSize
+
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,33 +17,37 @@ fun DonutChartSample() {
     val testPieChartData: List<PieChartData> = listOf(
         PieChartData(
             partName = "part A",
-            data = 500.0,
+            data = 300.0,
             color = Color(0xFF0B666A),
         ),
         PieChartData(
             partName = "Part B",
-            data = 700.0,
+            data = 5000.0,
             color = Color(0xFF35A29F),
         ),
         PieChartData(
             partName = "Part C",
-            data = 500.0,
+            data = 150.0,
             color = Color(0xFF97FEED),
         ),
         PieChartData(
-            partName = "Part D",
-            data = 100.0,
+            partName = "Part DPart DPart DPart D",
+            data = 250.0,
             color = Color(0xFF071952),
         ),
     )
 
-    DonutChart(
-        modifier = Modifier.fillMaxSize(),
-        pieChartData = testPieChartData,
-        centerTitle = "Orders",
-        centerTitleStyle = TextStyle(color = Color(0xFF071952)),
-        outerCircularColor = Color.LightGray,
-        innerCircularColor = Color.Gray,
-        ratioLineColor = Color.LightGray,
-    )
+
+
+        val totalSum = testPieChartData.sumOf { it.data }
+        DonutChart(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(.3f),
+            pieChartData = testPieChartData,
+            centerTitle = totalSum.toString(),
+            centerTitleStyle = TextStyle(color = MaterialTheme.colorScheme.onPrimary),
+            descriptionStyle = TextStyle(color = MaterialTheme.colorScheme.onPrimary),
+            outerCircularColor = Color.LightGray,
+            innerCircularColor = Color.Gray,
+        )
+
 }

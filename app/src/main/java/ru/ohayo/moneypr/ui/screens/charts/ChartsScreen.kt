@@ -38,7 +38,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.screens.charts.components.DonutChartSample
-import ru.ohayo.moneypr.utils.all_charts.donutChart.DonutChart
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 
@@ -76,7 +75,9 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+
         DonutChartSample()
+        Spacer(modifier = Modifier.height(8.dp))
 
         // Список категорий
         LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
@@ -84,6 +85,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
                 CategoryItem(category = category)
             }
         }
+
     }
 }
 @Composable
