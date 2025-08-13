@@ -24,7 +24,7 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertAll(categories: List<CategoryDbo>) {
-        categoryDao.insertAll(categories)
+        categoryDao.insertAllCategory(categories)
     }
 
     override suspend fun insertCategory(categoryDbo: CategoryDbo) {

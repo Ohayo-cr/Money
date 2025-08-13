@@ -18,7 +18,7 @@ interface CategoryDao {
     suspend fun insertCategory(categoryDbo: CategoryDbo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(categories: List<CategoryDbo>)
+    suspend fun insertAllCategory(categories: List<CategoryDbo>)
 
     @Query("SELECT * FROM categoryDbo ORDER BY `order` DESC")
     fun getAllCategories(): Flow<List<CategoryDbo>>
@@ -33,17 +33,13 @@ interface CategoryDao {
     fun getCategoryById(id: Long): Flow<CategoryDbo?>
     @Query("SELECT * FROM categoryDbo WHERE categoryName = :name LIMIT 1")
     suspend fun getCategoryByName(name: String): CategoryDbo?
-    @Update
-    suspend fun update(categoryDbo: CategoryDbo)
 
     // Если нужно массовое обновление
     @Query("UPDATE categoryDbo SET `order` = :newOrder WHERE id = :id")
     suspend fun updateOrder(id: Long, newOrder: Int)
     @Query("SELECT MAX(`order`) FROM categoryDbo WHERE type = :type")
     suspend fun getMaxOrder(type: CategoryType): Int?
-    @Query("SELECT MAX(`order`) FROM CategoryDbo WHERE type = :type")
-    suspend fun getNextOrder(type: CategoryType): Int?
-    // Получить категории по типу с сортировкой по order
+
     @Query("SELECT * FROM categoryDbo WHERE type = :type ORDER BY `order` ASC")
     fun getCategoriesByType(type: CategoryType): Flow<List<CategoryDbo>>
 
