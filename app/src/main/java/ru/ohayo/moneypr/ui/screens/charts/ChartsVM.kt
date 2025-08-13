@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import ru.ohayo.moneypr.domain.use_case.CalendarUseCase
 import ru.ohayo.moneypr.repository.ChartsRepository
 
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
+import ru.ohayo.moneypr.ui.screens.charts.components.ChartDataMapper
 import ru.ohayo.moneypr.utils.all_charts.donutChart.model.PieChartData
 import java.util.Calendar
 import javax.inject.Inject
@@ -21,6 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ChartsVM @Inject constructor(
     private val repository: ChartsRepository,
+    private val calendarUseCase: CalendarUseCase,
+    private val chartDataMapper: ChartDataMapper
 ) : ViewModel() {
 
     private val calendar = Calendar.getInstance().apply {
@@ -83,14 +87,7 @@ class ChartsVM @Inject constructor(
         }
     }
     private fun updatePieChartData(summaries: List<CategorySummaryFromDb>) {
-        val chartData = summaries.map { summary ->
-            PieChartData(
-                data = toPositive(summary.totalAmount),
-                color = Color(summary.color),
-                partName = summary.categoryName
-            )
-        }
-        _pieChartData.value = chartData
+        _pieChartData.value = chartDataMapper.toPieChartData(summaries)
     }
     fun nextMonth() {
         val newCalendar = _currentMonth.value.clone() as Calendar
