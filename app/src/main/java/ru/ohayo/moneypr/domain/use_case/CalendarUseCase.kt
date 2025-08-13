@@ -1,8 +1,9 @@
 package ru.ohayo.moneypr.domain.use_case
 
 import java.util.Calendar
+import javax.inject.Inject
 
-class CalendarUseCase {
+class CalendarUseCase @Inject constructor() {
     fun getMonthRange(calendar: Calendar): Pair<Long, Long> {
         val cal = calendar.clone() as Calendar
         cal.set(Calendar.DAY_OF_MONTH, 1)

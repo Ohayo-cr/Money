@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
+import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.screens.charts.components.DonutChartSample
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
@@ -83,6 +84,9 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
         LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
             items(categorySummaries) { category ->
                 CategoryItem(category = category)
+            }
+            item {
+                Spacers.Large()
             }
         }
 

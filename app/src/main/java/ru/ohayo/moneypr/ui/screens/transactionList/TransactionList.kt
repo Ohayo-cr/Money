@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
 import ru.ohayo.moneypr.ui.screens.transactionList.components.TransactionDetailsDialog
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
@@ -69,11 +70,7 @@ fun TransactionsList(
 
                     }
                     item {
-                        Spacer(
-                            modifier = Modifier
-                                .height(200.dp)
-                                .fillMaxWidth()
-                        )
+                        Spacers.Large()
                     }
                 }
             }

@@ -2,8 +2,9 @@ package ru.ohayo.moneypr.ui.screens.charts.components
 
 import androidx.compose.ui.graphics.Color
 import ru.ohayo.moneypr.utils.all_charts.donutChart.model.PieChartData
+import javax.inject.Inject
 
-class ChartDataMapper {
+class ChartDataMapper @Inject constructor() {
     fun toPieChartData(summaries: List<CategorySummaryFromDb>): List<PieChartData> {
         return summaries.map { summary ->
             PieChartData(

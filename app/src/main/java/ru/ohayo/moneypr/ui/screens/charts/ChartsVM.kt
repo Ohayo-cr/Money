@@ -71,7 +71,7 @@ class ChartsVM @Inject constructor(
     private fun loadCategoryData(calendar: Calendar) {
         viewModelScope.launch {
             try {
-                val (start, end) = getMonthRange(calendar)
+                val (start, end) = calendarUseCase.getMonthRange(calendar)
                 // Собираем Flow из репозитория
                 repository.getCategoriesForPeriod(start, end)
                     .catch { e ->
@@ -103,42 +103,9 @@ class ChartsVM @Inject constructor(
         updateMonthLabel()
     }
 
-
-
-
     private fun updateMonthLabel() {
-        val cal = _currentMonth.value
-        val current = Calendar.getInstance().apply {
-            set(Calendar.DAY_OF_MONTH, 1)
-            clear(Calendar.HOUR_OF_DAY)
-            clear(Calendar.MINUTE)
-            clear(Calendar.SECOND)
-            clear(Calendar.MILLISECOND)
-        }
-
-        // Сравниваем год и месяц (по первому числу)
-        if (cal.get(Calendar.YEAR) == current.get(Calendar.YEAR) &&
-            cal.get(Calendar.MONTH) == current.get(Calendar.MONTH)
-        ) {
-            _monthLabel.value = "Current month"
-        } else {
-            val month = cal.get(Calendar.MONTH) + 1
-            val year = cal.get(Calendar.YEAR)
-            _monthLabel.value = "%02d.%d".format(month, year)
-        }
+        _monthLabel.value = calendarUseCase.formatMonthLabel(_currentMonth.value)
     }
 
-
-    private fun getMonthRange(calendar: Calendar): Pair<Long, Long> {
-        val cal = calendar.clone() as Calendar
-        cal.set(Calendar.DAY_OF_MONTH, 1)
-        val start = cal.timeInMillis
-
-        cal.add(Calendar.MONTH, 1)
-        cal.add(Calendar.DAY_OF_MONTH, -1)
-        val end = cal.timeInMillis
-
-        return Pair(start, end)
-    }
     private fun toPositive(value: Double) = kotlin.math.abs(value)
 }
