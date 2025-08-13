@@ -75,16 +75,16 @@ fun DonutChart(
     }
 
     Box(
-        modifier = modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier = modifier.fillMaxWidth()
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically // выравнивание по вертикали
+        Row(modifier = Modifier,
+            horizontalArrangement = Arrangement.Start
+
         ) {
             drawDonutChart(
                 modifier = Modifier
-                    .weight(5f),
+                    .weight(0.65f)
+                    .fillMaxWidth(),
                 textMeasure = textMeasure,
                 pieChartData = pieChartData,
                 centerTitle = centerTitle,
@@ -100,8 +100,8 @@ fun DonutChart(
                 pieChartData = pieChartData,
                 descriptionStyle = descriptionStyle,
                 modifier = Modifier
-                    .weight(1f) // меньше ширины
-                     // тоже растягивается на всю высоту
+                    .weight(0.35f)
+                    .fillMaxWidth()
             )
         }
     }

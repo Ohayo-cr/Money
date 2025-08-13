@@ -17,8 +17,8 @@ internal fun PieChartDescriptionRight(
     descriptionStyle: TextStyle = TextStyle.Default,
     modifier: Modifier = Modifier
 ) {
-
     LazyColumn(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp)
     ) {

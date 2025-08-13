@@ -93,15 +93,17 @@ class ChartsVM @Inject constructor(
         _pieChartData.value = chartData
     }
     fun nextMonth() {
-        _currentMonth.value = _currentMonth.value.apply { add(Calendar.MONTH, 1) }.clone() as Calendar
+        val newCalendar = _currentMonth.value.clone() as Calendar
+        newCalendar.add(Calendar.MONTH, 1)
+        _currentMonth.value = newCalendar
         updateMonthLabel()
-        // loadTopCategories() - теперь не нужен, так как collectLatest в init сам обновит данные
     }
 
     fun prevMonth() {
-        _currentMonth.value = _currentMonth.value.apply { add(Calendar.MONTH, -1) }.clone() as Calendar
+        val newCalendar = _currentMonth.value.clone() as Calendar
+        newCalendar.add(Calendar.MONTH, -1)
+        _currentMonth.value = newCalendar
         updateMonthLabel()
-        // loadTopCategories() - теперь не нужен, так как collectLatest в init сам обновит данные
     }
 
 
