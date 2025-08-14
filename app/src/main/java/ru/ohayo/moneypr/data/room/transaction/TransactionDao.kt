@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
+import ru.ohayo.moneypr.ui.screens.charts.components.data.CategorySummaryFromDb
 
 
 @Dao

@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.screens.charts.components
+package ru.ohayo.moneypr.ui.screens.charts.components.data
 
 data class CategorySummaryFromDb(
     val categoryName: String,

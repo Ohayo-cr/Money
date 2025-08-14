@@ -5,7 +5,6 @@ package ru.ohayo.moneypr.repository
 import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.data.room.transaction.TransactionDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
-import ru.ohayo.moneypr.ui.screens.charts.components.CategorySummaryFromDb
 
 
 import javax.inject.Inject

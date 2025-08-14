@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.screens.charts.components
+package ru.ohayo.moneypr.ui.screens.charts.components.data
 
 import androidx.compose.ui.graphics.Color
 import ru.ohayo.moneypr.utils.all_charts.donutChart.model.PieChartData
