@@ -26,11 +26,7 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatterKeyboard
 fun KeyboardSheet(
     keyboardViewModel: NoDateKeyboardViewModel = hiltViewModel(),
     onDismiss: () -> Unit,
-    onOkClicked: (String) -> Unit,
-
-
-
-    ) {
+    onOkClicked: (String) -> Unit) {
     val displayText = if (keyboardViewModel.result.isNotEmpty()) {
         NumberFormatterKeyboard.formatWithSpaces(keyboardViewModel.result)
     } else {
@@ -58,8 +54,7 @@ fun KeyboardSheet(
                 UndatedKeyboard(
                     onDateButtonClicked =  onDismiss ,
                     onHideKeyboardClicked =  onDismiss ,
-                    onOkClicked = { onOkClicked(displayText) },
-                    dateText = "Hello date",
+                    onOkClicked = { onOkClicked(displayText) }
                 )
 
                 Spacer(modifier = Modifier.height(56.dp))

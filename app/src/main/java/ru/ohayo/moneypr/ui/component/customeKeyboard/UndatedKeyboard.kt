@@ -12,9 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.ohayo.moneypr.ui.screens.addAccount.NoDateKeyboardViewModel
 
@@ -23,8 +21,7 @@ fun UndatedKeyboard(
     viewModel: NoDateKeyboardViewModel = hiltViewModel(),
     onDateButtonClicked: () -> Unit,
     onHideKeyboardClicked: () -> Unit,
-    onOkClicked: () -> Unit,
-    dateText: String
+    onOkClicked: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -47,12 +44,9 @@ fun UndatedKeyboard(
                 ))
             KeyboardButton("8", Modifier.weight(1f), onClick = { viewModel.appendToInput("8") })
             KeyboardButton("9", Modifier.weight(1f), onClick = { viewModel.appendToInput("9") },)
-            DateButton(
-                text = dateText,
+            ArrowButton(
                 onClick = onDateButtonClicked,
                 modifier = Modifier.weight(1f),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
                 shape = RoundedCornerShape(
                     topStart = 2.dp,
                     topEnd = 8.dp,
