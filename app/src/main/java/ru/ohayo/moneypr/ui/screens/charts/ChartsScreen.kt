@@ -41,12 +41,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.ui.screens.charts.components.data.CategorySummaryFromDb
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
@@ -83,68 +85,93 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
                 )
             }
 
-            Box(
-                modifier = Modifier
-                    .clickable { showPeriodDialog = true }
-                    .padding(8.dp)
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = periodLabel,
-                        fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        textAlign = TextAlign.Center
-                    )
-                    Text(
-                        text = periodType.name.lowercase().replaceFirstChar { it.uppercase() },
-                        fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
-                        textAlign = TextAlign.Center
+
+                Box(
+                    modifier = Modifier
+                        .clickable { showPeriodDialog = true }
+                        .padding(8.dp)
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = periodLabel,
+                            fontSize = 18.sp,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            text = periodType.name.lowercase().replaceFirstChar { it.uppercase() },
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
+                IconButton(onClick = { viewModel.nextPeriod() }) {
+                    Icon(
+                        Icons.Default.ArrowForward,
+                        contentDescription = "Next period",
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
-
-            IconButton(onClick = { viewModel.nextPeriod() }) {
+        if (pieChartData.isEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Icon(
-                    Icons.Default.ArrowForward,
-                    contentDescription = "Next period",
-                    tint = MaterialTheme.colorScheme.onPrimary
+                    painter = painterResource(id = R.drawable.ic_default_none),
+                    contentDescription = "No data",
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    modifier = Modifier.size(64.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Нет данных",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
             }
-        }
+        } else {
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        DonutChartSample(pieChartData = pieChartData)
-        Spacer(modifier = Modifier.height(8.dp))
+            DonutChartSample(pieChartData = pieChartData)
+            Spacer(modifier = Modifier.height(8.dp))
 
-        // Список категорий
-        LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
-            items(categorySummaries) { category ->
-                CategoryItem(category = category)
+            // Список категорий
+            LazyColumn(modifier = Modifier.padding(horizontal = 8.dp)) {
+                items(categorySummaries) { category ->
+                    CategoryItem(category = category)
+                }
+                item {
+                    Spacers.Large()
+                }
             }
-            item {
-                Spacers.Large()
-            }
-        }
 
-    }
-    // Диалог выбора периода
-    if (showPeriodDialog) {
-        PeriodSelectionDialog(
-            currentPeriodType = periodType,
-            onPeriodSelected = { type ->
-                viewModel.setPeriodType(type)
-                showPeriodDialog = false
-            },
-            onCustomRangeSelected = { start, end ->
-                viewModel.setCustomRange(start, end)
-                showPeriodDialog = false
-            },
-            onDismiss = { showPeriodDialog = false }
-        )
+        }
+        // Диалог выбора периода
+        if (showPeriodDialog) {
+            PeriodSelectionDialog(
+                currentPeriodType = periodType,
+                onPeriodSelected = { type ->
+                    viewModel.setPeriodType(type)
+                    showPeriodDialog = false
+                },
+                onCustomRangeSelected = { start, end ->
+                    viewModel.setCustomRange(start, end)
+                    showPeriodDialog = false
+                },
+                onDismiss = { showPeriodDialog = false }
+            )
+        }
     }
 }
+
 @Composable
 fun CategoryItem(category: CategorySummaryFromDb) {
 val color =  MaterialTheme.colorScheme.onPrimary
@@ -222,7 +249,7 @@ fun PeriodSelectionDialog(
         title = { Text("Select Period") },
         text = {
             Column {
-                PeriodType.values().forEach { type ->
+                PeriodType.entries.forEach { type ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
