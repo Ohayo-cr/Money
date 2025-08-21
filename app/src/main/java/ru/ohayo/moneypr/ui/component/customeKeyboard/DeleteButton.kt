@@ -18,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -28,7 +29,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun DeleteButton(
     modifier: Modifier = Modifier,
-    onDeleteLast: () -> Unit
+    onDeleteLast: () -> Unit,
+    shape: Shape = RoundedCornerShape(2.dp)
 ) {
     var isPressed by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()

@@ -96,7 +96,7 @@ fun UndatedKeyboard(
             val buttonText = if (viewModel.isExpressionReadyForEvaluation) "=" else "OK"
             val isOnlyMinus = viewModel.currentInput == "-"
             val buttonEnabled = if (viewModel.result.isNotEmpty()) {
-                 viewModel.result.toDoubleOrNull() != 0.0
+                viewModel.result.toDoubleOrNull() != 0.0
             } else {
                 !isOnlyMinus && (viewModel.isExpressionReadyForEvaluation || isNumber(viewModel.currentInput))
             }

@@ -60,5 +60,6 @@ data class TransactionDbo(
     val note: String? = null,
     val tag: String? = null,
     val timestamp: Long,
+    val inBudget: Boolean = true
 
     )
