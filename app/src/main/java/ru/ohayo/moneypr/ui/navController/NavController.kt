@@ -14,6 +14,7 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransaction
 import ru.ohayo.moneypr.ui.screens.allSettings.SettingsScreen
@@ -30,7 +31,7 @@ import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
 import ru.ohayo.moneypr.ui.screens.addAccount.AddAccountScreen
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
-
+import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionDetailsScreen
 
 
 @Composable
@@ -117,6 +118,16 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.AddTransaction.route) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransaction(navController = navController, viewModel = categoryViewModel)
+        }
+        composable("transaction_details") {
+            val transaction = it.arguments?.getSerializable("transaction") as? TransactionDbo
+            if (transaction != null) {
+                TransactionDetailsScreen(
+                    transaction = transaction,
+                    onBackClick = { navController.popBackStack() },
+                    navController = navController
+                )
+            }
         }
     }
 }

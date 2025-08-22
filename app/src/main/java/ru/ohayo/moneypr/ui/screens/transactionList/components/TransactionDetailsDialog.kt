@@ -41,6 +41,11 @@ fun TransactionDetailsDialog(
                         transaction.timestamp
                     )
                 }")
+                Text(text = "Создано: ${
+                    formatTimestamp(
+                        transaction.createdAt
+                    )
+                }")
                 transaction.note?.let {
                     Text(text = "Описание: $it")
                 }
