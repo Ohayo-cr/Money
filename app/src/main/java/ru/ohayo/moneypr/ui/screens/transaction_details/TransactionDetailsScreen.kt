@@ -36,12 +36,14 @@ fun TransactionDetailsScreen(
         ) {
             BackButton(navController)
 
-            Text(
-                text = "Детали транзакции",
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(8.dp),
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+            if (transaction != null) {
+                Text(
+                    text = "${transaction.type}",
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(8.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                )
+            }
         }
 
         // Показываем контент в зависимости от состояния данных

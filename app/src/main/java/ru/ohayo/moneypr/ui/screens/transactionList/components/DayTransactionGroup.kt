@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
@@ -53,18 +54,18 @@ fun DayTransactionGroup(
                 text = date,
                 style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(start = 8.dp),
-                color = colorScheme.onSurface
+                color = TextDisabled
             )
                Text(
-                   text = "Итог: ${NumberFormatter.format(total)}",
+                   text = NumberFormatter.format(total),
                    style = MaterialTheme.typography.titleSmall,
                    modifier = Modifier.padding(end = 8.dp),
-                   color = colorScheme.onSurface,
+                   color = TextDisabled,
                    maxLines = 1,
                    overflow = TextOverflow.Ellipsis
                )
            }
-            Divider(modifier = Modifier, color = colorScheme.onPrimary)
+            Divider(modifier = Modifier.padding(vertical = 2.dp), color = TextDisabled)
             Spacer(modifier = Modifier.height(4.dp))
             Column(
                 modifier = Modifier.padding(horizontal = 2.dp),

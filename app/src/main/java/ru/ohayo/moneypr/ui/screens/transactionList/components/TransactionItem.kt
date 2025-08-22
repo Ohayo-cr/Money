@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +26,11 @@ import androidx.compose.ui.unit.sp
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
+import ru.ohayo.moneypr.ui.theme.TextDisabled
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -36,7 +42,8 @@ fun TransactionItem(
 ) {
 
     val category = getCategoryByName(categories, transaction.category)
-    Box(modifier = Modifier.fillMaxWidth()
+    Box(modifier = Modifier
+        .fillMaxWidth()
         .clickable { onTransactionClick(transaction) }
     ) {
         Row(
@@ -72,10 +79,20 @@ fun TransactionItem(
                     }
 
                     Text(
-                        text = transaction.category,
+                        text = formattedCategory,
                         color = MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.Bold,
-                        maxLines = 2
+                        maxLines = 1
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = Instant.ofEpochMilli(transaction.timestamp)
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalTime()
+                            .format(DateTimeFormatter.ofPattern("HH:mm")),
+                        color = TextDisabled,
+                        fontSize = 12.sp,
+                        maxLines = 1
                     )
 
                 }
@@ -94,8 +111,9 @@ fun TransactionItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                    transaction.account?.let { Text(text = it, fontSize = 12.sp,   color = MaterialTheme.colorScheme.onPrimary) }
+                    transaction.account?.let { Text(text = it, fontSize = 12.sp,   color = TextDisabled) }
 
 
                 }
@@ -103,6 +121,7 @@ fun TransactionItem(
         }
     }
 }
+
 
 @Composable
 fun getCategoryByName(categories: List<CategoryDbo>, categoryName: String): CategoryDbo? {
