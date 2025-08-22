@@ -20,7 +20,7 @@ import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import javax.inject.Inject
 
 @HiltViewModel
-class TransactionViewModel @Inject constructor(
+class AddTransactionViewModel @Inject constructor(
     private val repository: TransactionRepository,
     private val accountRepository: AccountRepository,
     private val currencyRepository: CurrencyRepository,

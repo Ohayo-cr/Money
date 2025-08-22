@@ -6,6 +6,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +16,6 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransaction
 import ru.ohayo.moneypr.ui.screens.allSettings.SettingsScreen
@@ -32,6 +33,7 @@ import ru.ohayo.moneypr.ui.screens.addAccount.AddAccountScreen
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
 import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionDetailsScreen
+import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionViewModel
 
 
 @Composable
@@ -103,7 +105,7 @@ fun NavHostScreen(navController: NavHostController) {
             ChartsScreen()
         }
         composable(Screen.Records.route) {
-            TransactionsList()
+            TransactionsList(navController = navController)
         }
         composable(Screen.AccountList.route) {
             val accountViewModel: AccountViewModel = hiltViewModel()
@@ -119,11 +121,20 @@ fun NavHostScreen(navController: NavHostController) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransaction(navController = navController, viewModel = categoryViewModel)
         }
-        composable("transaction_details") {
-            val transaction = it.arguments?.getSerializable("transaction") as? TransactionDbo
-            if (transaction != null) {
+        composable("transaction_details/{transactionId}") { backStackEntry ->
+            val transactionId = backStackEntry.arguments?.getString("transactionId")?.toLongOrNull()
+
+            if (transactionId != null) {
+                val viewModel: TransactionViewModel = hiltViewModel()
+
+                LaunchedEffect(transactionId) {
+                    viewModel.getTransactionById(transactionId)
+                }
+
+                val transaction by viewModel.transaction.collectAsState()
+
                 TransactionDetailsScreen(
-                    transaction = transaction,
+                    transaction = transaction, // Может быть null
                     onBackClick = { navController.popBackStack() },
                     navController = navController
                 )
@@ -131,5 +142,6 @@ fun NavHostScreen(navController: NavHostController) {
         }
     }
 }
+
 
 

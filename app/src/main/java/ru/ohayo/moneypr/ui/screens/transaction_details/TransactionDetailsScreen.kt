@@ -3,9 +3,11 @@ package ru.ohayo.moneypr.ui.screens.transaction_details
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,56 +23,90 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
 fun TransactionDetailsScreen(
-    transaction: TransactionDbo,
+    transaction: TransactionDbo?,
     onBackClick: () -> Unit,
     navController: NavController
 ) {
-    val payment = when {
-        transaction.paymentAccount != null -> "Счет списания: ${transaction.paymentAccount}"
-        transaction.recipientAccount != null -> "Счет пополнения: ${transaction.recipientAccount}"
-        else -> null
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        BackButton(navController)
-
-        Text(
-            text = "Детали транзакции",
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(top = 8.dp)
-        )
-
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxWidth()
-                .padding(top = 64.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
         ) {
-            Text(text = "Сумма: ${NumberFormatter.format(transaction.amount)}")
-            Text(text = "Счёт: ${transaction.account}")
-            Text(text = "Категория: ${transaction.category}") // Прямо используем
-            Text(text = "Дата: ${formatTimestamp(transaction.timestamp)}")
-            Text(text = "Создано: ${formatTimestamp(transaction.createdAt)}")
-            transaction.note?.let {
-                Text(text = "Описание: $it")
+            BackButton(navController)
+
+            Text(
+                text = "Детали транзакции",
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(8.dp),
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
+
+        // Показываем контент в зависимости от состояния данных
+        when (transaction) {
+            null -> {
+                // Показываем загрузку или пустой контейнер
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {}
             }
-            payment?.let { Text(text = it) }
+            else -> {
+                // Показываем данные транзакции
+                val payment = when {
+                    transaction.paymentAccount != null -> "Счет списания: ${transaction.paymentAccount}"
+                    transaction.recipientAccount != null -> "Счет пополнения: ${transaction.recipientAccount}"
+                    else -> null
+                }
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 64.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    DetailsText("Сумма: ${NumberFormatter.format(transaction.amount)}")
+                    DetailsText("Счёт: ${transaction.account}")
+                    DetailsText("Категория: ${transaction.category}")
+                    DetailsText("Дата: ${formatTimestamp(transaction.timestamp)}")
+                    DetailsText("Создано: ${formatTimestamp(transaction.createdAt)}")
+                    transaction.note?.let {
+                        DetailsText("Описание: $it")
+                    }
+                    payment?.let {
+                        DetailsText(it)
+                    }
+                }
+            }
         }
 
         TextButton(
             onClick = onBackClick,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            Text("Закрыть", color = MaterialTheme.colorScheme.primary)
+            Text("Закрыть", color = MaterialTheme.colorScheme.onPrimary)
+        }
+    }
+}
+
+@Composable
+private fun DetailsText(s: String) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Column {
+            Text(
+                text = s, // Исправлено: было String(), стало s
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Divider(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxWidth(),
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
+            )
         }
     }
 }

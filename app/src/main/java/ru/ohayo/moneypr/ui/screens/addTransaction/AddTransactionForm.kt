@@ -43,7 +43,7 @@ import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
 @Composable
 fun AddTransactionForm(
     categoryId: Int,
-    viewModel: TransactionViewModel = hiltViewModel(),
+    viewModel: AddTransactionViewModel = hiltViewModel(),
     keyboardViewModel: KeyboardViewModel = hiltViewModel(),
     accountViewModel: AccountViewModel = hiltViewModel(),
     onTransactionAdded: () -> Unit,

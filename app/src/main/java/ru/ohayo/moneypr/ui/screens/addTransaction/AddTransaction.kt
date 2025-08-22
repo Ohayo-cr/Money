@@ -29,7 +29,7 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 fun AddTransaction(
     navController: NavController,
     viewModel: CategoryViewModel = hiltViewModel(),
-    transactionViewModel: TransactionViewModel = hiltViewModel()
+    transactionViewModel: AddTransactionViewModel = hiltViewModel()
 ) {
 
     var selectedTab by rememberSaveable { mutableStateOf(CategoryType.Expense) }

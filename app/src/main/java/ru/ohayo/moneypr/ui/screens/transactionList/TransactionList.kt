@@ -10,26 +10,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
 import ru.ohayo.moneypr.ui.screens.transactionList.components.TransactionDetailsDialog
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
-import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel
+import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransactionViewModel
 
 
 
 @Composable
-fun TransactionsList(
-    transactionListVM: TransactionListViewModel = hiltViewModel(),
-    categoryViewModel: CategoryViewModel = hiltViewModel(),
-    transactionViewModel: TransactionViewModel = hiltViewModel()
-
+fun TransactionsList(navController: NavController,
+                     transactionListVM: TransactionListViewModel = hiltViewModel(),
+                     categoryViewModel: CategoryViewModel = hiltViewModel()
     ) {
     val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
-    var selectedTransaction by remember { mutableStateOf<TransactionDbo?>(null) }
     val scrollState = transactionListVM.scrollState
     val groupedTransactions = remember(transactions) {
         if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
@@ -63,7 +61,9 @@ fun TransactionsList(
                                 date = date,
                                 transactions = dayTransactions,
                                 categories = categories,
-                                onTransactionClick = { selectedTransaction = it }
+                                onTransactionClick = { transaction ->
+                                    navController.navigate("transaction_details/${transaction.id}")
+                                }
                             )
 
                         }
@@ -76,16 +76,7 @@ fun TransactionsList(
             }
         }
     }
-
-
-        selectedTransaction?.let { transaction ->
-            TransactionDetailsDialog(
-                transaction = transaction,
-                categories = categories,
-                onDismiss = { selectedTransaction = null }
-            )
-        }
-    }
+}
 
 
 @Composable

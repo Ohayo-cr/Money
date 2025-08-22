@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
-import ru.ohayo.moneypr.ui.screens.addTransaction.TransactionViewModel
 
 @Composable
 fun TransactionDetailsDialog(
