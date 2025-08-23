@@ -30,5 +30,7 @@ interface AccountDao {
     suspend fun insertAllAccount(accountDbo: List<AccountDbo>)
     @Query("SELECT COUNT(*) FROM AccountDbo")
     suspend fun getAccountsCount(): Int
+    @Query("SELECT * FROM AccountDbo WHERE name = :accountName")
+    suspend fun getAccountByName(accountName: String): AccountDbo?
 }
 

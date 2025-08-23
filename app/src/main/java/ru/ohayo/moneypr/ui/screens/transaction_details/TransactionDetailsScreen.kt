@@ -14,11 +14,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.screens.transactionList.components.formatTimestamp
+import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
@@ -58,8 +60,8 @@ fun TransactionDetailsScreen(
             else -> {
                 // Показываем данные транзакции
                 val payment = when {
-                    transaction.paymentAccount != null -> "Счет списания: ${transaction.paymentAccount}"
-                    transaction.recipientAccount != null -> "Счет пополнения: ${transaction.recipientAccount}"
+                    transaction.paymentAccount != null -> Pair("Счет списания", transaction.paymentAccount)
+                    transaction.recipientAccount != null -> Pair("Счет пополнения", transaction.recipientAccount)
                     else -> null
                 }
 
@@ -70,37 +72,41 @@ fun TransactionDetailsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    DetailsText("Сумма: ${NumberFormatter.format(transaction.amount)}")
-                    DetailsText("Счёт: ${transaction.account}")
-                    DetailsText("Категория: ${transaction.category}")
-                    DetailsText("Дата: ${formatTimestamp(transaction.timestamp)}")
-                    DetailsText("Создано: ${formatTimestamp(transaction.createdAt)}")
-                    transaction.note?.let {
-                        DetailsText("Описание: $it")
-                    }
+                    DetailsText("Сумма", NumberFormatter.format(transaction.amount))
+                    transaction.account?.let { DetailsText("Счёт", it) }
                     payment?.let {
-                        DetailsText(it)
+                        DetailsText(it.first, it.second)
                     }
+                    DetailsText("Категория", transaction.category)
+                    DetailsText("Дата", formatTimestamp(transaction.timestamp))
+                    DetailsText("Описание", transaction.note ?: "Tap add note", transaction.note == null)
+                    Text(
+                        text = "Created on ${formatTimestamp(transaction.createdAt)}",
+                        textAlign = TextAlign.Center,
+                        color = TextDisabled,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    )
                 }
             }
-        }
-
-        TextButton(
-            onClick = onBackClick,
-            modifier = Modifier.padding(bottom = 16.dp)
-        ) {
-            Text("Закрыть", color = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }
 
 @Composable
-private fun DetailsText(s: String) {
+private fun DetailsText(title: String, mainText: String, isPlaceholder: Boolean = false) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Column {
             Text(
-                text = s, // Исправлено: было String(), стало s
-                color = MaterialTheme.colorScheme.onPrimary,
+                text = title,
+                color = TextDisabled,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                text = mainText,
+                color = if (isPlaceholder) TextDisabled
+                else MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.fillMaxWidth()
             )
             Divider(

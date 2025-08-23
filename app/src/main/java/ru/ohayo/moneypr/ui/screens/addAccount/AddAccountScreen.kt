@@ -42,7 +42,6 @@ import ru.ohayo.moneypr.ui.theme.TextDisabled
 
 
 
-@SuppressLint("SuspiciousIndentation")
 @Composable
 fun AddAccountScreen(
     accountVM: AddAccountViewModel = hiltViewModel(),
@@ -59,185 +58,180 @@ fun AddAccountScreen(
     val selectedIcon by accountVM.selectedIcon.collectAsState(initial = null)
 
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        BackButton(navController)
-                        Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
-                    }
-
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    BackButton(navController)
+                    Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
                 }
-                AccountInfoCard(
-                    items = listOf(
-                        AccountCardItem(
-                            key = "Account type",
-                            valueText = fieldValues["type"] ?: "",
-                            onClick = { accountVM.setShowDialog("accountType", true) }
-                        ),
-                        AccountCardItem(
-                            key = "Account name",
-                            valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
-                                ?: "",
-                            onClick = { accountVM.setShowDialog("name", true) }
-                        )
+
+            }
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account type",
+                        valueText = fieldValues["type"] ?: "",
+                        onClick = { accountVM.setShowDialog("accountType", true) }
+                    ),
+                    AccountCardItem(
+                        key = "Account name",
+                        valueText = if (fieldValues["name"].isNullOrBlank()) "Please enter name" else fieldValues["name"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("name", true) }
                     )
                 )
-                AccountInfoCard(
-                    items = listOf(
-                        AccountCardItem(
-                            key = "Account balance",
-                            valueText = fieldValues["balance"] ?: "0",
-                            onClick = { accountVM.setShowDialog("balance", true) }
-                        )
+            )
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account balance",
+                        valueText = fieldValues["balance"] ?: "0",
+                        onClick = { accountVM.setShowDialog("balance", true) }
                     )
                 )
-                AccountInfoCard(
-                    items = listOf(
-                        AccountCardItem(
-                            key = "Account icon",
-                            valueIcon = selectedIcon,
-                            isClickable = false
-                        ),
-                        AccountCardItem(
-                            key = "Account currency",
-                            valueText = fieldValues["currency_display"] ?: "",
-                            onClick = { accountVM.setShowDialog("currency", true) }
-                        ),
-                        AccountCardItem(
-                            key = "Account note",
-                            valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
-                                ?: "",
-                            onClick = { accountVM.setShowDialog("note", true) }
-                        )
+            )
+            AccountInfoCard(
+                items = listOf(
+                    AccountCardItem(
+                        key = "Account icon",
+                        valueIcon = selectedIcon,
+                        isClickable = false
+                    ),
+                    AccountCardItem(
+                        key = "Account currency",
+                        valueText = fieldValues["currency_display"] ?: "",
+                        onClick = { accountVM.setShowDialog("currency", true) }
+                    ),
+                    AccountCardItem(
+                        key = "Account note",
+                        valueText = if (fieldValues["note"].isNullOrBlank()) "Note text" else fieldValues["note"]
+                            ?: "",
+                        onClick = { accountVM.setShowDialog("note", true) }
                     )
                 )
+            )
+        }
+
+        FullWidthButton(
+            text = "Save account",
+            onClick = {
+
+                val name = fieldValues["name"] ?: ""
+                val type = fieldValues["type"] ?: ""
+                val balanceString = fieldValues["balance"] ?: "0"
+                val currency = fieldValues["currency"] ?: ""
+                val note = fieldValues["note"] ?: ""
+                val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
+                if (name.isEmpty()) {
+                    Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
+
+                } else if (currency.isEmpty()) {
+                    Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
+                } else {
+                    accountVM.addAccount(name, type, balance, currency, note)
+                }
+            }
+        )
+        when (val currentState = accountState) {
+            is AddAccountViewModel.AccountState.Success -> {
+                val name = fieldValues["name"] ?: ""
+                LaunchedEffect(currentState) {
+                    navController.popBackStack()
+                    Toast.makeText(context, "Счет $name успешно добавлен", Toast.LENGTH_SHORT)
+                        .show()
+
+                    accountVM.resetState()
+                }
             }
 
-            FullWidthButton(
-                text = "Save account",
-                onClick = {
-
-                    val name = fieldValues["name"] ?: ""
-                    val type = fieldValues["type"] ?: ""
-                    val balanceString = fieldValues["balance"] ?: "0"
-                    val currency = fieldValues["currency"] ?: ""
-                    val note = fieldValues["note"] ?: ""
-                    val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
-                    if (name.isEmpty()) {
-                        Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
-
-                    } else if (currency.isEmpty()) {
-                        Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
-                    } else {
-                        accountVM.addAccount(name, type, balance, currency, note)
-                    }
+            is AddAccountViewModel.AccountState.Error -> {
+                val errorMessage = (currentState).message
+                LaunchedEffect(currentState) {
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                    accountVM.resetState()
                 }
-            )
-            when (val currentState = accountState) {
-                is AddAccountViewModel.AccountState.Success -> {
-                    val name = fieldValues["name"] ?: ""
-                    LaunchedEffect(currentState) {
-                        navController.popBackStack()
-                        Toast.makeText(context, "Счет $name успешно добавлен", Toast.LENGTH_SHORT)
-                            .show()
-
-                        accountVM.resetState()
-                    }
-                }
-
-                is AddAccountViewModel.AccountState.Error -> {
-                    val errorMessage = (currentState).message
-                    LaunchedEffect(currentState) {
-                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-                        accountVM.resetState()
-                    }
-                }
-
-                AddAccountViewModel.AccountState.Loading -> {}
-                AddAccountViewModel.AccountState.Idle -> {}
             }
-        }
 
-        if (dialogStates["name"] == true) {
-            AccountTextDialog(
-                onDismissRequest = {
-                    accountVM.confirmField("name")
-                },
-                tempName = tempFieldValues["name"] ?: "",
-                onTempNameChange = { accountVM.setTempFieldValue("name", it) },
-                onConfirm = {
-                    accountVM.confirmField("name")
-                },
-                title = "Enter Account Name"
-
-            )
+            AddAccountViewModel.AccountState.Loading -> {}
+            AddAccountViewModel.AccountState.Idle -> {}
         }
-
-        if (dialogStates["note"] == true) {
-            AccountTextDialog(
-                onDismissRequest = {
-                    accountVM.confirmField("note")
-                },
-                tempName = tempFieldValues["note"] ?: "",
-                onTempNameChange = { accountVM.setTempFieldValue("note", it) },
-                onConfirm = {
-                    accountVM.confirmField("note")
-                },
-                title = "Enter Note"
-            )
-        }
-
-        if (dialogStates["accountType"] == true) {
-            AccountInfoSelector(
-                text = "Enter account type",
-                onDismissRequest = { accountVM.confirmField("accountType") },
-                items = accountTypeList,
-                selectedItem = accountTypeList.find { it.mainText == fieldValues["type"] },
-                onItemSelected = { selectedItem ->
-                    accountVM.setAccountType(AccountType.entries.first { it.name == selectedItem.mainText })
-                    accountVM.confirmField("accountType")
-                }
-            )
-        }
-        if (dialogStates["currency"] == true) {
-            AccountInfoSelector(
-                text = "Enter Currency",
-                onDismissRequest = { accountVM.setShowDialog("currency", false) },
-                items = currencies,
-                selectedItem = currencies.find { it.mainText == fieldValues["currency"] },
-                onItemSelected = { selectedItem ->
-                    accountVM.setCurrency(selectedItem)
-                    accountVM.setShowDialog("currency", false)
-                }
-            )
-        }
-        if (dialogStates["balance"] == true) {
-            KeyboardSheet(
-                onDismiss = { accountVM.setShowDialog("balance", false) },
-                onOkClicked = { result ->
-                    accountVM.setFieldValue("balance", result)
-                    accountVM.setShowDialog("balance", false)
-
-                }
-            )
-        }
-
     }
 
+    if (dialogStates["name"] == true) {
+        AccountTextDialog(
+            onDismissRequest = {
+                accountVM.confirmField("name")
+            },
+            tempName = tempFieldValues["name"] ?: "",
+            onTempNameChange = { accountVM.setTempFieldValue("name", it) },
+            onConfirm = {
+                accountVM.confirmField("name")
+            },
+            title = "Enter Account Name"
 
+        )
+    }
 
+    if (dialogStates["note"] == true) {
+        AccountTextDialog(
+            onDismissRequest = {
+                accountVM.confirmField("note")
+            },
+            tempName = tempFieldValues["note"] ?: "",
+            onTempNameChange = { accountVM.setTempFieldValue("note", it) },
+            onConfirm = {
+                accountVM.confirmField("note")
+            },
+            title = "Enter Note"
+        )
+    }
 
+    if (dialogStates["accountType"] == true) {
+        AccountInfoSelector(
+            text = "Enter account type",
+            onDismissRequest = { accountVM.confirmField("accountType") },
+            items = accountTypeList,
+            selectedItem = accountTypeList.find { it.mainText == fieldValues["type"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setAccountType(AccountType.entries.first { it.name == selectedItem.mainText })
+                accountVM.confirmField("accountType")
+            }
+        )
+    }
+    if (dialogStates["currency"] == true) {
+        AccountInfoSelector(
+            text = "Enter Currency",
+            onDismissRequest = { accountVM.setShowDialog("currency", false) },
+            items = currencies,
+            selectedItem = currencies.find { it.mainText == fieldValues["currency"] },
+            onItemSelected = { selectedItem ->
+                accountVM.setCurrency(selectedItem)
+                accountVM.setShowDialog("currency", false)
+            }
+        )
+    }
+    if (dialogStates["balance"] == true) {
+        KeyboardSheet(
+            onDismiss = { accountVM.setShowDialog("balance", false) },
+            onOkClicked = { result ->
+                accountVM.setFieldValue("balance", result)
+                accountVM.setShowDialog("balance", false)
 
+            }
+        )
+    }
+
+}
 
 
 @Composable
@@ -263,7 +257,11 @@ fun AccountInfoCard(items: List<AccountCardItem>) {
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = item.key, color = colorScheme.onPrimary, modifier = Modifier.padding(vertical = 16.dp))
+                        Text(
+                            text = item.key,
+                            color = colorScheme.onPrimary,
+                            modifier = Modifier.padding(vertical = 16.dp)
+                        )
                         if (item.valueText != null) {
                             Text(text = item.valueText, color = TextDisabled)
                         } else if (item.valueIcon != null) {

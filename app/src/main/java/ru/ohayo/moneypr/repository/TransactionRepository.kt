@@ -3,14 +3,19 @@ package ru.ohayo.moneypr.repository
 
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.internal.NopCollector.emit
+import ru.ohayo.moneypr.data.room.account.AccountDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.ui.screens.transaction_details.componets.TransactionWithAccount
 
 
 import javax.inject.Inject
 
 class TransactionRepository @Inject constructor(
-    private val transactionDao: TransactionDao
+    private val transactionDao: TransactionDao,
+    private val accountDao: AccountDao
 ) {
 
     fun getAllTransactions(): Flow<List<TransactionDbo>> {
@@ -35,7 +40,11 @@ class TransactionRepository @Inject constructor(
     fun getLastAddedTransactionTimestampFlow(): Flow<Long?> =
         transactionDao.getLastAddedTransactionTimestampFlow()
 
-
+    fun getTransactionWithAccount(id: Long): Flow<TransactionWithAccount?> = flow {
+        val transaction = transactionDao.getTransactionById(id) ?: return@flow emit(null)
+        val account = transaction.account?.let { accountDao.getAccountByName(it) }
+        emit(TransactionWithAccount(transaction, account))
+    }
 
 
 
