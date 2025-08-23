@@ -4,7 +4,6 @@ package ru.ohayo.moneypr.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.internal.NopCollector.emit
 import ru.ohayo.moneypr.data.room.account.AccountDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo

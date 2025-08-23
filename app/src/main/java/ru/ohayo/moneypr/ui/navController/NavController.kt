@@ -128,13 +128,10 @@ fun NavHostScreen(navController: NavHostController) {
                 val viewModel: TransactionViewModel = hiltViewModel()
 
                 LaunchedEffect(transactionId) {
-                    viewModel.getTransactionById(transactionId)
+                    viewModel.setTransactionId(transactionId)
                 }
 
-                val transaction by viewModel.transaction.collectAsState()
-
                 TransactionDetailsScreen(
-                    transaction = transaction, // Может быть null
                     onBackClick = { navController.popBackStack() },
                     navController = navController
                 )
