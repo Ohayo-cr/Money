@@ -131,6 +131,7 @@ fun NavHostScreen(navController: NavHostController) {
                 viewModel.setTransactionId(transactionId)
 
                 TransactionDetailsScreen(
+                    transactionId = transactionId,
                     onBackClick = { navController.popBackStack() },
                     navController = navController
                 )
@@ -138,6 +139,7 @@ fun NavHostScreen(navController: NavHostController) {
         }
     }
 }
+
 
 
 

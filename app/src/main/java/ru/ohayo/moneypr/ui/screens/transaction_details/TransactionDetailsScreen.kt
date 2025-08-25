@@ -34,6 +34,7 @@ import ru.ohayo.moneypr.utils.formate.formatTime
 
 @Composable
 fun TransactionDetailsScreen(
+    transactionId: Long,
     viewModel: TransactionViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
     navController: NavController

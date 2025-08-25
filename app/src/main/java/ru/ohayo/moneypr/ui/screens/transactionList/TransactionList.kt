@@ -34,6 +34,7 @@ fun TransactionsList(navController: NavController,
         if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
     }
 
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
