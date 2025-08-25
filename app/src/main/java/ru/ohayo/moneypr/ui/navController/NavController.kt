@@ -16,6 +16,7 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import kotlinx.coroutines.flow.first
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransaction
 import ru.ohayo.moneypr.ui.screens.allSettings.SettingsScreen
@@ -125,11 +126,9 @@ fun NavHostScreen(navController: NavHostController) {
             val transactionId = backStackEntry.arguments?.getString("transactionId")?.toLongOrNull()
 
             if (transactionId != null) {
+                // Получаем ViewModel и СРАЗУ устанавливаем ID
                 val viewModel: TransactionViewModel = hiltViewModel()
-
-                LaunchedEffect(transactionId) {
-                    viewModel.setTransactionId(transactionId)
-                }
+                viewModel.setTransactionId(transactionId)
 
                 TransactionDetailsScreen(
                     onBackClick = { navController.popBackStack() },
@@ -139,6 +138,7 @@ fun NavHostScreen(navController: NavHostController) {
         }
     }
 }
+
 
 
 

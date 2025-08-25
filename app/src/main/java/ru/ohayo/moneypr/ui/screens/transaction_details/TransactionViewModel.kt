@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
@@ -21,11 +22,18 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _transactionId = MutableStateFlow<Long?>(null)
+    val transactionId: StateFlow<Long?> = _transactionId.asStateFlow()
+
+    private val _isDataLoaded = MutableStateFlow(false)
+    val isDataLoaded: StateFlow<Boolean> = _isDataLoaded.asStateFlow()
 
     val transactionWithAccount = _transactionId
         .filterNotNull()
         .flatMapLatest { id ->
             repository.getTransactionWithAccount(id)
+        }
+        .onEach {
+            _isDataLoaded.value = (it != null) // Устанавливаем флаг загрузки данных
         }
         .stateIn(
             scope = viewModelScope,
@@ -33,8 +41,10 @@ class TransactionViewModel @Inject constructor(
             initialValue = null
         )
 
+
     fun setTransactionId(id: Long) {
         _transactionId.value = id
+        _isDataLoaded.value = false
     }
 
 }

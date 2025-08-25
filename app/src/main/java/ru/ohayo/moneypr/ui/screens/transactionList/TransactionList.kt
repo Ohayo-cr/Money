@@ -14,17 +14,16 @@ import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
-import ru.ohayo.moneypr.ui.screens.transactionList.components.TransactionDetailsDialog
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
-import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransactionViewModel
-
+import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionViewModel
 
 
 @Composable
 fun TransactionsList(navController: NavController,
                      transactionListVM: TransactionListViewModel = hiltViewModel(),
-                     categoryViewModel: CategoryViewModel = hiltViewModel()
+                     categoryViewModel: CategoryViewModel = hiltViewModel(),
+                     transactionVM: TransactionViewModel = hiltViewModel(),
     ) {
     val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
@@ -61,6 +60,7 @@ fun TransactionsList(navController: NavController,
                                 date = date,
                                 transactions = dayTransactions,
                                 categories = categories,
+
                                 onTransactionClick = { transaction ->
                                     navController.navigate("transaction_details/${transaction.id}")
                                 }
