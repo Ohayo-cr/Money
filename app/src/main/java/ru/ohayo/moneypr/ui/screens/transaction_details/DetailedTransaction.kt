@@ -1,5 +1,6 @@
 package ru.ohayo.moneypr.ui.screens.transaction_details
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.customeButton.BackButton
@@ -33,13 +33,13 @@ import ru.ohayo.moneypr.utils.formate.formatCustomDate
 import ru.ohayo.moneypr.utils.formate.formatTime
 
 @Composable
-fun TransactionDetailsScreen(
-    transactionId: Long,
-    viewModel: TransactionViewModel = hiltViewModel(),
+fun DetailedTransaction(
+    navController: NavController,
+
     onBackClick: () -> Unit,
-    navController: NavController
+    transactionVM: TransactionViewModel
 ) {
-    val transactionWithAccount by viewModel.transactionWithAccount.collectAsState()
+    val transactionWithAccount by transactionVM.transactionWithAccount.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -62,9 +62,9 @@ fun TransactionDetailsScreen(
         // Показываем контент в зависимости от состояния данных
         when (val data = transactionWithAccount) {
             null -> {
-Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+                Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
 
-}
+                }
             }
             else -> {
                 val transaction = data.transaction
@@ -156,9 +156,9 @@ private fun DetailsText(title: String, mainText: String, isPlaceholder: Boolean 
                 modifier = Modifier.fillMaxWidth()
             )
 
-            }
         }
     }
+}
 
 @Composable
 private fun AccountDetailsRow(title: String, account: AccountDbo?) {
@@ -172,33 +172,33 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
             .fillMaxWidth()) {
 
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column {
-                Text(
-                    text = title,
-                    color = TextDisabled
-                )
-                Text(
-                    text = "${account.name} (${NumberFormatter.format(account.balance)} ${account.currency})",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column {
+                    Text(
+                        text = title,
+                        color = TextDisabled
+                    )
+                    Text(
+                        text = "${account.name} (${NumberFormatter.format(account.balance)} ${account.currency})",
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
 
+                }
+                account.icon?.let { iconRes ->
+                    Icon(
+                        painter = painterResource(id = iconRes),
+                        contentDescription = null,
+                        modifier = Modifier.size(26.dp),
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
             }
-            account.icon?.let { iconRes ->
-                Icon(
-                    painter = painterResource(id = iconRes),
-                    contentDescription = null,
-                    modifier = Modifier.size(26.dp),
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            }
+
         }
-
     }
-}
 }

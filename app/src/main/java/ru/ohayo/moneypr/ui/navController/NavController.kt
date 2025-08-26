@@ -6,17 +6,13 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import kotlinx.coroutines.flow.first
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryScreen
 import ru.ohayo.moneypr.ui.screens.addTransaction.AddTransaction
 import ru.ohayo.moneypr.ui.screens.allSettings.SettingsScreen
@@ -24,21 +20,19 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryList
 import ru.ohayo.moneypr.ui.screens.charts.ChartsScreen
 import ru.ohayo.moneypr.ui.screens.transactionList.TransactionsList
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountScreen
-
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyScreen
-
 import ru.ohayo.moneypr.ui.screens.splashScreen.SplashScreen
-
 import ru.ohayo.moneypr.ui.screens.accountScreen.AccountViewModel
 import ru.ohayo.moneypr.ui.screens.addAccount.AddAccountScreen
 import ru.ohayo.moneypr.ui.screens.addCategory.AddCategoryViewModel
 import ru.ohayo.moneypr.ui.screens.currencyScreen.CurrencyViewModel
-import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionDetailsScreen
+import ru.ohayo.moneypr.ui.screens.transaction_details.DetailedTransaction
 import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionViewModel
 
 
 @Composable
 fun NavHostScreen(navController: NavHostController) {
+    val transactionVM: TransactionViewModel = hiltViewModel()
     NavHost(
         navController = navController,
         startDestination = Screen.Records.route,
@@ -106,7 +100,10 @@ fun NavHostScreen(navController: NavHostController) {
             ChartsScreen()
         }
         composable(Screen.Records.route) {
-            TransactionsList(navController = navController)
+            TransactionsList(
+                navController = navController,
+                transactionVM = transactionVM
+            )
         }
         composable(Screen.AccountList.route) {
             val accountViewModel: AccountViewModel = hiltViewModel()
@@ -122,20 +119,13 @@ fun NavHostScreen(navController: NavHostController) {
             val categoryViewModel: CategoryViewModel = hiltViewModel()
             AddTransaction(navController = navController, viewModel = categoryViewModel)
         }
-        composable("transaction_details/{transactionId}") { backStackEntry ->
-            val transactionId = backStackEntry.arguments?.getString("transactionId")?.toLongOrNull()
 
-            if (transactionId != null) {
-                // Получаем ViewModel и СРАЗУ устанавливаем ID
-                val viewModel: TransactionViewModel = hiltViewModel()
-                viewModel.setTransactionId(transactionId)
-
-                TransactionDetailsScreen(
-                    transactionId = transactionId,
-                    onBackClick = { navController.popBackStack() },
-                    navController = navController
-                )
-            }
+        composable(Screen.DetailedTransaction.route) {
+            DetailedTransaction(
+                navController = navController,
+                onBackClick = { navController.popBackStack() },
+                transactionVM = transactionVM
+            )
         }
     }
 }
