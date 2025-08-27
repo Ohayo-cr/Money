@@ -149,7 +149,7 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
                     CategoryItem(category = category)
                 }
                 item {
-                    Spacers.Large()
+                    Spacers.Large200()
                 }
             }
 

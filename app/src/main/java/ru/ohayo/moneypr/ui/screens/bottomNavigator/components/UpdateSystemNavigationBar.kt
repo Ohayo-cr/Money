@@ -18,7 +18,7 @@ fun UpdateSystemNavigationBar(navController: NavHostController) {
 
     // Сохраняем цвета схемы из MaterialTheme
     val colorScheme = MaterialTheme.colorScheme
-    val surfaceColor = colorScheme.surface
+    val primaryColor = colorScheme.primary
     val backgroundColor = colorScheme.background
 
     // Сохраняем последнее значение маршрута
@@ -29,7 +29,7 @@ fun UpdateSystemNavigationBar(navController: NavHostController) {
     // Реагируем на изменения маршрута и обновляем цвет навбар'а
     LaunchedEffect(currentRoute) {
         val navBarColor = if (currentRoute != null && currentRoute in routesToShowBottomNav) {
-            surfaceColor
+            primaryColor
         } else {
             backgroundColor
         }

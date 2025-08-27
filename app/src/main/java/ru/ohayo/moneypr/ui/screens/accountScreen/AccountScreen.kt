@@ -8,10 +8,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
+import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
@@ -27,31 +30,20 @@ fun AccountScreen(navController: NavController,
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 8.dp, start = 4.dp, end = 4.dp),
+            ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-
-
-
-            TextButton(onClick = { navController.navigate(Screen.AddAccount.route)}) {
-                Text(text = "Add new account", color = MaterialTheme.colorScheme.onPrimary)
-
-            }
-    }
-
-
-        // Отображение списка счетов
-        Text(
-            text = "Yours accounts",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(vertical = 8.dp),
-            color = MaterialTheme.colorScheme.onPrimary
+        TopAppPanel(
+            title = "Список счетов",
+            iconPainter = painterResource(id = R.drawable.bot_add_icon),
+            onIconClick = { navController.navigate(Screen.AddAccount.route)}
         )
+
 
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(top = 8.dp, start = 4.dp, end = 4.dp)
                 .weight(1f)
         ) {
             items(accounts) { account ->

@@ -1,7 +1,6 @@
 package ru.ohayo.moneypr.ui.screens.addAccount
 
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,12 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.account.AccountType
-import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
+import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountCardItem
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountInfoSelector
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountTextDialog
@@ -61,21 +59,21 @@ fun AddAccountScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceBetween
+            ,
+
     ) {
+        TopAppPanel(
+            title = "Add account",
+            showBackButton = true,
+            navController = navController
+        )
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    BackButton(navController)
-                    Text(text = "Add account", color = colorScheme.onPrimary, fontSize = 18.sp)
-                }
 
-            }
             AccountInfoCard(
                 items = listOf(
                     AccountCardItem(

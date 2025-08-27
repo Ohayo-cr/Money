@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
+import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
 import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
@@ -37,13 +38,13 @@ fun TransactionsList(navController: NavController,
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "List of transactions",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(16.dp),
-                color = MaterialTheme.colorScheme.onPrimary
 
+            TopAppPanel(
+                title = "Список транзакций"
             )
+
+
+
 
             when {
                 transactions.isEmpty() -> EmptyTransactionsPlaceholder()
@@ -54,6 +55,9 @@ fun TransactionsList(navController: NavController,
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     state = scrollState
                 ) {
+                    item {
+                        Spacers.Micro2()
+                    }
                     groupedTransactions.forEach { (date, dayTransactions) ->
                         item {
                             DayTransactionGroup(
@@ -69,7 +73,7 @@ fun TransactionsList(navController: NavController,
                         }
                     }
                     item {
-                        Spacers.Large()
+                        Spacers.Large200()
                     }
                 }
             }

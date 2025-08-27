@@ -9,7 +9,15 @@ import androidx.compose.ui.unit.dp
 
 object Spacers {
     @Composable
-    fun Small() {
+    fun Micro2() {
+        Spacer(
+            modifier = Modifier
+                .height(2.dp)
+                .fillMaxWidth()
+        )
+    }
+    @Composable
+    fun Small8() {
         Spacer(
             modifier = Modifier
                 .height(8.dp)
@@ -18,7 +26,7 @@ object Spacers {
     }
 
     @Composable
-    fun Medium() {
+    fun Medium16() {
         Spacer(
             modifier = Modifier
                 .height(16.dp)
@@ -27,7 +35,7 @@ object Spacers {
     }
 
     @Composable
-    fun Large() {
+    fun Large200() {
         Spacer(
             modifier = Modifier
                 .height(200.dp)

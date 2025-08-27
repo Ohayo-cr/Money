@@ -64,7 +64,7 @@ fun BottomNavigationBar(navController: NavController,
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp))
-            .background(colorScheme.surface)
+            .background(colorScheme.primary)
 
             .height(64.dp),
         contentAlignment = Alignment.BottomEnd
@@ -72,8 +72,8 @@ fun BottomNavigationBar(navController: NavController,
     ) {
         // Нижняя навигация
         NavigationBar(
-            contentColor = colorScheme.surface,
-            containerColor = colorScheme.surface,
+            contentColor = colorScheme.primary,
+            containerColor = colorScheme.primary,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(55.dp) // Высота NavigationBar
@@ -82,7 +82,7 @@ fun BottomNavigationBar(navController: NavController,
 
 
             Row(
-                modifier = Modifier.fillMaxWidth().background(colorScheme.surface),
+                modifier = Modifier.fillMaxWidth().background(colorScheme.primary),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -126,7 +126,7 @@ fun BottomNavigationBar(navController: NavController,
                             unselectedIconColor = colorScheme.onSurface,
                             selectedTextColor = colorScheme.inversePrimary,
                             unselectedTextColor =colorScheme.onSurface,
-                            indicatorColor = colorScheme.surface
+                            indicatorColor = colorScheme.primary
                         ),
                         interactionSource = remember { NoRippleInteractionSource }
                     )
@@ -175,7 +175,7 @@ fun BottomNavigationBar(navController: NavController,
                             unselectedIconColor = colorScheme.onSurface,
                             selectedTextColor = colorScheme.inversePrimary,
                             unselectedTextColor =colorScheme.onSurface,
-                            indicatorColor = colorScheme.surface
+                            indicatorColor = colorScheme.primary
                         ),
                         interactionSource = remember { NoRippleInteractionSource }
                     )
