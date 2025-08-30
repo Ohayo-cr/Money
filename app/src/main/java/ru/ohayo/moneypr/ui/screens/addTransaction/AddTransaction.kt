@@ -2,11 +2,14 @@ package ru.ohayo.moneypr.ui.screens.addTransaction
 
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -21,6 +24,7 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 import ru.ohayo.moneypr.ui.navController.Screen
+import ru.ohayo.moneypr.ui.screens.addTransaction.componens.TransferBox
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 
 
@@ -47,89 +51,120 @@ fun AddTransaction(
 
         CategoryTabRow(
             selectedType = selectedTab,
-            onTypeSelected = { type -> selectedTab = type }
-        )
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-
-        ) {
-
-            LazyVerticalGrid(
-                state = listState,
-                columns = GridCells.Fixed(4),
-                contentPadding = PaddingValues(
-                    top = 20.dp,
-                    bottom = bottomPadding
-                ),
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                items(filteredCategories) { category ->
-                    ChooseCategory(
-                        iconItem = category.iconResId,
-                        backgroundColor = Color(category.color),
-                        name = category.categoryName,
-                        onClick = {
-                            selectedCategoryId = category.id
-                            showAddTransactionForm = true
-                            transactionViewModel.selectCategoryName(category.categoryName)
-                        },
-                        isSelected = selectedCategoryId == category.id
-                    )
+            onTypeSelected = { type ->
+                // Сброс состояний только если выбрана другая вкладка
+                if (selectedTab != type) {
+                    selectedTab = type
+                    selectedCategoryId = null
+                    showAddTransactionForm = false
+                    isFirstSelection = true
                 }
             }
+        )
+        when (selectedTab) {
+            CategoryType.Expense, CategoryType.Income -> {
 
-            val density = LocalDensity.current
-            LaunchedEffect(key1 = selectedCategoryId) {
-                if (isFirstSelection && showAddTransactionForm) {
-                    val index = filteredCategories.indexOfFirst { it.id == selectedCategoryId }
-                    if (index != -1) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
 
-                        val bottomPaddingPx = density.run { bottomPadding.roundToPx() }
+                ) {
 
-                        listState.layoutInfo.visibleItemsInfo.getOrNull(0)?.let { firstItem ->
-                            val itemSizePx = firstItem.size.height / 2
-                            val visibleHeight = listState.layoutInfo.viewportSize.height
-
-                            val scrollOffset = visibleHeight - bottomPaddingPx - itemSizePx
-
-                            listState.animateScrollToItem(
-                                index = index,
-                                scrollOffset = -scrollOffset
+                    LazyVerticalGrid(
+                        state = listState,
+                        columns = GridCells.Fixed(4),
+                        contentPadding = PaddingValues(
+                            top = 20.dp,
+                            bottom = bottomPadding
+                        ),
+                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                    ) {
+                        items(filteredCategories) { category ->
+                            ChooseCategory(
+                                iconItem = category.iconResId,
+                                backgroundColor = Color(category.color),
+                                name = category.categoryName,
+                                onClick = {
+                                    selectedCategoryId = category.id
+                                    showAddTransactionForm = true
+                                    transactionViewModel.selectCategoryName(category.categoryName)
+                                },
+                                isSelected = selectedCategoryId == category.id
                             )
-                            isFirstSelection = false
+                        }
+                    }
+
+                    val density = LocalDensity.current
+                    LaunchedEffect(key1 = selectedCategoryId) {
+                        if (isFirstSelection && showAddTransactionForm) {
+                            val index =
+                                filteredCategories.indexOfFirst { it.id == selectedCategoryId }
+                            if (index != -1) {
+
+                                val bottomPaddingPx = density.run { bottomPadding.roundToPx() }
+
+                                listState.layoutInfo.visibleItemsInfo.getOrNull(0)
+                                    ?.let { firstItem ->
+                                        val itemSizePx = firstItem.size.height / 2
+                                        val visibleHeight = listState.layoutInfo.viewportSize.height
+
+                                        val scrollOffset =
+                                            visibleHeight - bottomPaddingPx - itemSizePx
+
+                                        listState.animateScrollToItem(
+                                            index = index,
+                                            scrollOffset = -scrollOffset
+                                        )
+                                        isFirstSelection = false
+                                    }
+                            }
+                        }
+                    }
+
+
+
+
+                    if (showAddTransactionForm && selectedCategoryId != null) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.BottomCenter)
+                        ) {
+                            AddTransactionForm(
+                                categoryId = selectedCategoryId!!.toInt(),
+                                onTransactionAdded = {
+                                    navController.navigate(Screen.Records.route) {
+                                        popUpTo(0)
+                                    }
+                                },
+                                modifier = Modifier
+                                    .align(Alignment.BottomCenter)
+                                    .wrapContentHeight() // Чтобы не занимала всё пространство
+                            )
                         }
                     }
                 }
             }
 
-
-
-            if (showAddTransactionForm && selectedCategoryId != null) {
-                Box(
+            CategoryType.AccountTransfer -> {
+                // Новое отображение для AccountTransfer
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(Alignment.BottomCenter)
+                        .weight(1f)
+                        .padding(4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    AddTransactionForm(
-                        categoryId = selectedCategoryId!!.toInt(),
-                        onTransactionAdded = {
-                            navController.navigate(Screen.Records.route) {
-                                popUpTo(0)
-                            }
-                        },
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .wrapContentHeight() // Чтобы не занимала всё пространство
-                    )
+                    // Пустой бокс как указано в требованиях
+                    TransferBox()
                 }
             }
         }
     }
 }
+
 
 
 

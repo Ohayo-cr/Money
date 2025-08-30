@@ -26,7 +26,8 @@ import ru.ohayo.moneypr.ui.component.others.NoRippleInteractionSource
 @Composable
 fun CategoryTabRow(
     selectedType: CategoryType,
-    onTypeSelected: (CategoryType) -> Unit
+    onTypeSelected: (CategoryType) -> Unit,
+    availableTypes: List<CategoryType> = CategoryType.entries // По умолчанию все
 ) {
     val colorScheme = MaterialTheme.colorScheme
 
@@ -44,19 +45,18 @@ fun CategoryTabRow(
             .background(colorScheme.primary)
             .padding(2.dp)
     ) {
-        // Внутренний Row для выравнивания Tab'ов по низу
         Row(
             verticalAlignment = Alignment.Bottom,
             modifier = Modifier.fillMaxWidth()
         ) {
             TabRow(
-                selectedTabIndex = selectedType.ordinal,
+                selectedTabIndex = availableTypes.indexOf(selectedType).coerceAtLeast(0),
                 modifier = Modifier.fillMaxWidth(),
                 containerColor = colorScheme.primary,
                 indicator = {},
                 divider = {}
             ) {
-                CategoryType.entries.forEach { type ->
+                availableTypes.forEach { type ->
                     Tab(
                         selected = selectedType == type,
                         onClick = { onTypeSelected(type) },

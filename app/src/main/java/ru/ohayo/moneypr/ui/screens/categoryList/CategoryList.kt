@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
@@ -74,7 +75,8 @@ fun CategoryList(categoryVM: CategoryViewModel = hiltViewModel(),
             onTypeSelected = { newType ->
                 categoryVM.setSelectedCategoryType(newType) // Обновляем тип в ViewModel
                 CategoryViewModel.CategoryTypeHolder.currentType = newType
-            }
+            },
+            availableTypes = listOf(CategoryType.Expense, CategoryType.Income)
         )
 
 
