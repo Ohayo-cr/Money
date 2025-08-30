@@ -6,15 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,18 +24,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.R
+import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
 
 @Composable
 fun TransferBox(
-    fromAccount: String = "Счет списания",
-    toAccount: String = "Счет получения",
+    fromAccount: AccountDbo? = null,
+    toAccount: AccountDbo? = null,
     onFromAccountClick: () -> Unit = {},
     onToAccountClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val m = MaterialTheme.colorScheme
     val shape = RoundedCornerShape(percent = 20)
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -52,76 +52,104 @@ fun TransferBox(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-        // Левая часть - счет списания
-        Column(
-            modifier = Modifier
-                .weight(1f)
-
-        ) {
-            Text(
-                text = fromAccount,
-                style = MaterialTheme.typography.bodyMedium,
-                color = m.onPrimary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+            // Левая часть - счет списания
+            AccountItem(
+                title = "Счет списания",
+                account = fromAccount,
+                onClick = onFromAccountClick,
+                modifier = Modifier.weight(1f)
             )
-            Spacers.Small8()
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .background(Color.White, shape = shape)
-                    .clickable { onFromAccountClick()  }
-                    .align(Alignment.CenterHorizontally),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Добавить счет списания",
-                    tint = Color.Black,
-                    modifier = Modifier.size(30.dp)
-                )
-            }
-        }
 
-        // Центральная иконка перевода
-        Icon(
-            painter = painterResource(id = R.drawable.icc_transfer), // Замените на ваш ресурс
-            contentDescription = "Перевод",
-            tint = m.onPrimary,
-            modifier = Modifier
-                .size(60.dp)
+            // Центральная иконка перевода
+            Icon(
+                painter = painterResource(id = R.drawable.icc_transfer), // Замените на ваш ресурс
+                contentDescription = "Перевод",
+                tint = m.onPrimary,
+                modifier = Modifier.size(60.dp)
+            )
+
+            // Правая часть - счет получения
+            AccountItem(
+                title = "Счет пополнения",
+                account = toAccount,
+                onClick = onToAccountClick,
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+@Composable
+fun AccountItem(
+    account: AccountDbo?,
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(percent = 20)
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
 
-        // Правая часть - счет получения
-        Column(
-            modifier = Modifier
-                .weight(1f)
+        Spacers.Small8()
 
+        Box(
+            modifier = Modifier
+                .size(60.dp)
+                .background(Color.White, shape = shape)
+                .clickable { onClick() }
+                .align(Alignment.CenterHorizontally),
+            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = toAccount,
-                style = MaterialTheme.typography.bodyMedium,
-                color = m.onPrimary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacers.Small8()
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .background(Color.White, shape = shape)
-                    .clickable { onToAccountClick() }
-                    .align(Alignment.CenterHorizontally),
-                contentAlignment = Alignment.Center
-            ) {
+            if (account == null) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Добавить счет получения",
+                    contentDescription = "Добавить счет",
                     tint = Color.Black,
                     modifier = Modifier.size(30.dp)
                 )
+            } else {
+                // Отображаем иконку аккаунта, если задана
+                account.icon?.let { iconRes ->
+                    Icon(
+                        painter = painterResource(id = iconRes),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(40.dp)
+                    )
+                } ?: Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    tint = Color.Black,
+                    modifier = Modifier.size(40.dp)
+                )
             }
         }
+
+        if (account != null) {
+            Spacers.Small8()
+            Text(
+                text = account.name,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                text = "${account.balance} ${account.currency}",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

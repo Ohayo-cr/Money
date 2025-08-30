@@ -2,14 +2,11 @@ package ru.ohayo.moneypr.ui.screens.addTransaction
 
 
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -45,6 +42,8 @@ fun AddTransaction(
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val bottomPaddingPercentage = 0.5f
     val bottomPadding = (screenHeight * bottomPaddingPercentage).dp
+    val fromAccount by transactionViewModel.fromAccount
+    val toAccount by transactionViewModel.toAccount
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -154,12 +153,39 @@ fun AddTransaction(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .padding(4.dp),
+                        .padding(top =4.dp, start = 4.dp, end = 4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     // Пустой бокс как указано в требованиях
-                    TransferBox()
+                    TransferBox(
+                        fromAccount = fromAccount,
+                        toAccount = toAccount,
+                        onFromAccountClick = { /* открыть экран выбора счета списания */ },
+                        onToAccountClick = { /* открыть экран выбора счета получения */ }
+                    )
                 }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.End)
+                ) {
+                    AddTransactionForm(
+                        categoryId = -1, // или какой-то специальный ID для трансферов
+                        onTransactionAdded = {
+                            navController.navigate(Screen.Records.route) {
+                                popUpTo(0)
+                            }
+                        },
+                        tranferMod = true, // Для трансферов
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .wrapContentHeight()
+                    )
+                }
+
+
+
             }
         }
     }

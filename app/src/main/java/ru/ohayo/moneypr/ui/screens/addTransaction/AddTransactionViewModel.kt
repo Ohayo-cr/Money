@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.repository.CategoryRepository
 import ru.ohayo.moneypr.repository.CurrencyRepository
 import ru.ohayo.moneypr.repository.TransactionRepository
@@ -93,6 +94,32 @@ class AddTransactionViewModel @Inject constructor(
             }
         }
     }
+
+    // ПЕРЕВОДЫ
+    private val _fromAccount = mutableStateOf<AccountDbo?>(null)
+    val fromAccount: State<AccountDbo?> get() = _fromAccount
+
+    private val _toAccount = mutableStateOf<AccountDbo?>(null)
+    val toAccount: State<AccountDbo?> get() = _toAccount
+
+    // Функции для выбора аккаунтов
+    fun selectFromAccount(account: AccountDbo) {
+        _fromAccount.value = account
+    }
+
+    fun selectToAccount(account: AccountDbo) {
+        _toAccount.value = account
+    }
+
+    fun clearFromAccount() {
+        _fromAccount.value = null
+    }
+
+    fun clearToAccount() {
+        _toAccount.value = null
+    }
+    fun getFromAccount(): AccountDbo? = _fromAccount.value
+    fun getToAccount(): AccountDbo? = _toAccount.value
 
 }
 
