@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(
     indices = [
-        Index(value = ["name"], unique = true), // Уникальное имя счета
+        Index(value = ["name"], unique = true),
     ]
 )
 data class AccountDbo(

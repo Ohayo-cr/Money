@@ -36,7 +36,7 @@ fun TransferBox(
     modifier: Modifier = Modifier
 ) {
     val m = MaterialTheme.colorScheme
-    val shape = RoundedCornerShape(percent = 20)
+
 
     Box(
         modifier = modifier
@@ -50,7 +50,7 @@ fun TransferBox(
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
         ) {
             // Левая часть - счет списания
             AccountItem(

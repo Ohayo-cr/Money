@@ -21,6 +21,8 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 import ru.ohayo.moneypr.ui.navController.Screen
+import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectSheet
+import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectionType
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.TransferBox
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 
@@ -29,7 +31,7 @@ import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 @Composable
 fun AddTransaction(
     navController: NavController,
-    viewModel: CategoryViewModel = hiltViewModel(),
+    categoryViewModel: CategoryViewModel = hiltViewModel(),
     transactionViewModel: AddTransactionViewModel = hiltViewModel()
 ) {
 
@@ -38,12 +40,11 @@ fun AddTransaction(
     var selectedCategoryId by rememberSaveable { mutableStateOf<Long?>(null) }
     val listState = rememberLazyGridState()
     var isFirstSelection by rememberSaveable { mutableStateOf(true) }
-    val filteredCategories = viewModel.filterCategoriesByType(selectedTab)
+    val filteredCategories = categoryViewModel.filterCategoriesByType(selectedTab)
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val bottomPaddingPercentage = 0.5f
     val bottomPadding = (screenHeight * bottomPaddingPercentage).dp
-    val fromAccount by transactionViewModel.fromAccount
-    val toAccount by transactionViewModel.toAccount
+
 
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -148,20 +149,32 @@ fun AddTransaction(
             }
 
             CategoryType.AccountTransfer -> {
-                // Новое отображение для AccountTransfer
+                var showAccountSelection by remember { mutableStateOf(false) }
+                var selectingAccountType by remember { mutableStateOf<AccountSelectionType?>(null) }
+                val accounts by transactionViewModel.accounts.collectAsState(initial = emptyList())
+
+                // Получаем значения из ViewModel
+                val fromAccount by transactionViewModel.fromAccount
+                val toAccount by transactionViewModel.toAccount
+
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .padding(top =4.dp, start = 4.dp, end = 4.dp),
+                        .padding(top = 4.dp, start = 4.dp, end = 4.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Пустой бокс как указано в требованиях
                     TransferBox(
                         fromAccount = fromAccount,
                         toAccount = toAccount,
-                        onFromAccountClick = { /* открыть экран выбора счета списания */ },
-                        onToAccountClick = { /* открыть экран выбора счета получения */ }
+                        onFromAccountClick = {
+                            selectingAccountType = AccountSelectionType.From
+                            showAccountSelection = true
+                        },
+                        onToAccountClick = {
+                            selectingAccountType = AccountSelectionType.To
+                            showAccountSelection = true
+                        }
                     )
                 }
 
@@ -171,18 +184,43 @@ fun AddTransaction(
                         .align(Alignment.End)
                 ) {
                     AddTransactionForm(
-                        categoryId = -1, // или какой-то специальный ID для трансферов
+                        categoryId = 999,
                         onTransactionAdded = {
                             navController.navigate(Screen.Records.route) {
                                 popUpTo(0)
                             }
                         },
-                        tranferMod = true, // Для трансферов
+                        tranferMod = true,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                             .wrapContentHeight()
                     )
                 }
+
+                if (showAccountSelection) {
+                    AccountSelectSheet(
+                        account = accounts,
+                        selectedAccountDbo = when (selectingAccountType) {
+                            AccountSelectionType.From -> fromAccount
+                            AccountSelectionType.To -> toAccount
+                            null -> null
+                        },
+                        onDismiss = {
+                            showAccountSelection = false
+                            selectingAccountType = null
+                        },
+                        onAccountSelected = { selectedAccount ->
+                            when (selectingAccountType) {
+                                AccountSelectionType.From -> transactionViewModel.selectFromAccount(selectedAccount)
+                                AccountSelectionType.To -> transactionViewModel.selectToAccount(selectedAccount)
+                                null -> {}
+                            }
+                            showAccountSelection = false
+                            selectingAccountType = null
+                        }
+                    )
+                }
+
 
 
 

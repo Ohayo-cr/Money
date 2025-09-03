@@ -116,8 +116,7 @@ fun NavHostScreen(navController: NavHostController) {
             AddAccountScreen(navController = navController)
         }
         composable(Screen.AddTransaction.route) {
-            val categoryViewModel: CategoryViewModel = hiltViewModel()
-            AddTransaction(navController = navController, viewModel = categoryViewModel)
+            AddTransaction(navController = navController )
         }
 
         composable(Screen.DetailedTransaction.route) {
