@@ -186,6 +186,7 @@ fun AddTransaction(
                     AddTransactionForm(
                         categoryId = 999,
                         onTransactionAdded = {
+
                             navController.navigate(Screen.Records.route) {
                                 popUpTo(0)
                             }

@@ -18,6 +18,7 @@ import ru.ohayo.moneypr.repository.TransactionRepository
 import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -117,6 +118,39 @@ class AddTransactionViewModel @Inject constructor(
 
     fun clearToAccount() {
         _toAccount.value = null
+    }
+    fun addTransferTransaction(amount: Double, note: String?) {
+        viewModelScope.launch {
+            try {
+                val fromAcc = _fromAccount.value ?: return@launch
+                val toAcc = _toAccount.value ?: return@launch
+
+                val transaction = TransactionDbo(
+                    type = CategoryType.AccountTransfer,
+                    currency = fromAcc.currency, // или toAcc.currency — проверь совпадение
+                    amount = amount,
+                    paymentAccount = fromAcc.name,
+                    recipientAccount = toAcc.name,
+                    note = note,
+                    timestamp = selectedDate.value,
+                    category = "Transfer" // или любая служебная категория
+                )
+
+                repository.insertTransaction(transaction)
+
+                // Обновляем балансы
+                accountRepository.updateBalancesTransfer(
+                    fromAccount = fromAcc.name,
+                    toAccount = toAcc.name,
+                    amount = amount
+                )
+
+                _transactionResult.value = Result.success(Unit)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _transactionResult.value = Result.failure(e)
+            }
+        }
     }
     fun getFromAccount(): AccountDbo? = _fromAccount.value
     fun getToAccount(): AccountDbo? = _toAccount.value

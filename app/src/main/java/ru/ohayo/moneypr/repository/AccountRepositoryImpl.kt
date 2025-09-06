@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.ohayo.moneypr.data.room.account.AccountDao
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
@@ -27,15 +28,18 @@ class AccountRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateBalance(accountName: String, amount: Double) {
-        accountDao.updateBalance(accountName, amount)
+        val roundedAmount = (amount * 100.0).roundToInt() / 100.0
+        accountDao.updateBalance(accountName, roundedAmount)
     }
 
     override suspend fun getAccountName(accountId: Long): String? {
         return accountDao.getAccountNameById(accountId)
     }
+
     override suspend fun getAccountById(accountId: Long): AccountDbo? {
         return accountDao.getAccountById(accountId)
     }
+
     override suspend fun insertAllAccount(accountDbo: List<AccountDbo>) {
         accountDao.insertAllAccount(accountDbo)
     }
@@ -45,4 +49,16 @@ class AccountRepositoryImpl @Inject constructor(
         return accountDao.getAccountsCount() == 0
     }
 
+    override suspend fun updateBalancesTransfer(
+        fromAccount: String,
+        toAccount: String,
+        amount: Double
+    ) {
+        val roundedAmount = (amount * 100.0).roundToInt() / 100.0
+        val updatedRows = accountDao.atomicTransfer(fromAccount, toAccount, roundedAmount)
+
+        if (updatedRows != 2) {
+            throw Exception("Transfer failed: one or both accounts not found or insufficient funds")
+        }
+    }
 }

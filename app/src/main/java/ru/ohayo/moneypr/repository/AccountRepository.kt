@@ -12,5 +12,6 @@ interface AccountRepository {
     suspend fun getAccountById(accountId: Long): AccountDbo?
     suspend fun insertAllAccount(accountDbo: List<AccountDbo>)
     suspend fun isAccountsEmpty(): Boolean
+    suspend fun updateBalancesTransfer(fromAccount: String, toAccount: String, amount: Double)
 
 }

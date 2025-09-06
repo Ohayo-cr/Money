@@ -65,6 +65,9 @@ fun AddTransactionForm(
     val lastDateFromDB by viewModel.lastSelectedDate.collectAsState(initial = System.currentTimeMillis())
     val selectedDate by viewModel.selectedDate.collectAsState()
     var transactionDate by remember { mutableLongStateOf(selectedDate) }
+    // Для переводов
+    val fromAccount by viewModel.fromAccount
+    val toAccount by viewModel.toAccount
 
     Column(
         modifier = Modifier
@@ -113,24 +116,41 @@ fun AddTransactionForm(
                     dateText = formatLocalDateTime(transactionDate),
                     onOkClicked = {
                         val parsedAmount = keyboardViewModel.getParsedAmount()
-                        if (parsedAmount != null && currencyAcc != "Not" && selectedCategory != null) {
-                            val amountWithSign = when (selectedCategory.type) {
-                                CategoryType.Expense -> -parsedAmount // Расход — отрицательная сумма
-                                else -> parsedAmount // Доход — положительная сумма
+                        if (parsedAmount != null) {
+                            if (tranferMod) {
+                                // Режим перевода
+                                if (fromAccount != null && toAccount != null) {
+                                    viewModel.addTransferTransaction(
+                                        amount = parsedAmount,
+                                        note = note.ifBlank { null }
+                                    )
+                                    onTransactionAdded()
+                                } else {
+                                    isError = true
+                                }
+                            } else {
+                                // Обычный режим транзакции
+                                if (currencyAcc != "Not" && selectedCategory != null) {
+                                    val amountWithSign = when (selectedCategory.type) {
+                                        CategoryType.Expense -> -parsedAmount // Расход — отрицательная сумма
+                                        else -> parsedAmount // Доход — положительная сумма
+                                    }
+
+                                    val transaction = TransactionDbo(
+                                        amount = amountWithSign,
+                                        note = note.ifBlank { null },
+                                        type = selectedCategory.type,
+                                        timestamp = transactionDate,
+                                        category = selectedCategory.categoryName,
+                                        account = selectedAccount?.name,
+                                        currency = currencyAcc
+                                    )
+                                    viewModel.addTransaction(transaction)
+                                    onTransactionAdded()
+                                } else {
+                                    isError = true
+                                }
                             }
-
-                            val transaction = TransactionDbo(
-                                amount = amountWithSign,
-                                note = note.ifBlank { null },
-                                type = selectedCategory.type,
-                                timestamp = transactionDate,
-                                category = selectedCategory.categoryName,
-                                account = selectedAccount?.name,
-                                currency = currencyAcc
-                            )
-                            viewModel.addTransaction(transaction)
-                            onTransactionAdded()
-
                         } else {
                             isError = true
                         }

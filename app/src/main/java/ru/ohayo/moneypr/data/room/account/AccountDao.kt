@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import ru.ohayo.moneypr.data.room.account.AccountDbo
+
 
 @Dao
 interface AccountDao {
@@ -19,9 +19,9 @@ interface AccountDao {
     @Query("DELETE FROM AccountDbo WHERE id = :id")
     suspend fun deleteAccountById(id: Long) // Используем Long
 
+
     @Query("UPDATE AccountDbo SET balance = ROUND(balance + :amount, 2) WHERE name = :accountName")
     suspend fun updateBalance(accountName: String, amount: Double)
-
     @Query("SELECT name FROM AccountDbo WHERE id = :accountId")
     suspend fun getAccountNameById(accountId: Long): String?
     @Query("SELECT * FROM AccountDbo WHERE id = :accountId")
@@ -32,5 +32,20 @@ interface AccountDao {
     suspend fun getAccountsCount(): Int
     @Query("SELECT * FROM AccountDbo WHERE name = :accountName")
     suspend fun getAccountByName(accountName: String): AccountDbo?
+    @Query("""
+    UPDATE AccountDbo 
+    SET balance = CASE 
+        WHEN name = :fromAccount THEN ROUND(balance - :amount, 2)
+        WHEN name = :toAccount THEN ROUND(balance + :amount, 2)
+    END
+    WHERE name IN (:fromAccount, :toAccount)
+    AND :fromAccount != :toAccount
+""")
+    suspend fun atomicTransfer(
+        fromAccount: String,
+        toAccount: String,
+        amount: Double
+    ): Int
 }
+
 
