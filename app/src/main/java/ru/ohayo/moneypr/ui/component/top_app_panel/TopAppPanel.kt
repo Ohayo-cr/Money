@@ -1,6 +1,7 @@
 package ru.ohayo.moneypr.ui.component.top_app_panel
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -20,8 +21,10 @@ import ru.ohayo.moneypr.ui.component.customeButton.BackButton
 @Composable
 fun TopAppPanel(
     title: String,
-    iconPainter: Painter? = null,
-    onIconClick: (() -> Unit)? = null,
+    leftIcon1: Painter? = null,
+    onIconClick1: (() -> Unit)? = null,
+    rightIcon2: Painter? = null,
+    onIconClick2: (() -> Unit)? = null,
     showBackButton: Boolean = false,
     navController: NavController? = null,
     noClip: Boolean = false,
@@ -39,51 +42,58 @@ fun TopAppPanel(
             .fillMaxWidth()
             .let { if (!noClip) it.clip(shape) else it }
             .background(MaterialTheme.colorScheme.primary)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        Row(
+        // ЛЕВАЯ ЧАСТЬ — кнопка назад или пустое место
+        if (showBackButton && navController != null) {
+            BackButton(navController)
+        }
+
+        // ЦЕНТР — заголовок (всегда по центру!)
+        Text(
+            text = title,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .align(Alignment.Center)
+                .padding(horizontal = 8.dp), // внутренние отступы текста
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
+            ),
+            color = MaterialTheme.colorScheme.onBackground,
+            maxLines = 1,
+            textAlign = TextAlign.Center
+        )
+
+        // ПРАВАЯ ЧАСТЬ — иконки
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
         ) {
-            // Кнопка "назад" или балансирующий элемент слева
-            if (showBackButton && navController != null) {
-                BackButton(navController)
-            } else if (iconPainter == null || onIconClick == null) {
-                Spacer(modifier = Modifier.width(24.dp))
-            } else {
-                Spacer(modifier = Modifier.width(0.dp))
+            if (leftIcon1 != null && onIconClick1 != null) {
+                Icon(
+                    painter = leftIcon1,
+                    contentDescription = "Left icon",
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable(onClick = onIconClick1)
+
+                )
             }
 
-            // Заголовок по центру
-            Text(
-                text = title,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 16.dp),
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium
-                ),
-                color = MaterialTheme.colorScheme.onBackground,
-                maxLines = 1,
-                textAlign = TextAlign.Center
-            )
+            if (rightIcon2 != null && onIconClick2 != null) {
+                Spacer(modifier = Modifier.width(16.dp)) // отступ между иконками
+                Icon(
+                    painter = rightIcon2,
+                    contentDescription = "Right icon",
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable(onClick = onIconClick2)
 
-            // Иконка справа (если передана)
-            if (iconPainter != null && onIconClick != null) {
-                IconButton(
-                    onClick = onIconClick,
-                    modifier = Modifier.size(24.dp)
-                ) {
-                    Icon(
-                        painter = iconPainter,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground
-                    )
-                }
-            } else {
-                Spacer(modifier = Modifier.width(24.dp))
+                )
+
             }
         }
     }

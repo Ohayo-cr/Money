@@ -35,8 +35,8 @@ fun AccountScreen(navController: NavController,
     ) {
         TopAppPanel(
             title = "Список счетов",
-            iconPainter = painterResource(id = R.drawable.bot_add_icon),
-            onIconClick = { navController.navigate(Screen.AddAccount.route)}
+            leftIcon1 = painterResource(id = R.drawable.bot_add_icon),
+            onIconClick1 = { navController.navigate(Screen.AddAccount.route)}
         )
 
 

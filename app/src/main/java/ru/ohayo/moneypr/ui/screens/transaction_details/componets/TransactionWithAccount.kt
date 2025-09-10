@@ -5,5 +5,7 @@ import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 
 data class TransactionWithAccount(
     val transaction: TransactionDbo,
-    val account: AccountDbo?
+    val account: AccountDbo?,
+    val paymentAccount: AccountDbo?,        // transaction.paymentAccount
+    val recipientAccount: AccountDbo?       // transaction.recipientAccount
 )

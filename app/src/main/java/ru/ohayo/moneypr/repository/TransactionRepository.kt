@@ -44,7 +44,9 @@ class TransactionRepository @Inject constructor(
     fun getTransactionWithAccount(id: Long): Flow<TransactionWithAccount?> = flow {
         val transaction = transactionDao.getTransactionById(id) ?: return@flow emit(null)
         val account = transaction.account?.let { accountDao.getAccountByName(it) }
-        emit(TransactionWithAccount(transaction, account))
+        val paymentAccount = transaction.paymentAccount?.let { accountDao.getAccountByName(it) }
+        val recipientAccount = transaction.recipientAccount?.let { accountDao.getAccountByName(it) }
+        emit(TransactionWithAccount(transaction, account, paymentAccount, recipientAccount))
     }
 
 }

@@ -17,15 +17,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountDbo
-import ru.ohayo.moneypr.ui.component.customeButton.BackButton
+import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.component.spacers.StandartDivider
+import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.screens.transactionList.components.formatTimestamp
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
@@ -35,57 +40,49 @@ import ru.ohayo.moneypr.utils.formate.formatTime
 @Composable
 fun DetailedTransaction(
     navController: NavController,
-
     onBackClick: () -> Unit,
     transactionVM: TransactionViewModel
 ) {
     val transactionWithAccount by transactionVM.transactionWithAccount.collectAsState()
+    val DboTransaction = transactionWithAccount?.transaction
+    var showDeleteDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            BackButton(navController)
-
-            transactionWithAccount?.transaction?.let { transaction ->
-                Text(
-                    text = "${transaction.type}",
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(8.dp),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                )
-            }
+        transactionWithAccount?.transaction?.let { transaction ->
+            TopAppPanel(
+                title = "${transaction.type}",
+                showBackButton = true,
+                navController = navController,
+                leftIcon1 = painterResource(id = R.drawable.ic_edit_main),
+                onIconClick1 = {},
+                rightIcon2 = painterResource(id = R.drawable.ic_delete),
+                onIconClick2 = {showDeleteDialog = true}
+            )
         }
 
         // Показываем контент в зависимости от состояния данных
         when (val data = transactionWithAccount) {
             null -> {
-                Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)) {
 
                 }
             }
             else -> {
                 val transaction = data.transaction
                 val account = data.account
+                val paymentAccount = data.paymentAccount
+                val recipientAccount = data.recipientAccount
 
-                val payment = when {
-                    transaction.paymentAccount != null -> Pair(
-                        "Счет списания",
-                        transaction.paymentAccount
-                    )
 
-                    transaction.recipientAccount != null -> Pair(
-                        "Счет пополнения",
-                        transaction.recipientAccount
-                    )
+                    Spacers.Micro2()
 
-                    else -> null
-                }
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(horizontal = 4.dp, vertical = 8.dp)
                         .background(
                             color = MaterialTheme.colorScheme.secondary,
                             shape = RoundedCornerShape(10.dp)
@@ -100,14 +97,17 @@ fun DetailedTransaction(
                     ) {
                         DetailsText("Sum", "${NumberFormatter.format(transaction.amount)} ${transaction.currency}" )
                         StandartDivider()
-                        // Отображаем аккаунт с иконкой и балансом
                         transaction.account?.let {
                             AccountDetailsRow("Account", account = account)
                             StandartDivider()
                         }
 
-                        payment?.let {
-                            DetailsText(it.first, it.second)
+                        transaction.paymentAccount?.let {
+                            AccountDetailsRow("Счет списания", account = paymentAccount )
+                            StandartDivider()
+                        }
+                        transaction.recipientAccount?.let {
+                            AccountDetailsRow("Счет зачисления", account = recipientAccount)
                             StandartDivider()
                         }
 
