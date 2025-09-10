@@ -21,7 +21,8 @@ import androidx.core.view.WindowCompat
 
 // Основные цвета
 val AppleGreenColor = Color(0xFF50C878)
-val ErorColor = Color(0xFF8B0000)
+val ErrorColor = Color(0xFF8B0000)
+val CornflowerBlueColor = Color(0xFF2196F3)
 
 
 // Цвета текста

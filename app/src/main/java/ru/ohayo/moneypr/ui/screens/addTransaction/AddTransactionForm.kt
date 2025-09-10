@@ -47,7 +47,7 @@ fun AddTransactionForm(
     keyboardViewModel: KeyboardViewModel = hiltViewModel(),
     accountViewModel: AccountViewModel = hiltViewModel(),
     onTransactionAdded: () -> Unit,
-    tranferMod: Boolean = false,
+    transferMod: Boolean = false,
     modifier: Modifier
 ) {
     val selectedAccount by accountViewModel.selectedAccountDbo.collectAsState()
@@ -97,8 +97,8 @@ fun AddTransactionForm(
                     onAccountButtonClicked = {
                         showAccountSelection = true
                     },
-                    selectedAccountName = if(!tranferMod)selectedAccount?.name ?: "X account" else "",
-                    currencyText = if(!tranferMod) currencyAcc else ""
+                    selectedAccountName = if(!transferMod)selectedAccount?.name ?: "X account" else "",
+                    currencyText = if(!transferMod) currencyAcc else ""
                 )
 
                 NoteField(
@@ -117,7 +117,7 @@ fun AddTransactionForm(
                     onOkClicked = {
                         val parsedAmount = keyboardViewModel.getParsedAmount()
                         if (parsedAmount != null) {
-                            if (tranferMod) {
+                            if (transferMod) {
                                 // Режим перевода
                                 if (fromAccount != null && toAccount != null) {
                                     viewModel.addTransferTransaction(

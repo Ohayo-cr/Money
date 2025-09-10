@@ -8,6 +8,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.theme.AppleGreenColor
+import ru.ohayo.moneypr.ui.theme.CornflowerBlueColor
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 import kotlin.math.abs
 
@@ -25,8 +26,8 @@ fun buildAmountText(transaction: TransactionDbo): AnnotatedString {
         pushStyle(
             SpanStyle(
                 color = when (transaction.type) {
-                    CategoryType.Expense ->  colorScheme.onPrimary
                     CategoryType.Income -> AppleGreenColor
+                    CategoryType.AccountTransfer -> CornflowerBlueColor
                     else -> colorScheme.onPrimary
                 }
             )

@@ -191,7 +191,7 @@ fun AddTransaction(
                                 popUpTo(0)
                             }
                         },
-                        tranferMod = true,
+                        transferMod = true,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                             .wrapContentHeight()

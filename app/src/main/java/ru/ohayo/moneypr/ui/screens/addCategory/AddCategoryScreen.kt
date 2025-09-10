@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
-import ru.ohayo.moneypr.ui.theme.ErorColor
+import ru.ohayo.moneypr.ui.theme.ErrorColor
 import ru.ohayo.moneypr.ui.screens.addCategory.components.IconGridSection
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import ru.ohayo.moneypr.ui.component.customeButton.TextSizeButton
@@ -119,7 +119,7 @@ fun AddCategoryScreen(
                 TextSizeButton(
                     text = "Delete",
                     onClick = {},
-                    containerColor = ErorColor,
+                    containerColor = ErrorColor,
                 )
             }
             FullWidthButton(text = "Save",

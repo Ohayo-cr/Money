@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.theme.TextDisabled
@@ -112,8 +113,19 @@ fun TransactionItem(
                         overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-
-                    transaction.account?.let { Text(text = it, fontSize = 12.sp,   color = TextDisabled) }
+                    // 👇 Заменяем именно эту строку:
+                    when (transaction.type) {
+                        CategoryType.AccountTransfer -> {
+                            Text(
+                                text = "${transaction.paymentAccount} → ${transaction.recipientAccount }",
+                                fontSize = 12.sp,
+                                color = TextDisabled
+                            )
+                        }
+                        else -> {
+                            transaction.account?.let { Text(text = it, fontSize = 12.sp, color = TextDisabled) }
+                        }
+                    }
 
 
                 }
