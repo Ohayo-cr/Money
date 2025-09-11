@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.ohayo.moneypr.R
+import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.ui.theme.ErrorColor
 import ru.ohayo.moneypr.ui.screens.addCategory.components.IconGridSection
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
@@ -77,7 +78,8 @@ fun AddCategoryScreen(
                 onTypeSelected = { newType ->
                     categoryVM.setSelectedCategoryType(newType) // Обновляем тип в ViewModel
                     CategoryViewModel.CategoryTypeHolder.currentType = newType
-                }
+                },
+                availableTypes = listOf(CategoryType.Expense, CategoryType.Income)
             )
             Divider()
             Spacer(modifier = Modifier.height(16.dp))
