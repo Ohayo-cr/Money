@@ -10,14 +10,14 @@ object NumberFormatter {
         decimalSeparator = '.'
     })
 
-    // Функция для форматирования числа
-    fun format(number: Double): String {
+    // Функция для форматирования числа с опцией отображения знака "+"
+    fun format(number: Double, showPlus: Boolean = false): String {
         val formatted = formatter.format(number)
-        // Если число отрицательное, добавляем пробел после минуса
-        return if (formatted.startsWith("-")) {
+        val result = if (formatted.startsWith("-")) {
             formatted.replaceFirst("-", "- ")
         } else {
-            formatted
+            if (showPlus) "+ $formatted" else formatted
         }
+        return result
     }
 }

@@ -35,15 +35,27 @@ fun TransactionItem(
     transaction: TransactionDbo,
     categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
+    timeFormatter: (Long) -> String = { timestamp ->
+        Instant.ofEpochMilli(timestamp)
+            .atZone(ZoneId.systemDefault())
+            .toLocalTime()
+            .format(DateTimeFormatter.ofPattern("HH:mm"))
+    },
+    isFirst: Boolean = false,
+    isLast: Boolean = false
 ) {
 
     val category = categoryMap[transaction.category]
     Box(modifier = Modifier
         .fillMaxWidth()
         .clickable { onTransactionClick(transaction) }
+
     ) {
         Row(
-            modifier = Modifier,
+            modifier = Modifier.padding(
+                top = if (isFirst) 6.dp  else 2.dp,
+                bottom = if (isLast) 6.dp else 2.dp,
+                start = 6.dp, end = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
 
@@ -82,10 +94,7 @@ fun TransactionItem(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = Instant.ofEpochMilli(transaction.timestamp)
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalTime()
-                            .format(DateTimeFormatter.ofPattern("HH:mm")),
+                        text = timeFormatter(transaction.timestamp),
                         color = TextDisabled,
                         fontSize = 12.sp,
                         maxLines = 1
@@ -108,7 +117,7 @@ fun TransactionItem(
                         overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    // 👇 Заменяем именно эту строку:
+
                     when (transaction.type) {
                         CategoryType.AccountTransfer -> {
                             Text(

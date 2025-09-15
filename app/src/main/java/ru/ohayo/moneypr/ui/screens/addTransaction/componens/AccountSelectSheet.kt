@@ -38,7 +38,8 @@ fun AccountSelectSheet(
     account: List<AccountDbo>,
     selectedAccountDbo: AccountDbo?,
     onDismiss: () -> Unit,
-    onAccountSelected: (AccountDbo) -> Unit
+    onAccountSelected: (AccountDbo) -> Unit,
+    title: String = "Выберите счет"
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -54,7 +55,7 @@ fun AccountSelectSheet(
                 )
             ) {
                 Text(
-                    text = "Выберите счет",
+                    text = title,
                     style = typography.titleMedium,
                     modifier = Modifier
                         .fillMaxWidth()

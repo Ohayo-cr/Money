@@ -22,7 +22,7 @@ import ru.ohayo.moneypr.ui.component.customeTab.CategoryTabRow
 import ru.ohayo.moneypr.ui.component.categoryIcon.ChooseCategory
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectSheet
-import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountSelectionType
+import ru.ohayo.moneypr.ui.screens.addTransaction.componens.AccountTypeTransfer
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.TransferBox
 import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
 
@@ -150,7 +150,7 @@ fun AddTransaction(
 
             CategoryType.AccountTransfer -> {
                 var showAccountSelection by remember { mutableStateOf(false) }
-                var selectingAccountType by remember { mutableStateOf<AccountSelectionType?>(null) }
+                var selectingAccountType by remember { mutableStateOf<AccountTypeTransfer?>(null) }
                 val accounts by transactionViewModel.accounts.collectAsState(initial = emptyList())
 
                 // Получаем значения из ViewModel
@@ -168,11 +168,11 @@ fun AddTransaction(
                         fromAccount = fromAccount,
                         toAccount = toAccount,
                         onFromAccountClick = {
-                            selectingAccountType = AccountSelectionType.From
+                            selectingAccountType = AccountTypeTransfer.From
                             showAccountSelection = true
                         },
                         onToAccountClick = {
-                            selectingAccountType = AccountSelectionType.To
+                            selectingAccountType = AccountTypeTransfer.To
                             showAccountSelection = true
                         }
                     )
@@ -202,9 +202,9 @@ fun AddTransaction(
                     AccountSelectSheet(
                         account = accounts,
                         selectedAccountDbo = when (selectingAccountType) {
-                            AccountSelectionType.From -> fromAccount
-                            AccountSelectionType.To -> toAccount
-                            null -> null
+                            AccountTypeTransfer.From -> fromAccount
+                            AccountTypeTransfer.To -> toAccount
+                            else -> {null}
                         },
                         onDismiss = {
                             showAccountSelection = false
@@ -212,12 +212,17 @@ fun AddTransaction(
                         },
                         onAccountSelected = { selectedAccount ->
                             when (selectingAccountType) {
-                                AccountSelectionType.From -> transactionViewModel.selectFromAccount(selectedAccount)
-                                AccountSelectionType.To -> transactionViewModel.selectToAccount(selectedAccount)
-                                null -> {}
+                                AccountTypeTransfer.From -> transactionViewModel.selectFromAccount(selectedAccount)
+                                AccountTypeTransfer.To -> transactionViewModel.selectToAccount(selectedAccount)
+                                else -> {null}
                             }
                             showAccountSelection = false
                             selectingAccountType = null
+                        },
+                        title = when (selectingAccountType) {
+                            AccountTypeTransfer.From -> "Счет списания"
+                            AccountTypeTransfer.To -> "Счет пополнения"
+                            else -> "Выберите счет"
                         }
                     )
                 }
@@ -229,6 +234,7 @@ fun AddTransaction(
         }
     }
 }
+
 
 
 
