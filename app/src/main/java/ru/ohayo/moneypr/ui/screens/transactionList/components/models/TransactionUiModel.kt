@@ -1,4 +1,4 @@
-package ru.ohayo.moneypr.ui.screens.transactionList.components
+package ru.ohayo.moneypr.ui.screens.transactionList.components.models
 
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo

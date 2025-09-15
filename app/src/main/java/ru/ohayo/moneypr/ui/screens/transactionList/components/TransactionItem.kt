@@ -13,9 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,21 +25,19 @@ import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.theme.TextDisabled
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Date
-import java.util.Locale
+
 
 @Composable
 fun TransactionItem(
     transaction: TransactionDbo,
-    categories: List<CategoryDbo>,
+    categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
 ) {
 
-    val category = getCategoryByName(categories, transaction.category)
+    val category = categoryMap[transaction.category]
     Box(modifier = Modifier
         .fillMaxWidth()
         .clickable { onTransactionClick(transaction) }
@@ -135,10 +130,3 @@ fun TransactionItem(
 }
 
 
-@Composable
-fun getCategoryByName(categories: List<CategoryDbo>, categoryName: String): CategoryDbo? {
-    val result by remember(categories, categoryName) {
-        mutableStateOf(categories.find { it.categoryName == categoryName })
-    }
-    return result
-}

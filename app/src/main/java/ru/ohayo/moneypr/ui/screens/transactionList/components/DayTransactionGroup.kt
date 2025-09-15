@@ -28,7 +28,7 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatter
 fun DayTransactionGroup(
     date: String,
     transactions: List<TransactionDbo>,
-    categories: List<CategoryDbo>,
+    categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit
 ) {
     val income = transactions.filter { it.amount > 0 }.sumOf { it.amount }
@@ -74,7 +74,7 @@ fun DayTransactionGroup(
                 for (transaction in transactions) {
                     TransactionItem(
                         transaction = transaction,
-                        categories = categories,
+                        categoryMap = categoryMap,
                         onTransactionClick = onTransactionClick
                     )
 

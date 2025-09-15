@@ -25,8 +25,12 @@ fun TransactionsList(navController: NavController,
                      categoryViewModel: CategoryViewModel = hiltViewModel(),
                      transactionVM: TransactionViewModel
     ) {
+
     val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
+    val categoryMap = remember(categories) {
+        categories.associateBy { it.categoryName } // 👈 Создаем маппинг здесь
+    }
     val scrollState = transactionListVM.scrollState
     val groupedTransactions = remember(transactions) {
         if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
@@ -63,7 +67,7 @@ fun TransactionsList(navController: NavController,
                             DayTransactionGroup(
                                 date = date,
                                 transactions = dayTransactions,
-                                categories = categories,
+                                categoryMap = categoryMap,
                                 onTransactionClick = { transaction ->
                                     transactionVM.setTransactionIdAndNavigate(transaction.id) {
                                         navController.navigate(Screen.DetailedTransaction.route)
@@ -84,12 +88,9 @@ fun TransactionsList(navController: NavController,
 
 @Composable
 private fun EmptyTransactionsPlaceholder() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 64.dp), // Отступ для заголовка
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = "Нет транзакций",
