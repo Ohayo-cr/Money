@@ -142,7 +142,3 @@ fun getCategoryByName(categories: List<CategoryDbo>, categoryName: String): Cate
     }
     return result
 }
-fun formatTimestamp(timestamp: Long): String {
-    val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
-    return dateFormat.format(Date(timestamp))
-}

@@ -31,11 +31,13 @@ import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.component.spacers.StandartDivider
 import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
-import ru.ohayo.moneypr.ui.screens.transactionList.components.formatTimestamp
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 import ru.ohayo.moneypr.utils.formate.formatCustomDate
 import ru.ohayo.moneypr.utils.formate.formatTime
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun DetailedTransaction(
@@ -201,4 +203,9 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
 
         }
     }
+}
+@Composable
+fun formatTimestamp(timestamp: Long): String {
+    val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+    return dateFormat.format(Date(timestamp))
 }
