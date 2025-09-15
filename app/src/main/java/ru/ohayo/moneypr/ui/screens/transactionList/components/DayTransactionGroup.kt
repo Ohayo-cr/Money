@@ -21,19 +21,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
+import ru.ohayo.moneypr.ui.screens.transactionList.components.models.DayTransactions
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
 fun DayTransactionGroup(
-    date: String,
-    transactions: List<TransactionDbo>,
+    dayTransactions: DayTransactions,
     categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit
 ) {
-    val income = transactions.filter { it.amount > 0 }.sumOf { it.amount }
-    val expense = transactions.filter { it.amount < 0 }.sumOf { -it.amount }
-    val total = income - expense
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,13 +49,13 @@ fun DayTransactionGroup(
                Arrangement.SpaceBetween) {
 
             Text(
-                text = date,
+                text = dayTransactions.date,
                 style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(start = 8.dp),
                 color = TextDisabled
             )
                Text(
-                   text = NumberFormatter.format(total),
+                   text = NumberFormatter.format(dayTransactions.total),
                    style = MaterialTheme.typography.titleSmall,
                    modifier = Modifier.padding(end = 8.dp),
                    color = TextDisabled,
@@ -71,7 +69,7 @@ fun DayTransactionGroup(
                 modifier = Modifier.padding(horizontal = 2.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                for (transaction in transactions) {
+                for (transaction in dayTransactions.transactions) {
                     TransactionItem(
                         transaction = transaction,
                         categoryMap = categoryMap,

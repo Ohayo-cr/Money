@@ -29,11 +29,11 @@ fun TransactionsList(navController: NavController,
     val transactions by transactionListVM.transactions.collectAsState()
     val categories by categoryViewModel.categories.collectAsState()
     val categoryMap = remember(categories) {
-        categories.associateBy { it.categoryName } // 👈 Создаем маппинг здесь
+        categories.associateBy { it.categoryName }
     }
     val scrollState = transactionListVM.scrollState
     val groupedTransactions = remember(transactions) {
-        if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyMap()
+        if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyList()
     }
 
 
@@ -62,11 +62,10 @@ fun TransactionsList(navController: NavController,
                     item {
                         Spacers.Micro2()
                     }
-                    groupedTransactions.forEach { (date, dayTransactions) ->
+                    groupedTransactions.forEach { dayTransactions ->
                         item {
                             DayTransactionGroup(
-                                date = date,
-                                transactions = dayTransactions,
+                                dayTransactions = dayTransactions, // передаем весь объект
                                 categoryMap = categoryMap,
                                 onTransactionClick = { transaction ->
                                     transactionVM.setTransactionIdAndNavigate(transaction.id) {
