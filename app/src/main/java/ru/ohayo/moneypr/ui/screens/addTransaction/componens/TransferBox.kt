@@ -2,6 +2,7 @@ package ru.ohayo.moneypr.ui.screens.addTransaction.componens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
+import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 @Composable
 fun TransferBox(
@@ -40,10 +43,10 @@ fun TransferBox(
 
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth().padding(top = 16.dp)
             .background(
                 color = m.tertiary,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(16.dp),
             )
             .padding(vertical = 28.dp, horizontal = 8.dp)
     ) {
@@ -62,10 +65,10 @@ fun TransferBox(
 
             // Центральная иконка перевода
             Icon(
-                painter = painterResource(id = R.drawable.icc_transfer), // Замените на ваш ресурс
+                painter = painterResource(id = R.drawable.ic_2arrow), // Замените на ваш ресурс
                 contentDescription = "Перевод",
                 tint = m.onPrimary,
-                modifier = Modifier.size(60.dp)
+                modifier = Modifier.size(60.dp).align(Alignment.CenterVertically)
             )
 
             // Правая часть - счет получения
@@ -88,8 +91,13 @@ fun AccountItem(
 ) {
     val shape = RoundedCornerShape(percent = 20)
     Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier        .clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null
+        ) { onClick() }
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+
     ) {
         Text(
             text = title,
@@ -105,7 +113,6 @@ fun AccountItem(
             modifier = Modifier
                 .size(60.dp)
                 .background(Color.White, shape = shape)
-                .clickable { onClick() }
                 .align(Alignment.CenterHorizontally),
             contentAlignment = Alignment.Center
         ) {
@@ -134,22 +141,20 @@ fun AccountItem(
             }
         }
 
-        if (account != null) {
-            Spacers.Small8()
-            Text(
-                text = account.name,
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text(
-                text = "${account.balance} ${account.currency}",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        Spacers.Small8()
+        Text(
+            text = account?.name ?: "не выбран",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = if (account != null) "${NumberFormatter.format(account.balance)} ${account.currency}" else "не известно",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
