@@ -122,7 +122,6 @@ fun NavHostScreen(navController: NavHostController) {
         composable(Screen.DetailedTransaction.route) {
             DetailedTransaction(
                 navController = navController,
-                onBackClick = { navController.popBackStack() },
                 transactionVM = transactionVM
             )
         }

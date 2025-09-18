@@ -214,7 +214,7 @@ fun AddTransaction(
                             when (selectingAccountType) {
                                 AccountTypeTransfer.From -> transactionViewModel.selectFromAccount(selectedAccount)
                                 AccountTypeTransfer.To -> transactionViewModel.selectToAccount(selectedAccount)
-                                else -> {null}
+                                else -> {}
                             }
                             showAccountSelection = false
                             selectingAccountType = null

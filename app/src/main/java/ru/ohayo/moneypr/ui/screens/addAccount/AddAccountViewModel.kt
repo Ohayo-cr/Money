@@ -14,6 +14,7 @@ import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.repository.CurrencyRepository
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountIconMapper
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountItem
+import ru.ohayo.moneypr.utils.app_const.ExchangeRates
 
 import javax.inject.Inject
 @HiltViewModel
@@ -111,14 +112,15 @@ class AddAccountViewModel @Inject constructor(
     fun setCurrency(selectedCurrency: AccountItem) {
         viewModelScope.launch {
             // Store the symbol in fieldValues for database
-            _fieldValues.update { it + ("currency" to selectedCurrency.symbol) }
+            _fieldValues.update { it + ("currency" to selectedCurrency.mainText) }
             // Store the display name separately for UI
             _fieldValues.update { it + ("currency_display" to selectedCurrency.mainText) }
+            _fieldValues.update { it + ("currency_symbol" to selectedCurrency.symbol) }
         }
     }
 
 
-    fun addAccount(name: String, type: String, balance: Double, currency: String, note: String) {
+    fun addAccount(name: String, type: String, balance: Double, note: String) {
         viewModelScope.launch {
             _state.value = AccountState.Loading
             try {
@@ -135,14 +137,20 @@ class AddAccountViewModel @Inject constructor(
                 val accountType = enumValueOrNull<AccountType>(type)
                     ?: throw IllegalArgumentException("Неверный тип счета: $type")
 
+                val currencyCode = _fieldValues.value["currency"] ?: throw IllegalArgumentException("Нужно выбрать валюту")
+                val currencySymbol = _fieldValues.value["currency_symbol"] ?: throw IllegalArgumentException("Символ валюты не установлен")
+                val exchangeRate = ExchangeRates.getRate(currencyCode)
+
                 val accountDbo = AccountDbo(
                     name = name,
                     type = accountType,
                     initialBalance = balance,
                     balance = balance,
-                    currency = currency,
+                    currencyCode = currencyCode,
                     icon = _selectedIcon.value,
-                    note = note
+                    note = note,
+                    exchangeRate = exchangeRate,
+                    currencySymbol = currencySymbol,
                     )
 
                 accountRepository.insertAccount(accountDbo)

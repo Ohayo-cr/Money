@@ -56,7 +56,7 @@ fun AddTransactionForm(
     val accounts by viewModel.accounts.collectAsState(initial = emptyList())
 
     val selectedCategory = viewModel.getSelectedCategory()
-    val currencyAcc = selectedAccount?.currency ?: "Not"
+    val currencyAcc = selectedAccount?.currencySymbol ?: "Not"
 
     val focusManager = LocalFocusManager.current
     var showAccountSelection by remember { mutableStateOf(false) }
@@ -130,11 +130,12 @@ fun AddTransactionForm(
                                 }
                             } else {
                                 // Обычный режим транзакции
-                                if (currencyAcc != "Not" && selectedCategory != null) {
+                                if (selectedAccount != null && currencyAcc != "Not" && selectedCategory != null) {
                                     val amountWithSign = when (selectedCategory.type) {
                                         CategoryType.Expense -> -parsedAmount // Расход — отрицательная сумма
                                         else -> parsedAmount // Доход — положительная сумма
                                     }
+                                    val account = selectedAccount
 
                                     val transaction = TransactionDbo(
                                         amount = amountWithSign,
@@ -142,8 +143,9 @@ fun AddTransactionForm(
                                         type = selectedCategory.type,
                                         timestamp = transactionDate,
                                         category = selectedCategory.categoryName,
-                                        account = selectedAccount?.name,
-                                        currency = currencyAcc
+                                        account = account?.name,
+                                        currency = currencyAcc,
+                                        exchangeRate = account?.exchangeRate ?: 1.0,
                                     )
                                     viewModel.addTransaction(transaction)
                                     onTransactionAdded()

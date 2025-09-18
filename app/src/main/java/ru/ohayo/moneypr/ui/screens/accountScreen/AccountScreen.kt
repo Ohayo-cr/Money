@@ -97,7 +97,7 @@ fun AccountItem(accountDbo: AccountDbo) {
 
 
             Text(
-                text = "${NumberFormatter.format(accountDbo.balance)} ${accountDbo.currency}",
+                text = "${NumberFormatter.format(accountDbo.balance)} ${accountDbo.currencySymbol}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

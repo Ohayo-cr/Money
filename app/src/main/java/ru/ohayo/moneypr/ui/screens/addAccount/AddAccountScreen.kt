@@ -127,16 +127,13 @@ fun AddAccountScreen(
                 val name = fieldValues["name"] ?: ""
                 val type = fieldValues["type"] ?: ""
                 val balanceString = fieldValues["balance"] ?: "0"
-                val currency = fieldValues["currency"] ?: ""
                 val note = fieldValues["note"] ?: ""
                 val balance = balanceString.replace(" ", "").toDoubleOrNull() ?: 0.0
                 if (name.isEmpty()) {
                     Toast.makeText(context, "Введите название счета", Toast.LENGTH_SHORT).show()
 
-                } else if (currency.isEmpty()) {
-                    Toast.makeText(context, "Выберите валюту", Toast.LENGTH_SHORT).show()
                 } else {
-                    accountVM.addAccount(name, type, balance, currency, note)
+                    accountVM.addAccount(name, type, balance,  note)
                 }
             }
         )

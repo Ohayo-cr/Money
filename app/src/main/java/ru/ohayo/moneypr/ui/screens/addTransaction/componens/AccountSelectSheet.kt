@@ -79,7 +79,7 @@ fun AccountSelectSheet(
                                 ) {
                                     Text(text = account.name, style = typography.bodyLarge)
                                     Text(
-                                        text = "${NumberFormatter.format(account.balance)} ${account.currency}",
+                                        text = "${NumberFormatter.format(account.balance)} ${account.currencySymbol}",
                                         style = typography.bodySmall
                                     )
                                 }

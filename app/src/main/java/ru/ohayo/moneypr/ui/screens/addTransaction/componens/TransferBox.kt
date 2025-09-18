@@ -150,7 +150,7 @@ fun AccountItem(
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = if (account != null) "${NumberFormatter.format(account.balance)} ${account.currency}" else "не известно",
+            text = if (account != null) "${NumberFormatter.format(account.balance)} ${account.currencySymbol}" else "не известно",
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
             textAlign = TextAlign.Center,

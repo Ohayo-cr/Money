@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.repository.CategoryRepository
-import ru.ohayo.moneypr.repository.CurrencyRepository
 import ru.ohayo.moneypr.repository.TransactionRepository
 import ru.ohayo.moneypr.repository.AccountRepository
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
@@ -25,7 +24,6 @@ import javax.inject.Inject
 class AddTransactionViewModel @Inject constructor(
     private val repository: TransactionRepository,
     private val accountRepository: AccountRepository,
-    private val currencyRepository: CurrencyRepository,
     private val categoryRepository: CategoryRepository
 ) : ViewModel() {
 
@@ -52,7 +50,7 @@ class AddTransactionViewModel @Inject constructor(
     val transactionResult: StateFlow<Result<Unit>?> = _transactionResult.asStateFlow()
 
     val accounts = accountRepository.getAllAccounts()
-    val currencies = currencyRepository.getAllCurrenciesFlow()
+
 
     // Состояние текущей даты (в миллисекундах)
     private val _currentDate = MutableStateFlow(System.currentTimeMillis())
@@ -127,7 +125,7 @@ class AddTransactionViewModel @Inject constructor(
 
                 val transaction = TransactionDbo(
                     type = CategoryType.AccountTransfer,
-                    currency = fromAcc.currency, // или toAcc.currency — проверь совпадение
+                    currency = fromAcc.currencySymbol, // или toAcc.currency — проверь совпадение
                     amount = amount,
                     paymentAccount = fromAcc.name,
                     recipientAccount = toAcc.name,

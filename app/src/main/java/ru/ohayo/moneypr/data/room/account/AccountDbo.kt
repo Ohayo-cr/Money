@@ -15,10 +15,13 @@ data class AccountDbo(
     val type: AccountType,
     val initialBalance : Double = 0.0,
     val balance: Double,
-    val currency: String,
+    val currencySymbol: String,
+    val currencyCode: String,
     val icon: Int? = null,
     val note: String? = "",
-    @PrimaryKey(autoGenerate = true) val id: Long = 0
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val exchangeRate: Double = 1.0,
+    val inBudget: Boolean = true,
 )
 
 enum class AccountType {

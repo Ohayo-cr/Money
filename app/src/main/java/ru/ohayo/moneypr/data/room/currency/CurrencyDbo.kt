@@ -9,5 +9,6 @@ data class CurrencyDbo(
     val code: String,
     val fullName: String,
     val iconResId: Int? = null,
-    val symbol: String
+    val symbol: String,
+    val rate: Double,
 )

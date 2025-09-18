@@ -42,11 +42,9 @@ import java.util.Locale
 @Composable
 fun DetailedTransaction(
     navController: NavController,
-    onBackClick: () -> Unit,
     transactionVM: TransactionViewModel
 ) {
     val transactionWithAccount by transactionVM.transactionWithAccount.collectAsState()
-    val DboTransaction = transactionWithAccount?.transaction
     var showDeleteDialog by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
@@ -186,7 +184,7 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
                         color = TextDisabled
                     )
                     Text(
-                        text = "${account.name} (${NumberFormatter.format(account.balance)} ${account.currency})",
+                        text = "${account.name} (${NumberFormatter.format(account.balance)} ${account.currencySymbol})",
                         color = MaterialTheme.colorScheme.onPrimary
                     )
 

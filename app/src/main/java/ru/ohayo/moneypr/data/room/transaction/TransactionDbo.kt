@@ -62,6 +62,6 @@ data class TransactionDbo(
     val timestamp: Long,
     val createdAt: Long = System.currentTimeMillis(),
     val inBudget: Boolean = true,
-
+    val exchangeRate: Double = 1.0,
 
     )
