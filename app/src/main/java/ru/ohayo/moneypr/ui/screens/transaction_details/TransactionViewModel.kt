@@ -29,9 +29,7 @@ class TransactionViewModel @Inject constructor(
     val transactionWithAccount = _transactionId
         .filterNotNull()
         .flatMapLatest { id ->
-
             repository.getTransactionWithAccount(id)
-
         }
         .stateIn(
             scope = viewModelScope,
@@ -72,5 +70,6 @@ class TransactionViewModel @Inject constructor(
         }
     }
 }
+
 
 

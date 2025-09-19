@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -24,18 +25,27 @@ import ru.ohayo.moneypr.utils.categoryIcon.IconTypeMapper
 fun CategoryIcon(
     iconResId: Int,
     backgroundColor: Color,
-    modifier: Modifier = Modifier.size(60.dp),
+    size: Dp = 60.dp,
+    modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     isSelected: Boolean = false,
     scale: Float = 1f,
-    padding: Dp = 8.dp,
 ) {
     val isPicture = IconTypeMapper.isNoTint(iconResId)
     val iconTint = if (!isPicture) Color.White else Color.Unspecified
     val shape = RoundedCornerShape(percent = 20)
 
+    // Пропорциональный паддинг: базовое соотношение 8.dp при 60.dp
+    val basePadding = 8.dp
+    val baseSize = 60.dp
+    val padding = with(LocalDensity.current) {
+        val calculatedPadding = basePadding * (size / baseSize)
+        calculatedPadding.roundToPx().toDp()
+    }
+
     Box(
         modifier = modifier
+            .size(size)
             .scale(scale)
             .background(
                 color = if (isPicture) Color.Transparent else backgroundColor,

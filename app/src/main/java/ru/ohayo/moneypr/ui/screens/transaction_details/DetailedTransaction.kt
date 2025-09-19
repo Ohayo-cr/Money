@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,16 +23,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountDbo
+import ru.ohayo.moneypr.data.room.category.CategoryDbo
+import ru.ohayo.moneypr.data.room.category.CategoryType
+import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.component.spacers.StandardDivider
 import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
+import ru.ohayo.moneypr.utils.app_const.AppConstants
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 import ru.ohayo.moneypr.utils.formate.formatCustomDate
 import ru.ohayo.moneypr.utils.formate.formatTime
@@ -49,9 +55,8 @@ fun DetailedTransaction(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        transactionWithAccount?.transaction?.let { transaction ->
             TopAppPanel(
-                title = "${transaction.type}",
+                title = "Details transaction",
                 showBackButton = true,
                 navController = navController,
                 leftIcon1 = painterResource(id = R.drawable.ic_edit_main),
@@ -59,9 +64,7 @@ fun DetailedTransaction(
                 rightIcon2 = painterResource(id = R.drawable.ic_delete),
                 onIconClick2 = {showDeleteDialog = true}
             )
-        }
 
-        // Показываем контент в зависимости от состояния данных
         when (val data = transactionWithAccount) {
             null -> {
                 Box(modifier = Modifier
@@ -75,6 +78,7 @@ fun DetailedTransaction(
                 val account = data.account
                 val paymentAccount = data.paymentAccount
                 val recipientAccount = data.recipientAccount
+                val category = data.category
 
 
                     Spacers.Micro2()
@@ -87,15 +91,29 @@ fun DetailedTransaction(
                             color = MaterialTheme.colorScheme.secondary,
                             shape = RoundedCornerShape(10.dp)
                         )
-                        .padding(8.dp)
+
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        DetailsText("Sum", "${NumberFormatter.format(transaction.amount)} ${transaction.currency}" )
+
+                        DetailsText(
+                            "Sum",
+                            "${NumberFormatter.format(transaction.amount, transaction.type == CategoryType.Income)} ${transaction.currency}"
+                        )
+                        StandardDivider()
+                        if (transaction.exchangeRate != 1.0) {
+                            DetailsText("ExchangeRate",transaction.exchangeRate.toString())
+                            StandardDivider()
+                            DetailsText("Sum in base currency",
+                                "≈ ${NumberFormatter.format(transaction.amount * transaction.exchangeRate, true)} ${AppConstants.BASE_CURRENCY}")
+                            StandardDivider()
+                        }
+                        DetailsText(
+                            "Type transaction",transaction.type.toString()
+                        )
                         StandardDivider()
                         transaction.account?.let {
                             AccountDetailsRow("Account", account = account)
@@ -111,7 +129,7 @@ fun DetailedTransaction(
                             StandardDivider()
                         }
 
-                        DetailsText("Category", transaction.category)
+                        category?.let { DetailsCategory( it ) }
                         StandardDivider()
                         DetailsText("Date", formatCustomDate(transaction.timestamp))
                         StandardDivider()
@@ -142,10 +160,12 @@ fun DetailedTransaction(
 private fun DetailsText(title: String, mainText: String, isPlaceholder: Boolean = false) {
     Box(modifier = Modifier
         .fillMaxWidth()
+        .height(56.dp)
         .padding(horizontal = 8.dp)) {
-        Column {
+        Column(modifier = Modifier
+            .fillMaxSize(), verticalArrangement = Arrangement.Center) {
             Text(
-                text = title,
+                text = "$title:",
                 color = TextDisabled,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -163,9 +183,11 @@ private fun DetailsText(title: String, mainText: String, isPlaceholder: Boolean 
 @Composable
 private fun AccountDetailsRow(title: String, account: AccountDbo?) {
     if (account == null) return
+    val size = 56.dp
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(size)
             .padding(horizontal = 8.dp)
     ) {
         Column(     modifier = Modifier
@@ -174,7 +196,7 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -184,7 +206,7 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
                         color = TextDisabled
                     )
                     Text(
-                        text = "${account.name} (${NumberFormatter.format(account.balance)} ${account.currencySymbol})",
+                        text = "${account.name} ${NumberFormatter.format(account.balance)} ${account.currencySymbol}",
                         color = MaterialTheme.colorScheme.onPrimary
                     )
 
@@ -193,10 +215,51 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
                     Icon(
                         painter = painterResource(id = iconRes),
                         contentDescription = null,
-                        modifier = Modifier.size(26.dp),
+                        modifier = Modifier.size(size-8.dp),
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
+            }
+
+        }
+    }
+}
+@Composable
+private fun DetailsCategory(category: CategoryDbo) {
+    val size = 56.dp
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(size)
+            .padding(horizontal = 8.dp)
+    ) {
+        Column(     modifier = Modifier
+            .fillMaxWidth()) {
+
+
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column {
+                    Text(
+                        text = "Category",
+                        color = TextDisabled
+                    )
+                    Text(
+                        text = category.categoryName,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+
+                }
+                CategoryIcon(iconResId =category.iconResId ,
+                    backgroundColor = Color(category.color),
+                    size =(size-8.dp),
+                )
+
+
             }
 
         }

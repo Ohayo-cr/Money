@@ -2,8 +2,10 @@
 package ru.ohayo.moneypr.repository
 
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import ru.ohayo.moneypr.data.room.account.AccountDao
 import ru.ohayo.moneypr.data.room.category.CategoryDao
 import ru.ohayo.moneypr.data.room.transaction.TransactionDao
@@ -43,10 +45,22 @@ class TransactionRepository @Inject constructor(
 
     fun getTransactionWithAccount(id: Long): Flow<TransactionWithAccount?> = flow {
         val transaction = transactionDao.getTransactionById(id) ?: return@flow emit(null)
+
+        // Получаем все данные последовательно
         val account = transaction.account?.let { accountDao.getAccountByName(it) }
         val paymentAccount = transaction.paymentAccount?.let { accountDao.getAccountByName(it) }
         val recipientAccount = transaction.recipientAccount?.let { accountDao.getAccountByName(it) }
-        emit(TransactionWithAccount(transaction, account, paymentAccount, recipientAccount))
-    }
+        val category = categoryDao.getCategoryByName(transaction.category)
+
+        emit(
+            TransactionWithAccount(
+                transaction = transaction,
+                account = account,
+                paymentAccount = paymentAccount,
+                recipientAccount = recipientAccount,
+                category = category
+            )
+        )
+    }.flowOn(Dispatchers.IO)
 
 }
