@@ -25,7 +25,7 @@ import ru.ohayo.moneypr.utils.categoryIcon.IconTypeMapper
 fun CategoryIcon(
     iconResId: Int,
     backgroundColor: Color,
-    size: Dp = 60.dp,
+    size: Dp = 48.dp,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     isSelected: Boolean = false,
@@ -36,8 +36,8 @@ fun CategoryIcon(
     val shape = RoundedCornerShape(percent = 20)
 
     // Пропорциональный паддинг: базовое соотношение 8.dp при 60.dp
-    val basePadding = 8.dp
-    val baseSize = 60.dp
+    val basePadding = 6.dp
+    val baseSize = 48.dp
     val padding = with(LocalDensity.current) {
         val calculatedPadding = basePadding * (size / baseSize)
         calculatedPadding.roundToPx().toDp()

@@ -62,7 +62,7 @@ fun TransactionItem(
                 CategoryIcon(
                     iconResId = cat.iconResId,
                     backgroundColor = Color(cat.color),
-                    size = (54.dp),
+
 
                 )
             }

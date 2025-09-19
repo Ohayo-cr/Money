@@ -63,10 +63,12 @@ fun ChooseCategory(
     ) {
         CategoryIcon(
             iconResId = iconItem,
+            size = 60.dp,
             backgroundColor = backgroundColor,
             onClick = onClick,
             isSelected = isSelected,
             scale = animatedScale
+
         )
 
         if (name != null) {
