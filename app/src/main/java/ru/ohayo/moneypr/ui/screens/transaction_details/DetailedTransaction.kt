@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
-import ru.ohayo.moneypr.ui.component.spacers.StandartDivider
+import ru.ohayo.moneypr.ui.component.spacers.StandardDivider
 import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
@@ -96,27 +96,27 @@ fun DetailedTransaction(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         DetailsText("Sum", "${NumberFormatter.format(transaction.amount)} ${transaction.currency}" )
-                        StandartDivider()
+                        StandardDivider()
                         transaction.account?.let {
                             AccountDetailsRow("Account", account = account)
-                            StandartDivider()
+                            StandardDivider()
                         }
 
                         transaction.paymentAccount?.let {
                             AccountDetailsRow("Счет списания", account = paymentAccount )
-                            StandartDivider()
+                            StandardDivider()
                         }
                         transaction.recipientAccount?.let {
                             AccountDetailsRow("Счет зачисления", account = recipientAccount)
-                            StandartDivider()
+                            StandardDivider()
                         }
 
                         DetailsText("Category", transaction.category)
-                        StandartDivider()
+                        StandardDivider()
                         DetailsText("Date", formatCustomDate(transaction.timestamp))
-                        StandartDivider()
+                        StandardDivider()
                         DetailsText("Time", formatTime(transaction.timestamp))
-                        StandartDivider()
+                        StandardDivider()
                         DetailsText(
                             "Note",
                             transaction.note ?: "Tap add note",

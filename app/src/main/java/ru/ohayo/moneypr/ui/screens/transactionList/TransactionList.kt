@@ -14,69 +14,61 @@ import ru.ohayo.moneypr.ui.component.spacers.Spacers
 import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.navController.Screen
 import ru.ohayo.moneypr.ui.screens.transactionList.components.DayTransactionGroup
-import ru.ohayo.moneypr.ui.screens.transactionList.components.groupTransactionsByDate
-import ru.ohayo.moneypr.ui.screens.categoryList.CategoryViewModel
+import ru.ohayo.moneypr.ui.screens.transactionList.components.models.LocalCategoryMap
 import ru.ohayo.moneypr.ui.screens.transaction_details.TransactionViewModel
 
 
 @Composable
 fun TransactionsList(navController: NavController,
                      transactionListVM: TransactionListViewModel = hiltViewModel(),
-                     categoryViewModel: CategoryViewModel = hiltViewModel(),
                      transactionVM: TransactionViewModel
     ) {
 
-    val transactions by transactionListVM.transactions.collectAsState()
-    val categories by categoryViewModel.categories.collectAsState()
-    val categoryMap = remember(categories) {
-        categories.associateBy { it.categoryName }
-    }
+    val groupedTransactions by transactionListVM.groupedTransactions.collectAsState()
+    val categoryMap by transactionListVM.categoryMap.collectAsState()
     val scrollState = transactionListVM.scrollState
-    val groupedTransactions = remember(transactions) {
-        if (transactions.isNotEmpty()) groupTransactionsByDate(transactions) else emptyList()
-    }
 
+    CompositionLocalProvider(LocalCategoryMap provides categoryMap) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            TopAppPanel(
-                title = "Список транзакций"
-            )
+                TopAppPanel(
+                    title = "Список транзакций"
+                )
 
 
 
 
-            when {
-                transactions.isEmpty() -> EmptyTransactionsPlaceholder()
-                else -> LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    contentPadding = PaddingValues(horizontal = 4.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    state = scrollState
-                ) {
-                    item {
-                        Spacers.Micro2()
-                    }
-                    groupedTransactions.forEach { dayTransactions ->
+                when {
+                    groupedTransactions.isEmpty() -> EmptyTransactionsPlaceholder()
+                    else -> LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        contentPadding = PaddingValues(horizontal = 4.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        state = scrollState
+                    ) {
                         item {
-                            DayTransactionGroup(
-                                dayTransactions = dayTransactions, // передаем весь объект
-                                categoryMap = categoryMap,
-                                onTransactionClick = { transaction ->
-                                    transactionVM.setTransactionIdAndNavigate(transaction.id) {
-                                        navController.navigate(Screen.DetailedTransaction.route)
-                                    }
-                                }
-                            )
+                            Spacers.Micro2()
                         }
-                    }
-                    item {
-                        Spacers.Large200()
+                        groupedTransactions.forEach { dayTransactions ->
+                            item {
+                                DayTransactionGroup(
+                                    dayTransactions = dayTransactions, // передаем весь объект
+                                    onTransactionClick = { transaction ->
+                                        transactionVM.setTransactionIdAndNavigate(transaction.id) {
+                                            navController.navigate(Screen.DetailedTransaction.route)
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                        item {
+                            Spacers.Large200()
+                        }
                     }
                 }
             }

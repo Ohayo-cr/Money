@@ -32,7 +32,6 @@ import ru.ohayo.moneypr.utils.formate.NumberFormatter
 @Composable
 fun DayTransactionGroup(
     dayTransactions: DayTransactions,
-    categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit
 ) {
     val currencyList = remember(dayTransactions.total) {
@@ -102,7 +101,6 @@ fun DayTransactionGroup(
                     for ((index, transaction) in transactions.withIndex()) {
                         TransactionItem(
                             transaction = transaction,
-                            categoryMap = categoryMap,
                             onTransactionClick = onTransactionClick,
                             isFirst = index == 0,
                             isLast = index == transactions.size - 1

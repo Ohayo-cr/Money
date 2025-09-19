@@ -24,6 +24,7 @@ import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.category.CategoryType
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
+import ru.ohayo.moneypr.ui.screens.transactionList.components.models.LocalCategoryMap
 import ru.ohayo.moneypr.ui.theme.TextDisabled
 import java.time.Instant
 import java.time.ZoneId
@@ -33,7 +34,6 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun TransactionItem(
     transaction: TransactionDbo,
-    categoryMap: Map<String, CategoryDbo>,
     onTransactionClick: (TransactionDbo) -> Unit,
     timeFormatter: (Long) -> String = { timestamp ->
         Instant.ofEpochMilli(timestamp)
@@ -45,6 +45,7 @@ fun TransactionItem(
     isLast: Boolean = false
 ) {
 
+    val categoryMap = LocalCategoryMap.current
     val category = categoryMap[transaction.category]
     Box(modifier = Modifier
         .fillMaxWidth()

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun StandartDivider() {
+fun StandardDivider() {
     Divider(
         modifier = Modifier
             .fillMaxWidth(),
