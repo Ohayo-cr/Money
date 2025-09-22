@@ -1,14 +1,17 @@
 package ru.ohayo.moneypr.ui.screens.accountScreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.R
@@ -26,7 +29,7 @@ fun AccountScreen(navController: NavController,
 ) {
 
     val accounts by accountViewModel.accounts.collectAsState(initial = emptyList()) // Получаем список счетов
-
+    val balanceInfo by accountViewModel.balanceInfo.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +41,10 @@ fun AccountScreen(navController: NavController,
             leftIcon1 = painterResource(id = R.drawable.bot_add_icon),
             onIconClick1 = { navController.navigate(Screen.AddAccount.route)}
         )
-
+        TotalBalanceBox(
+            totalBalance = balanceInfo.totalBalance,
+            currencySymbol = balanceInfo.currencySymbol
+        )
 
         LazyColumn(
             modifier = Modifier
@@ -101,5 +107,26 @@ fun AccountItem(accountDbo: AccountDbo) {
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+    }
+}
+@Composable
+fun TotalBalanceBox(totalBalance: Double, currencySymbol: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 4.dp, top = 8.dp, end = 4.dp)
+            .height(60.dp)
+            .background(
+                color = MaterialTheme.colorScheme.tertiary,
+                shape = RoundedCornerShape(12.dp)
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Общий баланс: ${NumberFormatter.format(totalBalance)} $currencySymbol",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onPrimary,
+            fontWeight = FontWeight.Bold
+        )
     }
 }

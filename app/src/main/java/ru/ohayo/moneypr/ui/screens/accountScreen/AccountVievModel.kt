@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import ru.ohayo.moneypr.repository.AccountRepository
-import ru.ohayo.moneypr.data.room.account.AccountType
 import ru.ohayo.moneypr.ui.screens.addTransaction.componens.SelectedAccountManager
+import ru.ohayo.moneypr.utils.app_const.AppConstants
+import ru.ohayo.moneypr.utils.app_const.CurrencySymbols
 import javax.inject.Inject
 
 
@@ -65,6 +68,22 @@ class AccountViewModel @Inject constructor(
             }
         }
     }
+    data class BalanceInfo(
+        val totalBalance: Double,
+        val currencySymbol: String
+    )
+
+    val balanceInfo: StateFlow<BalanceInfo> = _accounts
+        .map { accountList ->
+            val total = accountList.sumOf { it.balance * it.exchangeRate }
+            val symbol = CurrencySymbols.getSymbol(AppConstants.BASE_CURRENCY)
+            BalanceInfo(total, symbol)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = BalanceInfo(0.0, "₽") // или CurrencySymbols.getSymbol(AppConstants.BASE_CURRENCY)
+        )
 
 
 

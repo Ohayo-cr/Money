@@ -14,41 +14,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
-import ru.ohayo.moneypr.data.room.category.CategoryDbo
 import ru.ohayo.moneypr.data.room.transaction.TransactionDbo
 import ru.ohayo.moneypr.ui.screens.transactionList.components.models.DayTransactions
 import ru.ohayo.moneypr.ui.theme.TextDisabled
-import ru.ohayo.moneypr.utils.formate.NumberFormatter
+
 
 @Composable
 fun DayTransactionGroup(
     dayTransactions: DayTransactions,
     onTransactionClick: (TransactionDbo) -> Unit
 ) {
-    val currencyList = remember(dayTransactions.total) {
-        dayTransactions.total.toList()
-    }
 
-    var currentIndex by remember { mutableIntStateOf(0) }
-
-    // Переключение валют каждые 3 секунды
-    LaunchedEffect(currencyList.size) {
-        if (currencyList.size > 1) {
-            while (true) {
-                delay(3000)
-                currentIndex = (currentIndex + 1) % currencyList.size
-            }
-        }
-    }
 
     Box(
         modifier = Modifier
@@ -74,16 +53,10 @@ fun DayTransactionGroup(
                     modifier = Modifier.padding(start = 8.dp),
                     color = TextDisabled
                 )
-                // Отображение валюты
-                val currencyText = if (currencyList.isEmpty()) {
-                    ""
-                } else {
-                    val (currency, amount) = currencyList[currentIndex]
-                    "${NumberFormatter.format(amount, true)} $currency"
-                }
+
 
                 Text(
-                    text = currencyText,
+                    text = dayTransactions.totalFormatted,
                     style = MaterialTheme.typography.titleSmall,
                     modifier = Modifier.padding(end = 8.dp),
                     color = TextDisabled,
