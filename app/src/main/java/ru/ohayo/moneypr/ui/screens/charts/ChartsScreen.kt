@@ -3,9 +3,7 @@ package ru.ohayo.moneypr.ui.screens.charts
 
 import androidx.compose.material3.DatePicker
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,14 +17,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -43,22 +37,24 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import ru.ohayo.moneypr.R
 import ru.ohayo.moneypr.ui.screens.charts.components.data.CategorySummaryFromDb
 import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.spacers.Spacers
+import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.screens.charts.components.DonutChartSample
+import ru.ohayo.moneypr.ui.screens.charts.components.PeriodSelector
 import ru.ohayo.moneypr.ui.screens.charts.components.data.PeriodType
 import ru.ohayo.moneypr.utils.formate.NumberFormatter
 
 
 @Composable
-fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
+fun ChartsScreen(navController: NavController,
+                 viewModel: ChartsVM = hiltViewModel()) {
 
     val categorySummaries by viewModel.categorySummaries.collectAsState()
     val periodLabel by viewModel.periodLabel.collectAsState()
@@ -69,52 +65,20 @@ fun ChartsScreen(viewModel: ChartsVM = hiltViewModel()) {
 
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Заголовок с навигацией
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = { viewModel.prevPeriod() }) {
-                Icon(
-                    Icons.Default.ArrowBack,
-                    contentDescription = "Previous period",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            }
+        TopAppPanel(
+            title = "Charts Screen",
+            navController = navController,
+            showBackButton = true,
+            noClip = true
 
-
-                Box(
-                    modifier = Modifier
-                        .clickable { showPeriodDialog = true }
-                        .padding(8.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = periodLabel,
-                            fontSize = 18.sp,
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = periodType.name.lowercase().replaceFirstChar { it.uppercase() },
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-
-                IconButton(onClick = { viewModel.nextPeriod() }) {
-                    Icon(
-                        Icons.Default.ArrowForward,
-                        contentDescription = "Next period",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            }
+        )
+        PeriodSelector(
+            periodLabel = periodLabel,
+            periodType = periodType,
+            onPrevClick = { viewModel.prevPeriod() },
+            onNextClick = { viewModel.nextPeriod() },
+            onPeriodClick = { showPeriodDialog = true }
+        )
         if (pieChartData.isEmpty()) {
             Column(
                 modifier = Modifier

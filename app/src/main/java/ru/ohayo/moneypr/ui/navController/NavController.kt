@@ -97,7 +97,9 @@ fun NavHostScreen(navController: NavHostController) {
             SettingsScreen(navController = navController)
         }
         composable(Screen.Charts.route) {
-            ChartsScreen()
+            ChartsScreen(
+                navController = navController,
+            )
         }
         composable(Screen.Records.route) {
             TransactionsList(
