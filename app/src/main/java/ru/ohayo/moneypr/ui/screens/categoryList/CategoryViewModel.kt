@@ -25,6 +25,7 @@ class CategoryViewModel @Inject constructor(
     // Используем StateFlow для управления состоянием
     private val _categories = MutableStateFlow<List<CategoryDbo>>(emptyList())
     val categories: StateFlow<List<CategoryDbo>> = _categories
+
     // Текущая категория при редактировании
     private val _categoryDbo = MutableStateFlow<CategoryDbo?>(null)
     val categoryDbo: StateFlow<CategoryDbo?> = _categoryDbo

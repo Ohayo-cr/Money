@@ -23,12 +23,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.ohayo.moneypr.data.room.account.AccountType
+import ru.ohayo.moneypr.ui.component.categoryIcon.CategoryIcon
 import ru.ohayo.moneypr.ui.component.customeButton.FullWidthButton
 import ru.ohayo.moneypr.ui.component.top_app_panel.TopAppPanel
 import ru.ohayo.moneypr.ui.screens.addAccount.components.AccountCardItem
@@ -260,11 +262,9 @@ fun AccountInfoCard(items: List<AccountCardItem>) {
                         if (item.valueText != null) {
                             Text(text = item.valueText, color = TextDisabled)
                         } else if (item.valueIcon != null) {
-                            Icon(
-                                painter = painterResource(id = item.valueIcon),
-                                modifier = Modifier.size(28.dp),
-                                contentDescription = null,
-                                tint = TextDisabled
+                            CategoryIcon(
+                                iconResId = item.valueIcon,
+                                backgroundColor = Color.Gray
                             )
                         }
                     }

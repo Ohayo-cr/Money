@@ -211,12 +211,10 @@ private fun AccountDetailsRow(title: String, account: AccountDbo?) {
                     )
 
                 }
-                account.icon?.let { iconRes ->
-                    Icon(
-                        painter = painterResource(id = iconRes),
-                        contentDescription = null,
-                        modifier = Modifier.size(size-8.dp),
-                        tint = MaterialTheme.colorScheme.onPrimary
+                account.icon?.let {
+                    CategoryIcon(
+                        iconResId = it,
+                        backgroundColor = Color.Gray
                     )
                 }
             }

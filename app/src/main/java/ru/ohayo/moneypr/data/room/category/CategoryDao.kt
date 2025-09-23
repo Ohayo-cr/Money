@@ -53,7 +53,7 @@ interface CategoryDao {
     suspend fun updateCategory(categoryDbo: CategoryDbo)
     @Query("SELECT * FROM categoryDbo WHERE id = :id")
     suspend fun getCategoryByIdUpdate(id: Long): CategoryDbo?
-    @Query("SELECT category, COUNT(*) as transactionCount, SUM(amount) as totalAmount FROM transactions GROUP BY category")
+    @Query("SELECT category, COUNT(*) as transactionCount, SUM(amount * exchangeRate) as totalAmount FROM transactions GROUP BY category")
     suspend fun getCategoryTransactionStats(): List<CategoryTransactionStats>
 
 }

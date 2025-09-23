@@ -90,8 +90,7 @@ fun AccountItem(accountDbo: AccountDbo) {
             accountDbo.icon?.let {
                 CategoryIcon(
                     iconResId = it,
-                    backgroundColor = Color.Gray,
-                    size = 40.dp
+                    backgroundColor = Color.Gray
                 )
             }
                 Spacer(modifier = Modifier.size(10.dp))
