@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import ru.ohayo.moneypr.utils.all_charts.donutChart.DonutChart
 import ru.ohayo.moneypr.utils.all_charts.donutChart.model.PieChartData
@@ -26,8 +25,8 @@ fun DonutChartSample(pieChartData: List<PieChartData>) {
             centerTitle = formattedTotalSum,
             centerTitleStyle = TextStyle(color = MaterialTheme.colorScheme.onPrimary),
             descriptionStyle = TextStyle(color = MaterialTheme.colorScheme.onPrimary),
-            outerCircularColor = Color.LightGray,
-            innerCircularColor = Color.Gray,
+            outerCircularColor = MaterialTheme.colorScheme.onPrimary,
+            innerCircularColor = MaterialTheme.colorScheme.onPrimary
         )
 
 }

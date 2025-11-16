@@ -3,7 +3,6 @@ package ru.ohayo.moneypr.utils.all_charts.donutChart
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
@@ -44,7 +43,7 @@ fun DonutChart(
     pieChartData: List<PieChartData>,
     centerTitle: String = "",
     centerTitleStyle: TextStyle = TextStyle.Default,
-    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 2000),
+    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 500),
     descriptionStyle: TextStyle = TextStyle.Default,
     outerCircularColor: Color = Color.Gray,
     innerCircularColor: Color = Color.Gray,
