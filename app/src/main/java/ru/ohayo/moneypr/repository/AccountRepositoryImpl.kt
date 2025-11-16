@@ -6,6 +6,7 @@ import ru.ohayo.moneypr.data.room.account.AccountDao
 import ru.ohayo.moneypr.data.room.account.AccountDbo
 import javax.inject.Inject
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
@@ -28,7 +29,7 @@ class AccountRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateBalance(accountName: String, amount: Double) {
-        val roundedAmount = (amount * 100.0).roundToInt() / 100.0
+        val roundedAmount = (amount * 100.0).roundToLong() / 100.0
         accountDao.updateBalance(accountName, roundedAmount)
     }
 
@@ -54,7 +55,7 @@ class AccountRepositoryImpl @Inject constructor(
         toAccount: String,
         amount: Double
     ) {
-        val roundedAmount = (amount * 100.0).roundToInt() / 100.0
+        val roundedAmount = (amount * 100.0).roundToLong() / 100.0
         val updatedRows = accountDao.atomicTransfer(fromAccount, toAccount, roundedAmount)
 
         if (updatedRows != 2) {
